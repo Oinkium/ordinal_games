@@ -1,0 +1,23 @@
+\begin{thebibliography}{1}
+
+\bibitem{abramskyjagadeesangames}
+Samson Abramsky and Radha Jagadeesan.
+\newblock Games and full completeness for multiplicative linear logic.
+\newblock {\em CoRR}, abs/1311.6057, 2013.
+
+\bibitem{blassgames}
+Andreas Blass.
+\newblock A game semantics for linear logic.
+\newblock {\em Annals of Pure and Applied Logic}, 56(1–3):183 -- 220, 1992.
+
+\bibitem{martinsthesis}
+Martin Churchill, Jim Laird, and Guy McCusker.
+\newblock Imperative programs as proofs via game semantics.
+\newblock {\em CoRR}, abs/1307.2004, 2013.
+
+\bibitem{laird02}
+J.~Laird.
+\newblock A categorical semantics of higher-order store.
+\newblock In {\em Proceedings of CTCS '02}, number~69 in ENTCS. Elsevier, 2002.
+
+\end{thebibliography}
