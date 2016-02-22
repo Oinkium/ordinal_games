@@ -180,6 +180,7 @@
 \newcommand{\comp}{\circ}
 \newcommand{\cprd}{\sqcup}
 \newcommand{\G}{\mathcal G}
+\newcommand{\suchthat}{\;\colon\;}
 
 %%% END Article customizations
 
@@ -421,6 +422,48 @@ The functor $\cmap{\sequoid}{\G_s\times\G}\G$ actually gives us a monoidal-categ
   L\sequoid(M\tensor N)\cong (L\sequoid M)\sequoid N
 \]
 satisfying certain coherence conditions.  Once again, the isomorphism is the obvious copycat one - in both games, $O$ must start in the game $L$ but thereafter may switch to any game.  
+
+TODO: Finish off this section, introduce exponentials, introduce win-games.
+
+\section{Games with ordinal sequences of moves}
+
+We now moify the definitions from the last section so that our games admit sequences of moves of ordinal length.  This will involve making two main changes.
+
+\begin{itemize}
+  \item Our set $P_A$ of legal plays, rather than containing only finite sequences of moves, will be allowed to contain sequences of moves of ordinal length (given as functions from some ordinal into the set of moves $M_A$.
+  \item Plays (sequences of moves) rather than moves will be taken as primitive.  In particular, we shall introduce a sign function $\cmap{\zeta_A}{P_A}{\{O,P\}}$ that assigns a player to each play.
+\end{itemize}
+
+\subsection{Preliminary definitions}
+
+\begin{definition}
+  Let $\beta$ be an ordinal, and let $M$ be a set of moves.  An \emph{$\beta$-play on move-set $M$} is a function $\cmap{s}{\beta}{M}$.  We shall use the same notation as we did for finite sequences; for example, if $s$ is a $\beta$-play on $M$, and $a\in M$, we write $sa$ for the $(\beta+1)$-play that agrees with $s$ on the initial segment $\beta$ and takes the value $a$ on the final element.
+
+  If $s$ is a $\beta$-play on $M$, and $\gamma<\beta$, we have a $\gamma$-play $s\vert_\gamma$, given by restricting $s$ to the initial segment $\gamma$.
+
+  If $\alpha$ is an ordinal and $M$ is a set of moves, we write $M^{*<\alpha}$ for the set of all $\beta$-plays on $M$, where $\beta$ ranges over all ordinals less than $\alpha$.  
+\end{definition}
+
+\begin{definition}
+  Let $\alpha$ be an ordinal.  A \emph{game over $\alpha$}, or \emph{$\alpha$-game}, is given by a tuple
+  \[
+    (M_A, \zeta_A, P_A)
+  \]
+  where
+  \begin{itemize}
+    \item $M_A$ is a set of moves,
+    \item $P_A\subset M_A^{*<\alpha}$ is a prefix-closed set of legal plays of lengths less than $\alpha$ and
+    \item $\cmap{\zeta_A}{P_A}{\{O,P\}}$ is a function satisfying the alternating rule: if $s,sa\in P_A$ then $\zeta_A(s)=\neg\zeta_A(sa)$.
+  \end{itemize}
+
+  Given $\beta<\alpha$, we write $P_A(\beta)$ for the set of all $\beta$-plays in $P_A$.  
+
+  There is one further restriction on the set $P_A$ which is that it must respect the limiting behaviour at limit ordinals.  Namely, if $\lambda<\alpha$ is a limit ordinal, then we require that the \emph{sheaf condition} holds:
+  \begin{equation}
+    \tag{Sheaf condition}
+    P_A(\lambda)=\{\cmap{s}{\lambda}{M_A}\suchthat s\vert_\beta\in P_A(\beta)\textrm{ for all }\beta < \lambda\}
+  \end{equation}
+\end{definition}
       
 \bibliographystyle{plain}
 \bibliography{ordinal_games.bib}
