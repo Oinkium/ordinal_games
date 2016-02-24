@@ -187,6 +187,7 @@
 \begin{document}
 
 \section{Abramsky-Jagadeesan games: a review}
+\label{abjagreview}
 
 \subsection{Games and strategies}
 
@@ -263,7 +264,7 @@ We shall now give a formal definition of playing two games in parallel.
 \begin{notation}
   Let $X,Y$ be sets.  If $s\in(X\cprd Y)^*$ is any sequence made up of terms from both $X$ and $Y$ then we write $s\vert_X$ for the subsequence of $s$ made up of all those terms that came from $X$ and $s\vert_Y$ for the subsequence of $s$ made up of all those terms that came from $Y$.  
   
-  Now suppose $S\subset X^*$ is a set of sequences of elements of $X$ and that $T\subset Y^*$ is a set of sequences of elements of $Y$.  We write $S\|T$ for the subset of $(X\cprd Y)^*$ made up of those alternating sequences $s$ such that $s\vert_X\in S$ and $s\vert_Y\in T$.  
+  Now suppose $S\subset X^*$ is a set of sequences of elements of $X$ and that $T\subset Y^*$ is a set of sequences of elements of $Y$.  We write $S\|T$ for the subset of $(X\cprd Y)^*$ made up of those sequences $s$ such that $s\vert_X\in S$ and $s\vert_Y\in T$.  
 \end{notation}
 
 \begin{definition}
@@ -271,8 +272,10 @@ We shall now give a formal definition of playing two games in parallel.
   
   The \emph{game with starting player $b$ obtained by playing $A$,$B$ in parallel} is given by
   \[
-    A\|_bB=(M_A\cprd M_B,\lambda_A\cprd\lambda_B,b,P_A\|P_B)
+    A\|_bB=(M_A\cprd M_B,\lambda_A\cprd\lambda_B,b,(P_A\|P_B)\cap M_{A\|_bB}^\circledast)
   \]
+
+  Here, $M_{A\|_bB}^\circledast$ is the set of all sequences $s\in(M_A\cprd M_B)^*$ that start with a $b$-move and thereafter alternate $O$-moves and $P$-moves.
   
   If $M,N$ are negative games, we write $M\tensor N$ for $M\|_ON$.
   
@@ -286,7 +289,7 @@ We shall now give a formal definition of playing two games in parallel.
 If $A,B$ are games, then the we can weaken the game $A\|_bB$ by requiring that the starting player $b$ play the first move in game $A$.  In this case, we must have $b=b_A$, or the resulting game has no legal plays at all.  For this reason, we may suppress mention of the starting player $b$ in our notation.
 
 \begin{definition}
-  We use the notation from \cite{martinsthesis}.  If $X,Y$ are sets and $S\subset X^*, T\subset Y^*$ then we write $S\|_LT\subset S\|T$ for the set of all alternating sequences $s\in S\|T$ that are either empty or have their first term in $S$.  Then we define
+  We use the notation from \cite{martinsthesis}.  If $X,Y$ are sets and $S\subset X^*, T\subset Y^*$ then we write $S\|_LT\subset S\|T$ for the set of all sequences $s\in S\|T$ that are either empty or have their first term in $S$.  Then we define
   \[
     A\llfloor B = (M_A\cprd M_B,\lambda_A\cprd\lambda_B,b_A,P_A\|_LP_B)
   \]
@@ -297,6 +300,7 @@ If $A,B$ are games, then the we can weaken the game $A\|_bB$ by requiring that t
 \end{definition}
 
 \subsection{Categorical Semantics}
+\label{abjag-categorical-semantics}
 
 We build a category $\mathcal G$ whose objects are negative games.  If $M,N$ are negative games, then the morphisms $M\to N$ will be strategies for $M\implies N$.  
 
@@ -431,7 +435,7 @@ We now moify the definitions from the last section so that our games admit seque
 
 \begin{itemize}
   \item Our set $P_A$ of legal plays, rather than containing only finite sequences of moves, will be allowed to contain sequences of moves of ordinal length (given as functions from some ordinal into the set of moves $M_A$.
-  \item Plays (sequences of moves) rather than moves will be taken as primitive.  In particular, we shall introduce a sign function $\cmap{\zeta_A}{P_A}{\{O,P\}}$ that assigns a player to each play.
+  \item Plays (sequences of moves) rather than moves will be taken as primitive.  In particular, we shall replace the sign function for moves $\cmap{\lambda_A}{P_A}{\{O,P\}}$ with the sign function for plays $\cmap{\zeta_A}{P_A}{\{O,P\}}$ that assigns a player to each play.
 \end{itemize}
 
 \subsection{Preliminary definitions}
@@ -464,6 +468,167 @@ We now moify the definitions from the last section so that our games admit seque
     P_A(\lambda)=\{\cmap{s}{\lambda}{M_A}\suchthat s\vert_\beta\in P_A(\beta)\textrm{ for all }\beta < \lambda\}
   \end{equation}
 \end{definition}
+
+\begin{remark}
+  The starting player $b_A$ and the move function $\lambda_A$ have disappeared from our definition.  This is because they can be recovered from the function $\zeta_A$.  Note that the sheaf condition tells us that $P_A(0)=\{\epsilon\}$, where $\cmap{\epsilon}{0}{M_A}$ is the empty sequence.  $b_A$ can then be recovered as
+  \[
+    b_A=\neg\zeta_A(\epsilon)
+  \]
+  since the alternating condition tells us that $\zeta_A(a)=\neg\zeta_A(\epsilon)$, where $a\in M_A$ is any one-move play.  $\zeta_A$ can also be thought of as a replacement for $\lambda_A$: given one of the games from Section \ref{abjagreview}, we may define a function $\cmap{\zeta_A}{P_A}{\{O,P\}}$ by setting $\zeta_A(sa)=\lambda_A(a)$ and $\zeta_A(\epsilon)=\neg b_A$.  
+\end{remark}
+
+\begin{definition}
+  If $A$ is an $\alpha$-game, we say that $A$ is \emph{positive} if $\zeta_A(\epsilon)=O$ and \emph{negative} if $\zeta_A(\epsilon)=P$.
+\end{definition}
+
+\begin{example}
+  The games over $\omega$ correspond precisely to the first definition of games from Section \ref{abjagreview}.  
+
+  If $n\in\omega$, then a game over $n$ corresponds to a game bounded by $n$.
+
+  If $A$ is a game over $\omega+1$, then the sheaf condition tells us that $P_A(\omega)$ is the set of all limits of finite plays in $A$.  $(\omega+1)$-games correspond to the win-games we discussed in section \ref{win-games}, where $W_A$ can be recovered as
+  \[
+    W_A=\{s\in P_A(\omega)\suchthat\zeta_A(s)=P\}
+  \]
+
+  If $A$ is a game over $\omega 2$, then $A$ can be thought of as a sort of `double game': $O$ and $P$ start off by playing a game.  After infinitely many moves have been made, the infinite sequence of moves that has been built up determines a new game to be played, with a new choice of starting player.
+\end{example}
+
+Our definition of a strategy for a game exactly mirrors the definition from section \ref{abjagreview}.
+\begin{definition}
+  Let $\alpha$ be an ordinal, and let $A$ be a game over $\alpha$.  A \emph{strategy} for $A$ is a prefix-closed subset $\sigma\subset P_A$ such that:
+  \begin{itemize}
+    \item $\sigma$ contains at most one $P$-reply to every $O$-play: suppose $s\in P_A$ such that $\zeta_A(s)=O$.  Then if $s\in\sigma$, and $sa,sb\in\sigma$, then $a=b$.
+    \item $\sigma$ contains every $O$-reply to every $P$-play: suppose $s\in P_A$ such that $\zeta_A(s)=P$.  Then if $s\in\sigma$ and $sa\in P_A$, then $sa\in\sigma$.  
+  \end{itemize}
+  If $\sigma$ in fact contains a (necessarily unique) $P$-reply for every $O$ play (so if $s\in\sigma$ and $\zeta_A(s)=O$, then $sa\in\sigma$ for some $a$), then we say that $\sigma$ is a \emph{total strategy}.  
+\end{definition}
+
+\subsection{Monoidal category structure}
+
+Let $\alpha$ be an ordinal.  In order to construct a category of $\alpha$-games, we need to define the connectives $\tensor$ and $\implies$.  Qualitatively, our definitions mirror those from section \ref{abjagreview}: in the tensor product of two negative game
+
+\subsubsection{Tensor}
+
+\begin{notation}
+  Let $\beta$ be an ordinal, let $X,Y$ be sets of moves, and suppose that $\cmap{s}{\beta}{X\cprd Y}$ is a sequence over $\beta$ taking values in the disjoint union of $X$ and $Y$.  This gives us a partition of $\beta$ into two sets $\beta_X=s\inv(X)$ and $\beta_Y=s\inv(Y)$.  Under the induced ordering from $\beta$, $\beta_X$ and $\beta_Y$ become ordinals themselves, and standard ordinal theory tells us that $\beta_X,\beta_Y<\beta$.  
+
+  We now have induced plays $\cmap{s\vert_X}{\beta_X}{X},\cmap{s\vert_Y}{\beta_Y}{Y}$.  
+
+  Now let $\alpha$ be an ordinal, and suppose that $S\subset X^{*<\alpha}$ is a set of ordinal-length plays on move-set $X$ and that $T\subset Y^{*<\alpha}$ is a set of ordinal-length plays on move set $Y$.  We write $S\|T$ for the set of ordinal length plays in $(X\cprd Y)^{*<\alpha}$ whose restriction to $X$ is contained in $S$ and whose restriction to $Y$ is contained in $T$:
+  \[
+    S\|T=\{s\in(X\cprd Y)^{*<\alpha}\suchthat s\vert_X\in S, s\vert_Y\in T\}
+  \]
+\end{notation}
+
+\begin{definition}
+  Let $\alpha$ be an ordinal, and let $N,L$ be negative games over $\alpha$.  We first define a function $\cmap{\zeta_{A\tensor B}}{P_N\|P_L}{\{O,P\}}$ as follows:
+  \begin{itemize}
+    \item If $\beta=\gamma+1$ is a successor ordinal, then $\beta$ has a greatest element $\gamma$.  Let $\cmap{s}{\beta}{M_N\cprd M_L}$ be a play over $\beta$.  If the final move $s(\gamma)$ comes from $M_N$, then we set
+      \[
+        \zeta_{N\tensor L}(s)=\zeta_N(s\vert_N)
+      \]
+      On the other hand, if the final move $s(\gamma)$ comes from $M_L$ then we set
+      \[
+        \zeta_{N\tensor L}(s)=\zeta_L(s\vert_L)
+      \]
+    \item If $\lambda$ is a limit ordinal, and $\cmap{s}{\lambda}{M_N\cprd M_L}$ is a play over $\lambda$, then we set
+      \[
+        \zeta_{N\tensor L}(s)=
+        \begin{cases}
+          O&\textrm{ if $\zeta_N(s\vert_N)=O$ or $\zeta_L(s\vert_L)=O$}\\
+          P&\textrm{ if $\zeta_N(s\vert_N)=P$ and $\zeta_L(s\vert_L)=P$}
+        \end{cases}
+      \]
+  \end{itemize}
+
+  Now let $P_{N\tensor L}$ be the set of all sequences $s\in P_N\|P_L$ such that the set of all subsequences of $s$ obeys the alternating condition with respect to $\zeta_{N\tensor L}$.  Certainly $P_{N\tensor L}$ is prefix-closed, and it is easy to see that it obeys the alternating condition with respect to $\zeta_{N\tensor L}$ as well.
+\end{definition}
+
+\begin{lemma}
+  \label{tensor-is-sheaf}
+  The set $P_{N\tensor L}$ obeys the sheaf condition.
+  \begin{proof}
+    Let $\lambda<\alpha$ be a limit ordinal, and suppose $\cmap{s}{\lambda}{M_N\cprd M_L}$ is such that $s\vert_\beta\in P_{N\tensor L}$ for all $\beta<\lambda$.  We need to show that $s\in P_{N\tensor L}$.  
+
+    It follows easily from the sheaf condition on $P_N,P_L$ that $s\in P_N\|P_L$, so it remains to show that the set of subsequences of $s$ obeys the alternating condition with respect to $\zeta_{N\tensor L}$.  But if $t,ta$ are subsequences of $s$, then they are necessarily \emph{proper} subsequences, since $ta$ is a sequence over a successor ordinal $\gamma+1$, while $\lambda$ is a limit ordinal.  So $ta=s\vert_{\gamma+1}\in P_{N\tensor L}$, and it follows that $t$ and $ta$ have opposite signs.
+  \end{proof}
+\end{lemma}
+
+\begin{definition}
+  We define the \emph{tensor product} of $N$ and $L$ to be
+  \[
+    N\tensor L=(M_N\cprd M_L,\zeta_{N\tensor L},P_{N\tensor L})
+  \]
+\end{definition}
+
+The definition of implication is similar.
+
+\begin{definition}
+  Let $\alpha$ be an ordinal, and let $N,L$ be negative games over $\alpha$.  We define a function $\cmap{\zeta_{N\implies L}}{P_N\|P_L}{\{O,P\}}$ as follows:
+  \begin{itemize}
+    \item If $\beta=\gamma+1$ is a successor ordinal, and $\cmap{s}{\beta}{M_N\cprd M_L}$ is a play over $\beta$, then we look at the last play $s(\gamma)$.  If $s(\gamma)$ is a move from $M_N$, then we set
+      \[
+        \zeta_{N\implies L}(s)=\neg(\zeta_N(s\vert_N))
+      \]
+      On the other hand, if $s(\gamma)$ comes from $M_L$, then we set
+      \[
+        \zeta_{N\implies L}(s)=\zeta_N(s\vert_N)
+      \]
+    \item If $\lambda$ is a limit ordinal, and $\cmap{s}{\lambda}{M_N\cprd M_L}$ is a play over $\lambda$, then we set
+      \[
+        \zeta_{N\implies L}(s)=
+        \begin{cases}
+          P&\textrm{ if $\zeta_N(s\vert_N)=O$ or $\zeta_L(s\vert_L)=P$}\\
+          O&\textrm{ if $\zeta_N(s\vert_N)=P$ and $\zeta_L(s\vert_L)=O$}
+        \end{cases}
+      \]
+  \end{itemize}
+  
+  As before, we define $P_{N\implies L}$ to be the set of all plays $s\in P_N\|P_L$ such that the set of all subsequences of $s$ obeys the alternating condition with respect to $\zeta_{N\implies L}$.  As above, $P_{N\implies L}$ is prefix closed and alternating.  By a similar argument to that in Lemma \ref{tensor-is-sheaf}, it satisfies the sheaf condition.
+
+  We define
+  \[
+    N\implies L=(M_N\cprd M_L,\zeta_{N\implies L},P_{N\implies L})
+  \]
+\end{definition}
+
+\subsection{Categorical semantics}
+
+Fix an ordinal $\alpha$.  We mirror section \ref{abjag-categorical-semantics} and build a category $\G^\alpha$ of games over $\alpha$.  The objects of $\G^\alpha$ are negative $\alpha$-games, and a morphism from $N$ to $L$ is a strategy for the game $N\implies L$.
+
+We need to give a way to compose morphisms.
+
+\begin{definition}
+  Let $L,M,N$ be negative games over $\alpha$ and let $\cmap{\sigma}{L}{M},\cmap{\tau}{M}{N}$ be strategies.  Define
+  \[
+    \tau\|\sigma=\{s\in(M_L\cprd M_M\cprd M_N)^{*<\alpha}\suchthat s\vert_{L,M}\in\sigma, s\vert_{M,N}\in \tau\}
+  \]
+
+  We recover the composed strategy $\tau\comp\sigma$ for $L\implies N$ by forgetting the moves in $M$:
+  \[
+    \tau\comp\sigma=\{s\vert_{L,N}\colon s\in\tau\|\sigma\}
+  \]
+\end{definition} 
+
+\begin{proposition}
+  $\tau\comp\sigma$ is a well-formed strategy for $L\implies N$.
+  \begin{proof}
+    We should first show that $\tau\circ\sigma\subset P_{L\implies N}$.  Suppose $s\in\tau\|\sigma$.  We need to show that $s\vert_{L,N}$ is an element of $P_L\|P_N$ and that its set of subsequences is alternating with respect to $\zeta_{P\implies N}$.  
+
+    To show that $s\vert_{L,N}\in P_L\|P_N$, we need to show that $s\vert_L\in P_L$ and $s\vert_N\in P_N$.  But we know that $s\vert_{L,M}\in\sigma\subset P_L\|P_M$ so in particular we have that $s\vert_L\in P_L$.  Similarly, $s\vert_{M,N}\in\tau\subset P_M\|P_N$, so $s\vert_N\in P_N$.
+
+    Now suppose 
+
+  \end{proof}
+\end{proposition}
+
+  If $\map{\rho}{K}{L}\xrightarrow{\sigma}\map{\tau}{M}{N}$ are morphisms, then we have
+  \begin{align*}
+    \tau\comp(\sigma\comp\rho)&=\{s\vert_{K,N}\colon s\in(K\cprd L\cprd M\cprd N)^*, s\vert_{K,L}\in\rho,\;s\vert_{L,M}\in\sigma,\;s\vert_{M,N}\in\tau\}\\
+      &= (\tau\comp\sigma)\comp\rho
+  \end{align*}
+  so this composition is associative, and it is easy to check that the copycat strategy is the identity.
       
 \bibliographystyle{plain}
 \bibliography{ordinal_games.bib}
