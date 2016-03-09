@@ -677,13 +677,13 @@ We now define a category $\G(\alpha)$.  The objects of $\G(\alpha)$ are negative
               (s\vert_{N,L})\vert_N=(s\vert_{N,M})\vert_N
             \]
             and $s\vert_{N,M}\in\sigma\subset P_{N\implies M}$, so $(s\vert_{N,L})\vert_N\in P_N$, and similarly, $(s\vert_{N,L})\vert_L\in P_L$.
-          \item We want to show that $\comp\tau\sigma$ is alternating with respect to $\zeta_{N\implies L}$.  Suppose $s,sa\in\comp\tau\sigma$, and suppose that $s=s'\vert{N,L}$, where $s'\in\tau\|\sigma$.  We have:
+          \item We want to show that $\comp\tau\sigma$ is alternating with respect to $\zeta_{N\implies L}$.  Suppose $s,sa\in\comp\tau\sigma$, and suppose that $s=s'\vert_{N,L}$, where $s'\in\tau\|\sigma$ and $sa=s'a\vert_{N,L}$.  We have:
             \begin{IEEEeqnarray*}{rCl}
               \zeta_{N\implies L}(s)&=&(\zeta_N(s\vert_N)\Rightarrow\zeta_L(s\vert_L))\\
               \zeta_{N\implies M}(s'\vert_{N,M})&=&(\zeta_N(s\vert_N)\Rightarrow\zeta_M(s'\vert_M))\\
               \zeta_{M\implies L}(s'\vert_{M,L})&=&(\zeta_M(s'\vert_M)\Rightarrow\zeta_L(s\vert_L))
             \end{IEEEeqnarray*}
-            Therefore, if $\zeta_{N\implies L}=O$, then $\zeta_{N\implies M}(s'\vert_{N,M})=O$ or $\zeta_{M\implies L}(s'\vert_{M,L})=O$ (by transitivity of $\Rightarrow$).  In the first case, we must have 
+            Therefore, if $\zeta_{N\implies L}=O$, then either $\zeta_{N\implies M}(s'\vert_{N,M})=O$ or $\zeta_{M\implies L}(s'\vert_{M,L})=O$ (by transitivity of $\Rightarrow$).  In the first case, we must have 
         \end{enumerate}
     \end{enumerate}
   \end{proof}
