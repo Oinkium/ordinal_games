@@ -637,9 +637,9 @@ We now define a category $\G(\alpha)$.  The objects of $\G(\alpha)$ are negative
 \begin{definition}
   Let $N,M,L$ be negative games over $\alpha$.  Definie
   \[
-    \L^\alpha(N,M,L)\subset(M_L\cprd M_M\cprd M_N)^{*<\alpha}
+    \L^\alpha(N,M,L)\subset(M_N\cprd M_M\cprd M_L)^{*<\alpha}
   \]
-  to be the set of all sequences $s\in(M_L\cprd M_M\cprd M_N)^{*<\alpha}$ such that if $t,ta$ are subsequences of $s$, then $t$ and $ta$ are not an $L$-move and an $N$-move, or vice versa: in other words, either $t,ta$ come from the same game, or one of them is an $M$-move - we are not allowed to jump straight from $L$ to $N$ or back again.
+  to be the set of all sequences $s\in(M_N\cprd M_M\cprd M_L)^{*<\alpha}$ such that if $t,ta$ are subsequences of $s$, then $t$ and $ta$ are not an $L$-move and an $N$-move, or vice versa: in other words, either $t,ta$ come from the same game, or one of them is an $M$-move - we are not allowed to jump straight from $L$ to $N$ or back again.
   
   Now let $\cmap{\sigma}{N}{M}$,$\cmap{\tau}{M}{L}$ be strategies.  Define
   \[
@@ -660,6 +660,7 @@ We now define a category $\G(\alpha)$.  The objects of $\G(\alpha)$ are negative
       \item $\comp\tau\sigma\subset P_{N\implies L}$.  In other words:
         \begin{enumerate}[a)]
           \item For every $s\in\comp\tau\sigma$, $s\vert_N\in P_N$ and $s\vert_L\in P_L$
+          \item If $ta\in\comp\tau\sigma$ is a play over a successor ordinal, then $\zeta_{N\implies L}(ta)=\lambda_{N\implies L}(a)$.
           \item $\comp\tau\sigma$ is alternating with respect to $\zeta_{N\implies L}$.
         \end{enumerate}
       \item If $s\in\sigma$ is an $O$-play and $sa,sb\in\sigma$, then $a=b$.
