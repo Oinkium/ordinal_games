@@ -630,12 +630,43 @@ $N\tensor L$ and $N\implies L$ are well-formed games.
 \end{proof}
 \end{proposition}
 
+A phenomenon occurs for implication similar to that observed for the tensor product.  Though the sign $\zeta_{N\implies L}(s)$ of a play $s$ in $N\implies L$ is given by the formula
+\[
+  \zeta_{N\implies L}(s)=(\zeta_N(s\vert_N)\Rightarrow\zeta_L(s\vert_L))
+\]
+there are only three values of the pair $(\zeta_N(s\vert_N),\zeta_L(s\vert_L))$ that occur in normal play: $(O,O)$, $(P,P)$ (in which case $\zeta_{N\implies L}(s)=P$) and $(P,O)$ (in which case $\zeta_{N\implies L}(s)=O$).  The fourth case $(O,P)$ - giving $\zeta_{N\implies L}(s)=P$ - can still occur, but only for a limiting play, and if it does occur then there are no legal opponent replies.  In this case, player $P$ wins immediately.  This is the content of the following lemma:
+
+\begin{lemma}
+  Let $N,L$ be negative $\alpha$-games, and suppose $s,sa$ are plays in $N\implies L$.  Then:
+  \begin{enumerate}[i)]
+    \item Either $\zeta_N(s\vert_N)=P$ or $\zeta_L(s\vert_L)=O$.
+    \item Either $\zeta_N(sa\vert_N)=P$ or $\zeta_L(sa\vert_L)=O$.
+  \end{enumerate}
+  \begin{proof}
+    \begin{enumerate}[(i):]
+      \item Suppose $s\in P_{N\implies L}$ such that $\zeta_N(s\vert_N)=O$ and $\zeta_L(s\vert_L)=P$.  Then $\zeta_{N\implies L}(s)=P$.  Suppose that $a\in M_N\cprd M_L$ with $\lambda_{N\implies L}(a)=O$.  We shall show that $sa\not \in P_{N\implies L}$.
+
+        If $a\in M_N$ then $\zeta_L(sa\vert_L)=\zeta_L(s\vert_L)=P$, and if $a\in M_L$ then $\zeta_N(sa\vert_N)=\zeta_N(s\vert_N)=O$.  In either case, 
+        \[
+          \zeta_{N\implies L}(sa)=(\zeta_N(sa\vert_N)\Rightarrow\zeta_L(sa\vert_L))=P
+        \]
+        But $\lambda_{N\implies L}=O$, and therefore $sa\not\in P_{N\implies L}$.
+
+      \item Now suppose that $s,sa\in P_{N\implies L}$.
+        
+        Suppose first that $\zeta_{N\implies L}(sa)=O$.  In that case, we must have $\zeta_N(sa\vert_N)=P$ \emph{and} $\zeta_L(sa\vert_L)=O$, and we are done.  So suppose instead that $\zeta_{N\implies L}(sa)=P$.  In that case, $\zeta_{N\implies L}(s)=O$, by alternation.  In that case, we must have $\zeta_N(s\vert_N)=P$ and $\zeta_L(s\vert_L)=O$.  
+
+        If $a\in M_N$ then $\zeta_L(sa\vert_L)=\zeta_L(s\vert_L)=O$, and if $a\in M_L$ then $\zeta_N(sa\vert_N)=\zeta_N(s\vert_N)=P$.
+    \end{enumerate}
+  \end{proof}
+\end{lemma}
+
 \subsubsection{Morphisms, composition of morphisms and identity morphisms}
 
 We now define a category $\G(\alpha)$.  The objects of $\G(\alpha)$ are negative games over $\alpha$, and if $N,L$ are such games, then a morphism $N\to L$ is a strategy for $N\implies L$.  We define the composition of two morphisms as in section \ref{abjagreview}.
 
 \begin{definition}
-  Let $N,M,L$ be negative games over $\alpha$.  Definie
+  Let $N,M,L$ be negative games over $\alpha$.  Define
   \[
     \L^\alpha(N,M,L)\subset(M_N\cprd M_M\cprd M_L)^{*<\alpha}
   \]
