@@ -562,10 +562,10 @@ We shall give two proofs of this lemma - one direct proof using the Hyland-Schal
   where $\cmap{\dagger}{\Rel}{\oppcat{\Rel}}$ is the identity on objects and flips a relation $R\subset A\times B$ to give a relation $R^\dagger\subset B\times A$.  If $\cmap{\wk}{A}{A'}$ is a weakening morphism in $\G$ then its image $\grel\wk$ under this functor is the graph of the inclusion $P_{A'}\hookrightarrow P_A$.  Meanwhile, the image of $\tau$ under this functor is the graph of the function $\cmap{\grel\tau\inv}{P_B}{P_C}$.  By the definition of $P_{C'}$, the image of $\tau'$ under this functor is the graph of the function $\cmap{\grel\tau\inv\vert_{P_{B'}}}{P_{B'}}{P_{C'}}$.  It is then easy to check that the diagram
   \[
     \begin{tikzcd}
-      C
-        & C' \arrow[l, hook', "\grel\wk"'] \\
-      B \arrow[u, "\grel\tau\inv"]
-        & B' \arrow[u, "\grel\tau\inv\vert_{P_{B'}}"'] \arrow[l, hook', "\grel\wk"]
+      P_C
+        & P_{C'} \arrow[l, hook', "\grel\wk"'] \\
+      P_B \arrow[u, "\grel\tau\inv"]
+        & P_{B'} \arrow[u, "\grel\tau\inv\vert_{P_{B'}}"'] \arrow[l, hook', "\grel\wk"]
     \end{tikzcd}
     \]
   commutes.  
