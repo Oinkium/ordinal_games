@@ -502,7 +502,7 @@ We now introduce a lax version of our notion of weakening morphism that is stabl
       \begin{tikzcd}
         C \arrow[r, "\wk"] \arrow[dr, "\tau"']
           & C' \arrow[d, "\hat\tau", Sim'] \arrow[r, "\wk"]
-            & C'' \arrow[d, "\hat{\hat\tau}"] \\
+            & C'' \arrow[d, "\hat{\hat\tau}", Sim'] \\
         %
           & B \arrow[r, "\wk"] \arrow[dr, "\sigma"']
             & B' \arrow[d, "\hat\sigma", Sim'] \\
@@ -559,7 +559,7 @@ We shall give two proofs of this lemma - one direct proof using the Hyland-Schal
   \[
     \G \xrightarrow{\F} \Rel \xrightarrow{\dagger} \oppcat{\Rel}
     \]
-  where $\cmap{\dagger}{\Rel}{\oppcat{\Rel}}$ is the identity on objects and flips a relation $R\subset A\times B$ to give a relation $R^\dagger\subset B\times A$.  If $\cmap{\wk}{A}{A'}$ is a weakening morphism in $\G$ then its image $\grel\wk$ under this functor is the graph of the inclusion $P_{A'}\hookrightarrow P_A$.  Meanwhile, the image of $\tau$ under this functor is the graph of the function $\cmap{\grel\tau\inv}{P_B}{P_C}$.  By the definition of $P_{C'}$, the image of $\tau'$ under this functor is the graph of the function $\cmap{\grel\tau\inv\vert_{P_{B'}}}{P_{B'}}{P_{C'}}$.  It is then easy to check that the diagram
+  where $\cmap{\dagger}{\Rel}{\oppcat{\Rel}}$ is the identity on objects and flips a relation $R\subset A\times B$ to give a relation $R^\dagger\subset B\times A$.  If $\cmap{\wk}{A}{A'}$ is a weakening morphism in $\G$ then its image $\grel\wk$ under this functor is the graph of the inclusion $P_{A'}\hookrightarrow P_A$.  Meanwhile, the image of $\tau$ under this functor is the graph of the function $\cmap{\grel\tau\inv}{P_B}{P_C}$.  By the definition of $P_{C'}$, the image of $\tau'$ under this functor is the graph of the function $\cmap{\grel\tau\inv\vert_{P_{B'}}}{P_{B'}}{P_{C'}}$.  It is then easy to check that the resulting diagram commutes in $\Rel$:
   \[
     \begin{tikzcd}
       P_C
@@ -568,7 +568,6 @@ We shall give two proofs of this lemma - one direct proof using the Hyland-Schal
         & P_{B'} \arrow[u, "\grel\tau\inv\vert_{P_{B'}}"'] \arrow[l, hook', "\grel\wk"]
     \end{tikzcd}
     \]
-  commutes.  
 
   The last thing that we need to do is to check that $\tau'$ is an isomorphism.  If we apply exactly the same argument to $\map{\wk}{C}{C'}$ and the isomorphism $\cmap{\tau\inv}{B}{C}$ then we get a weakening $B''$ of $B$ and an isomorphism $\cmap{(\tau\inv)'}{B''}{C'}$ making the following diagram commute:
   \[

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.2.22)  3 JUN 2016 12:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.2.22)  3 JUN 2016 13:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -999,7 +999,7 @@ File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6] [7] [8
 ] [9]
-Overfull \hbox (17.5971pt too wide) in paragraph at lines 573--574
+Overfull \hbox (17.5971pt too wide) in paragraph at lines 572--573
 \OML/cmm/m/it/10.95 ^^\[] [] [] []B \OMS/cmsy/m/n/10.95 ! []\OML/cmm/m/it/10.95
  C$ \OT1/cmr/m/n/10.95 then we get a weak-en-ing $\OML/cmm/m/it/10.95 B[]$ \OT1
 /cmr/m/n/10.95 of $\OML/cmm/m/it/10.95 B$ \OT1/cmr/m/n/10.95 and an iso-mor-phi
@@ -1029,7 +1029,7 @@ lic/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></u
 sr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on weakenings.pdf (11 pages, 193255 bytes).
+Output written on weakenings.pdf (11 pages, 193318 bytes).
 PDF statistics:
  103 PDF objects out of 1000 (max. 8388607)
  74 compressed objects within 1 object stream
