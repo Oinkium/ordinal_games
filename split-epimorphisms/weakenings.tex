@@ -164,8 +164,7 @@
   {\mathop{}%
    \mathopen{\vphantom{#2}}^{#1}%
    \kern-\scriptspace%
-   #2}
-\def\presub#1#2%
+   #2} \def\presub#1#2%
   {\mathop{}%
    \mathopen{\vphantom{#2}}_{#1}%
    \kern-\scriptspace%
@@ -193,6 +192,13 @@
 \newcommand{\s}{\mathfrak{s}}
 \renewcommand{\t}{\mathfrak{t}}
 \newcommand{\grel}[1]{\underline{#1}}
+\newcommand{\prefix}{\sqsubseteq}
+
+%% Isomorphism arrows on commutative diagrams %%
+\tikzset{Isom/.style={every to/.append style={edge node={node [sloped, above, allow upside down, auto=false]{$\cong$}}}},
+         Isom'/.style={every to/.append style={edge node={node [sloped, above, allow upside down, auto=false, rotate=180]{$\cong$}}}},
+         Sim/.style={every to/.append style={edge node={node [sloped, above, allow upside down, auto=false]{$\sim$}}}},
+         Sim'/.style={every to/.append style={edge node={node [sloped, above, allow upside down, auto=false, rotate=180]{$\sim$}}}}}
 
 %%% END Article customizations
 
@@ -450,5 +456,137 @@ We shall want to prove various useful properties of these weakening pullbacks, n
    Since $\wk,\wk'$ are identity maps, we observe that we have the strict equality $\comp{\weak_A}{\weak_A}=\weak_A$ and we had better define $\mu_A$ to be the identity transformation.  This $\mu_A$ is automatically associative and the unit diagrams above hold (since all maps involved are identity maps).  We end up with an idempotent monad on $\G/A$.
   \end{proof}
 \end{theorem}
+
+\section{Lax weakening morphisms}
+
+We now introduce a lax version of our notion of weakening morphism that is stable under composition with isomorphisms:
+
+\begin{definition}
+  Let $A,B$ be games.  We say that a morphism $\cmap{\sigma}{B}{A}$ is a \emph{lax weakening} if it is the composition of a weakening morphism and an isomorphism; in other words, if there exists a weakening $B'$ of $B$ and an isomorphism $\cmap{\hat{\sigma}}{B'}{A}$ such that the diagram
+  \[
+    \begin{tikzcd}
+      B \arrow[r, "\wk"] \arrow[dr, "\sigma"']
+        & B' \arrow[d, "\hat\sigma", Sim'] \\
+      %
+        & A
+    \end{tikzcd}
+    \]
+  commutes.
+\end{definition}
+
+\begin{proposition}
+
+  i) If $B'$ is a weakening of $B$, then $\cmap{\wk}{B}{B'}$ is a lax weakening.
+  
+  ii) If $\cmap{\sigma}{B}{A}$ is an isomorphism, then $\sigma$ is a lax weakening.
+
+  iii) If $C\xrightarrow{\tau}\map{\sigma}{B}{A}$ are morphisms such that $\sigma$ and $\tau$ are lax weakenings, then $\cmap{\comp\sigma\tau}{C}{A}$ is a lax weakening.
+
+  \begin{proof}
+    (i) and (ii) are both obvious.  For part (iii), note that we have the diagram
+    \[
+      \begin{tikzcd}
+        C \arrow[r, "\wk"] \arrow[dr, "\tau"']
+          & C' \arrow[d, "\hat\tau", Sim']
+            & \\
+        %
+          & B \arrow[r, "\wk"] \arrow[dr, "\sigma"']
+            & B' \arrow[d, "\hat\sigma", Sim'] \\
+        %
+          &
+            & A
+      \end{tikzcd}
+      \]
+    It will suffice to find a weakening $C''$ of $C'$ and an isomorphism $\cmap{\hat{\hat\tau}}{C''}{B'}$ making the following diagram commute:
+    \[
+      \begin{tikzcd}
+        C \arrow[r, "\wk"] \arrow[dr, "\tau"']
+          & C' \arrow[d, "\hat\tau", Sim'] \arrow[r, "\wk"]
+            & C'' \arrow[d, "\hat{\hat\tau}"] \\
+        %
+          & B \arrow[r, "\wk"] \arrow[dr, "\sigma"']
+            & B' \arrow[d, "\hat\sigma", Sim'] \\
+        %
+          &
+            & A
+      \end{tikzcd}
+      \]
+    Therefore, it will suffice to prove the lemma which follows.
+  \end{proof}
+\end{proposition}
+
+\begin{lemma}[Lifting of weakenings along isomorphisms]
+  Let $B,C$ be games and let $\cmap{\tau}{C}{B}$ be an isomorphism.  Let $B'$ be a weakening of $B$.  Then there is a weakening $C'$ of $C$ and an isomorphism $\cmap{\tau'}{C'}{B'}$ such that the following diagram commutes:
+  \[
+    \begin{tikzcd}
+      C \arrow[r, "\wk"] \arrow[d, "\tau"', Sim]
+        & C' \arrow[d, "\tau'"', Sim] \\
+      B \arrow[r, "\wk"'] 
+        & B'
+    \end{tikzcd}
+    \]
+\end{lemma}
+
+We shall give two proofs of this lemma - one direct proof using the Hyland-Schalke functor and one proof using the idempotent monad structure described in the previous section.  
+
+\begin{proof}[First proof]
+  We know that $\cmap{\tau}{C}{B}$ is an isomorphism; therefore, its image $\grel\tau\subset P_C\times P_B$ under the Hyland-Schalke functor is an isomorphism in $\Rel$.  It is well-known (and easy to show) that the isomorphisms in $\Rel$ are precisely those relations that are the graphs of bijective functions.  Therefore, we have a bijection $\cmap{\grel\tau}{P_C}{P_B}$ with the property that
+
+  i) For all $s\in P_C$ there exists a $P$-play $\s\in\tau$ such that $\s\vert_C=s$ and $\s\vert_B=\grel\tau(s)$
+
+  ii) For all $P$-plays $\s\in\tau$, $\s\vert_B=\grel\tau\left(\s\vert_C\right)$.
+
+  Let $P_{C'}=\grel\tau\inv(P_{B'})\subseteq P_C$.  We claim that $P_{C'}$ is prefix-closed.  Let $s\in P_{C'}$ and let $t\prefix s$.  By the definition of $P_{C'}$, $\tau(s)\in P_{B'}$.  Since $P_{B'}$ is prefix-closed, it will suffice to show that $\grel\tau(t)\prefix\grel\tau(s)$.
+
+  By (i), we know that there exists a $P$-play $\s\in\tau$ such that $\s\vert_C = s$ and $\s\vert_B = \grel\tau(s)$.  Since $t\prefix s$, there is some prefix $\t\prefix\s$ such that $\t\vert_C = t$.  Then, by (ii), we must have $\grel\tau(t)=\t\vert_B\prefix\s\vert_B$.
+
+  Therefore, $C'=(M_C,\lambda_C, P_{C'})$ is a well-formed game.  We claim that it is a weakening of $C$.  
+
+  Indeed, suppose $s\in P_{C'}$ is an $O$-play and that $sc$ is a $P$-reply in $P_C$.  We need to show that $sc\in P_{C'}$.  
+
+  By the definition of $P_{C'}$, we know that $\grel\tau(s)\in P_{B'}$.  By (i) we know that there exists some $P$-play $\s\in\tau$ such that $\s\vert_C=s$ and $\s\vert_B=\grel\tau(s)$; since $\s$ is a $P$-play, we can deduce that $s$ and $\grel\tau(s)$ have the same sign, and so $\grel\tau(s)$ is an $O$-play in $P_{B'}$.  Examining (i) and (ii) above, we can see that $\grel\tau(sc)=\grel\tau(s)b$ for some $b\in P_B$.  Therefore, since $B'$ is a weakening of $B$, we have $\grel\tau(sc)\in P_{B'}$ and so $sc\in P_{C'}$ as desired.
+
+  Lastly, we define $\tau'$ to be given by the set $\tau \cap P_{C\implies B}$, and we claim that the diagram
+  \[
+    \begin{tikzcd}
+      C \arrow[r, "\wk"] \arrow[d, "\tau"', Sim]
+        & C' \arrow[d, "\tau'"'] \\
+      B \arrow[r, "\wk"'] 
+        & B'
+    \end{tikzcd}
+    \]
+  commutes.  This is most easily checked by applying the faithful functor
+  \[
+    \G \xrightarrow{\F} \Rel \xrightarrow{\dagger} \oppcat{\Rel}
+    \]
+  where $\cmap{\dagger}{\Rel}{\oppcat{\Rel}}$ is the identity on objects and flips a relation $R\subset A\times B$ to give a relation $R^\dagger\subset B\times A$.  If $\cmap{\wk}{A}{A'}$ is a weakening morphism in $\G$ then its image $\grel\wk$ under this functor is the graph of the inclusion $P_{A'}\hookrightarrow P_A$.  Meanwhile, the image of $\tau$ under this functor is the graph of the function $\cmap{\grel\tau\inv}{P_B}{P_C}$.  By the definition of $P_{C'}$, the image of $\tau'$ under this functor is the graph of the function $\cmap{\grel\tau\inv\vert_{P_{B'}}}{P_{B'}}{P_{C'}}$.  It is then easy to check that the diagram
+  \[
+    \begin{tikzcd}
+      C
+        & C' \arrow[l, hook', "\grel\wk"'] \\
+      B \arrow[u, "\grel\tau\inv"]
+        & B' \arrow[u, "\grel\tau\inv\vert_{P_{B'}}"'] \arrow[l, hook', "\grel\wk"]
+    \end{tikzcd}
+    \]
+  commutes.  
+
+  The last thing that we need to do is to check that $\tau'$ is an isomorphism.  If we apply exactly the same argument to $\map{\wk}{C}{C'}$ and the isomorphism $\cmap{\tau\inv}{B}{C}$ then we get a weakening $B''$ of $B$ and an isomorphism $\cmap{(\tau\inv)'}{B''}{C'}$ making the following diagram commute:
+  \[
+    \begin{tikzcd}
+      B \arrow[r, "\wk"] \arrow[d, "\tau\inv"', Sim]
+        & B'' \arrow[d, "(\tau\inv)'"] \\
+      C \arrow[r, "\wk"']
+        & C'
+    \end{tikzcd}
+    \]
+  Now note that $P_{B''}$ is defined to be $\grel\tau(P_{C'})$.  Since $\grel\tau$ is a bijection and $P_C$ was defined to be $\grel\tau\inv(P_{B'})$, we get that $B''=B'$.  We now get:
+  \begin{align*}
+    B \xrightarrow{\wk} B' \xrightarrow{(\tau\inv)'} C' \xrightarrow{\tau'} B'
+    & = B \xrightarrow{\tau\inv} C \xrightarrow{\wk} C' \xrightarrow{\tau'} B' \\
+    & = B \xrightarrow{\tau\inv} C \xrightarrow{\tau} B \xrightarrow{\wk} B' \\
+    & = B \xrightarrow{\wk} B'
+  \end{align*}
+  Since $\wk$ is an epimorphism, it follows that $\comp{\tau'}{(\tau\inv)'}=\id_{B'}$.  An identical argument shows that $\comp{(\tau\inv)'}{\tau'}=\id_{C'}$.  So $\tau'$ is an isomorphism.
+\end{proof}
 
 \end{document}
