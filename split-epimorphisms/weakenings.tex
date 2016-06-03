@@ -589,4 +589,47 @@ We shall give two proofs of this lemma - one direct proof using the Hyland-Schal
   Since $\wk$ is an epimorphism, it follows that $\comp{\tau'}{(\tau\inv)'}=\id_{B'}$.  An identical argument shows that $\comp{(\tau\inv)'}{\tau'}=\id_{C'}$.  So $\tau'$ is an isomorphism.
 \end{proof}
 
+\begin{proof}[Second proof]
+  We start off with the diagram
+  \[
+    \begin{tikzcd}
+      C \arrow[d, "\tau"', Sim]
+        & \\
+      B \arrow[r, "\wk"]
+        & B'
+    \end{tikzcd}
+    \]
+
+  We use the monad on the category $\G/B'$.  Let $C'$ be the pullback of $B'$ along the morphism $\cmap{\comp\wk\tau}{C}{B'}$.  This gives us the diagram
+  \[
+    \begin{tikzcd}
+      C \arrow[d, "\tau"', Sim] \arrow[r, "\wk"]
+        & C' \arrow[d, "(\comp\wk\tau)'"] \\
+      B \arrow[r, "\wk"]
+        & B'
+    \end{tikzcd}
+    \]
+  It remains to show that $(\comp\wk\tau)'$ is an isomorphism.  
+
+  To show this, let us rearrange the original diagram a bit to make the monadic structure explicit:
+  \[
+    \begin{tikzcd}
+      C \arrow[r, "\tau", Sim'] \arrow[dr, "\comp\wk\tau"']
+        & B \arrow[d, "\wk"] \\
+      %
+        & B'
+    \end{tikzcd}
+    \]
+  When we apply the functor $\weak_{B'}$ to this diagram, we get
+  \[
+    \begin{tikzcd}
+      C' \arrow[r, "\tau'"] \arrow[dr, "(\comp\wk\tau)'"']
+        & B' \arrow[d, "\wk'"] \\
+      %
+        & B'
+    \end{tikzcd}
+    \]
+  By definition, $\cmap{\wk=\eta_B}{B}{B'}$, and so $\wk'=(\eta_B)'$.  Since our monad is idempotent, $(\eta_B)'$ is an isomorphism.  $\tau'$ is an isomorphism by functoriality and therefore $(\comp\wk\tau)'$ is an isomorphism, as desired.
+\end{proof}
+
 \end{document}

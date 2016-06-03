@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.2.22)  3 JUN 2016 12:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.2.22)  3 JUN 2016 12:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1009,10 +1009,10 @@ sm $(\OML/cmm/m/it/10.95 ^^\[]\OT1/cmr/m/n/10.95 )[] [] [] []\OML/cmm/m/it/10.9
 
 [10] [11] (./weakenings.aux) ) 
 Here is how much of TeX's memory you used:
- 17677 strings out of 493054
- 350348 string characters out of 6140586
+ 17809 strings out of 493054
+ 353654 string characters out of 6140586
  398580 words of memory out of 5000000
- 20814 multiletter control sequences out of 15000+600000
+ 20946 multiletter control sequences out of 15000+600000
  17024 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,19n,87p,710b,1116s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1029,7 +1029,7 @@ lic/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></u
 sr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on weakenings.pdf (11 pages, 190361 bytes).
+Output written on weakenings.pdf (11 pages, 193139 bytes).
 PDF statistics:
  103 PDF objects out of 1000 (max. 8388607)
  74 compressed objects within 1 object stream
