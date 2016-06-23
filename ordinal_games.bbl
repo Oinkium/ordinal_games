@@ -1,23 +1,29 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{CLM13}
 
-\bibitem{abramskyjagadeesangames}
+\bibitem[AJ13]{abramskyjagadeesangames}
 Samson Abramsky and Radha Jagadeesan.
 \newblock Games and full completeness for multiplicative linear logic.
 \newblock {\em CoRR}, abs/1311.6057, 2013.
 
-\bibitem{blassgames}
+\bibitem[Bla92]{blassgames}
 Andreas Blass.
 \newblock A game semantics for linear logic.
 \newblock {\em Annals of Pure and Applied Logic}, 56(1–3):183 -- 220, 1992.
 
-\bibitem{martinsthesis}
+\bibitem[CLM13]{martinsthesis}
 Martin Churchill, Jim Laird, and Guy McCusker.
 \newblock Imperative programs as proofs via game semantics.
 \newblock {\em CoRR}, abs/1307.2004, 2013.
 
-\bibitem{laird02}
-J.~Laird.
-\newblock A categorical semantics of higher-order store.
-\newblock In {\em Proceedings of CTCS '02}, number~69 in ENTCS. Elsevier, 2002.
+\bibitem[Con76]{conwaygames}
+John~H. Conway.
+\newblock {\em On Numbers and Games}, volume~6 of {\em London Mathematical
+  Society Monographs}.
+\newblock Academic Press, London, 1976.
+
+\bibitem[Cur92]{curiengames}
+Pierre-Louis Curien.
+\newblock Concrete data structures, sequential algorithms and linear logic.
+\newblock Email communication on types mailing list, 1992.
 
 \end{thebibliography}
