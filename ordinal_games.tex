@@ -187,6 +187,9 @@
 \newcommand{\s}{\mathfrak s}
 \renewcommand{\t}{\mathfrak t}
 \newcommand{\emptyplay}{\epsilon}
+\newcommand{\bracketed}[1]{\left({#1}\right)}
+\newcommand{\bneggame}[1]{\bracketed{\neggame{#1}}}
+\newcommand{\prefix}{\sqsubseteq}
 
 %%% END Article customizations
 
@@ -311,9 +314,13 @@ This `double move' can only occur at the start of the game, and Blass treats it 
 
 By contrast, Abramsky-Jagadeesan games may admit moves by both players at the same position (specifically, at the beginning of the game, before any moves have been played), but this does not cause problems since we insist that our legal plays start with an $O$-move and be strictly alternating.  The authors of \cite{abramskyjagadeesangames} note that their model can be considered as an intermediate between Conway's games, where the position tells you nothing about which player is to move, and Blass games, where the position completely determines which player is to move.  In Abramsky-Jagadeesan games, one can deduce which player is to move (by looking at which player made the last move) in every position except the empty starting position.
 
+In the Abramsky-Jagadeesan model, a positive game is an immediate win to player $P$, since player $O$ has no legal move to start the game off.  As we noted before, this does not mean that the content of a positive game is meaningless, since we can use connectives to `unlock' these illegal plays.  For example, if $Q$ is a positive game and $N$ is a negative game then $Q\parr N$ is a negative game, and the possible positions in $Q$ are now all achievable.  
+
 Curien's game model (\cite{curiengames}) is similar to Abramsky's and Jagadeesan's, but involves only negative games.  The only slight problem is that negative Abramsky-Jagadeesan games are not closed under implication: if $N,L$ are negative games then $N\implies L$ may be neither negative nor positive.  We may fix this by modifying the definition of $N\implies L$ so that we delete from $P_{N\implies L}$ all plays that start with a $P$-move - or, equivalently, by requiring that all plays start in $L$.  This is the approach taken in \cite{martinsthesis}, where it fits well with the paper's treatment of the \emph{sequoid} operator $\sequoid$, which is a version of the tensor product that has been modified so that play is required to start in the left-hand game.
 
 We shall adopt elements of both the Blass and the Abramsky-Jagadeesan games models; specifically, we shall use Blass's games and Abramsky-Jagadeesan's strategies.  This means that our games model will be more restrictive than either the Blass or the Abramsky-Jagadeesan models, but this lack of flexibility will be just what we need in order to extend these games over the transfinite ordinals.  We will later consider ways we can relax our model to recover Abramsky and Jagadeesan's games model.
+
+\subsection{Our definition of games and strategies}
 
 \begin{definition}
   A \emph{game} is a triple $(M_A,\lambda_A,\zeta_A,P_A)$ where
@@ -337,8 +344,77 @@ We shall adopt elements of both the Blass and the Abramsky-Jagadeesan games mode
 
   If $a\in M_A$ then we may recover $\lambda_A(a)$ from $\zeta_A$ so long as $a$ occurs in some play in $P_A$.  Since moves that can never be played do not affect the game at all, we do not really need $\lambda_A$ in our definition, but we keep it to make the connection to earlier work clearer.
 
-  Given the game $A$, we define $L_A$ to be the set of all plays $s\in P_A$ such that $s_n=O$ for all odd $n$ and $s_n=P$ for all even $n$ - in other words, the set of plays in $P_A$ that start with an $O$-move.
+  If $a\in M_A$ and $\lambda_A(a)=O$, we call $a$ an \emph{$O$-move}.  If $\lambda_A(a)=P$, we call $a$ a \emph{$P$-move}.  If $s\in P_A$ and $\zeta_A(s)=O$, we call $s$ an \emph{$O$-play} or \emph{$O$-position}.  If $\zeta_A(s)=P$, we call $s$ a \emph{$P$-play} or \emph{$P$-position}.
+
+  Given the game $A$, we define $L_A$ to be the set of all plays $s\in P_A$ such that $\lambda_A(s_n)=O$ for all odd $n$ and $\lambda_A(s_n)=P$ for all even $n$ - in other words, the set of plays in $P_A$ that start with an $O$-move.
 \end{remark}
+
+\begin{definition}
+  Let $A=(M_A,\lambda_A,\zeta_A,P_A)$ be a game and let $L_A$ be the associated set of legal plays.  A \emph{strategy} for $A$ is a non-empty prefix-closed subset $\sigma\subset L_A$ such that:
+  \begin{itemize}
+    \item If $a\in P_A$ is an $O$-move and $s\in\sigma$ is a $P$-position such that $sa\in P_A$, then $sa\in\sigma$.
+    \item If $s\in\sigma$ is an $O$-position and $a,b\in M_A$ are $P$-moves such that $sa,sb\in\sigma$, then $a=b$.
+  \end{itemize}
+\end{definition}
+
+\subsection{Connectives}
+
+Our definitions of connectives on games are as in \cite{blassgames}.
+
+\begin{definition}
+  Let $A=(M_A,\lambda_A,\zeta_A,P_A)$ be a game.  The negation of $A$, $\neggame{A}$, is the game formed by interchanging the roles of the two players.
+  \begin{itemize}
+    \item $M_{\bneggame A}=M_A$
+    \item $\lambda_{\bneggame A} = \comp\neg{\lambda_A}$
+    \item $\zeta_{\bneggame A} = \comp\neg{\zeta_A}$
+    \item $P_{\bneggame A} = P_A$
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  Let $A=(M_A,\lambda_A,\zeta_A,P_A),B=(M_B,\lambda_B,\zeta_B,P_B)$ be games.  Then the tensor product $A\tensor B$ is the game given by playing $A$ and $B$ in parallel, with player $O$ taking ownership of a position whenever he owns either its $A$-component or its $B$-component.  The par $A\parr B$ is the game given by playing $A$ and $B$ in parallel, with player $P$ taking ownership of a position whenever she owns either its $A$-component or its $B$-component:
+  \begin{itemize}
+    \item $M_{A\tensor B}=M_{A\parr B}=M_A\cprd M_B$
+    \item $\lambda_{A\tensor B}=\lambda_{A\parr B}=(\lambda_A\cprd \lambda_B)$
+    \item $P_{A\tensor B}=P_{A\parr B} = \{s\in (M_A\cprd M_B)^*\suchthat s\vert_A\in P_A,s\vert_B\in P_B\}$
+    \item $\zeta_{A\tensor B}(s) = \zeta_A(s\vert_A)\wedge\zeta_B(s\vert_B)$
+    \item $\zeta_{A\parr B}(s) = \zeta_A(s\vert_A)\vee\zeta_B(s\vert_B)$
+  \end{itemize}
+  We define the linear implication $A\implies B$ to be $\bneggame A\parr B$.  So we have
+  \begin{itemize}
+    \item $M_{A\implies B} = M_A\cprd M_B$
+    \item $\lambda_{A\implies B} = ((\comp\neg{\lambda_A})\cprd\lambda_B)$
+    \item $P_{A\implies B} = \{s\in(M_A\cprd M_B)^*\suchthat s\vert_A\in P_A,s\vert_B\in P_B\}$
+    \item $\zeta_{A\implies B} = \bracketed{\zeta_A(s\vert_A)\Rightarrow\zeta_B(s\vert_B)}$
+  \end{itemize}
+  Here, $\wedge$, $\vee$ and $\Rightarrow$ are as specified in Figure \ref{truthtables}.
+\end{definition}
+
+\subsection{Categorical semantics}
+
+Following \cite{abramskyjagadeesangames}, we define a category $\G$ whose objects are games where the morphisms from a game $A$ to a game $B$ are strategies for $A\implies B$.  If $A$ is a game, then the identity morphism $A\to A$ is the copycat strategy for $A\implies A$:
+\[
+  \id_A = \{s\in P_{A\implies A}\suchthat \textrm{for all even length }t\prefix s,\;t\vert_{\bneggame A}=t\vert_A\}
+  \]
+
+Now let $A,B,C$ be games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  We define a strategy $\comp\tau\sigma$ for $A\implies C$.  Here we follow the presentation given in \cite{abramskyjagadeesangames}.  
+
+Given sets $X_1,\dots X_n$, we define the set of \emph{local strings} $\L(X_1,\dots,X_n)$ to be the set of all strings $s\in(X_1\cprd\dots\cprd X_n)^*$ such that if $s_n \in X_i$ and $s_{n+1}\in X_j$ then $i$ and $j$ differ by at most one.  In other words, the sequence $s$ is not allowed to jump straight from $X_1$ to $X_3$, but must go through $X_2$ first.
+
+Given our strategies $\sigma\from A\implies B,\tau\from B\implies C$, define the set
+\[
+  \sigma\|\tau = \{\s\in\L(M_A,M_B,M_C)\suchthat \s\vert_{A,B}\in \sigma,\s\vert_{B,C}\in\tau\}
+  \]
+We then define
+\[
+  \comp\tau\sigma = \{\s\vert_{A,C}\suchthat \s\in\sigma\|\tau\}
+  \]
+\begin{theorem}
+  $\comp\tau\sigma$ is a strategy for $A\implies C$.
+  \begin{proof}
+    If $s\in\comp\tau\sigma$, say that $\s\in\sigma\|\tau$ \emph{covers} $s$ if $\s\vert_{A,C}=s$.  By definition, every $s\in\comp\tau\sigma$ is covered by some $\s\in\sigma\|\tau$.  We claim that there is a minimal such $\s$.
+  \end{proof}
+\end{theorem}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
