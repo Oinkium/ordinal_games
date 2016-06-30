@@ -26,4 +26,9 @@ Pierre-Louis Curien.
 \newblock Concrete data structures, sequential algorithms and linear logic.
 \newblock Email communication on types mailing list, 1992.
 
+\bibitem[Joy77]{joyalgames}
+Andr\'{e} Joyal.
+\newblock Remarques sur la th\'{e}orie des jeux \`{a} deux personnes.
+\newblock {\em Gazette des sciences mathematiques de Quebec}, 1(4), 1977.
+
 \end{thebibliography}

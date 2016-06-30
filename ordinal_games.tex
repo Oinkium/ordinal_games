@@ -372,27 +372,34 @@ Our definitions of connectives on games are as in \cite{blassgames}.
 \end{definition}
 
 \begin{definition}
-  Let $A=(M_A,\lambda_A,\zeta_A,P_A),B=(M_B,\lambda_B,\zeta_B,P_B)$ be games.  Then the tensor product $A\tensor B$ is the game given by playing $A$ and $B$ in parallel, with player $O$ taking ownership of a position whenever he owns either its $A$-component or its $B$-component.  The par $A\parr B$ is the game given by playing $A$ and $B$ in parallel, with player $P$ taking ownership of a position whenever she owns either its $A$-component or its $B$-component:
+  Let $A=(M_A,\lambda_A,\zeta_A,P_A),B=(M_B,\lambda_B,\zeta_B,P_B)$ be games.  Define:
+  \[
+    P_A\| P_B = \{s\in (M_A\cprd M_B)^*\suchthat s\vert_A\in P_A,s\vert_B\in P_B\}
+    \]
+    Then the tensor product $A\tensor B$ is the game given by playing $A$ and $B$ in parallel, with player $O$ taking ownership of a position whenever he owns either its $A$-component or its $B$-component.  The par $A\parr B$ is the game given by playing $A$ and $B$ in parallel, with player $P$ taking ownership of a position whenever she owns either its $A$-component or its $B$-component:
   \begin{itemize}
     \item $M_{A\tensor B}=M_{A\parr B}=M_A\cprd M_B$
     \item $\lambda_{A\tensor B}=\lambda_{A\parr B}=(\lambda_A\cprd \lambda_B)$
-    \item $P_{A\tensor B}=P_{A\parr B} = \{s\in (M_A\cprd M_B)^*\suchthat s\vert_A\in P_A,s\vert_B\in P_B\}$
     \item $\zeta_{A\tensor B}(s) = \zeta_A(s\vert_A)\wedge\zeta_B(s\vert_B)$
+    \item $P_{A\tensor B} = \{s\in P_A\| P_B\suchthat\textrm{$s$ is alternating with respect to $\zeta_{A\tensor B}$}\}$
     \item $\zeta_{A\parr B}(s) = \zeta_A(s\vert_A)\vee\zeta_B(s\vert_B)$
+    \item $P_{A\parr B} = \{s\in P_A\| P_B\suchthat\textrm{$s$ is alternating with respect to $\zeta_{A\parr B}$}\}$
   \end{itemize}
+  (Here, $\zeta_{A\tensor B},\zeta_{A\parr B}$ are first defined as functions $P_A\| P_B\to\{O,P\}$ and then restricted to $P_{A\tensor B},P_{A\parr B}$ once these have been defined.)
+
   We define the linear implication $A\implies B$ to be $\bneggame A\parr B$.  So we have
   \begin{itemize}
     \item $M_{A\implies B} = M_A\cprd M_B$
     \item $\lambda_{A\implies B} = ((\comp\neg{\lambda_A})\cprd\lambda_B)$
-    \item $P_{A\implies B} = \{s\in(M_A\cprd M_B)^*\suchthat s\vert_A\in P_A,s\vert_B\in P_B\}$
     \item $\zeta_{A\implies B} = \bracketed{\zeta_A(s\vert_A)\Rightarrow\zeta_B(s\vert_B)}$
+    \item $P_{A\implies B} = \{s\in P_A\| P_B\suchthat\textrm{$s$ is alternating with respect to $\zeta_{A\implies B}$}\}$
   \end{itemize}
   Here, $\wedge$, $\vee$ and $\Rightarrow$ are as specified in Figure \ref{truthtables}.
 \end{definition}
 
 \subsection{Categorical semantics}
 
-Following \cite{abramskyjagadeesangames}, we define a category $\G$ whose objects are games where the morphisms from a game $A$ to a game $B$ are strategies for $A\implies B$.  If $A$ is a game, then the identity morphism $A\to A$ is the copycat strategy for $A\implies A$:
+Following \cite{joyalgames} and \cite{abramskyjagadeesangames}, we define a category $\G$ whose objects are games where the morphisms from a game $A$ to a game $B$ are strategies for $A\implies B$.  If $A$ is a game, then the identity morphism $A\to A$ is the copycat strategy for $A\implies A$:
 \[
   \id_A = \{s\in P_{A\implies A}\suchthat \textrm{for all even length }t\prefix s,\;t\vert_{\bneggame A}=t\vert_A\}
   \]
@@ -412,7 +419,11 @@ We then define
 \begin{theorem}
   $\comp\tau\sigma$ is a strategy for $A\implies C$.
   \begin{proof}
-    If $s\in\comp\tau\sigma$, say that $\s\in\sigma\|\tau$ \emph{covers} $s$ if $\s\vert_{A,C}=s$.  By definition, every $s\in\comp\tau\sigma$ is covered by some $\s\in\sigma\|\tau$.  We claim that there is a minimal such $\s$.
+    Certainly $\sigma\|\tau$ is prefix closed.  To show that $\comp\tau\sigma$ is prefix-closed, let $\s\in\sigma\|\tau$, and let $t\prefix\s\vert_{A,C}$.It will suffice to show that there is some prefix $\t\prefix\s$ such that $\t\vert_{A,C}=t$.  If $t=\emptyplay$, then set $\t=\emptyplay$.  Otherwise, $t=t'a$ for some $a\in M_{A\implies C}$.  If we let $\t$ be the prefix of $\s$ whose last move is $a$, then it is clear that $\t\vert_{A,C}=t$.
+
+    We now show that $\comp\sigma\tau\subset P_{A\implies C}$.  If $\s\in\sigma\|\tau$ then $\s\vert_{A,B}\in\sigma\subset P_{A\implies C}$, so $\s\vert_A=\s\vert_{A,B}\vert_A\in P_A$.  Similarly, $\s\vert_C\in P_C$.  So $\s\vert_{A,C}\in P_A\| P_C$.  
+
+    It remains to show that $\comp\sigma\tau$ is alternating with respect to $\zeta_{A\implies C}$.  
   \end{proof}
 \end{theorem}
 
