@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.2.22)  30 JUN 2016 15:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.12.25)  30 JUN 2016 16:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -894,32 +894,42 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 ) (./ordinal_games.aux)
 \openout1 = `ordinal_games.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 198.
-LaTeX Font Info:    ... okay on input line 198.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 198.
-LaTeX Font Info:    ... okay on input line 198.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 198.
-LaTeX Font Info:    ... okay on input line 198.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 198.
-LaTeX Font Info:    ... okay on input line 198.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 198.
-LaTeX Font Info:    ... okay on input line 198.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 198.
-LaTeX Font Info:    ... okay on input line 198.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
 
 (/usr/share/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-
-Overfull \hbox (26.81837pt too wide) in paragraph at lines 136--139
-\OT1/cmr/m/n/10.95 ity\scratchdimen=\dimen268without loss of gen-er-al-ity\scra
-tchbox=\box39 
- []
-
+\scratchcounter=\count145
+\scratchdimen=\dimen268
+\scratchbox=\box39
+\nofMPsegments=\count146
+\nofMParguments=\count147
+\everyMPshowfont=\toks46
+\MPscratchCnt=\count148
+\MPscratchDim=\dimen269
+\MPnumerator=\count149
+\makeMPintoPDFobject=\count150
+\everyMPtoPDFconversion=\toks47
 ) (/usr/share/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
 (/usr/share/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
 (/usr/share/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
 Package pdftexcmds Info: LuaTeX not detected.
@@ -928,11 +938,22 @@ Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )
 (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
 (/usr/share/texmf-dist/tex/latex/oberdiek/grfext.sty
-(/usr/share/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty))
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/share/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
 (/usr/share/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
 (/usr/share/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
 (/usr/share/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
 Package etexcmds Info: Could not find \expanded.
 (etexcmds)             That can mean that you are not using pdfTeX 1.50 or
 (etexcmds)             that some package has redefined \expanded.
@@ -943,95 +964,84 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
 
-(/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+(/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
 
-Overfull \hbox (33.11777pt too wide) in paragraph at lines 107--198
-\OT1/cmr/m/n/10.95 (HO)                                                        
-                                                                               
-      with-
- []
-
 ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for U+msa on input line 204.
+LaTeX Font Info:    Try loading font information for U+msa on input line 202.
 
-(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
-LaTeX Font Info:    Try loading font information for U+msb on input line 204.
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 202.
 
-(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd)
-LaTeX Font Info:    Try loading font information for U+stmry on input line 204.
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for U+stmry on input line 202.
 
 
 (/usr/share/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
-LaTeX Font Info:    Try loading font information for U+cmllr on input line 204.
+LaTeX Font Info:    Try loading font information for U+cmllr on input line 202.
 
 
 (/usr/share/texmf-dist/tex/latex/cmll/ucmllr.fd)
-Overfull \hbox (433.19853pt too wide) in paragraph at lines 204--205
-\OT1/cmr/m/n/10.95 point out that our $\OML/cmm/m/it/10.95 withoutlossofgeneral
-ity[]withoutlossofgenerality[]! \OT1/cmr/m/n/10.95 +
- []
-
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 214.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 212.
 
 
-(/usr/share/texmf-dist/tex/latex/base/omscmr.fd)
+(/usr/share/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 214.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 212.
+ [1
 
-Overfull \hbox (94.45592pt too wide) in paragraph at lines 214--215
-[]
- []
-
-[2] [3] [4] [5]
-Overfull \hbox (24.65974pt too wide) in paragraph at lines 323--324
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5]
+Overfull \hbox (24.65974pt too wide) in paragraph at lines 321--322
 \OT1/cmr/m/n/10.95 games mod-els; specif-i-cally, we shall use Blass's games an
 d Abramsky-Jagadeesan's
  []
 
-[6] [7] [8]
-LaTeX Font Info:    Try loading font information for U+euf on input line 413.
- (/usr/share/texmf-dist/tex/latex/amsfonts/ueuf.fd)
-Overfull \hbox (224.40529pt too wide) detected at line 414
-\OML/cmm/m/it/10.95 ^^[\OMS/cmsy/m/n/10.95 k\OML/cmm/m/it/10.95 ^^\ \OT1/cmr/m/
-n/10.95 = \OMS/cmsy/m/n/10.95 f[] 2 L\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 M[
-]; M[]; M[]\OT1/cmr/m/n/10.95 )  [] []  \U/euf/m/n/10.95 s\OMS/cmsy/m/n/10.95 j
-[] 2 \OML/cmm/m/it/10.95 ^^[; \U/euf/m/n/10.95 s\OMS/cmsy/m/n/10.95 j[] 2 \OML/
-cmm/m/it/10.95 ^^\\OMS/cmsy/m/n/10.95 g
- []
+[6] [7]
+LaTeX Font Info:    Try loading font information for U+euf on input line 411.
+ (/usr/share/texmf-dist/tex/latex/amsfonts/ueuf.fd
+File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
+) [8]
+(./ordinal_games.bbl) [9] (./ordinal_games.aux)
 
-[9] (./ordinal_games.bbl) [10] (./ordinal_games.aux) ) 
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 16903 strings out of 493054
- 331157 string characters out of 6140586
- 386854 words of memory out of 5000000
- 20046 multiletter control sequences out of 15000+600000
+ 16902 strings out of 493054
+ 331153 string characters out of 6140585
+ 386522 words of memory out of 5000000
+ 20045 multiletter control sequences out of 15000+600000
  11607 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,11n,82p,1043b,327s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/john/.texlive/tex
-mf-var/fonts/pk/ljfour/public/cmll/cmllr8.600pk> </home/john/.texlive/texmf-var
-/fonts/pk/ljfour/public/cmll/cmllr10.657pk></usr/share/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
-></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/sha
-re/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/amsfonts/euler/eufm10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfont
-s/symbols/msam10.pfb>
-Output written on ordinal_games.pdf (10 pages, 174633 bytes).
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/publi
+c/cmll/cmllr10.pfb></usr/share/texmf-dist/fonts/type1/public/cmll/cmllr8.pfb></
+usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/font
+s/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public
+/amsfonts/euler/eufm10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/s
+ymbols/msam10.pfb>
+Output written on ordinal_games.pdf (9 pages, 181224 bytes).
 PDF statistics:
- 102 PDF objects out of 1000 (max. 8388607)
- 74 compressed objects within 1 object stream
+ 97 PDF objects out of 1000 (max. 8388607)
+ 70 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
