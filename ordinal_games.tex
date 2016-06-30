@@ -190,6 +190,8 @@
 \newcommand{\bracketed}[1]{\left({#1}\right)}
 \newcommand{\bneggame}[1]{\bracketed{\neggame{#1}}}
 \newcommand{\prefix}{\sqsubseteq}
+\renewcommand{\wlog}{without loss of generality}
+\newcommand{\Wlog}{Without loss of generality}
 
 %%% END Article customizations
 
@@ -346,7 +348,7 @@ We shall adopt elements of both the Blass and the Abramsky-Jagadeesan games mode
 
   If $a\in M_A$ and $\lambda_A(a)=O$, we call $a$ an \emph{$O$-move}.  If $\lambda_A(a)=P$, we call $a$ a \emph{$P$-move}.  If $s\in P_A$ and $\zeta_A(s)=O$, we call $s$ an \emph{$O$-play} or \emph{$O$-position}.  If $\zeta_A(s)=P$, we call $s$ a \emph{$P$-play} or \emph{$P$-position}.
 
-  Given the game $A$, we define $L_A$ to be the set of all plays $s\in P_A$ such that $\lambda_A(s_n)=O$ for all odd $n$ and $\lambda_A(s_n)=P$ for all even $n$ - in other words, the set of plays in $P_A$ that start with an $O$-move.
+  Given the game $A$, we define $L_A$ to be the set of all plays $s\in P_A$ such that either $s$ has even length and $\zeta_A(s)=P$ or $s$ has odd length and $\zeta_A(s)=O$.  
 \end{remark}
 
 \begin{definition}
@@ -371,31 +373,29 @@ Our definitions of connectives on games are as in \cite{blassgames}.
   \end{itemize}
 \end{definition}
 
-\begin{definition}
-  Let $A=(M_A,\lambda_A,\zeta_A,P_A),B=(M_B,\lambda_B,\zeta_B,P_B)$ be games.  Define:
-  \[
-    P_A\| P_B = \{s\in (M_A\cprd M_B)^*\suchthat s\vert_A\in P_A,s\vert_B\in P_B\}
-    \]
-    Then the tensor product $A\tensor B$ is the game given by playing $A$ and $B$ in parallel, with player $O$ taking ownership of a position whenever he owns either its $A$-component or its $B$-component.  The par $A\parr B$ is the game given by playing $A$ and $B$ in parallel, with player $P$ taking ownership of a position whenever she owns either its $A$-component or its $B$-component:
-  \begin{itemize}
-    \item $M_{A\tensor B}=M_{A\parr B}=M_A\cprd M_B$
-    \item $\lambda_{A\tensor B}=\lambda_{A\parr B}=(\lambda_A\cprd \lambda_B)$
-    \item $\zeta_{A\tensor B}(s) = \zeta_A(s\vert_A)\wedge\zeta_B(s\vert_B)$
-    \item $P_{A\tensor B} = \{s\in P_A\| P_B\suchthat\textrm{$s$ is alternating with respect to $\zeta_{A\tensor B}$}\}$
-    \item $\zeta_{A\parr B}(s) = \zeta_A(s\vert_A)\vee\zeta_B(s\vert_B)$
-    \item $P_{A\parr B} = \{s\in P_A\| P_B\suchthat\textrm{$s$ is alternating with respect to $\zeta_{A\parr B}$}\}$
-  \end{itemize}
-  (Here, $\zeta_{A\tensor B},\zeta_{A\parr B}$ are first defined as functions $P_A\| P_B\to\{O,P\}$ and then restricted to $P_{A\tensor B},P_{A\parr B}$ once these have been defined.)
+We now define the tensor product $A\tensor B$, the par $A\parr B$ and the linear implication $A\implies B$ of two games.  All these games are obtained by playing $A$ and $B$ in parallel, so they all have the same set of moves:
+\[
+  M_{A\tensor B} = M_{A\parr B} = M_{A\implies B} = M_A \cprd M_B
+  \]
 
-  We define the linear implication $A\implies B$ to be $\bneggame A\parr B$.  So we have
-  \begin{itemize}
-    \item $M_{A\implies B} = M_A\cprd M_B$
-    \item $\lambda_{A\implies B} = ((\comp\neg{\lambda_A})\cprd\lambda_B)$
-    \item $\zeta_{A\implies B} = \bracketed{\zeta_A(s\vert_A)\Rightarrow\zeta_B(s\vert_B)}$
-    \item $P_{A\implies B} = \{s\in P_A\| P_B\suchthat\textrm{$s$ is alternating with respect to $\zeta_{A\implies B}$}\}$
-  \end{itemize}
-  Here, $\wedge$, $\vee$ and $\Rightarrow$ are as specified in Figure \ref{truthtables}.
+Ownership of moves is decided via the obvious copairing functions:
+\begin{IEEEeqnarray*}{c}
+  \lambda_{A\tensor B} = \lambda_{A\parr B} = \lambda_A \cprd \lambda_B\\
+  \lambda_{A\implies B} = (\neg\circ\lambda_A) \cprd \lambda_B
+\end{IEEEeqnarray*}
+
+\begin{definition}
+  Let $M$ be a set, let $P\subset M^*$ be prefix closed and let $\cmap{\lambda}{M}{\OP},\cmap{\zeta}{P}{\OP}$ be functions.  If $s\in P$, we say that $s$ is \emph{alternating with respect to $\zeta$} if the set of prefixes of $s$ satisfies the alternating condition: if $t,ta\prefix s$, then $\zeta(t) = \neg\zeta(ta)$.
 \end{definition}
+
+\begin{proposition}
+  $\neggame A$, $A\tensor B$,$A\parr B$,$A\implies B$ are well formed games.
+  \begin{proof}
+    This is obvious for $\neggame A$.  We will prove the proposition for $A\tensor B$ and the other two cases are entirely similar.  Alternatively, observe that $A\parr B=\neggame{(\neggame A \tensor \neggame B)}$ and $A\implies B = \neggame A \parr B$.
+
+    For $A\tensor B$, it suffices to show that $P_{A\tensor B}$ is alternating with respect to $\zeta_{A\tensor B}$.  Indeed, suppose $s,sa\in P_{A\tensor B}$.  Then $s,sa$ are both prefixes of $sa$.  Since $sa\in P_{A\tensor B}$, it must be alternating with respect to $\zeta_{A\tensor B}$ and therefore $s$ and $sa$ have opposite signs under $\zeta_{A\tensor B}$.  
+  \end{proof}
+\end{proposition}
 
 \subsection{Categorical semantics}
 
@@ -421,11 +421,13 @@ We then define
   \begin{proof}
     Certainly $\sigma\|\tau$ is prefix closed.  To show that $\comp\tau\sigma$ is prefix-closed, let $\s\in\sigma\|\tau$, and let $t\prefix\s\vert_{A,C}$.It will suffice to show that there is some prefix $\t\prefix\s$ such that $\t\vert_{A,C}=t$.  If $t=\emptyplay$, then set $\t=\emptyplay$.  Otherwise, $t=t'a$ for some $a\in M_{A\implies C}$.  If we let $\t$ be the prefix of $\s$ whose last move is $a$, then it is clear that $\t\vert_{A,C}=t$.
 
+    We want to show that $\comp\tau\sigma\subset L_A$.  First, we show that $\zeta_{A\implies C}(\emptyplay)=P$.  Note that since $\sigma\in L_{A\implies B},\tau\in L_{B\implies C}$, we must have $\zeta_{A\implies B}(\emptyplay)=\zeta_{B\implies C}(\emptyplay)=P$.  It follows that $\zeta_{A\implies C}(\emptyplay)=P$ by transitivity of $\Rightarrow$.  
+
     We now show that $\comp\tau\sigma\subset P_{A\implies C}$.  If $\s\in\sigma\|\tau$ then $\s\vert_{A,B}\in\sigma\subset P_{A\implies C}$, so $\s\vert_A=\s\vert_{A,B}\vert_A\in P_A$.  Similarly, $\s\vert_C\in P_C$.  So $\s\vert_{A,C}\in P_A\| P_C$.  
 
-    It remains to show that $\comp\tau\sigma$ is alternating with respect to $\zeta_{A\implies C}$.  Let $s\in\comp\tau\sigma$, and let $\s\in\sigma\|\tau$ be minimal such that $\s\vert_{A,C}=s$ (so if $s=\emptyplay$ then $\s=\emptyplay$ and if $s=s'y$ then $\s$ has $y$ as its last move).  
+    It remains to show that $\comp\tau\sigma$ is alternating with respect to $\zeta_{A\implies C}$.  This will also complete the proof that $\comp\tau\sigma\in L_{A\implies C}$.  Let $s\in\comp\tau\sigma$, and let $\s\in\sigma\|\tau$ be minimal such that $\s\vert_{A,C}=s$ (so if $s=\emptyplay$ then $\s=\emptyplay$ and if $s=s'y$ then $\s$ has $y$ as its last move).  
 
-    Suppose first that $sa\in\sigma$, where $a\in M_A$.  We have $\lambda_{A\implies C}(a)=$
+    We know that $\zeta_{A\implies C}(\emptyplay) = P$, so we first need to show that if $x\in M_{A\implies C}$ and $x\in \comp\tau\sigma$ then $\lambda_{A\implies C}(x)=O$.  First suppose that $x=a$ is an $A$-move.  
   \end{proof}
 \end{theorem}
 
