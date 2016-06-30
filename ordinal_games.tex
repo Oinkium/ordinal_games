@@ -421,9 +421,11 @@ We then define
   \begin{proof}
     Certainly $\sigma\|\tau$ is prefix closed.  To show that $\comp\tau\sigma$ is prefix-closed, let $\s\in\sigma\|\tau$, and let $t\prefix\s\vert_{A,C}$.It will suffice to show that there is some prefix $\t\prefix\s$ such that $\t\vert_{A,C}=t$.  If $t=\emptyplay$, then set $\t=\emptyplay$.  Otherwise, $t=t'a$ for some $a\in M_{A\implies C}$.  If we let $\t$ be the prefix of $\s$ whose last move is $a$, then it is clear that $\t\vert_{A,C}=t$.
 
-    We now show that $\comp\sigma\tau\subset P_{A\implies C}$.  If $\s\in\sigma\|\tau$ then $\s\vert_{A,B}\in\sigma\subset P_{A\implies C}$, so $\s\vert_A=\s\vert_{A,B}\vert_A\in P_A$.  Similarly, $\s\vert_C\in P_C$.  So $\s\vert_{A,C}\in P_A\| P_C$.  
+    We now show that $\comp\tau\sigma\subset P_{A\implies C}$.  If $\s\in\sigma\|\tau$ then $\s\vert_{A,B}\in\sigma\subset P_{A\implies C}$, so $\s\vert_A=\s\vert_{A,B}\vert_A\in P_A$.  Similarly, $\s\vert_C\in P_C$.  So $\s\vert_{A,C}\in P_A\| P_C$.  
 
-    It remains to show that $\comp\sigma\tau$ is alternating with respect to $\zeta_{A\implies C}$.  
+    It remains to show that $\comp\tau\sigma$ is alternating with respect to $\zeta_{A\implies C}$.  Let $s\in\comp\tau\sigma$, and let $\s\in\sigma\|\tau$ be minimal such that $\s\vert_{A,C}=s$ (so if $s=\emptyplay$ then $\s=\emptyplay$ and if $s=s'y$ then $\s$ has $y$ as its last move).  
+
+    Suppose first that $sa\in\sigma$, where $a\in M_A$.  We have $\lambda_{A\implies C}(a)=$
   \end{proof}
 \end{theorem}
 
