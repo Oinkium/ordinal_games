@@ -15,6 +15,7 @@
 \usepackage{mathtools} % for the all important \coloneqq symbol
 \usepackage{url} % for \url
 \usepackage{IEEEtrantools} % for \IEEEeqnarray
+\usepackage{pbox} % for \pbox
 
 %%% ToC (table of contents) APPEARANCE
 \usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
@@ -346,7 +347,7 @@ We shall adopt elements of both the Blass and the Abramsky-Jagadeesan games mode
 
   If $a\in M_A$ and $\lambda_A(a)=O$, we call $a$ an \emph{$O$-move}.  If $\lambda_A(a)=P$, we call $a$ a \emph{$P$-move}.  If $s\in P_A$ and $\zeta_A(s)=O$, we call $s$ an \emph{$O$-play} or \emph{$O$-position}.  If $\zeta_A(s)=P$, we call $s$ a \emph{$P$-play} or \emph{$P$-position}.
 
-  Given the game $A$, we define $L_A$ to be the set of all plays $s\in P_A$ such that either $s$ has even length and $\zeta_A(s)=P$ or $s$ has odd length and $\zeta_A(s)=O$.  
+  Given the game $A$, we define $L_A$ to be the set of all plays $s\in P_A$ such that either $s$ has even length and $\zeta_A(s)=P$ or $s$ has odd length and $\zeta_A(s)=O$.  Since $P_A$ is alternating, it is evident that $L_A=P_A$ if $\zeta_A(\emptyplay) = P$ and is empty otherwise.  This slightly strange definition will become more meaningful once we define games over ordinals.  
 \end{remark}
 
 \begin{definition}
@@ -371,6 +372,8 @@ Our definitions of connectives on games are as in \cite{blassgames}.
   \end{itemize}
 \end{definition}
 
+It follows immediately from the definitions that $\neggame A$ is a well formed game.
+
 We now define the tensor product $A\tensor B$, the par $A\parr B$ and the linear implication $A\implies B$ of two games.  All these games are obtained by playing $A$ and $B$ in parallel, so they all have the same set of moves:
 \[
   M_{A\tensor B} = M_{A\parr B} = M_{A\implies B} = M_A \cprd M_B
@@ -382,16 +385,85 @@ Ownership of moves is decided via the obvious copairing functions:
   \lambda_{A\implies B} = (\neg\circ\lambda_A) \cprd \lambda_B
 \end{IEEEeqnarray*}
 
+We define the set $P_A\|P_B$ to be the set of all plays in $(M_A \cprd M_B)^*$ whose $M_A$-component is a play from $P_A$ and whose $M_B$-component is a play from $P_B$:
+\[
+  P_A\|P_B = \{s\in (M_A\cprd M_B)^*\suchthat s\vert_A\in P_A,\; s\vert_B\in P_B\}
+  \]
+
+We are now in a position to define $\zeta_{A\tensor B},\zeta_{A\parr B},\zeta_{A\implies B}$ as functions $P_A\|P_B\to\OP$:
+\begin{IEEEeqnarray*}{rCl}
+  \zeta_{A\tensor B}(s) & = & \zeta_A(s\vert_A) \wedge \zeta_B(s\vert_B) \\
+  \zeta_{A\parr B}(s) & = & \zeta_A(s\vert_A) \vee \zeta_B(s\vert_B) \\
+  \zeta_{A\implies B}(s) & = & \zeta_A(s\vert_A) \Rightarrow \zeta_B(s\vert_B)
+\end{IEEEeqnarray*}
+
+(Here, $\wedge$, $\vee$ and $\Rightarrow$ are as in Figure \ref{truthtables}.)
+
+As things stand, $P_A\|P_B$ is not a valid set of plays for our $\lambda$ and $\zeta$ functions.  The first problem is that $P_A\|P_B$ contains plays which are not alternating with respect to $\zeta_{A\tensor B},\zeta_{A\parr B},\zeta_{A\implies B}$.  The second problem is that the $\zeta$ and $\lambda$ functions do not always agree with one another.  For example, suppose that $Q,R$ are two positive games.  So we have $\zeta_Q(\emptyplay) = \zeta_R(\emptyplay) = O$.  Then $\zeta_{Q\tensor R}(\emptyplay) = O\wedge O = O$.  But now suppose that player $P$ can make an opening move $q$ in $Q$.  Then we have
+\[
+  \zeta_{Q\tensor R}(q) = \zeta_Q(q) \wedge \zeta_R(\emptyplay) = P \wedge O = O
+  \]
+but $\lambda_{Q\tensor R}(q) = P$.  
+
+Our solution is to throw away some plays from $P_A\| P_B$ so that what remains satisfies the alternating condition and the condition on the $\lambda$ and $\zeta$ functions.
+
 \begin{definition}
   Let $M$ be a set, let $P\subset M^*$ be prefix closed and let $\cmap{\lambda}{M}{\OP},\cmap{\zeta}{P}{\OP}$ be functions.  If $s\in P$, we say that $s$ is \emph{alternating with respect to $\zeta$} if the set of prefixes of $s$ satisfies the alternating condition: if $t,ta\prefix s$, then $\zeta(t) = \neg\zeta(ta)$.
+
+  We say that $s$ is \emph{well formed with respect to $\lambda,\zeta$} if $s = \emptyplay$ or if $s=s'a$ and $\zeta(s)=\lambda(a)$.
+
+  Now let $A,B$ be games.  We define:
+  \begin{IEEEeqnarray*}{rCl}
+    P_{A\tensor B} & = & \left\{s\in P_A\|P_B \;\middle|\; \mbox{\pbox{\textwidth}{$s$ is alternating with respect to $\zeta_{A\tensor B}$ \\ $s$ is well formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$}}\right\} \\
+    P_{A\parr B} & = & \left\{s\in P_A\|P_B \;\middle|\; \mbox{\pbox{\textwidth}{$s$ is alternating with respect to $\zeta_{A\parr B}$ \\ $s$ is well formed with respect to $\zeta_{A\parr B},\lambda_{A\parr B}$}}\right\} \\
+    P_{A\implies B} & = & \left\{s\in P_A\|P_B \;\middle|\; \mbox{\pbox{\textwidth}{$s$ is alternating with respect to $\zeta_{A\implies B}$ \\ $s$ is well formed with respect to $\zeta_{A\implies B},\lambda_{A\implies B}$}}\right\}
+  \end{IEEEeqnarray*}
+\end{definition}
+
+\begin{definition}
+  We define:
+  \begin{IEEEeqnarray*}{cCc}
+    A\tensor B & = & (M_{A\tensor B}, \lambda_{A\tensor B}, \zeta_{A\tensor B}, P_{A\tensor B}) \\
+    A\parr B & = & (M_{A\parr B}, \lambda_{A\parr B}, \zeta_{A\parr B}, P_{A\parr B}) \\
+    A\implies B & = & (M_{A\implies B}, \lambda_{A\implies B}, \zeta_{A\implies B}, P_{A\implies B})
+  \end{IEEEeqnarray*}
 \end{definition}
 
 \begin{proposition}
-  $\neggame A$, $A\tensor B$,$A\parr B$,$A\implies B$ are well formed games.
+  $A\tensor B$,$A\parr B$,$A\implies B$ are well formed games.  Moreover, $P_{A\tensor B}$ is the largest subset of $P_A\|P_B$ such that $(M_{A\tensor B}, \lambda_{A\tensor B}, \zeta_{A\tensor B}, P_{A\tensor B})$ is a well formed game and similarly for the connectives $\parr$ and $\implies$.  
   \begin{proof}
-    This is obvious for $\neggame A$.  We will prove the proposition for $A\tensor B$ and the other two cases are entirely similar.  Alternatively, observe that $A\parr B=\neggame{(\neggame A \tensor \neggame B)}$ and $A\implies B = \neggame A \parr B$.
+    We will prove the proposition for $A\tensor B$; the other two cases are entirely similar.  Alternatively, observe that $A\parr B=\neggame{(\neggame A \tensor \neggame B)}$ and $A\implies B = \neggame A \parr B$.
 
-    For $A\tensor B$, it suffices to show that $P_{A\tensor B}$ is alternating with respect to $\zeta_{A\tensor B}$.  Indeed, suppose $s,sa\in P_{A\tensor B}$.  Then $s,sa$ are both prefixes of $sa$.  Since $sa\in P_{A\tensor B}$, it must be alternating with respect to $\zeta_{A\tensor B}$ and therefore $s$ and $sa$ have opposite signs under $\zeta_{A\tensor B}$.  
+    For $A\tensor B$, it suffices to show that $P_{A\tensor B}$ is alternating with respect to $\zeta_{A\tensor B}$, since every $s\in P_{A\tensor B}$ is well-formed by definition.  Suppose $s,sa\in P_{A\tensor B}$; then $s,sa\prefix sa$; since $sa$ is alternating with respect to $\zeta_{A\tensor B}$, it follows that $\zeta_{A\tensor B}(s) = \neg\zeta_{A\tensor B}(sa)$.
+
+    For the second part of the proposition, suppose that $V\subset P_A\|P_B$ is prefix-closed and satisfies the alternating condition with respect to $\zeta_{A\tensor B}$ and that every $s\in V$ is well-formed with respect to $\lambda_{A\tensor B},\zeta_{A\tensor B}$.  We need to show that $V\subset P_{A\tensor B}$, for which it will suffice to show that every $s\in V$ is alternating.  This is easy to see: since $V$ is prefix closed, the set of all prefixes of $s$ is a subset of $V$, and so it satisfies the alternating condition with respect to $\zeta_{A\tensor B}$.  
+  \end{proof}
+\end{proposition}
+
+A design feature of the connectives $\tensor,\parr,\implies$ is that only player $O$ may switch games in $A\tensor B$, while only player $P$ may switch games in $A\parr B$ and $A\implies B$.  The $\implies$ case follows immediately from the $\parr$ case by noting that $A\implies B = \neggame A\parr B$, and the $\parr$ case then follows from the $\tensor$ case by observing that $A\parr B=\neggame{(\neggame A \tensor \neggame B)}$.  Thus, it will suffice to prove the following proposition for the tensor product:
+
+\begin{proposition}
+  Let $A,B$ be games.  Suppose $s\in P_{A\implies B}$, $a\in M_A$ and $b\in M_B$.  Then:
+
+  i) If $sab\in P_{A\tensor B}$ then $\lambda_{A\tensor B}(b)=O$
+
+  ii) If $sba\in P_{A\tensor B}$ then $\lambda_{\tensor B}(a)=O$.  
+
+  \begin{proof}
+
+    (i): $\begin{aligned}[t]
+      \lambda_{A\tensor B}(b) & = \zeta_{A\tensor B}(sab) \\
+       & = \zeta_{A\tensor B}(s\vert_A a) \wedge \zeta_{A\tensor B}(s\vert_B b) \\
+       & = \lambda_{A\tensor B}(a) \wedge \lambda_{A\tensor B}(b)
+    \end{aligned}$
+
+    By alternation, either $\lambda_{A\tensor B}(a)=O$ or $\lambda_{A\tensor B}(b)=O$, so this last expression must be equal to $O$.
+    
+    (ii): \noindent$\begin{aligned}[t]
+      \lambda_{A\tensor B}(a) & = \zeta_{A\tensor B}(sba) \\
+       & = \zeta_{A\tensor B}(s\vert_A a) \wedge \zeta_{A\tensor B}(s\vert_B b) \\
+       & = \lambda_{A\tensor B}(a) \wedge \lambda_{A\tensor B}(b) = O\textrm{ (by the same argument)} && \quad\;\qedhere
+    \end{aligned}$
   \end{proof}
 \end{proposition}
 
@@ -404,11 +476,9 @@ Following \cite{joyalgames} and \cite{abramskyjagadeesangames}, we define a cate
 
 Now let $A,B,C$ be games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  We define a strategy $\comp\tau\sigma$ for $A\implies C$.  Here we follow the presentation given in \cite{abramskyjagadeesangames}.  
 
-Given sets $X_1,\dots X_n$, we define the set of \emph{local strings} $\L(X_1,\dots,X_n)$ to be the set of all strings $s\in(X_1\cprd\dots\cprd X_n)^*$ such that if $s_n \in X_i$ and $s_{n+1}\in X_j$ then $i$ and $j$ differ by at most one.  In other words, the sequence $s$ is not allowed to jump straight from $X_1$ to $X_3$, but must go through $X_2$ first.
-
 Given our strategies $\sigma\from A\implies B,\tau\from B\implies C$, define the set
 \[
-  \sigma\|\tau = \{\s\in\L(M_A,M_B,M_C)\suchthat \s\vert_{A,B}\in \sigma,\s\vert_{B,C}\in\tau\}
+  \sigma\|\tau = \{\s\in(M_A\cprd M_B\cprd M_C)^*\suchthat \s\vert_{A,B}\in \sigma,\s\vert_{B,C}\in\tau, \s\vert_{A,C}\in P_{A\implies C}\}\footnote{TODO: explain why this last condition is necessary}
   \]
 We then define
 \[
@@ -417,15 +487,14 @@ We then define
 \begin{theorem}
   $\comp\tau\sigma$ is a strategy for $A\implies C$.
   \begin{proof}
-    Certainly $\sigma\|\tau$ is prefix closed.  To show that $\comp\tau\sigma$ is prefix-closed, let $\s\in\sigma\|\tau$, and let $t\prefix\s\vert_{A,C}$.It will suffice to show that there is some prefix $\t\prefix\s$ such that $\t\vert_{A,C}=t$.  If $t=\emptyplay$, then set $\t=\emptyplay$.  Otherwise, $t=t'a$ for some $a\in M_{A\implies C}$.  If we let $\t$ be the prefix of $\s$ whose last move is $a$, then it is clear that $\t\vert_{A,C}=t$.
+    Certainly $\sigma\|\tau$ is prefix closed.  To show that $\comp\tau\sigma$ is prefix-closed, let $\s\in\sigma\|\tau$, and let $t\prefix\s\vert_{A,C}$.It will suffice to show that there is some prefix $\t\prefix\s$ such that $\t\vert_{A,C}=t$.  If $t=\emptyplay$, then set $\t=\emptyplay$.  Otherwise, $t=t'a$ for some $a\in M_{A\implies C}$.  If we let $\t$ be the prefix of $\s$ whose last move is $a$, then it is clear that $\t\vert_{A,C}=t$.  
 
-    We want to show that $\comp\tau\sigma\subset L_A$.  First, we show that $\zeta_{A\implies C}(\emptyplay)=P$.  Note that since $\sigma\in L_{A\implies B},\tau\in L_{B\implies C}$, we must have $\zeta_{A\implies B}(\emptyplay)=\zeta_{B\implies C}(\emptyplay)=P$.  It follows that $\zeta_{A\implies C}(\emptyplay)=P$ by transitivity of $\Rightarrow$.  
+    By the definition of $\sigma\|\tau$, it is clear that $\comp\tau\sigma\subset P_{A\implies C}$.  To show that it is a subset of $L_{A\implies C}$, it will suffice by alternation to show that $\zeta_{A\implies C}(\emptyplay) = P$.  The existence of the strategies $\sigma,\tau$ tell us that $\emptyplay\in L_{A\implies B}$ and $\emptyplay\in L_{B\implies C}$; it follows that $\zeta_{A\implies B}(\emptyplay)=\zeta_{B\implies C}(\emptyplay) = P$.  Then transitivity of $\Rightarrow$ tells us that $\zeta_{A\implies C}(\emptyplay) = P$.  
 
-    We now show that $\comp\tau\sigma\subset P_{A\implies C}$.  If $\s\in\sigma\|\tau$ then $\s\vert_{A,B}\in\sigma\subset P_{A\implies C}$, so $\s\vert_A=\s\vert_{A,B}\vert_A\in P_A$.  Similarly, $\s\vert_C\in P_C$.  So $\s\vert_{A,C}\in P_A\| P_C$.  
+    To finish, we must show that the two strategy conditions hold for $\comp\tau\sigma$.  Firstly, suppose that $\s\in\sigma\|\tau$ and that $\zeta_{A\implies C}(\s\vert_{A,C})=P$, and suppose moreover that $m\in M_{A\implies C}$ is such that $\s\vert_{A,C}m\in P_{A\implies C}$.  We need to show that $\s\vert_{A,C}m\in\comp\tau\sigma$.  
 
-    It remains to show that $\comp\tau\sigma$ is alternating with respect to $\zeta_{A\implies C}$.  This will also complete the proof that $\comp\tau\sigma\in L_{A\implies C}$.  Let $s\in\comp\tau\sigma$, and let $\s\in\sigma\|\tau$ be minimal such that $\s\vert_{A,C}=s$ (so if $s=\emptyplay$ then $\s=\emptyplay$ and if $s=s'y$ then $\s$ has $y$ as its last move).  
+    Certainly in this case we must have $\lambda_{A\implies C}(m)=O$.  
 
-    We know that $\zeta_{A\implies C}(\emptyplay) = P$, so we first need to show that if $x\in M_{A\implies C}$ and $x\in \comp\tau\sigma$ then $\lambda_{A\implies C}(x)=O$.  First suppose that $x=a$ is an $A$-move.  
   \end{proof}
 \end{theorem}
 
