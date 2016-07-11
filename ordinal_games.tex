@@ -467,36 +467,91 @@ A design feature of the connectives $\tensor,\parr,\implies$ is that only player
   \end{proof}
 \end{proposition}
 
-\subsection{Categorical semantics}
+\subsection{A category of games and partial strategies}
 
-Following \cite{joyalgames} and \cite{abramskyjagadeesangames}, we define a category $\G$ whose objects are games where the morphisms from a game $A$ to a game $B$ are strategies for $A\implies B$.  If $A$ is a game, then the identity morphism $A\to A$ is the copycat strategy for $A\implies A$:
+Following \cite{joyalgames} and \cite{abramskyjagadeesangames}, we define a category $\G$ whose objects are games where the morphisms from a game $A$ to a game $B$ are strategies for $A\implies B$.  For the sake of simplicity, and to avoid varioius technical issues, we shall require that the games in our category be \emph{negative} - namely, they should start with an opponent move.  In our language, we call a game $A$ \emph{negative} if $\zeta_A(\emptyplay)=P$ (and we call it positive if $\zeta_A(\emptyplay)=O$).  The equations
+\begin{gather*}
+  P \wedge P = P \\
+  P \Rightarrow P = P
+\end{gather*}
+tell us that the class of negative games is closed under $\tensor$ and $\implies$ (since $P\vee P=P$, it is also closed under $\parr$, but the par of two negative games has no legal moves in our presentation, so it does not give a good model of the $\parr$ connective in linear logic and we will not consider it).
+
+In order to get a category, we need a way to compose a strategy for $A\implies B$ with a strategy for $B\implies C$.  We do this in the standard way (see \cite{joyalgames} or \cite{martinsthesis}, for example).  
+
+Given negative games $A,B,C$ and strategies $\sigma$ for $A\implies B$ and $\tau$ for $B\implies C$, define
 \[
-  \id_A = \left\{s\in P_{A\implies A}\suchthat \textrm{for all even length }t\prefix s,\;t\vert_{\bneggame A}=t\vert_A\right\}
-  \]
-
-Now let $A,B,C$ be games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  We define a strategy $\comp\tau\sigma$ for $A\implies C$.  Here we follow the presentation given in \cite{abramskyjagadeesangames}.  
-
-Given our strategies $\sigma\from A\implies B,\tau\from B\implies C$, define the set
-\[
-  \sigma\|\tau = \{\s\in(M_A\cprd M_B\cprd M_C)^*\suchthat \s\vert_{A,B}\in \sigma,\s\vert_{B,C}\in\tau, \s\vert_{A,C}\in P_{A\implies C}\}\footnote{TODO: explain why this last condition is necessary}
+  \sigma\|\tau = \{\s\in(M_A\cprd M_B\cprd M_C)^*\suchthat \s\vert_{A,B}\in \sigma,\;\s\vert_{B,C}\in\tau\}
   \]
 We then define
 \[
-  \comp\tau\sigma = \{\s\vert_{A,C}\suchthat \s\in\sigma\|\tau\}
+  \comp\tau\sigma = \{\s\vert_{A,C}\suchthat\s\in\sigma\|\tau\}
   \]
-\begin{theorem}
-  $\comp\tau\sigma$ is a strategy for $A\implies C$.
+Before proving that this is indeed a strategy for $A\implies C$, we first record a nice property of negative games that will make things particularly easy for us:
+
+\begin{proposition}
+  Let $A,B$ be negative games and suppose that $s\in P_A\|P_B$ is alternating with respect to $\zeta_{A\tensor B}$.  Then:
+  \begin{enumerate}[i)]
+    \item Either $\zeta_{A}(s\vert_A)=P$ or $\zeta_{B}(s\vert_B)=P$.  
+    \item $s$ is well formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$.  
+  \end{enumerate}
+  Furthermore, (i) and (ii) hold if we replace $\tensor$ with $\implies$ throughout and if we replace (i) by the statement that either $\zeta_A(s\vert_A)=P$ or $\zeta_B(s\vert_B)=O$.
+  \label{nice-negative-games}
+\end{proposition}
+
+We gave an example earlier in which a play $sa$ in $P_A\|P_B$ was not well formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$.  The crucial thing that made that example work was that we had $\zeta_A(s\vert_A)=\zeta_B(s\vert_B)=O$.  This then meant that $\zeta_{A\tensor B}(sa)=O$ even when $\lambda_{A\tensor B}=P$.  Part (i) of the proposition above tells us that this situation never occurs, and part (ii) tells us that this is enough to ensure that we never get any alternating sequences that are not well formed.
+
+\begin{proof}[Proof of Proposition \ref{nice-negative-games}]
+  We proceed by induction on the length $n$ of $s$.  If $n=0$ then $s=\emptyplay$ and so $\zeta_A(s\vert_A)=\zeta_A(\emptyplay)=P$ and similarly for $B$, since $A,B$ are negative games.  Now suppose that $n>0$ - so $s=tm$ for some $t\in P_{A\tensor B},m\in M_{A\tensor B}$.  By induction, either $t\vert_A=P$ or $t\vert_B=P$, so there are three cases:
+  \begin{description}
+    \item[Case 1:] $\zeta_A(t\vert_A)=P$ and $\zeta_B(t\vert_B)=P$. Then either $tm\vert_A=t\vert_A$ (if $m$ is a $B$-move) or $tm\vert_B=t\vert_B$ (if $m$ is an $A$-move).  This proves part (i).  For part (ii), note that in this case we have $\zeta_{A\tensor B}(t)=P$, so $\zeta_{A\tensor B}(tm)=O$, since $tm$ is alternating.  If $m$ is an $A$-move, it means that $\zeta_B(tm\vert_B)=\zeta_B(t\vert_B)$, so we must have $\zeta_A(tm\vert_A)=O$.  Then
+      \[
+        \lambda_{A\tensor B}(m)=\lambda_A(m)=\zeta_A(t\vert_Am)=O=\zeta_{A\tensor B}(tm)
+        \]
+      If $m$ is a $B$-move, the argument is similar.
+    \item[Case 2:] $\zeta_A(t\vert_A)=P$ and $\zeta_B(t\vert_B)=O$.  For part (i), it will suffice to show that $m$ is a $B$-move - so $tm\vert_A=t\vert_A$.  Indeed, we have $\zeta_{A\tensor B}(t)=O$, so $\zeta_{A\tensor B}(tm)=P$, since $tm$ is alternating with respect to $\zeta_{A\tensor B}$.  In particular, $\zeta_B(tm\vert_B)=P$, so we must have $tm\vert_B\ne t\vert_B$ and therefore $m$ is a $B$-move.  For part (ii), we have:
+      \begin{gather*}
+        \lambda_{A\tensor B}(m)=\lambda_B(m)=\zeta_B(t\vert_Bm)=\neg\zeta_B(t\vert_B)=\neg O = P \\
+        \zeta_{A\tensor B}(tm)=\neg\zeta_{A\tensor B}(t)=t = \neg O = P = \lambda_{A\tensor B}
+      \end{gather*}
+    \item[Case 3:] $\zeta_A(t\vert_A)=O$ and $\zeta_B(t\vert_B)=P$.  Similar to Case 2.
+  \end{description}
+
+  Finally, note that the $\tensor$ result implies the $\implies$ result after writing $A\implies B=\neggame{A}\parr B = \neggame{(A\tensor \neggame{B})}$.
+\end{proof}
+
+A corollary of our result is that we have:
+\begin{align*}
+  P_{A\tensor B} & = \{s\in P_A\|P_B\suchthat \textrm{$s$ is alternating with respect to $\zeta_{A\tensor B}$}\} \\
+  P_{A\implies B} & = \{s\in P_A\|P_B\suchthat \textrm{$s$ is alternating with respect to $\zeta_{A\implies B}$}\}
+\end{align*}
+if $A,B$ are negative games.  In other words, we can ignore the well-formedness condition on plays if we are dealing with only negative games.
+
+\begin{proposition}
+  Let $A,B,C$ be negative games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Then $\comp\tau\sigma$ as defined above is a strategy for $A\implies C$.
   \begin{proof}
-    Certainly $\sigma\|\tau$ is prefix closed.  To show that $\comp\tau\sigma$ is prefix-closed, let $\s\in\sigma\|\tau$, and let $t\prefix\s\vert_{A,C}$.It will suffice to show that there is some prefix $\t\prefix\s$ such that $\t\vert_{A,C}=t$.  If $t=\emptyplay$, then set $\t=\emptyplay$.  Otherwise, $t=t'a$ for some $a\in M_{A\implies C}$.  If we let $\t$ be the prefix of $\s$ whose last move is $a$, then it is clear that $\t\vert_{A,C}=t$.  
+    We have $\emptyplay\in\comp\tau\sigma$, so $\comp\tau\sigma$ is non-empty.  Let $\s\in\sigma\|\tau$, and suppose that $t\prefix\s\vert_{A,C}$.  Let $m$ be the last move of $t$, and let $\t$ be the prefix of $\s$ consisting of all moves up to and including $m$.  Then $\t\vert_{A,C}=t$.  Since $\sigma\|\tau$ is clearly prefix closed, it follows that $t\in\comp\tau\sigma$.  This shows that $\comp\tau\sigma$ is prefix closed.  
+    
+    Since all games considered are negative,  there is no distinction between the set $P_X$ of plays and the set $L_X$ of legal plays for any game $X$.  If $\s\in\sigma\|\tau$, then $\s\vert_A=\s\vert_{A,B}\vert_A\in P_A$ and $\s\vert_C=\s\vert_{B,C}\vert_C\in P_C$, so $\comp\tau\sigma\subset P_A\|P_C$.  In order to show that $\comp\tau\sigma\subset P_{A\implies C}$, it suffices to show that it is alternating with respect to $\zeta_{A\implies C}$.  
 
-    By the definition of $\sigma\|\tau$, it is clear that $\comp\tau\sigma\subset P_{A\implies C}$.  To show that it is a subset of $L_{A\implies C}$, it will suffice by alternation to show that $\zeta_{A\implies C}(\emptyplay) = P$.  The existence of the strategies $\sigma,\tau$ tell us that $\emptyplay\in L_{A\implies B}$ and $\emptyplay\in L_{B\implies C}$; it follows that $\zeta_{A\implies B}(\emptyplay)=\zeta_{B\implies C}(\emptyplay) = P$.  Then transitivity of $\Rightarrow$ tells us that $\zeta_{A\implies C}(\emptyplay) = P$.  
+    Let $\s\in\sigma\|\tau$.  We shall show that if $\s\vert_{A,C}$ has even length then $\zeta_{A\implies C}(s\vert_{A,C})=P$ and that if $\s\vert_{A,C}$ has odd length then $\zeta_{A\implies C}(s\vert_{A,C})=O$.
 
-    To finish, we must show that the two strategy conditions hold for $\comp\tau\sigma$.  Firstly, suppose that $\s\in\sigma\|\tau$ and that $\zeta_{A\implies C}(\s\vert_{A,C})=P$, and suppose moreover that $m\in M_{A\implies C}$ is such that $\s\vert_{A,C}m\in P_{A\implies C}$.  We need to show that $\s\vert_{A,C}m\in\comp\tau\sigma$.  
+    If $\s\vert_{A,C}$ has even length, it means that the lengths of $\s\vert_A$ and $\s\vert_C$ have the same parity, and therefore that the lengths of $\s\vert_{A,B}$ and $\s\vert_{B,C}$ have the same parity.  Since $\s\vert_{A,B}\in\sigma$ and $\s\vert_{B,C}\in\tau$, it follows that $\zeta_{A\implies B}(\s\vert_{A,B})=\zeta_{B\implies C}(\s\vert_{B,C})$.  If $\zeta_B(\s\vert_B)=P$ then $\zeta_{A\implies B}(\s\vert_{A,B})=P$ and if $\zeta_B(\s\vert_B)=O$ then $\zeta_{B\implies C}(\s\vert_{B,C})=P$, so we must have $\zeta_{A\implies B}(\s\vert_{A,B})=\zeta_{B\implies C}(\s\vert_{B,C})=P$.  By transitivity of $\Rightarrow$, it follows that $\zeta_{A\implies C}(\s\vert_{A,C})=P$.  
 
-    Certainly in this case we must have $\lambda_{A\implies C}(m)=O$.  
+    If $\s\vert_{A,C}$ has odd length, it means that the lengths of $\s\vert_A$ and $\s\vert_C$ has opposite parities and therefore that the lengths of $\s\vert_{A,B}$ and $\s\vert_{B,C}$ have opposite parities.  So it follows that $\zeta_{A\implies B}(\s\vert_{A,B})=\neg\zeta_{B\implies C}(\s\vert_{B,C})$.  Suppose that $\zeta_{A\implies B}(\s\vert_{A,B})=O$.  Then $\zeta_A(\s\vert_A)=P$ and $\zeta_B(\s\vert_B)=O$.  By Proposition \ref{nice-negative-games} above applied to $\s\vert_{B,C}$, we must have $\zeta_C(\s\vert_C)=O$ and therefore $\zeta_{A\implies C}(\s\vert_{A,C})=(P\Rightarrow O)=O$.  
 
+    If instead we have $\zeta_{B\implies C}(\s\vert_{B,C})=O$, then $\zeta_B(\s\vert_B)=P$ and $\zeta_C(\s\vert_C)=O$.  By Proposition \ref{nice-negative-games} applied to $\s\vert_{A,B}$, we must have $\zeta_A(\s\vert_A)=P$ and so $\zeta_{A\implies C}(\s\vert_{A,C})=(P\Rightarrow O) = O$.  
+
+    We now show that the two strategy properties hold for $\comp\tau\sigma$.  Suppose $\s\in\sigma\|\tau$ and that $\zeta_{A\implies C}(\s\vert_{A,C})=P$.  Suppose also that $a\in M_A$ and that $\s\vert_{A,C}a\in P_{A\implies C}$.  We claim that $\s a\in\sigma\|\tau$.  
+
+    Certainly, we have $\s a\vert_{B,C}=\s\vert_{B,C}\in\tau$.  To show that $\s a\vert_{A,B}\in\sigma$, we first need to show that it is contained in $P_{A\implies B}$.  We have $\s a\vert_{A,B}\vert_A=\s\vert_{A,C}a\vert_A$.  Since $\s\vert_{A,C}a\in P_{A\implies C}$, this means that $\s\vert_{A,C}a\vert_A\in P_A$.  Moreover, $\s a\vert_{A,B}\vert_B=\s\vert_B\in P_B$, so $\s a\vert_{A,B}\in P_A\|P_B$.  
+
+    Next, we need to show that $\zeta_{A\implies B}(\s a\vert_{A,B})=\neg\zeta_{A\implies B}(\s\vert_{A,B})$.  We have:
+    \begin{IEEEeqnarray*}{rCrCCcl}
+      \zeta_{A\implies B}(\s a\vert_{A,B}) = (\zeta_A(\s\vert_A a) \Rightarrow \zeta_B(\s\vert_B)) & = & (&\neg\zeta_A(\s\vert_A) & \Rightarrow & \zeta_B(\s\vert_B)&) \\
+      \zeta_{A\implies B}(\s\vert_{A,B}) & = & (&\zeta_A(\s\vert_A) & \Rightarrow & \zeta_B(\s\vert_B)&)
+    \end{IEEEeqnarray*}
   \end{proof}
-\end{theorem}
+\end{proposition}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
