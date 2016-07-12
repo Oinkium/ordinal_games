@@ -526,30 +526,46 @@ A corollary of our result is that we have:
 \end{align*}
 if $A,B$ are negative games.  In other words, we can ignore the well-formedness condition on plays if we are dealing with only negative games.
 
-\begin{proposition}
-  Let $A,B,C$ be negative games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Then $\comp\tau\sigma$ as defined above is a strategy for $A\implies C$.
-  \begin{proof}
-    We have $\emptyplay\in\comp\tau\sigma$, so $\comp\tau\sigma$ is non-empty.  Let $\s\in\sigma\|\tau$, and suppose that $t\prefix\s\vert_{A,C}$.  Let $m$ be the last move of $t$, and let $\t$ be the prefix of $\s$ consisting of all moves up to and including $m$.  Then $\t\vert_{A,C}=t$.  Since $\sigma\|\tau$ is clearly prefix closed, it follows that $t\in\comp\tau\sigma$.  This shows that $\comp\tau\sigma$ is prefix closed.  
-    
-    Since all games considered are negative,  there is no distinction between the set $P_X$ of plays and the set $L_X$ of legal plays for any game $X$.  If $\s\in\sigma\|\tau$, then $\s\vert_A=\s\vert_{A,B}\vert_A\in P_A$ and $\s\vert_C=\s\vert_{B,C}\vert_C\in P_C$, so $\comp\tau\sigma\subset P_A\|P_C$.  In order to show that $\comp\tau\sigma\subset P_{A\implies C}$, it suffices to show that it is alternating with respect to $\zeta_{A\implies C}$.  
+This proposition allows us to prove the following useful fact:
 
-    Let $\s\in\sigma\|\tau$.  We shall show that if $\s\vert_{A,C}$ has even length then $\zeta_{A\implies C}(s\vert_{A,C})=P$ and that if $\s\vert_{A,C}$ has odd length then $\zeta_{A\implies C}(s\vert_{A,C})=O$.
+\begin{lemma}
+  \label{alternatingsequenceslemma}
+  Let $A,B,C$ be negative games, and let $\s\in (M_A\cprd M_B\cprd M_C)^*$.  If any two of the following statements are true, then so is the third:
+  \begin{gather*}
+    \s\vert_{A,B}\in P_{A\implies B}\\
+    \s\vert_{A,C}\in P_{A\implies C}\\
+    \s\vert_{B,C}\in P_{B\implies C}
+  \end{gather*}
+  \begin{proof}
+    By symmetry, it will suffice to prove that if $\s\vert_{A,B}\in P_{A\implies B}$ and $\s\vert_{B,C}\in P_{B\implies C}$ then $\s\vert_{A,C}\in P_{A\implies C}$.  If $X,Y$ are negative games, then sequences $t\in P_{X\implies Y}$ are specified by the following properties - $t\vert_X\in P_X$, $t\vert_Y\in P_Y$, if $t$ has even length, then $\zeta_{X\implies Y}(t)=P$ and if $t$ has odd length then $\zeta_{X\implies Y}(t)=O$.  We need to show that these properties holds if $X=A$, $Y=C$ and $t=\s\vert_{A,C}$.  
+
+    Certainly, $\s\vert_{A,C}\vert_A=\s\vert_A=\s\vert_{A,B}\vert_A\in P_A$ and similarly $\s\vert_{A,C}\vert_C\in P_C$.  
 
     If $\s\vert_{A,C}$ has even length, it means that the lengths of $\s\vert_A$ and $\s\vert_C$ have the same parity, and therefore that the lengths of $\s\vert_{A,B}$ and $\s\vert_{B,C}$ have the same parity.  Since $\s\vert_{A,B}\in\sigma$ and $\s\vert_{B,C}\in\tau$, it follows that $\zeta_{A\implies B}(\s\vert_{A,B})=\zeta_{B\implies C}(\s\vert_{B,C})$.  If $\zeta_B(\s\vert_B)=P$ then $\zeta_{A\implies B}(\s\vert_{A,B})=P$ and if $\zeta_B(\s\vert_B)=O$ then $\zeta_{B\implies C}(\s\vert_{B,C})=P$, so we must have $\zeta_{A\implies B}(\s\vert_{A,B})=\zeta_{B\implies C}(\s\vert_{B,C})=P$.  By transitivity of $\Rightarrow$, it follows that $\zeta_{A\implies C}(\s\vert_{A,C})=P$.  
 
     If $\s\vert_{A,C}$ has odd length, it means that the lengths of $\s\vert_A$ and $\s\vert_C$ has opposite parities and therefore that the lengths of $\s\vert_{A,B}$ and $\s\vert_{B,C}$ have opposite parities.  So it follows that $\zeta_{A\implies B}(\s\vert_{A,B})=\neg\zeta_{B\implies C}(\s\vert_{B,C})$.  Suppose that $\zeta_{A\implies B}(\s\vert_{A,B})=O$.  Then $\zeta_A(\s\vert_A)=P$ and $\zeta_B(\s\vert_B)=O$.  By Proposition \ref{nice-negative-games} above applied to $\s\vert_{B,C}$, we must have $\zeta_C(\s\vert_C)=O$ and therefore $\zeta_{A\implies C}(\s\vert_{A,C})=(P\Rightarrow O)=O$.  
 
     If instead we have $\zeta_{B\implies C}(\s\vert_{B,C})=O$, then $\zeta_B(\s\vert_B)=P$ and $\zeta_C(\s\vert_C)=O$.  By Proposition \ref{nice-negative-games} applied to $\s\vert_{A,B}$, we must have $\zeta_A(\s\vert_A)=P$ and so $\zeta_{A\implies C}(\s\vert_{A,C})=(P\Rightarrow O) = O$.  
+  \end{proof}
+\end{lemma}
 
-    We now show that the two strategy properties hold for $\comp\tau\sigma$.  Suppose $\s\in\sigma\|\tau$ and that $\zeta_{A\implies C}(\s\vert_{A,C})=P$.  Suppose also that $a\in M_A$ and that $\s\vert_{A,C}a\in P_{A\implies C}$.  We claim that $\s a\in\sigma\|\tau$.  
+We can use this fact to prove that the composition of two strategies is a well-defined strategy.
 
-    Certainly, we have $\s a\vert_{B,C}=\s\vert_{B,C}\in\tau$.  To show that $\s a\vert_{A,B}\in\sigma$, we first need to show that it is contained in $P_{A\implies B}$.  We have $\s a\vert_{A,B}\vert_A=\s\vert_{A,C}a\vert_A$.  Since $\s\vert_{A,C}a\in P_{A\implies C}$, this means that $\s\vert_{A,C}a\vert_A\in P_A$.  Moreover, $\s a\vert_{A,B}\vert_B=\s\vert_B\in P_B$, so $\s a\vert_{A,B}\in P_A\|P_B$.  
+\begin{proposition}
+  Let $A,B,C$ be negative games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Then $\comp\tau\sigma$ as defined above is a strategy for $A\implies C$.
+  \begin{proof}
+    We have $\emptyplay\in\comp\tau\sigma$, so $\comp\tau\sigma$ is non-empty.  Let $\s\in\sigma\|\tau$, and suppose that $t\prefix\s\vert_{A,C}$.  Let $m$ be the last move of $t$, and let $\t$ be the prefix of $\s$ consisting of all moves up to and including $m$.  Then $\t\vert_{A,C}=t$.  Since $\sigma\|\tau$ is clearly prefix closed, it follows that $t\in\comp\tau\sigma$.  This shows that $\comp\tau\sigma$ is prefix closed.  
+    
+    There is no distinction between the set $P_X$ of plays and the set $L_X$ of legal plays for any negative game $X$.  Since $\sigma\subset P_{A\implies B}$ and $\tau\subset P_{B\implies C}$, Lemma \ref{alternatingsequenceslemma} tells us that $\s\vert_{A,C}\in P_{A\implies C}$.  
 
-    Next, we need to show that $\zeta_{A\implies B}(\s a\vert_{A,B})=\neg\zeta_{A\implies B}(\s\vert_{A,B})$.  We have:
-    \begin{IEEEeqnarray*}{rCrCCcl}
-      \zeta_{A\implies B}(\s a\vert_{A,B}) = (\zeta_A(\s\vert_A a) \Rightarrow \zeta_B(\s\vert_B)) & = & (&\neg\zeta_A(\s\vert_A) & \Rightarrow & \zeta_B(\s\vert_B)&) \\
-      \zeta_{A\implies B}(\s\vert_{A,B}) & = & (&\zeta_A(\s\vert_A) & \Rightarrow & \zeta_B(\s\vert_B)&)
-    \end{IEEEeqnarray*}
+    We now show that the two strategy properties hold for $\comp\tau\sigma$.  Suppose $\s\in\sigma\|\tau$ and that $\zeta_{A\implies C}(\s\vert_{A,C})=P$.  Suppose also that $a\in M_A$ and that $\s\vert_{A,C}a\in P_{A\implies C}$.  We claim that $\s a\in\sigma\|\tau$.  Since $\s a\vert_{B,C}=\s\vert_{B,C}\in \tau$, it will suffice to show that $\s a\vert_{A,B}\in \sigma$.
+
+    We have $\s a\vert_{A,C}=\s\vert_{A,C}a\in P_{A\implies C}$ and $\s a\vert_{B,C}=\s\vert_{B,C}\in P_{B\implies C}$ so, by Lemma \ref{alternatingsequenceslemma}, $\s a\vert_{A,B}=\s\vert_{A,B}a\in P_{A\implies B}$.  Now $\zeta_{A\implies C}(\s\vert_{A,C})=P$ and so $\lambda_A(a)=P$, since $\s\vert_{A,C}a\in P_{A\implies C}$.  Since $\s\vert_{A,B}a\in P_{A\implies B}$, it follows that $\zeta_{A\implies B}(\s\vert_{A,B}a)=P$.  Since $\s\vert_{A,B}\in\sigma$ and $\sigma$ is a strategy, it follows that $\s\vert_{A,B}a\in\sigma$.  Therefore, $\s a\in\sigma\|\tau$, so $\s\vert_{A,C}a=\s a\vert_{A,C}\in\comp\tau\sigma$.
+
+    An identical argument tells us that if $c\in M_C$ and $\s\vert_{A,C}c\in P_{A\implies C}$ then $\s\vert_{A,C}c\in\comp\tau\sigma$.  
+
+    Now suppose that $s\in\comp\tau\sigma$ is such that $\zeta_{A\implies C}(s)=O$ and that $m_1,m_2\in M_{A,C}$ are such that $sm_1,sm_2\in\comp\tau\sigma$.  We wish to show that $m_1=m_2$.  
+
   \end{proof}
 \end{proposition}
 
