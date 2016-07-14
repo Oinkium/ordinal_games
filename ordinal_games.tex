@@ -9,7 +9,7 @@
 %%% PACKAGES
 \usepackage{booktabs} % for much better looking tables
 \usepackage{array} % for better arrays (eg matrices) in maths
-\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)\prefix\t$.
 \usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
 \usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 \usepackage{mathtools} % for the all important \coloneqq symbol
@@ -191,6 +191,7 @@
 \newcommand{\bracketed}[1]{\left({#1}\right)}
 \newcommand{\bneggame}[1]{\bracketed{\neggame{#1}}}
 \newcommand{\prefix}{\sqsubseteq}
+\renewcommand{\ss}{\mathbf{s}}
 
 %%% END Article customizations
 
@@ -552,6 +553,7 @@ This proposition allows us to prove the following useful fact:
 We can use this fact to prove that the composition of two strategies is a well-defined strategy.
 
 \begin{proposition}
+  \label{WellDefinedComposition}
   Let $A,B,C$ be negative games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Then $\comp\tau\sigma$ as defined above is a strategy for $A\implies C$.
   \begin{proof}
     We have $\emptyplay\in\comp\tau\sigma$, so $\comp\tau\sigma$ is non-empty.  Let $\s\in\sigma\|\tau$, and suppose that $t\prefix\s\vert_{A,C}$.  Let $m$ be the last move of $t$, and let $\t$ be the prefix of $\s$ consisting of all moves up to and including $m$.  Then $\t\vert_{A,C}=t$.  Since $\sigma\|\tau$ is clearly prefix closed, it follows that $t\in\comp\tau\sigma$.  This shows that $\comp\tau\sigma$ is prefix closed.  
@@ -564,8 +566,65 @@ We can use this fact to prove that the composition of two strategies is a well-d
 
     An identical argument tells us that if $c\in M_C$ and $\s\vert_{A,C}c\in P_{A\implies C}$ then $\s\vert_{A,C}c\in\comp\tau\sigma$.  
 
-    Now suppose that $s\in\comp\tau\sigma$ is such that $\zeta_{A\implies C}(s)=O$ and that $m_1,m_2\in M_{A,C}$ are such that $sm_1,sm_2\in\comp\tau\sigma$.  We wish to show that $m_1=m_2$.  
+    Now suppose that $s\in\comp\tau\sigma$ is such that $\zeta_{A\implies C}(s)=O$ and that $m_1,m_2\in M_{A\implies C}$ are such that $sm_1,sm_2\in\comp\tau\sigma$.  We wish to show that $m_1=m_2$.  
 
+    We shall use the argument given in \cite{abramskyjagadeesangames}.  Given a sequence $s\in\comp\tau\sigma$, we say that $\s\in\sigma\|\tau$ \emph{covers} $s$ if $s\prefix\s\vert_{A,C}$.  By definition, every sequence in $\comp\tau\sigma$ is covered by some sequence in $\comp\tau\sigma$.  We make two claims:
+    
+    i) If $s\in\comp\tau\sigma$, then there is a sequence $\s$ that is minimal among sequences covering $s$ (with respect to the prefix ordering) - in such a case, we must have $s=\s\vert_{A,C}$.
+
+    ii) If $s\in\comp\tau\sigma$, $\zeta_{A\implies C}(s)=O$ and $sm_1,sm_2\in\comp\tau\sigma$ for some $m_1,m_2\in M_{A\implies C}$, then $m_1=m_2$.
+
+    Claim (ii) is what we are trying to prove.  We prove (i) and (ii) by simultaneous induction on the length $n$ of $s$.  
+
+    If $s$ is the empty sequence, then $s$ is covered by $\emptyplay\in\sigma\|\tau$, which is clearly minimal.  Now suppose that $n\ge1$, so $s=s'm$ for some $s'\in\comp\tau\sigma,m\in M_{A\implies C}$.  By the inductive hypothesis (i), there is some $\s'$ minimal among sequences in $\sigma\|\tau$ that cover $s'$.  
+
+    Suppose first that $\zeta_{A\implies C}(s')=P$.  Suppose that $m=a\in M_A$.  We claim that $\s'\vert_{A,B}a\in P_{A\implies B}$.  $\s' a\vert_{A,C}=s'a\in P_{A\implies C}$, while $\s' a\vert_{B,C}=\s'\vert_{B,C}\in\tau\subset P_{B\implies C}$.  Therefore, by Lemma \ref{alternatingsequenceslemma}, $\s'\vert_{A,B}a=\s' a\vert_{A,B}\in P_{A\implies B}$.  Since $\s'\vert_{A,B}\in\sigma$ and $\lambda_{A\implies B}(a)=\neg\lambda_A(a)=\lambda_{A\implies B}(a)$, we must have $\s'\vert_{A,B}a\in\sigma$, by the definition of a strategy.  Therefore, $\s'a\in\sigma\|\tau$.
+    
+    Moreover, $\s'a$ is minimal among sequences that cover $s'a$: any such sequence must cover $s'$ and so must have $\s'$ as a prefix by minimality of $\s'$; moreover, the next move after $\s'$ must be a move in $A$, since the opponent is not permitted to switch games.  $\s'a$ is clearly minimal among sequences that have these properties and also include the move $a$.
+
+    An identical argument applies in the case that $m=c\in M_C$.
+
+    Now suppose that $\zeta_{A\implies C}(s')=O$.  Let $\s$ be any sequence covering $s$; after removing $B$-moves from the end of $\s$, we may assume that $m$ is the last move in $\s$.  We claim that $\s$ is minimal among sequences covering $s$.  
+
+    Since $\s$ covers $s'$, we must have $\s'\prefix\s$ by minimality of $\s'$.  Since $m$ is the last move in $\s$, we have
+    \[
+      \s=\s'b_1\dots b_km
+      \]
+    for some $k\ge0,b_1,\dots,b_k\in M_B$.  
+
+    Now let $m'\in M_{A\implies C}$, and suppose that $s'm\in\comp\tau\sigma$.  Let $\t$ be some sequence covering $s'm$.  Again, after removing $B$-moves from the end of $\t$, we may assume that $m$ is the last move of $\t$, and as before we may write $\t$ as
+    \[
+      \t=\s'\beta_1\dots \beta_jm'
+      \]
+    for some $j\ge0,\beta_1,\dots,\beta_j\in M_B$.  We shall show that $j=k$, that $\beta_i=b_i$ for all $i=1,\dots,j$ and that $m=m'$.  This will prove claims (i) (by setting $m'=m$) and (ii) for us.  
+
+    We have $\zeta_{A\implies C}(\s'\vert_{A,C})=\zeta_{A\implies C}(s')=O$, so $\zeta_A(\s'\vert_A)=P$ and $\zeta_C(\s'\vert_C)=O$.  Let us suppose for now that $\zeta_B(\s'\vert_B)=P$; the other case is entirely similar.  In that case, $\zeta_{A\implies B}(\s'\vert_{A,B})=P$ and $\zeta_{B\implies C}(\s'\vert_{B,C})=O$.  Since $\s'\vert_{B,C}b_1,\s'\vert_{B,C}\beta_1\in\tau$, we must have $b_1=\beta_1$.  Now, by the alternating condition, we must have $\zeta_{A\implies B}(\s'b_1\vert_{A,B})=O$ and $\zeta_{A\implies B}(\s'b_1\vert_{B,C})=P$.  Since $\s'b_1\vert_{A,B}b_2,\s'b_1\vert_{A,B}\beta_2\in\sigma$, we must have $b_2=\beta_2$.  This process continues until we reach the first move outside $M_B$, which must be $m$ in $\s$ and $m'$ in $\t$.  Since $m,m'$ are both $P$-moves, they must both occur as $P$-replies to the same $O$-play in one of $\sigma$ or $\tau$, so $m=m'$.
+  \end{proof}
+\end{proposition}
+
+Now that we have a working composition of strategies, we are ready to make the collection of games into a category.  The identity morphism $A\to A$ is given by the copycat strategy on $A\implies A$:
+\[
+  \id_A = \left\{s\in P_{A\implies A}\suchthat \textrm{for all even-length $t\prefix s$, $t\vert_{\neggame{A}}=t\vert_A$}\right\}
+  \]
+\begin{proposition}
+  Let $\G$ denote the class of games as defined above.  If we define a morphism from a game $A$ to a game $B$ to be a strategy for $A\implies B$, then the identity morphism and notion of composition given above make $\G$ into a category.
+  \begin{proof}
+    We need to show that composition is associative and that $\id_A$ is the identity morphism on $A$.  For associativity of composition, we claim that if $A\xrightarrow{\sigma}\map{\tau}{B}{C}\xrightarrow{\upsilon}D$ are morphisms then $\comp{(\comp\upsilon\tau)}{\sigma}=S$, where
+    \[
+      S = \{\ss\vert_{A,D}\suchthat \ss\in(M_A\cprd M_B\cprd M_C\cprd M_D)^*,\;\ss\vert_{A,B}\in\sigma,\;\ss\vert_{B,C}\in\tau,\;\ss\vert_{C,D}\in\upsilon\}
+      \]
+
+    Certainly, if $\ss\vert_{A,D}\in S$, then $\ss\vert_{A,D}\in\comp{(\comp\upsilon\tau)}\sigma$: we have $\ss\vert_{B,C,D}\in\tau\|\upsilon$, so $\ss\vert_{B,D}\in\comp\upsilon\tau$.  Then $\ss\vert_{A,B,D}\in\sigma\|(\comp\upsilon\tau)$, so $\ss\vert_{A,D}\in\comp{(\comp\upsilon\tau)}{\sigma}$.  
+
+    Conversely, suppose $s\in\comp{(\comp\upsilon\tau)}{\sigma}$.  Then there exists $\s\in\sigma\|(\comp\upsilon\tau)$ such that $\s\vert_{A,D}=s$.  Then the definition of $\comp\upsilon\tau$ tells us that there exists $\t\in\tau\|\upsilon$ such that $\s\vert_{A,D}=\t\vert_{A,D}$.  We may assume that $\s,\t$ are the minimal covering sequences constructed in Proposition \ref{WellDefinedComposition}.
+
+    Note that we have $\s\in(M_A\cprd M_B\cprd M_D)^*$ and $\t\in(M_B\cprd M_C\cprd M_D)^*$.  We inductively construct a sequence $\ss\in(M_A\cprd M_B\cprd M_C\cprd M_D)^*$ such that for each inductively-constructed subsequence $\ss'$, we have $\ss'\vert_{A,B,D}\prefix\s$ and $\ss'\vert_{B,C,D}\prefix\t$.
+
+    If $a\in M_A,b\in M_B,c\in M_C$, then we have $\lambda_{A\implies B}(a)=\lambda_{B\implies C}(b)=\lambda_{C\implies D}(c)=P$.  Therefore, $\s$ and $\t$ must start with a $D$-move, and these $D$-moves must be equal, since $\s\vert_{B,D}=\t\vert_{B,D}$.  This $D$-move - call it $d$ - is the first move of $\ss$, and it is clear that $d\vert_{A,B,D}\prefix\s$ and $d\vert_{B,C,D}\prefix\t$.
+
+    Now suppose we have constructed a non-empty sequence $\ss'm$ such that $\ss'\vert_{A,B,D}\prefix\s$ and $\ss'\vert_{B,C,D}\prefix\t$.  
+
+    If $m=a\in M_A$, then the prefix $\ss'\vert_{A,B,D}\prefix\s$ also ends in $a$.  If $\ss'\vert_{A,B,D}=\s$, then set $\ss=\ss'$ and finish.  Otherwise, extend $\ss'$ by appending the next move that occurs in $\s$ after $\ss'\vert_{A,B,D}$.  If $\lambda_{A\implies B}(a)=P$, then the next move in $\s$ must also take place in $A$, by the proof of Proposition \ref{WellDefinedComposition}.  Therefore, restricting our new sequence to $B,C,D$ gives us $\ss'\vert_{B,C,D}$, which we already know is a prefix of $\t$.  
   \end{proof}
 \end{proposition}
 
