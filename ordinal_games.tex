@@ -614,17 +614,22 @@ Now that we have a working composition of strategies, we are ready to make the c
       S = \{\ss\vert_{A,D}\suchthat \ss\in(M_A\cprd M_B\cprd M_C\cprd M_D)^*,\;\ss\vert_{A,B}\in\sigma,\;\ss\vert_{B,C}\in\tau,\;\ss\vert_{C,D}\in\upsilon\}
       \]
 
-    Certainly, if $\ss\vert_{A,D}\in S$, then $\ss\vert_{A,D}\in\comp{(\comp\upsilon\tau)}\sigma$: we have $\ss\vert_{B,C,D}\in\tau\|\upsilon$, so $\ss\vert_{B,D}\in\comp\upsilon\tau$.  Then $\ss\vert_{A,B,D}\in\sigma\|(\comp\upsilon\tau)$, so $\ss\vert_{A,D}\in\comp{(\comp\upsilon\tau)}{\sigma}$.  
+    Certainly, if $\ss\vert_{A,D}\in S$, then $\ss\vert_{A,D}\in\comp{(\comp\upsilon\tau)}\sigma$: we have $\ss\vert_{B,C,D}\in\tau\|\upsilon$, so $\ss\vert_{B,D}\in\comp\upsilon\tau$.  Then $\ss\vert_{A,B,D}\in\sigma\|(\comp\upsilon\tau)$, so $\ss\vert_{A,D}\in\comp{(\comp\upsilon\tau)}{\sigma}$.   
 
-    Conversely, suppose $s\in\comp{(\comp\upsilon\tau)}{\sigma}$.  Then there exists $\s\in\sigma\|(\comp\upsilon\tau)$ such that $\s\vert_{A,D}=s$.  Then the definition of $\comp\upsilon\tau$ tells us that there exists $\t\in\tau\|\upsilon$ such that $\s\vert_{A,D}=\t\vert_{A,D}$.  We may assume that $\s,\t$ are the minimal covering sequences constructed in Proposition \ref{WellDefinedComposition}.
+    Conversely, suppose $s\in\comp{(\comp\upsilon\tau)}{\sigma}$.  Then there exists $\s\in\sigma\|(\comp\upsilon\tau)$ such that $\s\vert_{A,D}=s$.  Then the definition of $\comp\upsilon\tau$ tells us that there exists $\t\in\tau\|\upsilon$ such that $\s\vert_{B,D}=\t\vert_{B,D}$.  We may assume that $\s,\t$ are the minimal covering sequences constructed in Proposition \ref{WellDefinedComposition}.
 
     Note that we have $\s\in(M_A\cprd M_B\cprd M_D)^*$ and $\t\in(M_B\cprd M_C\cprd M_D)^*$.  We inductively construct a sequence $\ss\in(M_A\cprd M_B\cprd M_C\cprd M_D)^*$ such that for each inductively-constructed subsequence $\ss'$, we have $\ss'\vert_{A,B,D}\prefix\s$ and $\ss'\vert_{B,C,D}\prefix\t$.
 
     If $a\in M_A,b\in M_B,c\in M_C$, then we have $\lambda_{A\implies B}(a)=\lambda_{B\implies C}(b)=\lambda_{C\implies D}(c)=P$.  Therefore, $\s$ and $\t$ must start with a $D$-move, and these $D$-moves must be equal, since $\s\vert_{B,D}=\t\vert_{B,D}$.  This $D$-move - call it $d$ - is the first move of $\ss$, and it is clear that $d\vert_{A,B,D}\prefix\s$ and $d\vert_{B,C,D}\prefix\t$.
 
-    Now suppose we have constructed a non-empty sequence $\ss'm$ such that $\ss'\vert_{A,B,D}\prefix\s$ and $\ss'\vert_{B,C,D}\prefix\t$.  
+    Now suppose we have constructed a non-empty sequence $\ss'm$ such that $\ss'm\vert_{A,B,D}\prefix\s$ and $\ss'm\vert_{B,C,D}\prefix\t$.  
 
-    If $m=a\in M_A$, then the prefix $\ss'\vert_{A,B,D}\prefix\s$ also ends in $a$.  If $\ss'\vert_{A,B,D}=\s$, then set $\ss=\ss'$ and finish.  Otherwise, extend $\ss'$ by appending the next move that occurs in $\s$ after $\ss'\vert_{A,B,D}$.  If $\lambda_{A\implies B}(a)=P$, then the next move in $\s$ must also take place in $A$, by the proof of Proposition \ref{WellDefinedComposition}.  Therefore, restricting our new sequence to $B,C,D$ gives us $\ss'\vert_{B,C,D}$, which we already know is a prefix of $\t$.  
+    \begin{description}
+      \item[Case A:] If $m=a\in M_A$, then $\ss'a\vert_{A,B,D}$ is a prefix of $\s$ ending with $a$.  If $\ss'a\vert_{A,B,D}=\s$, then we set $\ss=\ss'a$ and terminate.  Otherwise, $\ss'\vert_{A,B,D}ap\prefix\s$ for some move $p$.  Extend the sequence $\ss'a$ to $\ss'ap$.  
+
+      We already have $\ss'ap\vert_{A,B,D}\prefix\s$, so we need to show that $\ss'ap\vert_{B,C,D}=\ss'p\vert_{B,C,D}\prefix\t$.  If $p\in M_A$, then this is automatic by induction, so suppose that $p\in M_B\cprd M_D$.  If $\lambda_{A\implies B}(a)=P$, then $p\in M_A$ by the proof of Proposition \ref{WellDefinedComposition}, so we may assume that $\lambda_{A\implies B}(a)=O$.  
+    \end{description}
+
   \end{proof}
 \end{proposition}
 
