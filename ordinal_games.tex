@@ -192,6 +192,7 @@
 \newcommand{\bneggame}[1]{\bracketed{\neggame{#1}}}
 \newcommand{\prefix}{\sqsubseteq}
 \renewcommand{\ss}{\mathbf{s}}
+\newcommand{\pfun}{\rightharpoonup}
 
 %%% END Article customizations
 
@@ -348,16 +349,30 @@ We shall adopt elements of both the Blass and the Abramsky-Jagadeesan games mode
 
   If $a\in M_A$ and $\lambda_A(a)=O$, we call $a$ an \emph{$O$-move}.  If $\lambda_A(a)=P$, we call $a$ a \emph{$P$-move}.  If $s\in P_A$ and $\zeta_A(s)=O$, we call $s$ an \emph{$O$-play} or \emph{$O$-position}.  If $\zeta_A(s)=P$, we call $s$ a \emph{$P$-play} or \emph{$P$-position}.
 
-  Given the game $A$, we define $L_A$ to be the set of all plays $s\in P_A$ such that either $s$ has even length and $\zeta_A(s)=P$ or $s$ has odd length and $\zeta_A(s)=O$.  Since $P_A$ is alternating, it is evident that $L_A=P_A$ if $\zeta_A(\emptyplay) = P$ and is empty otherwise.  This slightly strange definition will become more meaningful once we define games over ordinals.  
 \end{remark}
 
+We give the usual definition of a strategy as an appropriate subset of $P_A$, where we have identified the strategy with the set of all plays that can arise when player $P$ plays according to that strategy:
+
 \begin{definition}
-  Let $A=(M_A,\lambda_A,\zeta_A,P_A)$ be a game and let $L_A$ be the associated set of legal plays.  A \emph{strategy} for $A$ is a non-empty prefix-closed subset $\sigma\subset L_A$ such that:
+  Let $A=(M_A,\lambda_A,\zeta_A,P_A)$ be a game.  A \emph{strategy} for $A$ is a non-empty prefix-closed subset $\sigma\subset P_A$ such that:
   \begin{itemize}
     \item If $a\in P_A$ is an $O$-move and $s\in\sigma$ is a $P$-position such that $sa\in P_A$, then $sa\in\sigma$.
     \item If $s\in\sigma$ is an $O$-position and $a,b\in M_A$ are $P$-moves such that $sa,sb\in\sigma$, then $a=b$.
   \end{itemize}
 \end{definition}
+
+The definition above will be the most technically useful, but it is also convenient to give a strategy by a partial function that tells player $P$ which move to make in each $O$-position.  If we write $P_A^-=\zeta_A\inv(\{O\})$ for the set of all $O$-positions and $M_A^+=\lambda_A\inv(\{P\})$ for the set of all $P$-moves, then the strategy $\sigma$ above gives rise to a partial function $\hat\sigma\from P_A^-\pfun M_A^+$ given by:
+\[
+  \hat\sigma(s)=
+  \begin{cases}
+    a & \textrm{if $a\in M_A^+$ and $sa\in P_A$}\\
+    \textrm{undefined} & \textrm{if $sb\not\in P_A$ for all $b\in M_A^+$}
+  \end{cases}
+  \]
+The second condition on strategies tells us that this is well defined.  Going in the other direction, if we are given a partial function $f\from P_A^-\pfun M_A^+$  then we can define a strategy $\overline{f}$ by
+\[
+  \overline f = \{s\in M_A^*\suchthat \textrm{for all $ta\prefix s$ with $\zeta_A(t)=O$, $f(t)$ is defined and equal to $a$}\}
+  \]
 
 \subsection{Connectives}
 
@@ -444,6 +459,7 @@ Our solution is to throw away some plays from $P_A\| P_B$ so that what remains s
 A design feature of the connectives $\tensor,\parr,\implies$ is that only player $O$ may switch games in $A\tensor B$, while only player $P$ may switch games in $A\parr B$ and $A\implies B$.  The $\implies$ case follows immediately from the $\parr$ case by noting that $A\implies B = \neggame A\parr B$, and the $\parr$ case then follows from the $\tensor$ case by observing that $A\parr B=\neggame{(\neggame A \tensor \neggame B)}$.  Thus, it will suffice to prove the following proposition for the tensor product:
 
 \begin{proposition}
+  \label{WhoSwitchesGames}
   Let $A,B$ be games.  Suppose $s\in P_{A\implies B}$, $a\in M_A$ and $b\in M_B$.  Then:
 
   i) If $sab\in P_{A\tensor B}$ then $\lambda_{A\tensor B}(b)=O$
@@ -558,7 +574,7 @@ We can use this fact to prove that the composition of two strategies is a well-d
   \begin{proof}
     We have $\emptyplay\in\comp\tau\sigma$, so $\comp\tau\sigma$ is non-empty.  Let $\s\in\sigma\|\tau$, and suppose that $t\prefix\s\vert_{A,C}$.  Let $m$ be the last move of $t$, and let $\t$ be the prefix of $\s$ consisting of all moves up to and including $m$.  Then $\t\vert_{A,C}=t$.  Since $\sigma\|\tau$ is clearly prefix closed, it follows that $t\in\comp\tau\sigma$.  This shows that $\comp\tau\sigma$ is prefix closed.  
     
-    There is no distinction between the set $P_X$ of plays and the set $L_X$ of legal plays for any negative game $X$.  Since $\sigma\subset P_{A\implies B}$ and $\tau\subset P_{B\implies C}$, Lemma \ref{alternatingsequenceslemma} tells us that $\s\vert_{A,C}\in P_{A\implies C}$.  
+    Since $\sigma\subset P_{A\implies B}$ and $\tau\subset P_{B\implies C}$, Lemma \ref{alternatingsequenceslemma} tells us that $\s\vert_{A,C}\in P_{A\implies C}$.  
 
     We now show that the two strategy properties hold for $\comp\tau\sigma$.  Suppose $\s\in\sigma\|\tau$ and that $\zeta_{A\implies C}(\s\vert_{A,C})=P$.  Suppose also that $a\in M_A$ and that $\s\vert_{A,C}a\in P_{A\implies C}$.  We claim that $\s a\in\sigma\|\tau$.  Since $\s a\vert_{B,C}=\s\vert_{B,C}\in \tau$, it will suffice to show that $\s a\vert_{A,B}\in \sigma$.
 
@@ -568,37 +584,51 @@ We can use this fact to prove that the composition of two strategies is a well-d
 
     Now suppose that $s\in\comp\tau\sigma$ is such that $\zeta_{A\implies C}(s)=O$ and that $m_1,m_2\in M_{A\implies C}$ are such that $sm_1,sm_2\in\comp\tau\sigma$.  We wish to show that $m_1=m_2$.  
 
-    We shall use the argument given in \cite{abramskyjagadeesangames}.  Given a sequence $s\in\comp\tau\sigma$, we say that $\s\in\sigma\|\tau$ \emph{covers} $s$ if $s\prefix\s\vert_{A,C}$.  By definition, every sequence in $\comp\tau\sigma$ is covered by some sequence in $\comp\tau\sigma$.  We make two claims:
-    
-    i) If $s\in\comp\tau\sigma$, then there is a sequence $\s$ that is minimal among sequences covering $s$ (with respect to the prefix ordering) - in such a case, we must have $s=\s\vert_{A,C}$.
+    We shall use the argument given in \cite{abramskyjagadeesangames}.  Given a sequence $s\in\comp\tau\sigma$, we say that $\s\in\sigma\|\tau$ \emph{covers} $s$ if $s\prefix\s\vert_{A,C}$.  By definition, every sequence in $\comp\tau\sigma$ is covered by some sequence in $\comp\tau\sigma$.  
 
-    ii) If $s\in\comp\tau\sigma$, $\zeta_{A\implies C}(s)=O$ and $sm_1,sm_2\in\comp\tau\sigma$ for some $m_1,m_2\in M_{A\implies C}$, then $m_1=m_2$.
+    We claim that if $s\in\comp\tau\sigma$ then there is a sequence $\s$ that is minimal among sequences that cover $s$ (with respect to the prefix ordering).  In such a case, we must clearly have $\s\vert_{A,C}=s$.
 
-    Claim (ii) is what we are trying to prove.  We prove (i) and (ii) by simultaneous induction on the length $n$ of $s$.  
-
-    If $s$ is the empty sequence, then $s$ is covered by $\emptyplay\in\sigma\|\tau$, which is clearly minimal.  Now suppose that $n\ge1$, so $s=s'm$ for some $s'\in\comp\tau\sigma,m\in M_{A\implies C}$.  By the inductive hypothesis (i), there is some $\s'$ minimal among sequences in $\sigma\|\tau$ that cover $s'$.  
-
-    Suppose first that $\zeta_{A\implies C}(s')=P$.  Suppose that $m=a\in M_A$.  We claim that $\s'\vert_{A,B}a\in P_{A\implies B}$.  $\s' a\vert_{A,C}=s'a\in P_{A\implies C}$, while $\s' a\vert_{B,C}=\s'\vert_{B,C}\in\tau\subset P_{B\implies C}$.  Therefore, by Lemma \ref{alternatingsequenceslemma}, $\s'\vert_{A,B}a=\s' a\vert_{A,B}\in P_{A\implies B}$.  Since $\s'\vert_{A,B}\in\sigma$ and $\lambda_{A\implies B}(a)=\neg\lambda_A(a)=\lambda_{A\implies B}(a)$, we must have $\s'\vert_{A,B}a\in\sigma$, by the definition of a strategy.  Therefore, $\s'a\in\sigma\|\tau$.
-    
-    Moreover, $\s'a$ is minimal among sequences that cover $s'a$: any such sequence must cover $s'$ and so must have $\s'$ as a prefix by minimality of $\s'$; moreover, the next move after $\s'$ must be a move in $A$, since the opponent is not permitted to switch games.  $\s'a$ is clearly minimal among sequences that have these properties and also include the move $a$.
-
-    An identical argument applies in the case that $m=c\in M_C$.
-
-    Now suppose that $\zeta_{A\implies C}(s')=O$.  Let $\s$ be any sequence covering $s$; after removing $B$-moves from the end of $\s$, we may assume that $m$ is the last move in $\s$.  We claim that $\s$ is minimal among sequences covering $s$.  
-
-    Since $\s$ covers $s'$, we must have $\s'\prefix\s$ by minimality of $\s'$.  Since $m$ is the last move in $\s$, we have
+    We shall use the partial-function definition of strategies for the sake of clarity.  Recall that our strategies $\sigma$ and $\tau$ give us partial functions:
+    \begin{gather*}
+      \hat\sigma\from P_{A\implies B}^-\to M_{A\implies B}^+\\
+      \hat\tau\from P_{B\implies C}^-\to M_{B\implies C}^+
+    \end{gather*}
+    It will be helpful to define one more partial function using our sequence $s$.  We define
     \[
-      \s=\s'b_1\dots b_km
+      \hat s(t) =
+      \begin{cases}
+        a & \textrm{if $ta\prefix s$} \\
+        \textrm{undefined} & \textrm{if $ta\not\prefix s$ for all $a\in M_{A\implies C}$}
+      \end{cases}
       \]
-    for some $k\ge0,b_1,\dots,b_k\in M_B$.  
+    So if we are given some prefix of $s$, $\hat{s}$ tells us what the next move is.  We shall be interested in $\hat s$ as a partial function $P_{A\implies C}^+\pfun M_{A\implies C}^-$: by Proposition \ref{WhoSwitchesGames}, the $O$-reply to a $P$-play in $A\implies C$ is always in the same game as the last move by player $P$, so $\hat s\from P_{A\implies C}^+\pfun M_{A\implies C}^-$ maps plays ending in an $A$-move to $A$-moves and maps plays ending in a $C$-move to $C$-moves.
 
-    Now let $m'\in M_{A\implies C}$, and suppose that $s'm\in\comp\tau\sigma$.  Let $\t$ be some sequence covering $s'm$.  Again, after removing $B$-moves from the end of $\t$, we may assume that $m$ is the last move of $\t$, and as before we may write $\t$ as
+    We can now define a map $F\colon \sigma\|\tau\to M_A\cprd M_B\cprd M_C$ by
     \[
-      \t=\s'\beta_1\dots \beta_jm'
+      F(\s) =
+      \begin{cases}
+        \hat s(\t\vert_{A,C}) & \textrm{if $\t=\emptyplay$ or if $\t$ ends with an $O$-move in $A$ or a $P$-move in $C$} \\
+        \hat \sigma(\t\vert_{A,B}) & \textrm{if $\t$ ends with a $P$-move in $A$ or an $O$-move in $B$} \\
+        \hat \tau(\t\vert_{B,C}) & \textrm{if $\t$ ends with a $P$-move in $B$ or an $O$-move in $C$}
+      \end{cases}
       \]
-    for some $j\ge0,\beta_1,\dots,\beta_j\in M_B$.  We shall show that $j=k$, that $\beta_i=b_i$ for all $i=1,\dots,j$ and that $m=m'$.  This will prove claims (i) (by setting $m'=m$) and (ii) for us.  
+    Note that any of the partial functions $\hat s,\hat\sigma,\hat\tau$ may be undefined at $\t$, so $F$ is only a \emph{partial} function.
 
-    We have $\zeta_{A\implies C}(\s'\vert_{A,C})=\zeta_{A\implies C}(s')=O$, so $\zeta_A(\s'\vert_A)=P$ and $\zeta_C(\s'\vert_C)=O$.  Let us suppose for now that $\zeta_B(\s'\vert_B)=P$; the other case is entirely similar.  In that case, $\zeta_{A\implies B}(\s'\vert_{A,B})=P$ and $\zeta_{B\implies C}(\s'\vert_{B,C})=O$.  Since $\s'\vert_{B,C}b_1,\s'\vert_{B,C}\beta_1\in\tau$, we must have $b_1=\beta_1$.  Now, by the alternating condition, we must have $\zeta_{A\implies B}(\s'b_1\vert_{A,B})=O$ and $\zeta_{A\implies B}(\s'b_1\vert_{B,C})=P$.  Since $\s'b_1\vert_{A,B}b_2,\s'b_1\vert_{A,B}\beta_2\in\sigma$, we must have $b_2=\beta_2$.  This process continues until we reach the first move outside $M_B$, which must be $m$ in $\s$ and $m'$ in $\t$.  Since $m,m'$ are both $P$-moves, they must both occur as $P$-replies to the same $O$-play in one of $\sigma$ or $\tau$, so $m=m'$.
+    We claim that if $\t\in\sigma\|\tau$ and $F(\t)$ is defined then $\t F(\t)\in\sigma\|\tau$.  In the first case, if $\t=\emptyplay$ or if $\t$ ends with an $O$-move in $A$ or a $P$-move in $C$, then $\zeta_{A\implies C}(\t\vert_{A,C})=P$.  If $\t=\emptyplay$ then $F(\t)$ is the first move in $s$, which must be the first move in $\tau$.  Otherwise, suppose that $\t$ ends with an $O$-move in $A$.  We have $\t F(\t)\vert_{A,C}\prefix s$, so $\t F(t)\vert_{A,C}\in P_{A\implies C}$, while $\t F(\t)\vert_{B,C}=\t\vert_{B,C}\in P_{B\implies C}$, so $\t F(\t)\vert_{A,B}\in P_{A\implies B}$, by Lemma \ref{alternatingsequenceslemma}.  Moreover, $\zeta_{A\implies B}(\t)=P$, and therefore $\t F(\t)\vert_{A,B}\in\sigma$.  Similarly, if $\t$ ends with a $P$-move in $C$, we have $\zeta_{B\implies C}(\t)=P$ which tells us that $\t F(\t)\vert_{B,C}\in\tau$.  In either case, $\t F(\t)\in\sigma\|\tau$.
+
+    If $\t$ ends with a $P$-move in $A$ or an $O$-move in $B$, then we have $\t\vert_{A,B}\in \sigma\cap P_{A\implies B}^-$.  Then $\t F(\t)\vert_{A,B}\in\sigma$ by the definition of $\hat\sigma$.  If $F(\t)$ is an $A$-move, then $\t F(\t)\vert_{B,C}=\t\vert_{B,C}\in\tau$ automatically.  If instead $F(\t)$ is a $B$-move, we note that $\lambda_{B\implies C}(F(t))=\neg\lambda_{A\implies B}(F(t))=\neg P=O$ and therefore $\t\vert_{B,C} F(\t)\in\tau$ by the definition of a strategy and the argument used in the first case above.
+
+    The third case is similar to the second.
+    
+    We construct $\s$ as follows: start with the empty sequence $\emptyplay$ and repeatedly apply the map $\t\mapsto \t F(\t)$ until we reach a point where $F(\t)$ is undefined.  This will produce either a finite or an infinite sequence.  If there are trailing $B$-moves then we remove them to produce our sequence $\s$.  We claim that $\s$ is finite and covers $s$ and moreover that it is minimal among all sequences covering $s$.  
+
+    Let $\s'$ be a sequence covering $s$.  We wish to show that $\s'\prefix\s$, so we show by induction on $n$ that $\s_n'=\s_n$ for all $n$ up to the length of $\s$.  For the induction step, we need to show that if $\s_i'=\s_i$ for $i=1,\dots,k$ then $\s_{k+1}'=F(\s_1\s_2\dots\s_k)$.  We shall show simultaneously that $\s\vert_{A,C}=s$.
+
+    Observe that if $b\in M_B$ then either $\lambda_{A\implies B}(b)=O$ or $\lambda_{B\implies C}(b)=O$, so $\s'$ cannot start with a $B$-move.  Therefore, the first move in $\s'$ must be the first move in $s$, which is $F(\emptyplay)$.  
+
+    Now assume that $\s_i'=\s_i$ for $i=1,\dots,k$ and write $\t=\s_1\s_2\dots\s_k$.  If $\t$ ends with an $O$-move in $A$ or a $P$-move in $C$ then $\zeta_{A\implies C}(\t\vert_{A,C})=P$, so $F(\s)=\hat s(\t\vert_{A,C})$ must be an $O$-reply in the same game as the previous $P$-move, so it is therefore a move in $A$ or $C$.  Therefore, $\t F(\t)\vert_{A,C}=\t\vert_{A,C} F(\t)\prefix s$.  Now $\s_{k+1}'$ is an $O$-reply in $A$ or $C$ by the same argument, and $\t\s_{k+1}'\vert_{A,C}$ is also a prefix of $s$, since $\s'$ covers $s$.  Therefore, we must have $F(\t)=\s_{k+1}'$.
+
+    
   \end{proof}
 \end{proposition}
 
