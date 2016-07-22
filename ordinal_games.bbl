@@ -26,6 +26,18 @@ Pierre-Louis Curien.
 \newblock Concrete data structures, sequential algorithms and linear logic.
 \newblock Email communication on types mailing list, 1992.
 
+\bibitem[HS02]{hylandschalkgames}
+Martin Hyland and Andrea Schalk.
+\newblock Games on graphs and sequentially realizable functionals. extended
+  abstract.
+\newblock In {\em Logic in Computer Science, 2002. Proceedings. 17th Annual
+  IEEE Symposium on}, pages 257--264. IEEE, 2002.
+
+\bibitem[Hyl97]{hyland1997games}
+Martin Hyland.
+\newblock Game semantics.
+\newblock {\em Semantics and logics of computation}, 14:131, 1997.
+
 \bibitem[Joy77]{joyalgames}
 Andr\'{e} Joyal.
 \newblock Remarques sur la th\'{e}orie des jeux \`{a} deux personnes.
