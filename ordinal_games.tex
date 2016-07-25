@@ -76,7 +76,7 @@
 \Newassociation{answer}{answerthm}{answers}
 \newcommand{\answerthmparams}{}
 
-%% Changes to enumerate things so they look better %%
+%% Changes to enumerate things so they look better %%\sigma$
 
 \makeatletter
 \def\enumfix{%
@@ -130,6 +130,7 @@
 \newcommand{\Set}{\catname{Set}}
 \newcommand{\Cont}{\catname{Cont}}
 \newcommand{\Sch}{\catname{Sch}}
+\newcommand{\Rel}{\catname{Rel}}
 \newcommand{\Mod}[1][]{\ifthenelse{\isempty{#1}}{\catname{Mod}}{#1\catname{mod}}}
 \DeclareMathOperator{\sh}{Sh}
 \newcommand{\Sh}[1][]{\ifthenelse{\isempty{#1}}{\sh}{\sh(#1)}}
@@ -183,8 +184,10 @@
 \newcommand{\G}{\mathcal G}
 \newcommand{\suchthat}{\;\colon\;}
 \newcommand{\varsuchthat}{\;\mid\;}
+\newcommand{\esuchthat}{\;.\;}
 \newcommand{\OP}{\{O,P\}}
 \renewcommand{\L}{\mathcal L}
+\newcommand{\F}{\mathcal F}
 \newcommand{\s}{\mathfrak s}
 \renewcommand{\t}{\mathfrak t}
 \newcommand{\emptyplay}{\epsilon}
@@ -193,6 +196,7 @@
 \newcommand{\prefix}{\sqsubseteq}
 \renewcommand{\ss}{\mathbf{s}}
 \newcommand{\pfun}{\rightharpoonup}
+\newcommand{\grel}[1]{\underline{#1}}
 
 %%% END Article customizations
 
@@ -506,6 +510,7 @@ Then we define the composite strategy on $A\implies C$ to be
 The process of showing that this is indeed a strategy for $A\implies C$, and that composition is associative, will be quite involved.  We shall start with a surprising lemma about strategies on the implication $A\implies B$.  
 
 \begin{lemma}
+  \label{PlayInStrategyDeterminedByComponents}
   et $A,B$ be games and let $\sigma$ be a strategy for $A\implies B$.  Suppose that $s,t\in\sigma$ are such that $s\vert_A=t\vert_A$ and $s\vert_B=t\vert_B$.  Then $s=t$.
   \begin{proof}
     Suppose that $s\ne t$.  Let $r\prefix s,t$ be the longest common subsequence of $s$ and $t$ - so we have $rx\prefix s, ry\prefix t$ for some moves $x,y\in M_{A\implies B}$ with $x\ne y$.  Since $rx,ry$ are both substrings of the strategy $\sigma$, $r$ must be a $P$-position and therefore the moves $x,y$ must take place in the same game.  Without loss of generality, suppose that $x,y\in M_A$.  Then we have $r\vert_Ax\prefix s\vert_A,r\vert_Ay\prefix t\vert_A$ and so $s\vert_A\ne t\vert_A$.
@@ -514,6 +519,7 @@ The process of showing that this is indeed a strategy for $A\implies C$, and tha
 
 Thus we see that the plays according to some given strategy $\sigma$ for $A\implies B$ are characterized by their $A$- and $B$-components.  More is true, however: given negative games $A$ and $B$, the strategies on $A\implies B$ are characterized by the $A$- and $B$-components of their constituent plays:
 \begin{lemma}
+  \label{HylandSchalkFaithful}
   Let $A,B$ be negative games and let $\sigma,\sigma'$ be strategies for $A\implies B$ such that
   \[
     \{(s\vert_A,s\vert_B)\suchthat \textrm{$s\in\sigma$ is a $P$-position}\}=\{(s'\vert_A,s'\vert_B)\suchthat\textrm{$s'\in\sigma'$ is a $P$-position}\}
@@ -527,6 +533,55 @@ Thus we see that the plays according to some given strategy $\sigma$ for $A\impl
     Now clearly $rx\ne t$ (since their restrictions to $A$ and $B$ are different).  Let $q\prefix rx, t$ be their largest common prefix; then we have $qu\prefix rx, qv\prefix t$ for some $u\ne v$.  But now since $qu, qv\in\sigma$, $u$ and $v$ must both be $O$-moves, so they must be contained in the same component.  But this is impossible: if they are both $A$-moves then we have $q\vert_Au\prefix r\vert_Ax$ and $q\vert_Av\prefix r\vert_A$, so $u=v$ and if they are both $B$-moves then we have $q\vert_Bu\prefix r\vert_B$ and $q\vert_Bv\prefix r\vert_By$, so $u=v$ again.  This is a contradiction.
   \end{proof}
 \end{lemma}
+
+Given games $A,B$ and a strategy $\sigma$ for $A\implies B$, the set
+\[
+  \{(s\vert_A,s\vert_B)\suchthat \textrm{$s\in\sigma$ is a $P$-position}\}\subset P_A\times P_B
+  \]
+is a \emph{relation} between $P_A$ and $P_B$.  Writing $\grel\sigma\subset P_A\times P_B$, we will show that if $A,B,C$ are games and $A\xrightarrow{\sigma}\map{\tau}{B}{C}$ are morphisms, then:
+\[
+  \grel{\comp\tau\sigma}=\comp{\grel\tau}{\grel\sigma}
+  \]
+under the usual composition of relations:
+\[
+  \comp{\grel\tau}{\grel\sigma} = \{(s,t)\in P_A\times P_C\suchthat \exists u\in P_B\esuchthat (s,u)\in\grel\sigma,\;(u,t)\in\grel\tau\}
+  \]
+Thus we will get a functor $\cmap{\F}{\G}{\Rel}$, where $\G$ is our category of negative games and $\Rel$ is the category of sets and relations.  Proposition \ref{HylandSchalkFaithful} then tells us that this functor is faithful.  
+
+It is clear from the definition of $\comp\tau\sigma$ that $\grel{\comp\tau\sigma}\subset\comp{\grel\tau}{\grel\sigma}$; indeed if $\s\in\sigma\|\tau$, then $(\s\vert_A,\s\vert_B)\in\grel\sigma$ and $(\s\vert_B,\s\vert_C)\in\grel\tau$, so $(\s\vert_A,\s\vert_C)\in\comp{\grel\tau}{\grel\sigma}$.  To show the reverse inclusion, we need to show the following: if $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$, then there is some $\s\in (M_A\cprd M_B\cprd M_C)^*$ such that $\s\vert_{A,B}=s$ and $\s\vert_{B,C}=t$.  
+
+This can be shown in an easy way.  Roughly speaking, we write out the sequence $s$, and then insert immediately after each $B$-move the moves from $t$ that occur at that point in the sequence.  This works for arbitrary sequences
+
+\begin{lemma}
+  \label{HylandSchalkIsFunctor}
+  Let $A,B,C$ be games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Suppose there exist $s\in\sigma,t\in\tau$ such that $s\vert_B=t\vert_B$.  Then there is a unique \emph{interleaving} of $s$ and $t$; i.e., there is a unique sequence $\s\in (M_A\cprd M_B\cprd M_C)^*$ such that $\s\vert_{A,B}=s$ and $\s\vert_{B,C}=t$.  
+\end{lemma}
+\begin{remark}
+  The existence part of this lemma holds for arbitrary sequences in an easy way, but uniqueness does not: for example, the sequences $ab$ and $cb$ have two distinct interleavings ($acb$ and $cab$).  Existence is all we need to show that $\grel{\comp\tau\sigma}=\comp{\grel\tau}{\grel\sigma}$, but uniqueness will come in useful later on, so we prove it now.
+\end{remark}
+\begin{proof}[Proof of Lemma \ref{HylandSchalkIsFunctor}]
+  Let $A,B,C$ be games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Let $s\in\sigma,t\in\tau$ be such that $s\vert_B=t\vert_B$.  
+
+  We build a sequence $\s\in (M_A\cprd M_B\cprd M_C)^*$ inductively.  The first move in $\s$ is the first move in $t$, which is our only choice since the first move in $s$ is a $P$-move in $B\implies C$.  Now suppose that we have built up a non-empty sequence $\s'$ such that $\s'\vert_{A,B}\prefix s$ and $\s'\vert_{B,C}\prefix t$.  We extend $\s'$ by one move $x$ such that $\s'x\vert_{A,B}\prefix s$ and $\s'x\vert_{B,C}\prefix t$.  Moreover, we show that there is a unique such $x$.  
+
+  Since $\s'$ is non-empty, we may write it as $\s'=\s''y$.  The move $x$ depends on $y$ as follows:
+  \begin{itemize}
+    \item If $y$ is an $O$-move in $A$, then $y$ is a $P$-move in $A\implies B$.  By induction, $\s''y\vert_{A,B}$ is a prefix of $s$ ending in $y$.  If in fact $\s''y\vert_A=s$, then terminate.  Otherwise, $x$ is the next move in $s$ after $\s''y\vert_{A,B}$.  
+      
+      Since $y$ is a $P$-move in $A\implies B$, $x$ must be a move in $A$ as well, by Proposition \ref{WhoSwitchesGames}.  Therefore, $\s'x\vert_{B,C}=\s'\vert_{B,C}\prefix t$, while $\s'x\vert_{A,B}\prefix s$ by the choice of $x$.  
+
+      For uniqueness, suppose that $\s'z\vert_{A,B}\prefix s$ and $\s'z\vert_{B,C}\prefix t$.  If $z$ is a move in $B$ or $C$, then we have
+      \[
+        \s''z\vert_{B,C}=\s''yz\vert_{B,C}\prefix t
+        \]
+      since $y$ is a move in $A$, but this contradicts the uniqueness of $y$.  Therefore, $z$ must be a move in $A$, and the condition that $\s'z\vert_{A,B}\prefix s$ forces $z$ to be equal to $x$.  
+
+    \item If $y$ is a $P$-move in $A$ or an $O$-move in $B$, then $y$ is an $O$-move in $A\implies B$.  By induction, $\s''y\vert_{A,B}$ is a prefix of $s$ ending in $y$.  If $\s''y\vert_A=s$, then terminate.  Otherwise, $x$ is the next move in $s$ after $\s''y\vert_{A,B}$.  
+
+      Since $s\in\sigma$, which is a strategy, and $y$ is an $O$-move in $A\implies B$, $x$ must be uniquely determined.  Moreover, we have $\s'x\vert_{A,B}\prefix s$ by the choice of $x$.  
+  \end{itemize}
+
+\end{proof}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
