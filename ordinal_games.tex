@@ -197,6 +197,7 @@
 \renewcommand{\ss}{\mathbf{s}}
 \newcommand{\pfun}{\rightharpoonup}
 \newcommand{\grel}[1]{\underline{#1}}
+\DeclareMathOperator{\length}{length}
 
 %%% END Article customizations
 
@@ -550,7 +551,29 @@ Thus we will get a functor $\cmap{\F}{\G}{\Rel}$, where $\G$ is our category of 
 
 It is clear from the definition of $\comp\tau\sigma$ that $\grel{\comp\tau\sigma}\subset\comp{\grel\tau}{\grel\sigma}$; indeed if $\s\in\sigma\|\tau$, then $(\s\vert_A,\s\vert_B)\in\grel\sigma$ and $(\s\vert_B,\s\vert_C)\in\grel\tau$, so $(\s\vert_A,\s\vert_C)\in\comp{\grel\tau}{\grel\sigma}$.  To show the reverse inclusion, we need to show the following: if $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$, then there is some $\s\in (M_A\cprd M_B\cprd M_C)^*$ such that $\s\vert_{A,B}=s$ and $\s\vert_{B,C}=t$.  
 
-This can be shown in an easy way.  Roughly speaking, we write out the sequence $s$, and then insert immediately after each $B$-move the moves from $t$ that occur at that point in the sequence.  This works for arbitrary sequences
+This can be shown in an easy way.  Roughly speaking, we write out the sequence $s$, and then insert immediately after each $B$-move the $C$-moves from $t$ that occur after that $B$-move.  This technique works for arbitrary sequences and is sufficient to prove that $\grel{\comp\tau\sigma}=\comp{\grel\tau}{\grel\sigma}$.  However, it turns out that if $s$ and $t$ are alternating plays in $A\implies B$ and $B\implies C$ then this interleaving is unique - and even more is true:
+
+\begin{lemma}
+  \label{LiftingLemma}
+  Let $A,B,C$ be negative games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Suppose that $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$.  Suppose moreover that $s$ and $t$ do not both end with $B$-moves.  Then there is a unique sequence $\s\in(M_A\cprd M_B\cprd M_C)^*$ such that:
+  \begin{itemize}
+    \item $\s\in\sigma\|\tau$ (so $\s\vert_{A,B}\in\sigma$ and $\s\vert_{B,C}\in\tau$)
+    \item $\s$ does not end with a $B$-move
+    \item $\s\vert_A=s\vert_A$
+    \item $\s\vert_C=t\vert_C$
+  \end{itemize}
+  Moreover, for this $\s$ we have $\s\vert_B=s\vert_B=t\vert_B$.
+\end{lemma}
+
+Note that the statement of Lemma \ref{LiftingLemma} is stronger than saying that there is a unique $\s$ such that $\s\vert_{A,B}=s$ and $\s\vert_{B,C}=t$.  Instead, we are saying that even if we make no restriction on the $B$-component of $\s$ (other than that $\s\in\sigma\|\tau$) then $\s$ is still uniquely determined, and its $B$-component is the same as that from $s$ and $t$.  
+
+\begin{proof}[Proof of Lemma \ref{LiftingLemma}]
+  Let $n=\length(s)+\length(t\vert_C)$; i.e., the total number of unique terms in $s$ and $t$ where we have identified the sequences $s\vert_B$ and $t\vert_B$ (this will be the length of the interleaved sequence $\s$).  We prove the claim by induction on $n$.  
+
+  We make the preliminary observation that if $a$ is a single-move play in $P_A$ and $b$ is a single-move play in $P_B$ then we must have $\lambda_A(a)=\lambda_B(b)=O$; then $\lambda_{A\implies B}(a)=P$ and $\lambda_{B\implies C}(b)=P$.  Therefore, any sequence $\s\in\sigma\|\tau$ must start with a move from $C$.  Suppose $n=0$; then $s=t=\emptyplay$.  Then setting $\s=\emptyplay$ will do, and $\emptyplay$ is the unique sequence satisfying the criteria above, since any non-empty sequence $\s$ must contain a $C$-move, so $\s\vert_C$ will be non-empty.
+
+  Now suppose that $n=1$ - since no pay in $A\implies B$ may start with an $A$-move and since no play in $B\implies C$ may start with a $B$-move, we must have $s=\emptyplay$ and $t=c$, for some single move $t$.  
+\end{proof}
 
 \begin{lemma}
   \label{HylandSchalkIsFunctor}
@@ -582,7 +605,6 @@ This can be shown in an easy way.  Roughly speaking, we write out the sequence $
   \end{itemize}
 
 \end{proof}
-
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
 
