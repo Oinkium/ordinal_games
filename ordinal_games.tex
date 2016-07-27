@@ -562,17 +562,37 @@ This can be shown in an easy way.  Roughly speaking, we write out the sequence $
     \item $\s\vert_A=s\vert_A$
     \item $\s\vert_C=t\vert_C$
   \end{itemize}
-  Moreover, for this $\s$ we have $\s\vert_B=s\vert_B=t\vert_B$.
+  Moreover, for this $\s$ we have $\s\vert_{A,B}=s$ and $\s\vert_{B,C}=t$.
 \end{lemma}
 
-Note that the statement of Lemma \ref{LiftingLemma} is stronger than saying that there is a unique $\s$ such that $\s\vert_{A,B}=s$ and $\s\vert_{B,C}=t$.  Instead, we are saying that even if we make no restriction on the $B$-component of $\s$ (other than that $\s\in\sigma\|\tau$) then $\s$ is still uniquely determined, and its $B$-component is the same as that from $s$ and $t$.  
+Note that the statement of Lemma \ref{LiftingLemma} is stronger than saying that there is a unique $\s$ such that $\s\vert_{A,B}=s$ and $\s\vert_{B,C}=t$.  Instead, we are saying that even if we make no restriction on the $B$-component of $\s$ (other than that $\s\in\sigma\|\tau$) then $\s$ is still uniquely determined, and it still restricts to $s$ and $t$ if we restrict to $A\implies B$ or $B\implies C$.
 
 \begin{proof}[Proof of Lemma \ref{LiftingLemma}]
-  Let $n=\length(s)+\length(t\vert_C)$; i.e., the total number of unique terms in $s$ and $t$ where we have identified the sequences $s\vert_B$ and $t\vert_B$ (this will be the length of the interleaved sequence $\s$).  We prove the claim by induction on $n$.  
+  Let $n=\length(s)+\length(t\vert_C)$; i.e., the total number of unique terms in $s$ and $t$ where we have identified the sequences $s\vert_B$ and $t\vert_B$ (this will be the length of the interleaved sequence $\s$).  We first prove that for each $k$ with $0\le k\le n$, there exists a unique sequence $\s^k\in\sigma\|\tau$ of length $k$ such that $\s^k\vert_A\prefix s\vert_A$ and $\s^k\vert_C\prefix t\vert_A$.  Moreover for this $\s^k$ we have $\s^k\vert_{A,B}\prefix s$ and $\s^k\vert_{B,C}\prefix t$, and if $j\le k$, then $\s^j\prefix\s^k$.
 
-  We make the preliminary observation that if $a$ is a single-move play in $P_A$ and $b$ is a single-move play in $P_B$ then we must have $\lambda_A(a)=\lambda_B(b)=O$; then $\lambda_{A\implies B}(a)=P$ and $\lambda_{B\implies C}(b)=P$.  Therefore, any sequence $\s\in\sigma\|\tau$ must start with a move from $C$.  Suppose $n=0$; then $s=t=\emptyplay$.  Then setting $\s=\emptyplay$ will do, and $\emptyplay$ is the unique sequence satisfying the criteria above, since any non-empty sequence $\s$ must contain a $C$-move, so $\s\vert_C$ will be non-empty.
+  We prove this by induction on $k$.  There is a unique sequence of length $0$, namely the empty sequence, and its $A$- and $C$-components are both empty, so are prefixes of $s$ and $t$.  
 
-  Now suppose that $n=1$ - since no pay in $A\implies B$ may start with an $A$-move and since no play in $B\implies C$ may start with a $B$-move, we must have $s=\emptyplay$ and $t=c$, for some single move $t$.  
+  Suppose now that $k=1$.  We make the observation that if $a$ is an $O$-move in $A$ and if $b$ is an $O$-move in $B$ then $a$ is a $P$-move in $A\implies B$ and $b$ is a $P$-move in $B\implies C$.  Since the starting move in $A\implies B$ or $B\implies C$ must be an $O$-move in both its component game and in the game as a whole, we see that any sequence in $\sigma\|\tau$ must begin with a move in $C$.  So we have $\s^1=c$, for some $C$-move $c$, and the condition that $\s^1\vert_C\prefix t$ means that $c$ must be the first move in $t$, which is always a move from $C$.  We have $\s^1\vert_A=\emptyplay\prefix s\vert_A$ and $\s^1\vert_B=\emptyplay\prefix s\vert_B$, as desired.
+
+  Now suppose that we have constructed the sequence $\s^k$ for some $k$ such that $1\le k<n$.  We seek a sequence $\s^{k+1}\in \sigma\|\tau$ of length $k+1$ such that $\s^{k+1}\vert_A\prefix s$ and $\s^{k+1}\vert_C\prefix t$.  If we write $\s'$ for the sequence obtained by removing the last move in $\s^{k+1}$, it is clear that $\s'\vert_A\prefix s$ and $\s'\vert_C\prefix t$, so $\s'=\s^k$ by uniqueness.  Therefore, $\s^{k+1}$ is of the form $\s^kx$, for some move $x\in M_A\cprd M_B\cprd M_C$.  
+
+  Write $\s^k=\s''y$, where $y$ is the last move in $\s^k$.  Our move $x$ will depend on which game $y$ is played on as follows:
+  
+  \begin{itemize}
+    \item Suppose $y$ is a move in $A$ or an $O$-move in $B$.  By induction, $\s''y\vert_{A,B}$ is a prefix of $s$ ending in $y$.  We claim that it is a proper prefix.  
+
+      Indeed, let $b$ be the last $B$-move occurring in $\s''y$ (since play in $A\implies B$ starts with a $B$-move, there must be such a move).  If $b=y$, then $b$ is an $O$-move in $A\implies B$.  Otherwise, $y$ must be a move in $A$, and then $b$ is again an $O$-move in $A\implies B$, since player $P$ switches games.  Therefore, $b$ is a $P$-move in $B\implies C$.  Now $\s''y\vert_B$ is a prefix of $t$ ending in $b$.  Since $b$ is a $P$-move in $B\implies C$, it may only be followed in $B\implies C$ by another move from $B$, so there are two possibilities: either $\s''y\vert_{B,C}=t$ or there is some other $B$-move $b'$ that occurs later than $b$ in the sequence $t$.  In the first case, $\s''y\vert_{A,B}$ must be a proper prefix of $s$ by length considerations:
+      \begin{align*}
+        \length(\s''y\vert_{A,B}) & = \length(\s''y) - \length(\s''y\vert_C) \\
+          & = \length(\s''y) - \length(t\vert_C) \\
+          & = k - \length(t\vert_C) < n - \length(t\vert_C) = \length(s)
+      \end{align*}
+      while in the second case $\s''y\vert_B$ must be a proper prefix of $t\vert_B=s\vert_B$, and so $\s''y\vert_{A,B}$ must be a proper prefix of $s$.
+
+      Therefore, we have $\s''y\vert_{A,B}x\prefix s$ for some move $x\in M_A\cprd M_B$.  If $x$ is an $A$-move then $\s''yx\vert_{B,C}=\s''y\vert_{B,C}\prefix t$, as desired.  If $x$ is a move in $B$, then it must be a $P$-move in $A\implies B$ (since $y$ is either a move in $A$ or an $O$-move in $B$), so it is an $O$-move in $B\implies C$.  Since $s\vert_B=t\vert_B$, we must have $\s''yx\vert_B\prefix t\vert_B$, and so $y$ must be a $P$-move in $B\implies C$, and should therefore be followed by another move in $B$, which must be $x$.  Therefore, $\s''yx\vert_{B,C}\prefix t$.
+
+      For uniqueness, suppose that $\s''yz\in\sigma\|\tau$ is such that $\s''yz\vert_A\prefix s\vert_A$ and $\s''yz\vert_C\prefix t\vert_C$.  We claim that $z$ cannot be a move in $C$ if $y$ is a move in $A$.  Indeed, we would then have
+  \end{itemize}
 \end{proof}
 
 \begin{lemma}
