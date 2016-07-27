@@ -591,8 +591,22 @@ Note that the statement of Lemma \ref{LiftingLemma} is stronger than saying that
 
       Therefore, we have $\s''y\vert_{A,B}x\prefix s$ for some move $x\in M_A\cprd M_B$.  If $x$ is an $A$-move then $\s''yx\vert_{B,C}=\s''y\vert_{B,C}\prefix t$, as desired.  If $x$ is a move in $B$, then it must be a $P$-move in $A\implies B$ (since $y$ is either a move in $A$ or an $O$-move in $B$), so it is an $O$-move in $B\implies C$.  Since $s\vert_B=t\vert_B$, we must have $\s''yx\vert_B\prefix t\vert_B$, and so $y$ must be a $P$-move in $B\implies C$, and should therefore be followed by another move in $B$, which must be $x$.  Therefore, $\s''yx\vert_{B,C}\prefix t$.
 
-      For uniqueness, suppose that $\s''yz\in\sigma\|\tau$ is such that $\s''yz\vert_A\prefix s\vert_A$ and $\s''yz\vert_C\prefix t\vert_C$.  We claim that $z$ cannot be a move in $C$ if $y$ is a move in $A$.  Indeed, we would then have
+      For uniqueness, suppose that $\s''yz\in\sigma\|\tau$ is such that $\s''yz\vert_A\prefix s\vert_A$ and $\s''yz\vert_C\prefix t\vert_C$.  As before, let $b$ be the last $B$-move occurring in $\s''y$; we have already shown that $b$ must be a $P$-move in $B\implies C$, and it follows that it must be the last move occurring in $\s''y\vert_{B,C}$ (since it can only be followed by another $B$-move).  Suppose that $z\in M_B\cprd M_C$.  Then $\s''yz\vert_{B,C}=\s''y\vert_{B,C}z$; since the last move in $\s''y\vert_{B,C}$ is $b$, this means that $z$ must be an $O$-move in $B$.  So $z$ is either an $O$-move in $B$ or a move in $A$.
+
+      If $y$ was an $O$-move in $A$, then $y$ is a $P$-move in $A\implies B$, so it must be followed in $A\implies B$ by another move from $A$.  Then the condition that $\s''yz\vert_A\prefix s\vert_A$ tells us that $z=x$.  If instead $y$ was a $P$-move in $A$ or a move in $B$ then $y$ is an $O$-move in $A\implies B$; now, since we have $\s''y\vert_{A,B}z,\s''y\vert_{A,B}x\in\sigma$, it must be the case that $x=z$ by the definition of a strategy.
+
+    \item If instead $y$ is a move in $C$ or a $P$-move in $B$, we use a symmetrical argument, choosing $x$ to be the next move along in $t$.  We need to take a little extra care here when we talk about the last $B$-move in $\s''y$; there may in fact be no $B$-moves in $\s''y$.  Since any play in $A\implies B$ must begin with a $B$-move, this only happens when $\s''y$ is entirely made up of $C$-moves.  In this case, it is not difficult to show that $\s''y\vert_{B,C}$ is a proper prefix of $t$ by length considerations. 
   \end{itemize}
+
+  Having constructed the sequences $\s^k$, we now claim that $\s=\s^n$ is the sequence we desire.  We have $\s\vert_{A,B}\prefix s$ and $\s\vert_{B,C}\prefix t$, and a length argument tells us that these prefix relations are actually equalities:
+  \[
+    \length(s)=n-\length(t\vert_C)\le n-\length(\s\vert_C)=\length(\s\vert_{A,B})\le\length(s)
+    \]
+  so we must have equality everywhere, and similarly for $t$ and $\s\vert_{B,C}$.  Since at least one of $s,t$ does not end with a $B$-move, our interleaved sequence $\s$ cannot end with a $B$-move.  
+
+  Now suppose that $\t$ were some other sequence in $\sigma\|\tau$ such that $\t\vert_A=s\vert_A$ and $\t\vert_C=t\vert_C$.  If $\length(\t)\le n$, then $\t=\s^k$ for some $k$ by uniqueness above.  So $\t\prefix\s$.  We also know that $\t$ includes the last move from $\s$, since this move must be an $A$-move or a $C$-move.  Therefore, $\t=\s$.  
+
+  If instead $\length(\t)\ge n$ then let $\t'$ be the length-$n$ prefix of $\t$.  By uniqueness above, we must have $\t'=\s$.  Since $\t\vert_A=\s\vert_A$ and $\t\vert_C=\s\vert_C$, this means that all subsequent moves in $\t$ must be $B$-moves.  Since $\t$ does not end with a $B$-move, we must have $\t=\s$.
 \end{proof}
 
 \begin{lemma}
