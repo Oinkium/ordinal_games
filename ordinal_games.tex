@@ -16,6 +16,7 @@
 \usepackage{url} % for \url
 \usepackage{IEEEtrantools} % for \IEEEeqnarray
 \usepackage{pbox} % for \pbox
+\usepackage{bm} % for bold Greek letters
 
 %%% ToC (table of contents) APPEARANCE
 \usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
@@ -192,12 +193,15 @@
 \renewcommand{\t}{\mathfrak t}
 \newcommand{\emptyplay}{\epsilon}
 \newcommand{\bracketed}[1]{\left({#1}\right)}
-\newcommand{\bneggame}[1]{\bracketed{\neggame{#1}}}
+\newcommand{\bneggame}[1]{{\bracketed{\neggame{#1}}}}
 \newcommand{\prefix}{\sqsubseteq}
 \renewcommand{\ss}{\mathbf{s}}
 \newcommand{\pfun}{\rightharpoonup}
 \newcommand{\grel}[1]{\underline{#1}}
 \DeclareMathOperator{\length}{length}
+\renewcommand{\b}{\mathfrak b}
+\renewcommand{\r}{\mathfrak r}
+\newcommand{\bbeta}{{\bm{\beta}}}
 
 %%% END Article customizations
 
@@ -618,21 +622,18 @@ This can be shown in an easy way.  Roughly speaking, we write out the sequence $
 
 \begin{lemma}
   \label{LiftingLemma}
-  Let $A,B,C$ be negative games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Suppose that $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$.  Suppose moreover that $s$ and $t$ do not both end with $B$-moves.  Then there is a unique sequence $\s\in(M_A\cprd M_B\cprd M_C)^*$ such that:
-  \begin{itemize}
-    \item $\s\in\sigma\|\tau$ (so $\s\vert_{A,B}\in\sigma$ and $\s\vert_{B,C}\in\tau$)
-    \item $\s$ does not end with a $B$-move
-    \item $\s\vert_A=s\vert_A$
-    \item $\s\vert_C=t\vert_C$
-  \end{itemize}
-  Moreover, for this $\s$ we have $\s\vert_{A,B}=s$ and $\s\vert_{B,C}=t$.
+  Let $A,B,C$ be negative games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Suppose that $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$.  Let $n=\length(s)+\length(t\vert_C)$; i.e., the total number of unique terms of $s$ and $t$ after we have identified their unique $B$-component.  Then for all $k$ with $0\le k\le n$, there is a unique sequence $\s^k\in\sigma\|\tau$ of length $k$ such that $\s^k\vert_A\prefix s\vert_A$ and $\s^k\vert_C\prefix t\vert_C$.  Moreover, for this $\s^k$ we have $\s^k\vert_{A,B}\prefix s$ and $\s^k\vert_{B,C}\prefix t$, and if $j\le k$ then $\s^j\prefix \s^k$.  
 \end{lemma}
 
-Note that the statement of Lemma \ref{LiftingLemma} is stronger than saying that there is a unique $\s$ such that $\s\vert_{A,B}=s$ and $\s\vert_{B,C}=t$.  Instead, we are saying that even if we make no restriction on the $B$-component of $\s$ (other than that $\s\in\sigma\|\tau$) then $\s$ is still uniquely determined, and it still restricts to $s$ and $t$ if we restrict to $A\implies B$ or $B\implies C$.
+Note that Lemma \ref{LiftingLemma} is stronger than saying that there is a unique sequence $\s^k$ of length $k$ such that $\s^k\vert_{A,B}\prefix s$ and $\s^k\vert_{B,C}\prefix t$.  Instead, we are saying that there exists a sequence $\s^k$ with those properties, but that it is uniquely determined even when we make no requirement on its $B$-component other than that the whole sequence is contained in $\sigma\|\tau$.
+
+As a corollary, we see that the sequences $s$ and $t$ may be interleaved: set $\s=\s^n$; then we have $\s\vert_{A,B}\prefix s$ and $\s\vert_{B,C}\prefix t$.  In fact, we have $\s\vert_{A,B}=s$ and $\s\vert_{B,C}=t$ by a length argument:
+\[
+  \length(\s\vert_{A,B})\le\length(s)=n-\length(t\vert_C)\le n-\length(\s\vert_C)=\length(\s\vert_{A,B})
+  \]
+so we must have equality everywhere, and similarly for $\s\vert_{B,C}$ and $t$.
 
 \begin{proof}[Proof of Lemma \ref{LiftingLemma}]
-  Let $n=\length(s)+\length(t\vert_C)$; i.e., the total number of unique terms in $s$ and $t$ where we have identified the sequences $s\vert_B$ and $t\vert_B$ (this will be the length of the interleaved sequence $\s$).  We first prove that for each $k$ with $0\le k\le n$, there exists a unique sequence $\s^k\in\sigma\|\tau$ of length $k$ such that $\s^k\vert_A\prefix s\vert_A$ and $\s^k\vert_C\prefix t\vert_A$.  Moreover for this $\s^k$ we have $\s^k\vert_{A,B}\prefix s$ and $\s^k\vert_{B,C}\prefix t$, and if $j\le k$, then $\s^j\prefix\s^k$.
-
   We prove this by induction on $k$.  There is a unique sequence of length $0$, namely the empty sequence, and its $A$- and $C$-components are both empty, so are prefixes of $s$ and $t$.  
 
   Suppose now that $k=1$.  We make the observation that if $a$ is an $O$-move in $A$ and if $b$ is an $O$-move in $B$ then $a$ is a $P$-move in $A\implies B$ and $b$ is a $P$-move in $B\implies C$.  Since the starting move in $A\implies B$ or $B\implies C$ must be an $O$-move in both its component game and in the game as a whole, we see that any sequence in $\sigma\|\tau$ must begin with a move in $C$.  So we have $\s^1=c$, for some $C$-move $c$, and the condition that $\s^1\vert_C\prefix t$ means that $c$ must be the first move in $t$, which is always a move from $C$.  We have $\s^1\vert_A=\emptyplay\prefix s\vert_A$ and $\s^1\vert_B=\emptyplay\prefix s\vert_B$, as desired.
@@ -658,18 +659,8 @@ Note that the statement of Lemma \ref{LiftingLemma} is stronger than saying that
 
       If $y$ was an $O$-move in $A$, then $y$ is a $P$-move in $A\implies B$, so it must be followed in $A\implies B$ by another move from $A$.  Then the condition that $\s''yz\vert_A\prefix s\vert_A$ tells us that $z=x$.  If instead $y$ was a $P$-move in $A$ or a move in $B$ then $y$ is an $O$-move in $A\implies B$; now, since we have $\s''y\vert_{A,B}z,\s''y\vert_{A,B}x\in\sigma$, it must be the case that $x=z$ by the definition of a strategy.
 
-    \item If instead $y$ is a move in $C$ or a $P$-move in $B$, we use a symmetrical argument, choosing $x$ to be the next move along in $t$.  We need to take a little extra care here when we talk about the last $B$-move in $\s''y$; there may in fact be no $B$-moves in $\s''y$.  Since any play in $A\implies B$ must begin with a $B$-move, this only happens when $\s''y$ is entirely made up of $C$-moves.  In this case, it is not difficult to show that $\s''y\vert_{B,C}$ is a proper prefix of $t$ by length considerations. 
+    \item If instead $y$ is a move in $C$ or a $P$-move in $B$, we use a symmetrical argument, choosing $x$ to be the next move along in $t$.  We need to take a little extra care here when we talk about the last $B$-move in $\s''y$; there may in fact be no $B$-moves in $\s''y$.  Since any play in $A\implies B$ must begin with a $B$-move, this only happens when $\s''y$ is entirely made up of $C$-moves.  In this case, it is not difficult to show that $\s''y\vert_{B,C}$ is a proper prefix of $t$ by length considerations.  \qedhere
   \end{itemize}
-
-  Having constructed the sequences $\s^k$, we now claim that $\s=\s^n$ is the sequence we desire.  We have $\s\vert_{A,B}\prefix s$ and $\s\vert_{B,C}\prefix t$, and a length argument tells us that these prefix relations are actually equalities:
-  \[
-    \length(s)=n-\length(t\vert_C)\le n-\length(\s\vert_C)=\length(\s\vert_{A,B})\le\length(s)
-    \]
-  so we must have equality everywhere, and similarly for $t$ and $\s\vert_{B,C}$.  Since at least one of $s,t$ does not end with a $B$-move, our interleaved sequence $\s$ cannot end with a $B$-move.  
-
-  Now suppose that $\t$ were some other sequence in $\sigma\|\tau$ such that $\t\vert_A=s\vert_A$ and $\t\vert_C=t\vert_C$.  If $\length(\t)\le n$, then $\t=\s^k$ for some $k$ by uniqueness above.  So $\t\prefix\s$.  We also know that $\t$ includes the last move from $\s$, since this move must be an $A$-move or a $C$-move.  Therefore, $\t=\s$.  
-
-  If instead $\length(\t)\ge n$ then let $\t'$ be the length-$n$ prefix of $\t$.  By uniqueness above, we must have $\t'=\s$.  Since $\t\vert_A=\s\vert_A$ and $\t\vert_C=\s\vert_C$, this means that all subsequent moves in $\t$ must be $B$-moves.  Since $\t$ does not end with a $B$-move, we must have $\t=\s$.
 \end{proof}
 
 We now have all the ingredients ready to prove that $\comp\tau\sigma$ is a well-defined strategy.
@@ -688,11 +679,73 @@ We now have all the ingredients ready to prove that $\comp\tau\sigma$ is a well-
 
     By a symmetrical argument, if $\s\vert_{A,C} c\in P_{A\implies C}$ for some $c\in M_C$, then $\s c\in\sigma\|\tau$.  
 
-    For the second strategy property, suppose that $s\in\comp\tau\sigma$ is n $O$-play and that $sx, sy\in\comp\tau\sigma$.  We claim that $x=y$.  By the definition of $\comp\tau\sigma$, there must be sequences $\s,\t\in\sigma\|\tau$ with $\s\vert_{A,C}=sx$ and $\t\vert_{A,C}=sy$.  Moreover, by removing any $B$-moves form the end of $\s,\t$, we may assume that the last move in $\s$ is $x$ and the last move in $\t$ is $y$.  We may write $\s=\s'x$ and $\t=\t'y$.  
+    For the second strategy property, suppose that $s\in\comp\tau\sigma$ is n $O$-play and that $sx, sy\in\comp\tau\sigma$.  We claim that $x=y$.  By the definition of $\comp\tau\sigma$, there must be sequences $\s,\t\in\sigma\|\tau$ with $\s\vert_{A,C}=sx$ and $\t\vert_{A,C}=sy$.  Moreover, by removing any $B$-moves form the end of $\s,\t$, we may assume that the last move in $\s$ is $x$ and the last move in $\t$ is $y$.  We may write $\s=\s'\b x$ and $\t=\t'\bbeta y$, where $\b$ and $\bbeta$ are sequences composed entirely out of $B$-moves and neither $\s'$ nor $\t'$ ends with a $B$-move.  In particular, $\s'\vert_{A,C}=\t'\vert_{A,C}=s$.
 
-    Now note that $\s'\vert_A=s\vert_A=\t'\vert_A$ and $\s'\vert_C=s\vert_C=\t'\vert_C$.  So we have $\s'x\vert_A=\t'x\vert_A$ and $\s'x\vert_C=\t'x\vert_C$.  Therefore, $\s'x=\t'x$ by Lemma \ref{LiftingLemma} and so $\s'=\t'$.  
+    Without loss of generality, $\length(\s')\le\length(\t')$.  Let $\t''$ be the prefix of $\t'$ that has the same length as $\s'$, writing $\t'=\t''\r$.
+
+    Now $\s'$ and $\t''$ have the same length, and we have
+    \[
+      \begin{matrix}
+        \s'\vert_A\prefix\s\vert_A & \t''\vert_A\prefix\s\vert_A \\
+        \s'\vert_C\prefix\s\vert_C & \t''\vert_C\prefix\s\vert_C
+      \end{matrix}
+      \]
+    so we must have $\s'=\t''$, by uniqueness in Lemma \ref{LiftingLemma}.  Now observe that we have
+    \[
+      \s'\vert_{A,C}=\t'\vert_{A,C}=\t''\vert_{A,C}\r\vert_{A,C}=\s'\vert_{A,C}\r\vert_{A,C}
+      \]
+    Since $\t'=\t''\r$ does not end with a $B$-move, $\r\vert_{A,C}$ must be non-empty if $\r$ is non-empty.  Therefore $\r=\emptyplay$, and so $\t'=\t''=\s'$.
+
+    We now claim that $\length(\b)=\length(\bbeta)$.  Indeed, suppose instead that $\length(\b)<\length(\bbeta)$.  Then there would be a prefix $\bbeta'\prefix\bbeta$ of length $\length(\b)+1$.  Then we would have
+    \[
+      \begin{matrix}
+        \s'\b x\vert_A=\s\vert_A & \s'\bbeta'\vert_A=\s'\vert_A\prefix\s\vert_A \\
+        \s'\b x\vert_C=\s\vert_C & \s'\bbeta'\vert_C=\s'\vert_C\prefix\s\vert_C
+      \end{matrix}
+      \]
+    and so $\s'\b x=\s'\bbeta'$ by Lemma \ref{LiftingLemma}, which is clearly impossible.  Therefore, $\length(\b)=\length(\bbeta)$.  Now we can apply Lemma \ref{LiftingLemma} in the same way to tell us that $\b=\bbeta$.
+
+    Suppose that $\zeta_B(\s'\b\vert_B)=P$.  Since $\s'\b\in\sigma\|\tau$, this means that $\zeta_A(\s'\b\vert_A)=P$, by Proposition \ref{nice-negative-games}(i).  Therefore, $\zeta_{A\implies B}(\s'\b)=P$, so $x$ and $y$ must both be moves in $C$.  Then we have $\s'\b\vert_{B,C}x,\s'\b\vert_{B,C}y\in\tau$, and so $x=y$ by the definition of a strategy.
+
+    By a symmetrical argument, if $\zeta_B(\s'\b\vert_B)=O$, then $x$ and $y$ must both be moves in $A$.  We then have $\s'\b\vert_{A,B}x,\s'\b\vert_{A,B}y\in\sigma$, so $x=y$.
   \end{proof}
 \end{proposition}
+
+Now we are ready to define our category $\G$ of games.  We have defined composition of strategies, so we need to define identity morphisms.  Identity morphisms are given by the copycat strategy, as usual:
+\[
+  \id_A=\left\{s\in P_{A\implies A}\suchthat\textrm{for all even length $t\prefix s$, $t\vert_\bneggame{A}=t\vert_A$}\right\}
+  \]
+We can now state our first main result.
+
+\begin{theorem}
+  The collection of negative games, with morphisms from $A$ to $B$ given by strategies on $A\implies B$ with the notions of composition and identity given above, forms a category $\G$.  Moreover, there is a faithful functor $\F\from\G\to\Rel$, where $\Rel$ is the category of sets and relations, given by sending a game $A$ to the set of plays $P_A$ and sending a strategy $\sigma\from A\implies B$ to the set
+  \[
+    \grel{\sigma}=\{(s\vert_A,s\vert_B)\suchthat \textrm{$s\in\sigma$ is a $P$-position}\}\subset P_A\times P_B
+    \]
+  \begin{proof}
+    We shall make much use of the relational content of a strategy.  We first need to show that the identity is indeed an identity and that composition is associative.  For the identity, note that $\grel{\id_A}=\Delta_{P_A}\subset P_A\times P_A$, the identity relation in $\Rel$.  If $B,C$ are negative games and $\sigma\colon B\implies A,\tau\colon A\implies C$ are strategies, then from our earlier discussion we have
+    \[
+      \grel{\comp{\id_A}{\sigma}}=\comp{\grel{\id_A}}{\grel\sigma}=\comp{\Delta_{P_A}}{\grel\sigma}=\grel\sigma
+      \]
+    and therefore $\comp{\id_A}{\sigma}=\sigma$, by Lemma \ref{HylandSchalkFaithful}.  Similarly, $\comp{\tau}{\id_A}=\tau$.  
+
+    For associativity of composition, we hijack the associativity in $\Rel$: if $A,B,C,D$ are negative games, and $\map{\sigma}AB\xrightarrow{\tau}\map{\upsilon}CD$ are morphisms, then we have:
+    \begin{align*}
+      \grel{\comp{(\comp\upsilon\tau)}{\sigma}} & = \comp{\grel{\comp\upsilon\tau}}{\sigma} \\
+        & = \comp{(\comp{\grel\upsilon}{\grel\tau})}{\grel\sigma} \\
+        & = \comp{\grel\upsilon}{(\comp{\grel\tau}{\grel\sigma})} \quad\textrm{by associativity in $\Rel$} \\
+        & = \comp{\grel\upsilon}{\grel{\comp\tau\sigma}} \\
+        & = \grel{\comp{\upsilon}{(\comp\tau\sigma)}}
+    \end{align*}
+    and so $\comp{(\comp\upsilon\tau)}{\sigma}=\comp{\upsilon}{(\comp\tau\sigma)}$, by Lemma \ref{HylandSchalkFaithful}.  
+
+    We have already shown that the map $\F$ respects composition, so it is a functor.  It is faithful by Lemma \ref{HylandSchalkFaithful}.
+  \end{proof}
+\end{theorem}
+
+\section{Monoidal and sequoidal category structure}
+
+The tensor product $\tensor$ makes 
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
