@@ -202,6 +202,10 @@
 \renewcommand{\b}{\mathfrak b}
 \renewcommand{\r}{\mathfrak r}
 \newcommand{\bbeta}{{\bm{\beta}}}
+\newcommand{\st}{{\Sigma^*}}
+
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
 
 %%% END Article customizations
 
@@ -494,6 +498,7 @@ A design feature of the connectives $\tensor,\parr,\implies$ is that only player
 \end{proposition}
 
 \subsection{A category of games and partial strategies}
+\label{CategoricalSemantics}
 
 Following \cite{joyalgames} and \cite{abramskyjagadeesangames}, we define a category $\G$ whose objects are games where the morphisms from a game $A$ to a game $B$ are strategies for $A\implies B$.  For the sake of simplicity, and to avoid varioius technical issues, we shall require that the games in our category be \emph{negative} - namely, they should start with an opponent move.  In our language, we call a game $A$ \emph{negative} if $\zeta_A(\emptyplay)=P$ (and we call it positive if $\zeta_A(\emptyplay)=O$).  The equations
 \begin{gather*}
@@ -743,9 +748,89 @@ We can now state our first main result.
   \end{proof}
 \end{theorem}
 
-\section{Monoidal and sequoidal category structure}
+\subsection{Total strategies and winning conditions}
 
-The tensor product $\tensor$ makes 
+Let $A$ be a game.  We call a strategy $\sigma$ for $A$ \emph{total} if it satisfies the additional requirement that whenever $s\in\sigma$ is an $O$-play, there exists some $a\in M_A$ such that $sa\in\sigma$ (before we only required that such a play be unique if it existed).  
+
+We might want to talk about a category of negative games and total strategies.  However, we cannot do this immediately, since the composition of two total strategies need not be total.  
+
+For example, let $\st$ be the negative game where each player has a unique move at every position:
+\begin{gather*}
+  M_{\st} = \{q,a\} \\
+  \lambda_{\st}(q) = O,\;\lambda_{\st}(a)=P \\
+  P_{\st} = \{\emptyplay, q, qa, qaq, qaqa, \dots\}
+\end{gather*}
+
+Let $I$ be the negative game with no moves and let $\bot$ be the negative game with a single opponent move and no further play:
+\[
+  \begin{matrix}
+    M_I=\emptyset & M_\bot = \{*\} \\
+    \lambda_I=\emptyset  & \lambda_\bot(*)=O \\
+    P_I=\{\emptyplay\} & P_\bot = \{\emptyplay, *\}
+  \end{matrix}
+  \]
+
+It is easy to see that if $A$ is a negative game then strategies for $I\implies A$ are the same thing as strategies for $A$ and that strategies for $A\implies\bot$ are the same thing as opponent strategies for $A$.  So we get morphisms $\cmap{\sigma}{I}{\st},\cmap{\tau}{\st}{\bot}$ given by the unique player and opponent strategies for $\st$:
+\[
+  \sigma = P_\st\quad\tau = \{*s\suchthat s\in P_\st\}
+  \]
+Moreover, both these strategies are total.
+
+The plays in $\sigma\|\tau$ are now those sequences $\s\in(M_I\cprd M_\st\cprd M_\bot)^*$ such that:
+\begin{gather*}
+  \s\vert_A=\emptyplay \\
+  \s\vert_B\in P_\st \\
+  \textrm{If $\s\ne\emptyplay$ then $\s\vert_C=*$}
+\end{gather*}
+
+Upon restricting these sequences to $A$ and $C$, we see that $\comp\tau\sigma$ contains only two plays - $\emptyplay$ and $*$.  $*$ is an $O$-play with no $P$-reply in $\comp\tau\sigma$, so $\comp\tau\sigma$ is not a total strategy.
+
+Clearly it is the infinite play in the game $\st$ that is causing the problem.  We can get around this by insisting that our games contain no infinite plays: if $A$ is a game, we say $A$ has an infinite play if $(P_A,\prefix)$ has an infinite chain.
+
+\begin{proposition}
+  Let $A,B,C$ be negative games and assume that $B$ has no infinite play.  Let $\sigma$ be a total strategy for $A\implies B$ and let $\tau$ be a total strategy for $B\implies C$.  Then $\comp\tau\sigma$ is a total strategy for $A\implies C$.
+  \begin{proof}
+    We have already shown that $\comp\tau\sigma$ is a strategy for $A\implies C$, so we need to show that it is total.  Let $s\in\comp\tau\sigma$ be an $O$-play.  We seek a $P$-move $x$ such that $sx\in\comp\tau\sigma$.  
+
+    By the definition of $\comp\tau\sigma$, there is some $\s\in\sigma\|\tau$ such that $\s\vert_{A,C}=s$.  Since $P_B$ contains no infinite chain, we may take $\s$ to be maximal such that $\s\vert_{A,B}=s$.  
+    
+    Since $s$ is an $O$-play, $\s\vert_A$ must be a $P$-play in $A$ and $\s\vert_C$ must be an $O$-play in $C$.  Consider the $B$-component $\s\vert_B$ of $\s$.  If this is an $O$-play, then $\s\vert_{A,B}$ is an $O$-play in $\sigma$, so, by totality of $\sigma$, there exists $x$ such that $\s\vert_{A,B}x\in\sigma$ and therefore $\s x\in\sigma\|\tau$.  Similarly, if $\s\vert_B$ is a $P$-play, then $\s\vert_{B,C}$ is an $O$-play in $\tau$, so there exists $x$ such that $\s\vert_{B,C}x\in\tau$ and so $\s x\in\sigma\|\tau$.  
+
+    If $x$ is a $B$-move, we have $\s x\vert_{A,C}=s$, contradicting maximality of $s$.  Therefore, $x$ is an $A$- or $C$-move, and we have $sx\in\comp\tau\sigma$.
+  \end{proof}
+\end{proposition}
+
+\subsection{Monoidal and sequoidal category structure}
+
+The tensor product $\tensor$ makes $\G$ into a monoidal category.  To show this, we will introduce a few more technical tools.
+
+\subsubsection{Copycat strategies}
+
+We have already introduced the copycat strategy $\id_A$ on a game $A$.  We can extend this idea to more general strategies as follows:
+
+\begin{definition}
+  Let $A,B$ be games, and let $\cmap{f}{P_A}{P_B}$ be a bijective function that preserves length and preserves the prefix ordering (i.e., a \emph{tree isomorphism}).  The \emph{copycat strategy} corresponding to $f$ is given by
+  \[
+    \sigma_f = \left\{s\in P_{A\implies B}\suchthat\textrm{for all even length $t\prefix s$, $t\vert_B=f(t\vert_A)$}\right\}
+    \]
+\end{definition}
+
+\begin{proposition}
+  \begin{enumerate}[i)]
+    \item For any tree isomorphism $\cmap{f}{P_A}{P_B}$, $\sigma_f$ is a strategy on $A\implies B$.
+
+    \item If $A,B,C$ are games, $\cmap{f}{P_A}{P_B}$ is a tree isomorphism and $\sigma$ is a strategy for $B\implies C$, then the composition of $\sigma$ and $\sigma_f$ is given by:
+      \[
+        \comp\sigma{\sigma_f} =
+        \]
+  \end{enumerate}
+\end{proposition}
+
+TODO: come back to this maybe.
+
+\section{Transfinite games}
+
+We want to extend the definitions and results from the previous section 
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
