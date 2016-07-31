@@ -800,6 +800,47 @@ Clearly it is the infinite play in the game $\st$ that is causing the problem.  
   \end{proof}
 \end{proposition}
 
+The result of this proposition means that we could create a category of games and total strategies by requiring that all our games have no infinite plays.  However, the resulting category is too weak for our requirements; in particular, it makes it very difficult to model the exponential from linear logic.  Moreover, it seems a bit wasteful to require that none of the games $A,BC$ have winning plays when it is only winning plays in game $B$ that are causing problems.  
+
+Fortunately, there is a cleverer way of getting around the problem.  Recall that we defined a game to be given by a tuple $(M_A,\lambda_A,\zeta_A,P_A)$.  Given such a game, and given some subset $X\subset P_A$, define $X^\omega$ to be the set of all infinite plays in the game -- i.e., the set of all infinite sequences $s\in M_A^\omega$ all of whose prefixes lie in $X$.  
+
+\begin{definition}
+  A \emph{win-game} is a tuple $A=(M_A,\lambda_A,\zeta_A,P_A,W_A)$ where $(M_A,\lambda_A,\zeta_A,P_A)$ is a game as defined before and $\cmap{W_A}{P_A^\omega}{\OP}$ is a function telling us whether each infinite play is a win for player $P$ or for player $O$.  
+\end{definition}
+
+To distinguish our original games from these win-games, we shall refer to the earlier games as \emph{finitary games}.  
+
+We can define an appropriate notion of strategies for these games.  If $A$ is a win-game, then a \emph{winning strategy} for $A$ is a total strategy for $(M_A,\lambda_A,\zeta_A,P_A)$ such that $W_A(s)=P$ for all $s\in\sigma^\omega$.  
+
+We can also extend our connectives to our new win games.  At the level of finitary games, our definitions of the connectives are unchanged, and it remains to define the $W$-functions.  If $A$ is a win game, then $W_{\neggame A}=\neg\circ W_A$.  
+
+If $A$ and $B$ are win games, we would like to define $W_{A\tensor B}$ by
+\[
+  W_{A\tensor B}(s) = W_A(s\vert_A) \wedge W_B(s\vert_B)
+  \]
+However, this is not well defined at present because one out of $s\vert_A$ and $s\vert_B$ might be a finite sequence even if $s$ is infinite.  For this purpose, it will be convenient to extend our function $W_A$ to include finite plays as well using $\zeta_A$:
+\[
+  W_A^* = \zeta_A\cprd W_A\from P_A\cprd P_A^\omega \to\OP
+  \]
+We can then define
+\[
+  W_{A\tensor B}(s) = W_A^*(s\vert_A)\wedge W_B^*(s\vert_B)
+  \]
+Indeed, we could do away with $\zeta_A$ and $W_A$ altogether, replacing them with $W_A^*$.  Since the rule for $\zeta_{A\tensor B}$ is also given by a conjunction, our rule for the tensor product becomes:
+\[
+  W_{A\tensor B}^*(s) = W_A^*(s\vert_A)\wedge W_B^*(s\vert_B)
+  \]
+This will be the starting point for our development of transfinite games in the next section.  In our formulation, finitary games are games played over the ordinal $\omega$, while win-games will be games played over the ordinal $\omega+1$.  We make no special distinction between finite and infinte plays, so the function $\zeta_A$ for our transfinite games incorporates both the function $\zeta_A$ and the function $W_A$ from our win-games, in the same manner as the function $W_A^*$ defined above.  One advantage of this point of view is that we no longer have to treat the finite- and infinite-play cases separately, but can give a uniform presentation.  
+
+For now, let us concentrate on developing the theory of win-games in the traditional way.  Having defined the tensor product, we may recover the definitions of the par $\parr$ and linear implication $\implies$ of two games as usual.  In particular, this means that we have
+\[
+  W_{A\implies B}^*(s) = (W_A(s\vert_A) \Rightarrow W_B(s\vert_B))
+  \]
+
+It is worth examining the definitions of the $W$-functions for tensor and implication.  Recall that in the tensor product, it is always player $O$ who switches games.  Therefore, if $s$ is an infinite play in $A\tensor B$ and $s\vert_A$ is finite and non-empty, it must be the case that player $P$ made the last move in $s$, and so $W_A^*(s\vert_A)=P$.  If we assume our games are negative, then this extends to the case that $s\vert_A$ is empty.  This tells us that player $P$ wins an infinite play $s$ in $A\tensor B$ if and only if each component is either $P$-winning or is finite.  
+
+Similarly, player $P$ wins an infinite play $s$ in $A\implies B$ if and only if $s\vert_A$ is infinite and $O$-winning or if 
+
 \subsection{Monoidal and sequoidal category structure}
 
 The tensor product $\tensor$ makes $\G$ into a monoidal category.  To show this, we will introduce a few more technical tools.
