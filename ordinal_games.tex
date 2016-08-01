@@ -16,7 +16,6 @@
 \usepackage{url} % for \url
 \usepackage{IEEEtrantools} % for \IEEEeqnarray
 \usepackage{pbox} % for \pbox
-\usepackage{bm} % for bold Greek letters
 
 %%% ToC (table of contents) APPEARANCE
 \usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
@@ -31,6 +30,20 @@
 \usepackage{stmaryrd}
 \usepackage{mathtools}
 \usepackage{cmll} % Linear logic symbols!
+\usepackage{bm} % for bold Greek letters
+
+%% Get the sqsubsetneqq character from the mathabx package
+\DeclareFontFamily{U}{mathb}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathb}{m}{n}{
+      <5> <6> <7> <8> <9> <10> gen * mathb
+      <10.95> mathb10 <12> <14.4> <17.28> <20.74> <24.88> mathb12
+      }{}
+\DeclareSymbolFont{mathb}{U}{mathb}{m}{n}
+
+\DeclareMathSymbol{\sqsubsetneq}    {3}{mathb}{"88}
+\DeclareMathSymbol{\varsqsubsetneq} {3}{mathb}{"8A}
+\DeclareMathSymbol{\varsqsubsetneqq}{3}{mathb}{"92}
+\DeclareMathSymbol{\sqsubsetneqq}   {3}{mathb}{"90}
 
 %% Lists %%
 \usepackage{enumerate}
@@ -56,6 +69,10 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{question}[theorem]{Question}
+
+\newtheoremstyle{note} {3pt} {3pt} {\itshape} {} {\itshape} {:} {.5em} {} % For short notes
+\theoremstyle{note}
+\newtheorem{note}[theorem]{Note}
 
 %% Exercises and answers %%
 \usepackage{answers}
@@ -195,6 +212,7 @@
 \newcommand{\bracketed}[1]{\left({#1}\right)}
 \newcommand{\bneggame}[1]{{\bracketed{\neggame{#1}}}}
 \newcommand{\prefix}{\sqsubseteq}
+\newcommand{\pprefix}{\sqsubsetneqq}
 \renewcommand{\ss}{\mathbf{s}}
 \newcommand{\pfun}{\rightharpoonup}
 \newcommand{\grel}[1]{\underline{#1}}
@@ -203,6 +221,7 @@
 \renewcommand{\r}{\mathfrak r}
 \newcommand{\bbeta}{{\bm{\beta}}}
 \newcommand{\st}{{\Sigma^*}}
+\renewcommand{\S}{{\mathfrak{S}}}
 
 \let\oldemptyset\emptyset
 \let\emptyset\varnothing
@@ -754,40 +773,44 @@ Let $A$ be a game.  We call a strategy $\sigma$ for $A$ \emph{total} if it satis
 
 We might want to talk about a category of negative games and total strategies.  However, we cannot do this immediately, since the composition of two total strategies need not be total.  
 
-For example, let $\st$ be the negative game where each player has a unique move at every position:
-\begin{gather*}
-  M_{\st} = \{q,a\} \\
-  \lambda_{\st}(q) = O,\;\lambda_{\st}(a)=P \\
-  P_{\st} = \{\emptyplay, q, qa, qaq, qaqa, \dots\}
-\end{gather*}
+\begin{example}
+  \label{TotalCompositionExample}
+  Let $\st$ be the negative game where each player has a unique move at every position:
+  \begin{gather*}
+    M_{\st} = \{q,a\} \\
+    \lambda_{\st}(q) = O,\;\lambda_{\st}(a)=P \\
+    P_{\st} = \{\emptyplay, q, qa, qaq, qaqa, \dots\}
+  \end{gather*}
 
-Let $I$ be the negative game with no moves and let $\bot$ be the negative game with a single opponent move and no further play:
-\[
-  \begin{matrix}
-    M_I=\emptyset & M_\bot = \{*\} \\
-    \lambda_I=\emptyset  & \lambda_\bot(*)=O \\
-    P_I=\{\emptyplay\} & P_\bot = \{\emptyplay, *\}
-  \end{matrix}
-  \]
+  Let $I$ be the negative game with no moves and let $\bot$ be the negative game with a single opponent move and no further play:
+  \[
+    \begin{matrix}
+      M_I=\emptyset & M_\bot = \{*\} \\
+      \lambda_I=\emptyset  & \lambda_\bot(*)=O \\
+      P_I=\{\emptyplay\} & P_\bot = \{\emptyplay, *\}
+    \end{matrix}
+    \]
 
-It is easy to see that if $A$ is a negative game then strategies for $I\implies A$ are the same thing as strategies for $A$ and that strategies for $A\implies\bot$ are the same thing as opponent strategies for $A$.  So we get morphisms $\cmap{\sigma}{I}{\st},\cmap{\tau}{\st}{\bot}$ given by the unique player and opponent strategies for $\st$:
-\[
-  \sigma = P_\st\quad\tau = \{*s\suchthat s\in P_\st\}
-  \]
-Moreover, both these strategies are total.
+  It is easy to see that if $A$ is a negative game then strategies for $I\implies A$ are the same thing as strategies for $A$ and that strategies for $A\implies\bot$ are the same thing as opponent strategies for $A$.  So we get morphisms $\cmap{\sigma}{I}{\st},\cmap{\tau}{\st}{\bot}$ given by the unique player and opponent strategies for $\st$:
+  \[
+    \sigma = P_\st\quad\tau = \{*s\suchthat s\in P_\st\}
+    \]
+  Moreover, both these strategies are total.
 
-The plays in $\sigma\|\tau$ are now those sequences $\s\in(M_I\cprd M_\st\cprd M_\bot)^*$ such that:
-\begin{gather*}
-  \s\vert_A=\emptyplay \\
-  \s\vert_B\in P_\st \\
-  \textrm{If $\s\ne\emptyplay$ then $\s\vert_C=*$}
-\end{gather*}
+  The plays in $\sigma\|\tau$ are now those sequences $\s\in(M_I\cprd M_\st\cprd M_\bot)^*$ such that:
+  \begin{gather*}
+    \s\vert_A=\emptyplay \\
+    \s\vert_B\in P_\st \\
+    \textrm{If $\s\ne\emptyplay$ then $\s\vert_C=*$}
+  \end{gather*}
 
-Upon restricting these sequences to $A$ and $C$, we see that $\comp\tau\sigma$ contains only two plays - $\emptyplay$ and $*$.  $*$ is an $O$-play with no $P$-reply in $\comp\tau\sigma$, so $\comp\tau\sigma$ is not a total strategy.
+  Upon restricting these sequences to $A$ and $C$, we see that $\comp\tau\sigma$ contains only two plays - $\emptyplay$ and $*$.  $*$ is an $O$-play with no $P$-reply in $\comp\tau\sigma$, so $\comp\tau\sigma$ is not a total strategy.
+\end{example}
 
 Clearly it is the infinite play in the game $\st$ that is causing the problem.  We can get around this by insisting that our games contain no infinite plays: if $A$ is a game, we say $A$ has an infinite play if $(P_A,\prefix)$ has an infinite chain.
 
 \begin{proposition}
+  \label{BoundedTotalComposition}
   Let $A,B,C$ be negative games and assume that $B$ has no infinite play.  Let $\sigma$ be a total strategy for $A\implies B$ and let $\tau$ be a total strategy for $B\implies C$.  Then $\comp\tau\sigma$ is a total strategy for $A\implies C$.
   \begin{proof}
     We have already shown that $\comp\tau\sigma$ is a strategy for $A\implies C$, so we need to show that it is total.  Let $s\in\comp\tau\sigma$ be an $O$-play.  We seek a $P$-move $x$ such that $sx\in\comp\tau\sigma$.  
@@ -839,7 +862,37 @@ For now, let us concentrate on developing the theory of win-games in the traditi
 
 It is worth examining the definitions of the $W$-functions for tensor and implication.  Recall that in the tensor product, it is always player $O$ who switches games.  Therefore, if $s$ is an infinite play in $A\tensor B$ and $s\vert_A$ is finite and non-empty, it must be the case that player $P$ made the last move in $s$, and so $W_A^*(s\vert_A)=P$.  If we assume our games are negative, then this extends to the case that $s\vert_A$ is empty.  This tells us that player $P$ wins an infinite play $s$ in $A\tensor B$ if and only if each component is either $P$-winning or is finite.  
 
-Similarly, player $P$ wins an infinite play $s$ in $A\implies B$ if and only if $s\vert_A$ is infinite and $O$-winning or if 
+Similarly, player $P$ wins an infinite play $s$ in $A\implies B$ if and only if $s\vert_A$ is infinite and $O$-winning or if $\s\vert_B$ is either finite or is infinite and $P$-winning.  Since it is player $P$ who switches games in $A\implies B$, if $s\vert_A$ is finite then it will end with an $O$-move, so will count as an $O$-winning play.  
+
+The point now is that if $A,B,C$ are negative win-games and $\sigma$ and $\tau$ are strategies for $A\implies B$ and $B\implies C$, we will never end up in the situation we were in in Example \ref{TotalCompositionExample} where we have an infintie play in $B$ that stops us from replying in the composition $\comp\tau\sigma$.  In that example, the unique infinite play in $\st$ would have to be either $O$-winning or $P$-winning, so either $\sigma$ or $\tau$ would not be a valid winning strategy.  
+
+\begin{proposition}
+  Let $A,B,C$ be negative win-games, let $\sigma$ be a winning strategy for $A\implies B$ and let $\tau$ be a winning strategy for $B\implies C$.  Then $\comp\tau\sigma$ is a winning strategy for $A\implies C$.  
+  \begin{proof}
+    First, we want to show that $\comp\tau\sigma$ is a total strategy.  Let $s\in\comp\tau\sigma$ be an $O$-position; then we have some $\s\in\sigma\|\tau$ with $\s\vert_{A,C}=s$.  
+
+    We claim that there is a maximal such $\s$.  By Lemma \ref{LiftingLemma}, $\s$ is determined by its length, and so the only way that there could not be a maximal such $\s$ is if there is some infinite sequence $\S\in(M_A\cprd M_B\cprd M_C)^\omega$ with $\S\vert_{A,B}\in\sigma\cup\sigma^\omega$, $\S\vert_{B,C}\in\tau\cup\tau^\omega$ and $\S\vert_{A,C}=s$.  Since $\S$ has some finite prefix $\s$ with $\s\vert_{A,C}=s$, $\S\vert_A$ and $\S\vert_C$ must both be finite, so they are $O$-plays in the games $A\implies B$ and $B\implies C$ respectively.  
+
+    Now $\S\vert_B$ is infinite.  If $W_B(\S\vert_B)=O$, then $W_{A\implies B}(\S\vert_{A,B})=O$, contradicting the fact that $\sigma$ is a winning strategy.  Symmetrically, if $W_B(\S\vert_B)=P$, then $W_{B\implies C}(\S\vert_{B,C})=O$, contradicting the fact that $\tau$ is a winning strategy.  We have a contradiction in either case, so if $\sigma$ and $\tau$ are indeed winning strategies, there must be a maximal (finite) $\s\in\sigma\|\tau$ such that $\s\vert_{A,C}=s$.  
+
+    The argument from Proposition \ref{BoundedTotalComposition} now applies, showing that $sx\in\comp\tau\sigma$ for some $P$-move $x$.  
+
+    Lastly, we want to show that any infinite play in $\comp\tau\sigma$ is $P$-winning.  Suppose $s$ is some infinite play in $\comp\tau\sigma$.  For each finite prefix $t\prefix s$ there is some $\t\in\sigma\|\tau$ with $\t\vert_{A,C}=t$, and by Lemma \ref{LiftingLemma}, we have $\t'\prefix\t$ if $t'\prefix t$.  Therefore, these $\t$ glue to give an infinite sequence $\s\in(M_A\cprd M_B\cprd M_C)^\omega$ such that $\s\vert_{A,B}\in\sigma^\omega$ and $\s\vert_{B,C}\in\tau^\omega$.  We claim that $W_{A\implies B}^*(\s\vert_{A,B})=W_{B\implies C}^*(\s\vert_{B,C})=P$ - then it follows that $W_{A\implies C}^*(\s\vert_{A,C})=P$ by transitivity of $\Rightarrow$.  If $\s\vert_{A,B}$ and $\s\vert_{B,C}$ are both infinite, then this is automatically true, since $\sigma$ and $\tau$ are winning strategies.  Otherwise, one of them must be infinite and the other finite.  
+
+    Suppose that $\s\vert_{A,B}$ is finite.  Let $\t$ be the shortest finite prefix of $\s$ with $\t\vert_{A,B}=\s\vert_{A,B}$; then we have $\t c\prefix \s$ for some move $c\in M_C$.  If $\t\vert_{A,B}=\emptyplay$, then $W_A^*(\t\vert_{A,B})=P$ since $A$ and $B$ are negative.  Otherwise, there is at least one $B$-move in $\t\vert_{A,B}$.  Let $b$ be the last $B$-move occurring in $\t\vert_{A,B}$ - then it is the last $B$-move occurring in $\t\vert_{B,C}$; since it is followed by the move $c$, it must be an $O$-move in $B\implies C$ and therefore a $P$-move in $B$.  Therefore, $W_{A\implies B}^*(\s\vert_{A,B})=P$.  
+
+    If instead $\s\vert_{B,C}$ is finite, once again we have some $\t\prefix\s$ with $\t\vert_{A,B}=\s\vert_{A,B}$ and $\t a\prefix\s$ for some move $a\in M_A$.  Since $\s\vert_{A,B}$ is infinite, it must be non-empty, so it must contain some $B$-move.  Let $b$ be the last $B$-move occurring in $\s\vert_{A,B}$; since $b$ is followed by an $A$-move, it must be an $O$-move in $B$.  Now $b$ is also the last $B$-move occurring in $\s\vert_{B,C}$ and so $W_{B\implies C}^*(\s\vert_{B,C})=P$.
+  \end{proof}
+\end{proposition}
+
+We get another result:
+
+\begin{theorem}
+  The collection of all negative win-games, with morphisms from $A$ to $B$ given by winning strategies on $A\implies B$ and composition defined as above, is a category.
+  \begin{proof}
+    We have shown already that the composition of two winning strategies is a winning strategy.  Associativity of composition is inherited from finitary games and the identity strategy is winning for $A\implies A$.  
+  \end{proof}
+\end{theorem}
 
 \subsection{Monoidal and sequoidal category structure}
 
@@ -871,7 +924,45 @@ TODO: come back to this maybe.
 
 \section{Transfinite games}
 
-We want to extend the definitions and results from the previous section 
+\begin{note}
+  In this section, we assume familiarity with ordinals, ordinal arithmetic and transfinite induction/recursion.  We shall frequently identify an ordinal $\alpha$ with the set $\{\beta\suchthat\beta<\alpha\}$ of all ordinals less than $\alpha$ without comment.
+\end{note}
+
+In the last section, we came across win-games, where in addition to the usual function $\cmap{\zeta_A}{P_A}{\OP}$ we have a function $\cmap{W_A}{P_A^\omega}{\OP}$, where $P_A^\omega$ is the set of infinite limits of plays in $P_A$.  We saw that it is usefult to combine these two functions into one:
+\[
+  W_A^* = \zeta_A\cprd W_A\from P_A\cprd P_A^*\to\OP
+  \]
+This suggests that it might make sense to combine $P_A$ and $P_A^\omega$ into one a single set $\overline{P_A}$ and use the function $W_A^*$ instead of $\zeta_A$ and $W_A$.  This new set will contain both finite and infinite plays, and the infinite plays will be precisely the limits of the finite plays.  In this way, the set of possible lengths of plays in $\overline{P_A}$ is the set $\{0,1,2,3,\dots,\omega\}$, or the ordinal $\omega+1$.  
+
+Contrast this with the finitary case, in which the set of possible lengths of plays is the set $\{0,1,2,3,\dots\}$, or the ordinal $\omega$.  In the coming sections, we will generalize these results so that we end up with games where the plays can have much larger ordinal lengths.  Win-games will be taken to be the motivating example throughout.  
+
+\subsection{Transfinite Games and Strategies}
+
+We fix some ordinal $\alpha$ throughout.  
+
+\begin{definition}
+  A \emph{game over $\alpha$}, or an \emph{$\alpha$-game}, is given by a tuple
+  \[
+    A = (M_A, \lambda_A, \zeta_A, P_A)
+    \]
+  where
+  \begin{itemize}
+    \item $M_A$ is a set of moves.
+    \item $\cmap{\lambda_A}{M_A}{\OP}$ is a function telling us which player may make each move.
+    \item $P_A$ is a set of pairs $(\beta, s)$, where $\beta<\alpha$ is some ordinal and $\cmap{s}{\beta}{M_A}$ is a sequence of moves of length $\beta$.  
+    \item $\cmap{\zeta_A}{P_A}{\OP}$ tells us which player owns each position.
+  \end{itemize}
+
+  We will normally abuse notation and write $s$ instead of $(\beta, s)$ and $\length(s)$ instead of $\beta$.  If $a\in M_A$, we will write $a$ for the $1$-move play $(1, a)$, and $st$ for the concatenation of two sequences $s$ and $t$ (where $\length(st)=\length(s)+\length(t)$).  We will write $t\prefix s$ if $\length(t)\le\length(s)$ and $s\vert_{\length(t)}=t$.  
+
+  To be called a game, $(M_A, \lambda_A, \zeta_A, P_A)$ has to satisfy four rules.
+  \begin{description}
+    \item[Prefix closure] $P_A$ must be closed under the relation $\prefix$.  
+    \item[Well-formedness] If $a\in M_A$ and $sa\in P_A$ then $\zeta_A(sa)=\lambda_A(a)$.  
+    \item[Alternating condition] If $a\in M_A$ and $sa\in P_A$ then $\zeta_A(s)=\neg\zeta_A(sa)$.
+    \item[Limit condition] If $\mu<\alpha$ is a limit ordinal and $s$ is a sequence of length $\mu$ such that every proper prefix $t\pprefix s$ is in $P_A$, then $s$ is in $P_A$.  
+  \end{description}
+\end{definition}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
