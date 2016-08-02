@@ -454,7 +454,7 @@ Our solution is to throw away some plays from $P_A\| P_B$ so that what remains s
 \begin{definition}
   Let $M$ be a set, let $P\subset M^*$ be prefix closed and let $\cmap{\lambda}{M}{\OP},\cmap{\zeta}{P}{\OP}$ be functions.  If $s\in P$, we say that $s$ is \emph{alternating with respect to $\zeta$} if the set of prefixes of $s$ satisfies the alternating condition: if $t,ta\prefix s$, then $\zeta(t) = \neg\zeta(ta)$.
 
-  We say that $s$ is \emph{well formed with respect to $\lambda,\zeta$} if $s = \emptyplay$ or if $s=s'a$ and $\zeta(s)=\lambda(a)$.
+  We say that $s$ is \emph{well formed with respect to $\lambda,\zeta$} if whenever $ta\prefix s$, for some $a\in M$, we have $\zeta(ta)=\lambda(a)$.
 
   Now let $A,B$ be games.  We define:
   \begin{IEEEeqnarray*}{rCl}
@@ -474,7 +474,7 @@ Our solution is to throw away some plays from $P_A\| P_B$ so that what remains s
 \end{definition}
 
 \begin{proposition}
-  $A\tensor B$,$A\parr B$,$A\implies B$ are well formed games.  Moreover, $P_{A\tensor B}$ is the largest subset of $P_A\|P_B$ such that $(M_{A\tensor B}, \lambda_{A\tensor B}, \zeta_{A\tensor B}, P_{A\tensor B})$ is a well formed game and similarly for the connectives $\parr$ and $\implies$.  
+  $A\tensor B$,$A\parr B$,$A\implies B$ are well formed games.  Moreover, $P_{A\tensor B}$ is the largest subset $X\subset P_A\|P_B$ such that $(M_{A\tensor B}, \lambda_{A\tensor B}, \zeta_{A\tensor B}, X)$ is a well formed game and similarly for the connectives $\parr$ and $\implies$.  
   \begin{proof}
     We will prove the proposition for $A\tensor B$; the other two cases are entirely similar.  Alternatively, observe that $A\parr B=\neggame{(\neggame A \tensor \neggame B)}$ and $A\implies B = \neggame A \parr B$.
 
@@ -849,7 +849,7 @@ Indeed, we could do away with $\zeta_A$ and $W_A$ altogether, replacing them wit
 \[
   W_{A\tensor B}^*(s) = W_A^*(s\vert_A)\wedge W_B^*(s\vert_B)
   \]
-This will be the starting point for our development of transfinite games in the next section.  In our formulation, finitary games are games played over the ordinal $\omega$, while win-games will be games played over the ordinal $\omega+1$.  We make no special distinction between finite and infinte plays, so the function $\zeta_A$ for our transfinite games incorporates both the function $\zeta_A$ and the function $W_A$ from our win-games, in the same manner as the function $W_A^*$ defined above.  One advantage of this point of view is that we no longer have to treat the finite- and infinite-play cases separately, but can give a uniform presentation.  
+This will be the starting point for our development of transfinite games in the next section.  In our formulation, finitary games are games played over the ordinal $\omega$, while win-games will be games played over the ordinal $\omega+1$.  We make no special distinction between finite and infinite plays, so the function $\zeta_A$ for our transfinite games incorporates both the function $\zeta_A$ and the function $W_A$ from our win-games, in the same manner as the function $W_A^*$ defined above.  One advantage of this point of view is that we no longer have to treat the finite- and infinite-play cases separately, but can give a uniform presentation.  
 
 For now, let us concentrate on developing the theory of win-games in the traditional way.  Having defined the tensor product, we may recover the definitions of the par $\parr$ and linear implication $\implies$ of two games as usual.  In particular, this means that we have
 \[
@@ -1035,22 +1035,39 @@ Our definitions of the functions $\lambda_{A\tensor B},\lambda_{A\parr B},\lambd
   \lambda_{A\implies B} = (\neg\circ\lambda_A)\cprd \lambda_B
 \end{gather*}
 
-Given a set $M$, a prefix-closed set $P\subset M^{*<\alpha}$ and functions $\cmap{\lambda}{M}{\OP},\cmap{\zeta}{P}{\OP}$, we say that a play $s\in P$ is \emph{well-formed with respect to $\lambda,\zeta$} if $\length(s)$ is a limit ordinal or if $s=s'a$ for $a\in M$ and $\zeta(s)=\lambda(a)$.  We say that $s$ is \emph{alternating with respect to $\zeta$} if whenever $t,ta$ are prefixes of $s$ (where $a\in M$), we have $\zeta(t)=\neg\zeta(ta)$.
+Given a set $M$, a prefix-closed set $P\subset M^{*<\alpha}$ and functions $\cmap{\lambda}{M}{\OP},\cmap{\zeta}{P}{\OP}$, we say that a play $s\in P$ is \emph{well-formed with respect to $\lambda,\zeta$} if whenever $ta\prefix s$ (with $a\in M$) we have $\zeta(ta)=\lambda(a)$.  We say that $s$ is \emph{alternating with respect to $\zeta$} if whenever $t,ta$ are prefixes of $s$ (where $a\in M$), we have $\zeta(t)=\neg\zeta(ta)$.
 
 As before, we now define:
 
-  \begin{IEEEeqnarray*}{rCl}
-    P_{A\tensor B} & = & \left\{s\in P_A\|P_B \;\middle|\; \mbox{\pbox{\textwidth}{$s$ is alternating with respect to $\zeta_{A\tensor B}$ \\ $s$ is well formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$}}\right\} \\
-    P_{A\parr B} & = & \left\{s\in P_A\|P_B \;\middle|\; \mbox{\pbox{\textwidth}{$s$ is alternating with respect to $\zeta_{A\parr B}$ \\ $s$ is well formed with respect to $\zeta_{A\parr B},\lambda_{A\parr B}$}}\right\} \\
-    P_{A\implies B} & = & \left\{s\in P_A\|P_B \;\middle|\; \mbox{\pbox{\textwidth}{$s$ is alternating with respect to $\zeta_{A\implies B}$ \\ $s$ is well formed with respect to $\zeta_{A\implies B},\lambda_{A\implies B}$}}\right\}
-  \end{IEEEeqnarray*}
+\begin{IEEEeqnarray*}{rCl}
+  P_{A\tensor B} & = & \left\{s\in P_A\|P_B \;\middle|\; \mbox{\pbox{\textwidth}{$s$ is alternating with respect to $\zeta_{A\tensor B}$ \\ $s$ is well formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$}}\right\} \\
+  P_{A\parr B} & = & \left\{s\in P_A\|P_B \;\middle|\; \mbox{\pbox{\textwidth}{$s$ is alternating with respect to $\zeta_{A\parr B}$ \\ $s$ is well formed with respect to $\zeta_{A\parr B},\lambda_{A\parr B}$}}\right\} \\
+  P_{A\implies B} & = & \left\{s\in P_A\|P_B \;\middle|\; \mbox{\pbox{\textwidth}{$s$ is alternating with respect to $\zeta_{A\implies B}$ \\ $s$ is well formed with respect to $\zeta_{A\implies B},\lambda_{A\implies B}$}}\right\}
+\end{IEEEeqnarray*}
 
-  Setting $M_{A\tensor B}=M_{A\parr B}=M_{A\implies B} = M_A\cprd M_B$, and restricting $\zeta_{A\tensor B},\zeta_{A\parr B},\zeta_{A\implies B}$ to $P_{A\tensor B},P_{A\parr B},P_{A\implies B}$ respectively, we arrive at our definitions of the connectives:
-  \begin{IEEEeqnarray*}{cCc}
-    A\tensor B & = & (M_{A\tensor B}, \lambda_{A\tensor B}, \zeta_{A\tensor B}, P_{A\tensor B})\\
-    A\parr B & = & (M_{A\parr B}, \lambda_{A\parr B}, \zeta_{A\parr B}, P_{A\parr B})\\
-    A\implies B & = & (M_{A\implies B}, \lambda_{A\implies B}, \zeta_{A\implies B}, P_{A\implies B})
-  \end{IEEEeqnarray*}
+Setting $M_{A\tensor B}=M_{A\parr B}=M_{A\implies B} = M_A\cprd M_B$, and restricting $\zeta_{A\tensor B},\zeta_{A\parr B},\zeta_{A\implies B}$ to $P_{A\tensor B},P_{A\parr B},P_{A\implies B}$ respectively, we arrive at our definitions of the connectives:
+\begin{IEEEeqnarray*}{cCc}
+  A\tensor B & = & (M_{A\tensor B}, \lambda_{A\tensor B}, \zeta_{A\tensor B}, P_{A\tensor B})\\
+  A\parr B & = & (M_{A\parr B}, \lambda_{A\parr B}, \zeta_{A\parr B}, P_{A\parr B})\\
+  A\implies B & = & (M_{A\implies B}, \lambda_{A\implies B}, \zeta_{A\implies B}, P_{A\implies B})
+\end{IEEEeqnarray*}
+
+\begin{proposition}
+  $A\tensor B$, $A\parr B$ and $A\implies B$ are well formed games.  Moreover, $P_{A\tensor B}$ is the largest subset $X\subset P_A\|P_B$ such that $(M_{A\tensor B}, \lambda_{A\tensor B}, \zeta_{A\tensor B}, X)$ is a well formed game and similarly for the connectives $\parr$ and $\implies$.
+  \begin{proof}
+    As before, we prove this proposition for $A\tensor B$ and the other two cases are entirely similar.  Alternatively, observe that $A\parr B=\neggame{(\neggame A \tensor \neggame B)}$ and that $A\implies B = \neggame A \parr B$.  
+
+    Examining the definitions of well formed and alternating sequences, it is immediate that $P_{A\tensor B}$ is prefix-closed.  Moreover, every sequence contained in $P_{A\tensor B}$ is well formed, so the well-formedness condition holds.  If $s,sa\in P_{A\tensor B}$ then $s,sa$ are both prefixes of $sa$ and so we must have $\zeta_{A\tensor B}(s)=\neg\zeta_{A\tensor B}(sa)$, since $sa$ is alternating.  
+
+    To show that the limit condition holds, suppose that $\mu<\alpha$ is a limit ordinal and that $s\in(M_A)^\mu$ is a sequence of length $\mu$ such that $t\in P_{A\tensor B}$ for every proper prefix $t\pprefix s$.  For each $t\pprefix s$, then, we must have $t\vert_A\in P_A$ and $t\vert_B\in P_B$.  
+
+    We claim that $s\vert_A\in P_A$.  Indeed, if $\length(s\vert_A)$ is a successor ordinal, then $s\vert_A$ has a last move $a$.  Let $t$ be the prefix of $s$ consisting of all moves up to and including that last move.  Then $\length(t)$ is a successor ordinal, so $t$ must be a \emph{proper} prefix of $s$, and therefore $s\vert_A=t\vert_A\in P_A$.  If instead $\length(s\vert_A)$ is a limit ordinal, then for every proper prefix $u\pprefix s\vert_A$, we have some $t\prefix s$ with $t\vert_A=u$ (take $t$ to be the prefix consisting of all moves in $s$ that occur in $u$ or that occur before some move in $u$).  Since $s\vert_A\ne u$, $t$ must be a \emph{proper} prefix of $s$, and so $t\vert_A\in P_A$.  Since $u$ is arbitrary, the limit condition for $A$ tells us that $s\vert_A\in P_A$.
+
+    By an identical argument, $s\vert_B\in P_B$, and so $s\in P_A\|P_B$.  We claim that $s$ is alternating with respect to $\zeta_{A\tensor B}$.  Indeed, if $t,ta\prefix s$, then $t,ta$ must both be \emph{proper} prefixes of $s$, since $\length(s)$ is a limit ordinal and $\length(ta)$ is a successor ordinal.  So $ta$ is alternating and therefore $\zeta_{A\tensor B}(t)=\neg\zeta_{A\tensor B}(ta)$.  
+
+    Lastly, we show that $s$ is well formed with respect to $\lambda_{A\tensor B},\zeta_{A\tensor B}$.  Suppose $ta\prefix s$.  Once again, $ta$ must be a \emph{proper} prefix of $s$, since it clearly has a different length.  Therefore, $ta$ is well formed and we have $\zeta_{A\tensor B}(ta)=\lambda_{A\tensor B}(a)$.  Therefore, $s\in P_{A\tensor B}$.  
+  \end{proof}
+\end{proposition}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
