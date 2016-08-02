@@ -24,11 +24,7 @@
 \renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
 
 %% Font things %%
-\usepackage{amsmath}
-\usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage{stmaryrd}
-\usepackage{mathtools}
 \usepackage{cmll} % Linear logic symbols!
 \usepackage{bm} % for bold Greek letters
 
@@ -938,7 +934,7 @@ Contrast this with the finitary case, in which the set of possible lengths of pl
 
 \subsection{Transfinite Games and Strategies}
 
-We fix some ordinal $\alpha$ throughout.  
+We fix some ordinal $\alpha$ throughout.  Given a set $M$, we write $M^{*<\alpha}$ for the set of all ordinal-length sequences of elements of $M$ whose length is less than $\alpha$.  
 
 \begin{definition}
   A \emph{game over $\alpha$}, or an \emph{$\alpha$-game}, is given by a tuple
@@ -960,9 +956,101 @@ We fix some ordinal $\alpha$ throughout.
     \item[Prefix closure] $P_A$ must be closed under the relation $\prefix$.  
     \item[Well-formedness] If $a\in M_A$ and $sa\in P_A$ then $\zeta_A(sa)=\lambda_A(a)$.  
     \item[Alternating condition] If $a\in M_A$ and $sa\in P_A$ then $\zeta_A(s)=\neg\zeta_A(sa)$.
-    \item[Limit condition] If $\mu<\alpha$ is a limit ordinal and $s$ is a sequence of length $\mu$ such that every proper prefix $t\pprefix s$ is in $P_A$, then $s$ is in $P_A$.  
+    \item[Limit condition] If $\mu<\alpha$ is a limit ordinal and $s\in(M_A)^\mu$ is a sequence of length $\mu$ such that every proper prefix $t\pprefix s$ is in $P_A$, then $s$ is in $P_A$.  
   \end{description}
 \end{definition}
+
+\begin{remark}
+  In the $\omega+1$ case, the limit condition tells us that the plays of length $\omega$ in $P_A$ are precisely those infinite plays all of whose finite prefixes lie in $P_A$.  It also guarantees that $P_A$ is non-empty, since the empty play $\emptyplay$ will always satisfy the conditions.
+
+  In the $\omega+1$ case, $\zeta_A$ will take the role of what we previously called $W_A^*$, while $P_A$ takes the role of what we called $P_A\cprd P_A^\infty$.  
+\end{remark}
+
+We define strategies for these games in much the same way that we defined them before:
+
+\begin{definition}
+  Let $A$ be an $\alpha$-game.  A (partial) \emph{strategy} for $A$ is a subset $\sigma\subset P_A$ satisfying three conditions:
+  \begin{description}
+    \item[$\sigma$ contains all $O$-replies] If $s\in\sigma$ is a $P$-play and $sa\in P_A$ is an $O$-response, then $sa\in\sigma$.
+    \item[$P$-replies are unique] If $s\in\sigma$ is an $O$-play and $sa,sb\in\sigma$ are $P$-responses, then $a=b$.
+    \item[Limit condition] If $\mu<\alpha$ is a limit ordinal and $s\in P_A$ is a sequence of length $\mu$ such that every proper prefix $t\pprefix s$ lies in $\sigma$, then $s\in\sigma$.
+  \end{description}
+
+  We call $\sigma$ \emph{total} if it satisfies the extra requirement:
+
+  \begin{description}
+    \item[$P$ always has a reply] If $s\in\sigma$ is an $O$-play, then there is some $P$-move $a\in M_A$ with $sa\in\sigma$.
+  \end{description}
+\end{definition}
+
+The only new part of this is the limit condition.  Let us examine what it means in the $\omega+1$ case.  Play according to a total strategy $\sigma$ gives rise to a sequence of plays $\emptyplay \prefix s_1\prefix s_2\prefix\dots$ (were $s_i$ has length $i$).  The limit condition then tells us that the limit $s_\omega$ of these plays must be contained in $\sigma$.  If $\zeta_A(s_\omega)=O$ then $P$ has no response to $s_\omega$ (since there are no plays of length $\omega+2$), contradicting totality of $\sigma$.  So for $\sigma$ to be a total strategy, we must have $\zeta_A(s_\omega)=P$ for every $s_\omega$ arising as the limit of finit plays according to $\sigma$.  So total strategies for $\omega+1$-games are exactly the same thing as the winning strategies for win-games that we defined earlier.  
+
+\subsection{Connectives}
+
+We may define connectives for $\alpha$-games in much the same way that we defined them for finitary games and win-games.  
+
+\begin{definition}
+  Let $A$ be an $\alpha$-game.  The negation $\neggame A$ of $A$ is given by
+  \begin{itemize}
+    \item $M_\bneggame A=M_A$
+    \item $\lambda_\bneggame A = \neg\circ\lambda_A$
+    \item $\zeta_\bneggame A = \neg\circ\zeta_A$
+    \item $P_\bneggame A = P_A$
+  \end{itemize}
+\end{definition}
+
+For the other connectives -- $\tensor$, $\parr$ and $\implies$ -- we will use interleaved plays.  If $A$ and $B$ are $\alpha$ games, then our interleaved plays will be sequences taking values in $M_A\cprd M_B$.  If $\beta<\alpha$ and $s\in(M_A\cprd M_B)^\beta$, we may write $\beta_A$ for $s\inv(M_A)$ and $\beta_B$ for $s\inv(M_B)$.  
+
+\begin{lemma}
+  \label{TechnicalOrdinalLemma}
+  Let $\beta$ be an ordinal, and let $\gamma$ be any subset of $\beta$.  Then $\gamma$ inherits a well-ordering from $\beta$ and, as ordinals, we have $\gamma\le\beta$.  
+  \begin{proof}
+    Any subset of $\gamma$ is a subset of $\beta$, so it has a least element.  Therefore, the inherited order on $\gamma$ is a well-order.
+
+    Suppose for a contradiction that $\beta<\gamma$.  Then we have order preserving injections
+    \[
+      i\from \gamma\hookrightarrow\beta\quad j\from\beta\hookrightarrow\gamma
+      \]
+    where $i$ is inclusion of $\gamma$ as a subset of $\beta$ and $j$ is inclusion of $\beta$ as a proper initial prefix of $\gamma$.  Let $f\from\gamma\hookrightarrow\gamma$ be the composition $\gamma\xhookrightarrow{i}\beta\xhookrightarrow{j}\gamma$.  Then $f$ is order preserving.  
+
+    Let $S=\{\delta\in\gamma\suchthat f(\delta)<\delta\}$.  $S$ is non-empty, since $\beta\in S$ (considering $\beta$ as an element of $\gamma$), so $S$ has a least element $\xi$.  Now $f(\xi)<\xi$, so $f(f(\xi))<f(\xi)$, since $f$ is order-preserving and injective.  Therefore, $\xi\le f(\xi)$ by minimality of $\xi$, which is a contradiction.
+  \end{proof}
+\end{lemma}
+
+Using Lemma \ref{TechnicalOrdinalLemma}, we see that $\beta_A,\beta_B\le\beta$; in particular, they are both less than $\alpha$, so we get induced sequences $s\vert_A$ of length $\beta_A$ and $s\vert_B$ of length $\beta_B$.  We define
+\[
+  P_A\|P_B = \left\{s\in (M_A\cprd M_B)^{*<\alpha}\suchthat s\vert_A\in P_A,\;s\vert_B\in P_B\right\}
+  \]
+
+We may now define functions $\zeta_{A\tensor B},\zeta_{A\parr B},\zeta_{A\implies B}\from P_A\|P_B\to\OP$ as before:
+\begin{IEEEeqnarray*}{rCc}
+  \zeta_{A\tensor B}(s) & = & \zeta_A(s\vert_A)\wedge\zeta_B(s\vert_B)\\
+  \zeta_{A\parr B}(s) & = & \zeta_A(s\vert_A)\vee\zeta_B(s\vert_B)\\
+  \zeta_{A\implies B}(s) & = & (\zeta_A(s\vert_A)\Rightarrow \zeta_B(s\vert_B))
+\end{IEEEeqnarray*}
+
+Our definitions of the functions $\lambda_{A\tensor B},\lambda_{A\parr B},\lambda_{A\implies B}\from M_A\cprd M_B\to \OP$ are the same as before:
+\begin{gather*}
+  \lambda_{A\tensor B}=\lambda_{A\parr B}=\lambda_A\cprd \lambda_B \\
+  \lambda_{A\implies B} = (\neg\circ\lambda_A)\cprd \lambda_B
+\end{gather*}
+
+Given a set $M$, a prefix-closed set $P\subset M^{*<\alpha}$ and functions $\cmap{\lambda}{M}{\OP},\cmap{\zeta}{P}{\OP}$, we say that a play $s\in P$ is \emph{well-formed with respect to $\lambda,\zeta$} if $\length(s)$ is a limit ordinal or if $s=s'a$ for $a\in M$ and $\zeta(s)=\lambda(a)$.  We say that $s$ is \emph{alternating with respect to $\zeta$} if whenever $t,ta$ are prefixes of $s$ (where $a\in M$), we have $\zeta(t)=\neg\zeta(ta)$.
+
+As before, we now define:
+
+  \begin{IEEEeqnarray*}{rCl}
+    P_{A\tensor B} & = & \left\{s\in P_A\|P_B \;\middle|\; \mbox{\pbox{\textwidth}{$s$ is alternating with respect to $\zeta_{A\tensor B}$ \\ $s$ is well formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$}}\right\} \\
+    P_{A\parr B} & = & \left\{s\in P_A\|P_B \;\middle|\; \mbox{\pbox{\textwidth}{$s$ is alternating with respect to $\zeta_{A\parr B}$ \\ $s$ is well formed with respect to $\zeta_{A\parr B},\lambda_{A\parr B}$}}\right\} \\
+    P_{A\implies B} & = & \left\{s\in P_A\|P_B \;\middle|\; \mbox{\pbox{\textwidth}{$s$ is alternating with respect to $\zeta_{A\implies B}$ \\ $s$ is well formed with respect to $\zeta_{A\implies B},\lambda_{A\implies B}$}}\right\}
+  \end{IEEEeqnarray*}
+
+  Setting $M_{A\tensor B}=M_{A\parr B}=M_{A\implies B} = M_A\cprd M_B$, and restricting $\zeta_{A\tensor B},\zeta_{A\parr B},\zeta_{A\implies B}$ to $P_{A\tensor B},P_{A\parr B},P_{A\implies B}$ respectively, we arrive at our definitions of the connectives:
+  \begin{IEEEeqnarray*}{cCc}
+    A\tensor B & = & (M_{A\tensor B}, \lambda_{A\tensor B}, \zeta_{A\tensor B}, P_{A\tensor B})\\
+    A\parr B & = & (M_{A\parr B}, \lambda_{A\parr B}, \zeta_{A\parr B}, P_{A\parr B})\\
+    A\implies B & = & (M_{A\implies B}, \lambda_{A\implies B}, \zeta_{A\implies B}, P_{A\implies B})
+  \end{IEEEeqnarray*}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
