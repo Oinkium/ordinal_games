@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.2.22)  3 AUG 2016 12:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.12.25)  3 AUG 2016 20:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1087,7 +1087,7 @@ T1/cmr/m/n/10.95 , and re-strict-ing $\OML/cmm/m/it/10.95 ^^P[]; ^^P[]; ^^P[]$
  []
 
 
-Overfull \hbox (11.05331pt too wide) in paragraph at lines 1058--1060
+Overfull \hbox (11.05331pt too wide) in paragraph at lines 1059--1061
 \OT1/cmr/m/it/10.95 over, $\OML/cmm/m/it/10.95 P[]$ \OT1/cmr/m/it/10.95 is the 
 largest sub-set $\OML/cmm/m/it/10.95 X \OMS/cmsy/m/n/10.95 ^^Z \OML/cmm/m/it/10
 .95 P[]\OMS/cmsy/m/n/10.95 k\OML/cmm/m/it/10.95 P[]$ \OT1/cmr/m/it/10.95 such t
@@ -1096,7 +1096,7 @@ hat $\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 M[]; ^^U[]; ^^P[]; X\OT1/cmr/m/n/1
  []
 
 [29] [30] [31] [32]
-Overfull \hbox (5.74709pt too wide) in paragraph at lines 1134--1135
+Overfull \hbox (5.74709pt too wide) in paragraph at lines 1135--1136
 \OML/cmm/m/it/10.95 s\OMS/cmsy/m/n/10.95 j[]$ \OT1/cmr/m/n/10.95 and $\OML/cmm/
 m/it/10.95 s\OMS/cmsy/m/n/10.95 j[]$ \OT1/cmr/m/n/10.95 are both lim-it-ing pla
 ys. By Lemma 3.6[], $[](\OML/cmm/m/it/10.95 s\OMS/cmsy/m/n/10.95 j[]\OT1/cmr/m/
@@ -1104,38 +1104,38 @@ n/10.95 )\OML/cmm/m/it/10.95 ; []\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 s\OMS/
 cmsy/m/n/10.95 j[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ^^T
  []
 
-(./ordinal_games.bbl [33]) [34] (./ordinal_games.aux) ) 
+[33] (./ordinal_games.bbl [34]) [35] (./ordinal_games.aux) ) 
 Here is how much of TeX's memory you used:
- 16950 strings out of 493054
- 331645 string characters out of 6140586
- 389206 words of memory out of 5000000
- 20062 multiletter control sequences out of 15000+600000
+ 16952 strings out of 493054
+ 331682 string characters out of 6140585
+ 389229 words of memory out of 5000000
+ 20064 multiletter control sequences out of 15000+600000
  20662 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,15n,82p,1043b,327s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmbx9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
-usr/share/texmf-dist/fonts/type1/public/cmll/cmllr10.pfb></usr/share/texmf-dist
-/fonts/type1/public/cmll/cmllr8.pfb></usr/share/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
-i6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/sh
-are/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr
-/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10
-.pfb></usr/share/texmf-dist/fonts/type1/public/mathabx-type1/mathb10.pfb></usr/
-share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/tex
-mf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on ordinal_games.pdf (34 pages, 330850 bytes).
+</usr/share/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.p
+fb></usr/share/texmf-dist/fonts/type1/public/cmll/cmllr10.pfb></usr/share/texmf
+-dist/fonts/type1/public/cmll/cmllr8.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
+sr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb>
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/e
+ufm10.pfb></usr/share/texmf-dist/fonts/type1/public/mathabx-type1/mathb10.pfb><
+/usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/shar
+e/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on ordinal_games.pdf (35 pages, 334447 bytes).
 PDF statistics:
- 205 PDF objects out of 1000 (max. 8388607)
- 145 compressed objects within 2 object streams
+ 208 PDF objects out of 1000 (max. 8388607)
+ 147 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

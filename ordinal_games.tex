@@ -549,7 +549,7 @@ We gave an example earlier in which a play $sa$ in $P_A\|P_B$ was not well forme
 \begin{proof}[Proof of Proposition \ref{nice-negative-games}]
   We proceed by induction on the length $n$ of $s$.  If $n=0$ then $s=\emptyplay$ and so $\zeta_A(s\vert_A)=\zeta_A(\emptyplay)=P$ and similarly for $B$, since $A,B$ are negative games.  Now suppose that $n>0$ - so $s=tm$ for some $t\in P_{A\tensor B},m\in M_{A\tensor B}$.  By induction, either $t\vert_A=P$ or $t\vert_B=P$, so there are three cases:
   \begin{description}
-    \item[Case 1:] $\zeta_A(t\vert_A)=P$ and $\zeta_B(t\vert_B)=P$. Then either $tm\vert_A=t\vert_A$ (if $m$ is a $B$-move) or $tm\vert_B=t\vert_B$ (if $m$ is an $A$-move).  This proves part (i).  For part (ii), note that in this case we have $\zeta_{A\tensor B}(t)=P$, so $\zeta_{A\tensor B}(tm)=O$, since $tm$ is alternating.  If $m$ is an $A$-move, it means that $\zeta_B(tm\vert_B)=\zeta_B(t\vert_B)$, so we must have $\zeta_A(tm\vert_A)=O$.  Then
+    \item[Case 1:] $\zeta_A(t\vert_A)=P$ and $\zeta_B(t\vert_B)=P$. Then either $tm\vert_A=t\vert_A$ (if $m$ is a $B$-move) or $tm\vert_B=t\vert_B$ (if $m$ is an $A$-move).  This proves part (i).  For part (ii), note that in this case we have $\zeta_{A\tensor B}(t)=P$, so $\zeta_{A\tensor B}(tm)=O$, since $tm$ is alternating.  If $m$ is an $A$-move, it means that $\zeta_B(tm\vert_B)=\zeta_B(t\vert_B)=P$, so we must have $\zeta_A(tm\vert_A)=O$ by the definition of $\zeta_{A\tensor B}$.  Then
       \[
         \lambda_{A\tensor B}(m)=\lambda_A(m)=\zeta_A(t\vert_Am)=O=\zeta_{A\tensor B}(tm)
         \]
@@ -1055,6 +1055,7 @@ Setting $M_{A\tensor B}=M_{A\parr B}=M_{A\implies B} = M_A\cprd M_B$, and restri
 \end{IEEEeqnarray*}
 
 \begin{proposition}
+  \label{TransTensorWellFormed}
   $A\tensor B$, $A\parr B$ and $A\implies B$ are well formed games.  Moreover, $P_{A\tensor B}$ is the largest subset $X\subset P_A\|P_B$ such that $(M_{A\tensor B}, \lambda_{A\tensor B}, \zeta_{A\tensor B}, X)$ is a well formed game and similarly for the connectives $\parr$ and $\implies$.
   \begin{proof}
     As before, we prove this proposition for $A\tensor B$ and the other two cases are entirely similar.  Alternatively, observe that $A\parr B=\neggame{(\neggame A \tensor \neggame B)}$ and that $A\implies B = \neggame A \parr B$.  
@@ -1142,10 +1143,31 @@ Our category will have acn $\alpha$-games as objects and the morphisms from $A$ 
 We shall want versions of Proposition \ref{nice-negative-games} and Lemma \ref{alternatingsequenceslemma} to record the properties of negative games that make them so useful for our definition of composition.
 
 \begin{proposition}
-  \label{TransNiceNegativeGames}
-  \begin{proof}
-  \end{proof}
+  \label{NiceAcnGames}
+  Let $A,B$ be acn $\alpha$-games and suppose that $s\in P_A\|P_B$ is alternating with respect to $\zeta_{A\tensor B}$.  Then:
+  \begin{enumerate}[i)]
+    \item If $s$ is not a length maximal limiting play, then either $\zeta_A(s\vert_A)=P$ or $\zeta_B(s\vert_B)=P$.  
+    \item $s$ is well formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$ (so $s\in P_{A\tensor B}$).
+  \end{enumerate}
+  Furthermore, (i) and (ii) hold if we replace $\tensor$ with $\implies$ throughout and if we change the first second `$P$' to an `$O$' in part (i).
 \end{proposition}
+
+Note that the extra hypothesis on (i) is necessary: suppose $\alpha=\omega+1$ and let $\st$ be as defined above where the unique infinite play is $O$-winning.  Then $\st\tensor\st$ contains an infinite play $s$ both of whose components are infinite and we have $\zeta_A(s\vert_A)=\zeta_B(s\vert_B)=O$.  
+
+\begin{proof}[Proof of Proposition \ref{NiceAcnGames}]
+  By Proposition \ref{TransTensorWellFormed}, for part (ii) it suffices to show that the set of alternating plays in $P_A\|P_B$ is well-formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$ - i.e., that if $s,sx\in P_A\|P_B$ are alternating then $\zeta_{A\tensor B}(sx)=\lambda_{A\tensor B}(x)$.
+
+  If $s$ is a limiting play, then one of $s\vert_A,s\vert_B$ must be a limiting play.  By Lemma \ref{TechnicalOrdinalLemma}, $\length(s\vert_A),\length(s\vert_B)\le\length(s)$, so $s\vert_A$ and $s\vert_B$ are not length maximal if $s$ is not.  Therefore, either $\zeta_A(s\vert_A)=P$ or $\zeta_B(s\vert_B)=P$, since $A$ and $B$ are both acn.  
+
+  We now prove (i) and (ii) for all successor plays by induction on their length.  Let $sx\in P_A\|P_B$ be alternating.  Then by induction either $t\vert_A=P$ or $t\vert_B=P$, so there are three cases:
+  \begin{description}
+    \item[Case 1:] $\zeta_A(t\vert_A=P)$ and $\zeta_B(t\vert_B)=P$.  Then either $sx\vert_A=s\vert_A$ (if $x$ is a $B$-move) or $sx\vert_B=s\vert_B$ (if $x$ is an $A$-move.  This proves part (i).  For part (ii), note that in this case we have $\zeta_{A\tensor B}(s)=P$, so $\zeta_{A\tensor B}(sx)=O$, since $sx$ is alternating.  If $x$ is an $A$-move, it means that $\zeta_B(sx\vert_B)=\zeta_B(s\vert_B)=P$, so we must have $\zeta_A(sx\vert_A)=O$ by the definition of $\zeta_{A\tensor B}$.  Then
+      \[
+        \lambda_{A\tensor B}(x)=\lambda_A(x)=\zeta_A(s\vert_Ax)=O=\zeta_{A\tensor B}(sx)
+        \]
+      If $x$ is a $B$-move, the argument is similar.
+  \end{description}
+\end{proof}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
