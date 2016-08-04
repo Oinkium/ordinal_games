@@ -1140,7 +1140,7 @@ Our category will have acn $\alpha$-games as objects and the morphisms from $A$ 
   \end{proof}
 \end{proposition}
 
-We shall want versions of Proposition \ref{nice-negative-games} and Lemma \ref{alternatingsequenceslemma} to record the properties of negative games that make them so useful for our definition of composition.
+We shall want a version of Proposition \ref{nice-negative-games} to record the properties of negative games that make them so useful for our definition of composition.
 
 \begin{proposition}
   \label{NiceAcnGames}
@@ -1149,7 +1149,7 @@ We shall want versions of Proposition \ref{nice-negative-games} and Lemma \ref{a
     \item If $s$ is not a length maximal limiting play, then either $\zeta_A(s\vert_A)=P$ or $\zeta_B(s\vert_B)=P$.  
     \item $s$ is well formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$ (so $s\in P_{A\tensor B}$).
   \end{enumerate}
-  Furthermore, (i) and (ii) hold if we replace $\tensor$ with $\implies$ throughout and if we change the first second `$P$' to an `$O$' in part (i).
+  Furthermore, (i) and (ii) hold if we replace $\tensor$ with $\implies$ throughout and if we change the second `$P$' to an `$O$' in part (i).
 \end{proposition}
 
 Note that the extra hypothesis on (i) is necessary: suppose $\alpha=\omega+1$ and let $\st$ be as defined above where the unique infinite play is $O$-winning.  Then $\st\tensor\st$ contains an infinite play $s$ both of whose components are infinite and we have $\zeta_A(s\vert_A)=\zeta_B(s\vert_B)=O$.  
@@ -1159,15 +1159,24 @@ Note that the extra hypothesis on (i) is necessary: suppose $\alpha=\omega+1$ an
 
   If $s$ is a limiting play, then one of $s\vert_A,s\vert_B$ must be a limiting play.  By Lemma \ref{TechnicalOrdinalLemma}, $\length(s\vert_A),\length(s\vert_B)\le\length(s)$, so $s\vert_A$ and $s\vert_B$ are not length maximal if $s$ is not.  Therefore, either $\zeta_A(s\vert_A)=P$ or $\zeta_B(s\vert_B)=P$, since $A$ and $B$ are both acn.  
 
-  We now prove (i) and (ii) for all successor plays by induction on their length.  Let $sx\in P_A\|P_B$ be alternating.  Then by induction either $t\vert_A=P$ or $t\vert_B=P$, so there are three cases:
-  \begin{description}
-    \item[Case 1:] $\zeta_A(t\vert_A=P)$ and $\zeta_B(t\vert_B)=P$.  Then either $sx\vert_A=s\vert_A$ (if $x$ is a $B$-move) or $sx\vert_B=s\vert_B$ (if $x$ is an $A$-move.  This proves part (i).  For part (ii), note that in this case we have $\zeta_{A\tensor B}(s)=P$, so $\zeta_{A\tensor B}(sx)=O$, since $sx$ is alternating.  If $x$ is an $A$-move, it means that $\zeta_B(sx\vert_B)=\zeta_B(s\vert_B)=P$, so we must have $\zeta_A(sx\vert_A)=O$ by the definition of $\zeta_{A\tensor B}$.  Then
-      \[
-        \lambda_{A\tensor B}(x)=\lambda_A(x)=\zeta_A(s\vert_Ax)=O=\zeta_{A\tensor B}(sx)
-        \]
-      If $x$ is a $B$-move, the argument is similar.
-  \end{description}
+  We may now prove (i) and (ii) for all successor plays by induction on their length, exactly as we did in Proposition \ref{nice-negative-games}.  
+
+  The $\implies$ result follows from the $\tensor$ result after writing $A\implies B=\neggame{(A\tensor\neggame B)}$.
 \end{proof}
+
+We shall also prove a version of a fact which we used implicitly a few times in the finitary case: if $A,B,C$ are negative games, $\sigma$ is a strategy for $A\implies B$ and $\tau$ is a strategy for $B\implies C$, then any sequence $\s\in\sigma\|\tau$ is \emph{local} - that is, it contains no adjacent pair $ac$ or $ca$, where $a\in M_A$ and $c\in M_C$.  We will prove this for our $\alpha$-games:
+
+\begin{lemma}
+  \label{AcnLocalSequences}
+  Let $A,B,C$ be acn $\alpha$-games, and let $\s\in(M_A\cprd M_B\cprd M_C)^{*<\alpha2}$ be such that $\s\vert_{A,B}\in P_{A\implies B}$ and $\s\vert_{B,C}\in P_{B\implies C}$.  If $a\in M_A$ occurs in the sequence $\s$, then it cannot be immediately followed by a move from $C$ and similarly if $c\in M_C$ occurs in $\s$, it cannot be immediately followed by a move from $A$.  
+  \begin{proof}
+    Suppose that $a\in M_A$ and $\t a\prefix\s$ for some sequence $\t$.  If $\t\vert_B$ is a limiting play, then $\zeta_B(t\vert_B)=P$ [$\t\vert_B$ cannot be length maximal, since $\t\vert_{A,B}a\in P_{A\implies B}$ is longer].  But then since $(O\Rightarrow P)=(P\Rightarrow P)=P$, we end up with $\zeta_{A\implies B}(ta)=\zeta_{A\implies B}(t)$, contradicting alternation.  Therefore, $\t\vert_B$ is a successor play and there is a last $B$-move $b$ occurring in $\t a$.  
+
+    Now $b$ is immediately followed in $\t a\vert_{A,B}$ by a move from $A$ (since there is at least one $A$-move occurring later in the sequence and there are no more $B$-moves by assumption), so by Proposition \ref{TransWhoSwitchesGames} $b$ must be an $O$-move in $A\implies B$, so must be a $P$-move in $B\implies C$.  Then $b$ can only be followed in $\t a\vert_{B,C}$ by another $B$-move; since it is the last $B$-move in $\t a$, it must be the last move occurring in $\t a\vert_{B,C}$.  Then the next move in $\s\vert_{B,C}$ must be a $B$-move; in particular, if $\t ax\prefix \s$, then $x$ is either an $A$-move or a $B$-move.
+
+    Now suppose that $c\in M_C$ and $\t c\prefix\s$ for some sequence $\t$.  If $\t\vert_B$ is a successor play, then we can use an symmetrical argument, but this time it is possible for $\t\vert_B$ to be a limiting play (for example, $\t$ could be entirely composed of $C$-moves).  However, if $\t ca\prefix\s$ for some $A$-move $a$, then the argument from earlier in the proof shows that $\t\vert_B$ cannot be a limit play.  It follows that if $\t cx\prefix\s$ then $x$ is a $B$-move or a $C$-move - indeed, if $x$ is an $A$-move then $\t\vert_B$ is a successor play and we are done by the argument from earlier.
+  \end{proof}
+\end{lemma}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}

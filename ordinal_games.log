@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.12.25)  3 AUG 2016 20:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.2.22)  4 AUG 2016 12:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1104,12 +1104,12 @@ n/10.95 )\OML/cmm/m/it/10.95 ; []\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 s\OMS/
 cmsy/m/n/10.95 j[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ^^T
  []
 
-[33] (./ordinal_games.bbl [34]) [35] (./ordinal_games.aux) ) 
+[33] [34] (./ordinal_games.bbl) [35] (./ordinal_games.aux) ) 
 Here is how much of TeX's memory you used:
- 16952 strings out of 493054
- 331682 string characters out of 6140585
- 389229 words of memory out of 5000000
- 20064 multiletter control sequences out of 15000+600000
+ 16953 strings out of 493054
+ 331701 string characters out of 6140586
+ 389241 words of memory out of 5000000
+ 20065 multiletter control sequences out of 15000+600000
  20662 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,15n,82p,1043b,327s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1132,7 +1132,7 @@ sfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/e
 ufm10.pfb></usr/share/texmf-dist/fonts/type1/public/mathabx-type1/mathb10.pfb><
 /usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/shar
 e/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on ordinal_games.pdf (35 pages, 334447 bytes).
+Output written on ordinal_games.pdf (35 pages, 336998 bytes).
 PDF statistics:
  208 PDF objects out of 1000 (max. 8388607)
  147 compressed objects within 2 object streams
