@@ -599,24 +599,24 @@ Now we can move on to the main work.  We start with a surprising lemma about str
 
 \begin{lemma}
   \label{PlayInStrategyDeterminedByComponents}
-  et $A,B$ be games and let $\sigma$ be a strategy for $A\implies B$.  Suppose that $s,t\in\sigma$ are such that $s\vert_A=t\vert_A$ and $s\vert_B=t\vert_B$.  Then $s=t$.
+  Let $A,B$ be games and let $\sigma$ be a strategy for $A\implies B$.  Suppose that $s,t\in\sigma$ are such that $s\vert_A=t\vert_A$ and $s\vert_B=t\vert_B$.  Then $s=t$.
   \begin{proof}
     Suppose that $s\ne t$.  Let $r\prefix s,t$ be the longest common subsequence of $s$ and $t$ - so we have $rx\prefix s, ry\prefix t$ for some moves $x,y\in M_{A\implies B}$ with $x\ne y$.  Since $rx,ry$ are both substrings of the strategy $\sigma$, $r$ must be a $P$-position and therefore the moves $x,y$ must take place in the same game.  Without loss of generality, suppose that $x,y\in M_A$.  Then we have $r\vert_Ax\prefix s\vert_A,r\vert_Ay\prefix t\vert_A$ and so $s\vert_A\ne t\vert_A$.
   \end{proof}
 \end{lemma}
 
-Thus we see that the plays according to some given strategy $\sigma$ for $A\implies B$ are characterized by their $A$- and $B$-components.  More is true, however: given negative games $A$ and $B$, the strategies on $A\implies B$ are characterized by the $A$- and $B$-components of their constituent plays:
+Thus we see that the plays according to some given strategy $\sigma$ for $A\implies B$ are characterized by their $A$- and $B$-components.  More is true, however: given games $A$ and $B$, the strategies on $A\implies B$ are characterized by the $A$- and $B$-components of their constituent plays:
 \begin{lemma}
   \label{HylandSchalkFaithful}
-  Let $A,B$ be negative games and let $\sigma,\sigma'$ be strategies for $A\implies B$ such that
+  Let $A,B$ be games and let $\sigma,\sigma'$ be strategies for $A\implies B$ such that
   \[
     \{(s\vert_A,s\vert_B)\suchthat \textrm{$s\in\sigma$ is a $P$-position}\}=\{(s'\vert_A,s'\vert_B)\suchthat\textrm{$s'\in\sigma'$ is a $P$-position}\}
     \]
   Then $\sigma=\sigma'$.
   \begin{proof}
-    Suppose for a contradiction that $\sigma\ne\sigma'$, so without loss of generality there is some $P$-position $s\in\sigma\setminus\sigma'$ (using the definition of a strategy).  By hypothesis, there is some $s'\in\sigma'$ such that $s'\vert_A=s\vert_A$ and $s'\vert_B=s\vert_B$.  Clearly, $s\ne s'$, since $s\ne\sigma'$, so let $r\prefix s$ be the largest common prefix of $s$ and $s'$.  We therefore have $rx\prefix s,ry\prefix s'$, where $x,y\in M_{A\implies B}$ and $x\ne y$.  
+    Our proof is essentially that given in \cite{CalderonMcCusker}.  Suppose for a contradiction that $\sigma\ne\sigma'$, so without loss of generality there is some $P$-position $s\in\sigma\setminus\sigma'$ (using the definition of a strategy).  By hypothesis, there is some $s'\in\sigma'$ such that $s'\vert_A=s\vert_A$ and $s'\vert_B=s\vert_B$.  Clearly, $s\ne s'$, since $s\not\in\sigma'$, so let $r\prefix s$ be the largest common prefix of $s$ and $s'$.  We therefore have $rx\prefix s,ry\prefix s'$, where $x,y\in M_{A\implies B}$ and $x\ne y$.  
 
-    Since $s\not\in\sigma'$, $rx\not\in\sigma'$.  Since $ry\in\sigma'$, $x$ and $y$ must be $P$-moves by the definition of a strategy.  Suppose without loss of generality that $x\in M_A$.  Then $y$ cannot also be an $A$-move, or we would have $r\vert_Ax\prefix s\vert_A$ and $r\vert_Ay\prefix s'\vert_A=s\vert_A$, which would contradict the fact that $x\ne y$.  So $y\in M_B$.  Now, by hypothesis, there exists some $P$-position $t\in\sigma$ such that $t\vert_A=ry\vert_A=r\vert_A$ and $t\vert_B=ry\vert_B=r\vert_By$.
+    Since $s\vert_A=s'\vert_A$ and $s\vert_B=s'\vert_B$, the moves $x$ and $y$ must take place in different games (otherwise we would be forced to have $x=y$).  They are therefore both $P$-moves.  Suppose without loss of generality that $x$ is an $A$-move and that $y$ is a $B$-move.  By hypothesis, there is some $P$-position $t\in\sigma$ such that $t\vert_A=ry\vert_A=r\vert_A$ and $t\vert_B=ry\vert_B=r\vert_By$.
 
     Now clearly $rx\ne t$ (since their restrictions to $A$ and $B$ are different).  Let $q\prefix rx, t$ be their largest common prefix; then we have $qu\prefix rx, qv\prefix t$ for some $u\ne v$.  But now since $qu, qv\in\sigma$, $u$ and $v$ must both be $O$-moves, so they must be contained in the same component.  But this is impossible: if they are both $A$-moves then we have $q\vert_Au\prefix r\vert_Ax$ and $q\vert_Av\prefix r\vert_A$, so $u=v$ and if they are both $B$-moves then we have $q\vert_Bu\prefix r\vert_B$ and $q\vert_Bv\prefix r\vert_By$, so $u=v$ again.  This is a contradiction.
   \end{proof}
@@ -642,7 +642,7 @@ This can be shown in an easy way.  Roughly speaking, we write out the sequence $
 
 \begin{lemma}
   \label{LiftingLemma}
-  Let $A,B,C$ be negative games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Suppose that $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$.  Let $n=\length(s)+\length(t\vert_C)$; i.e., the total number of unique terms of $s$ and $t$ after we have identified their unique $B$-component.  Then for all $k$ with $0\le k\le n$, there is a unique sequence $\s^k\in\sigma\|\tau$ of length $k$ such that $\s^k\vert_A\prefix s\vert_A$ and $\s^k\vert_C\prefix t\vert_C$.  Moreover, for this $\s^k$ we have $\s^k\vert_{A,B}\prefix s$ and $\s^k\vert_{B,C}\prefix t$, and if $j\le k$ then $\s^j\prefix \s^k$.  
+  Let $A,B,C$ be negative games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Suppose that $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$.  Let $n=\length(s)+\length(t\vert_C)$; i.e., the total number of unique terms of $s$ and $t$ after we have identified their common $B$-component.  Then for all $k$ with $0\le k\le n$, there is a unique sequence $\s^k\in\sigma\|\tau$ of length $k$ such that $\s^k\vert_A\prefix s\vert_A$ and $\s^k\vert_C\prefix t\vert_C$.  Moreover, for this $\s^k$ we have $\s^k\vert_{A,B}\prefix s$ and $\s^k\vert_{B,C}\prefix t$, and if $j\le k$ then $\s^j\prefix \s^k$.  
 \end{lemma}
 
 Note that Lemma \ref{LiftingLemma} is stronger than saying that there is a unique sequence $\s^k$ of length $k$ such that $\s^k\vert_{A,B}\prefix s$ and $\s^k\vert_{B,C}\prefix t$.  Instead, we are saying that there exists a sequence $\s^k$ with those properties, but that it is uniquely determined even when we make no requirement on its $B$-component other than that the whole sequence is contained in $\sigma\|\tau$.
@@ -1177,6 +1177,51 @@ We shall also prove a version of a fact which we used implicitly a few times in 
     Now suppose that $c\in M_C$ and $\t c\prefix\s$ for some sequence $\t$.  If $\t\vert_B$ is a successor play, then we can use an symmetrical argument, but this time it is possible for $\t\vert_B$ to be a limiting play (for example, $\t$ could be entirely composed of $C$-moves).  However, if $\t ca\prefix\s$ for some $A$-move $a$, then the argument from earlier in the proof shows that $\t\vert_B$ cannot be a limit play.  It follows that if $\t cx\prefix\s$ then $x$ is a $B$-move or a $C$-move - indeed, if $x$ is an $A$-move then $\t\vert_B$ is a successor play and we are done by the argument from earlier.
   \end{proof}
 \end{lemma}
+
+\subsection{Interleavings and the functor into $\Rel$}
+
+We now set out to extend to the transfinite case some of the results that we proved in the previous section about plays and strategies for the game $A\implies B$.
+
+\begin{lemma}
+  \label{TransPlayInStrategyDeterminedByComponents}
+  Let $A,B$ be $\alpha$-games and let $\sigma$ be a strategy for $A\implies B$.  Suppose that $s,t\in\sigma$ are such that $s\vert_A=t\vert_A$ and $s\vert_B=t\vert_B$.  Then $s=t$.
+  \begin{proof}
+    Exactly as in Lemma \ref{PlayInStrategyDeterminedByComponents}: suppose $s\ne t$.  By well-ordering, there is an earliest index $\beta$ such that $s(\beta)\ne t(\beta)$.  So we have a sequence $r$ and moves $x\ne y$ such that $rx\prefix s$ and $ry\prefix t$.  Since $x\ne y$, $r$ must be a $P$-position by the definition of strategy, and so $x,y$ must take place in the same game.  Therefore, either $s\vert_A\ne t\vert_A$ or $s\vert_B\ne t\vert_B$.
+  \end{proof}
+\end{lemma}
+
+Given acn $\alpha$-games $A$ and $B$ and a strategy $\sigma$ for $A\implies B$, we may define a relation $\grel\sigma\subset P_A\times P_B$ by
+\[
+  \grel\sigma = \{(s\vert_A,s\vert_B)\suchthat\textrm{$s\in\sigma$ is a $P$-position}\}
+  \]
+Once we have our category $\G(\alpha)$ set up, this will allow us to define a functor $\cmap{\F(\alpha)}{\G(\alpha)}{\Rel}$.  Then the following lemma, which is a version of Lemma \ref{HylandSchalkFaithful}, will tell us that this functor is faithful.
+
+\begin{lemma}
+  \label{TransHylandSchalkFaithful}
+  Let $A,B$ be $\alpha$-games and let $\sigma,\sigma'$ be strategies for $A\implies B$.  Suppose that $\grel\sigma=\grel{\sigma'}$ as subsets of $P_A\times P_B$.  Then $\sigma=\sigma'$.
+  \begin{proof}
+    Exactly as in Lemma \ref{HylandSchalkFaithful}.
+  \end{proof}
+\end{lemma}
+
+We will postpone discussion of the functor $\cmap{\F(\alpha)}{\G(\alpha)}{\Rel}$ until we have proved the main technical result, which will be the transfinite version of Lemma \ref{LiftingLemma}.  
+
+\begin{lemma}
+  \label{TransLiftingLemma}
+  Let $A,B,C$ be acn $\alpha$-games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Suppose that $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$.  Then there exists some ordinal $\beta<\alpha2$ such that for all $\gamma$ with $0\le\gamma\le\beta$ there is a unique sequence $\s^\gamma\in\sigma\|\tau$ of length $\gamma$ such that $\s^\gamma\vert_A\prefix s\vert_A$ and $\s\gamma\vert_C\prefix t\vert_C$.  Moreover, for this $\s^\gamma$ we have $\s^\gamma\vert_{A,B}\prefix s$ and $\s^\gamma\prefix t$ and if $\delta\le\gamma$ then $\s^\delta\prefix\s^\gamma$.  Lastly, we have $\s^\beta\vert_{A,B}=s$ and $\s^\beta\vert_{B,C}=t$.
+\end{lemma}
+
+Note that we have no explicit formula for the ordinal $\beta$ as we did for the the numeral $n$ in Lemma \ref{LiftingLemma}, owing to the fact that addition of ordinals is less well-behaved than addition of numerals.  Nevertheless, this lemma shall be sufficient for our purposes.  
+
+\begin{proof}[Proof of Lemma \ref{TransLiftingLemma}]
+  We proceed by induction on $\gamma$.  At some point we will be unable to proceed further with the induction, so we terminate and the final $\gamma$ we reach will be our $\beta$.  
+
+  There is a unique sequence of length $0$, namely the empty sequence and its $A$- and $C$-components are both empty, so are prefixes of $s$ and $t$.  
+
+  Now suppose that $\mu$ is a limit ordinal and that we have a chain of sequences $\s^\mu$ for all $\mu<\mu$ such that $\s^\gamma\vert_{A,B}\prefix s$ and $\s^\gamma\vert_{B,C}\prefix t$.  Then we may take the limit $\s^\mu$ of these sequences and we have $\s^\mu\vert_{A,B}\prefix s$ and $\s^\mu\vert_{B,C}\prefix t$.  For uniqueness, suppose that $\t^\mu$ has length $\mu$ and that $\t^\mu\vert_A\prefix s\vert_A$ and $\t^\mu\vert_C\prefix t\vert_C$.  Let $\gamma<\mu$, and let $\t^\gamma$ be the initial prefix of $\t^\mu$ of length $\gamma$.  Then $\t^\gamma\vert_A\prefix s\vert_A$ and $\t^\gamma\vert_C\prefix t\vert_C$, so $\t^\gamma=\s^\gamma$, by uniqueness.  Since $\gamma<\mu$ was arbitrary, it follows that $\t^\mu=\s^\mu$.  
+
+  Now suppose that $\gamma=\mu+1$, where $\mu$ is some limit ordinal, and suppose that we have constructed $\s^\mu$ of length $\mu$ such that $\s^\mu\vert_{A,B}\prefix s$ and $\s^\mu\vert_{B,C}\prefix t$.  If we in fact have $\s^\mu\vert_{A,B}=s$ and $\s^\mu\vert_{B,C}=t$, then we terminate.  Otherwise, at least one of these prefix relations is proper.  
+\end{proof}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
