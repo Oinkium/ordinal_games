@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2016.8.14)  16 AUG 2016 11:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2016.8.14)  20 AUG 2016 23:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -580,6 +580,10 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
 \pb@xlen=\skip62
 )
+(/usr/share/texmf-dist/tex/latex/multirow/multirow.sty
+\bigstrutjot=\dimen162
+)
+(/usr/share/texmf-dist/tex/latex/multirow/bigdelim.sty)
 (/usr/share/texmf-dist/tex/latex/tocbibind/tocbibind.sty
 Package: tocbibind 2010/10/13 v1.5k extra ToC listings
 Package tocbibind Info: The document has section divisions on input line 50.
@@ -664,8 +668,8 @@ Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
 (/usr/share/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
 \pgfutil@everybye=\toks28
-\pgfutil@tempdima=\dimen162
-\pgfutil@tempdimb=\dimen163
+\pgfutil@tempdima=\dimen163
+\pgfutil@tempdimb=\dimen164
 
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.tex))
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
@@ -691,14 +695,14 @@ Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
 \pgfkeys@tmptoks=\toks31
 ))
-\pgf@x=\dimen164
-\pgf@y=\dimen165
-\pgf@xa=\dimen166
-\pgf@ya=\dimen167
-\pgf@xb=\dimen168
-\pgf@yb=\dimen169
-\pgf@xc=\dimen170
-\pgf@yc=\dimen171
+\pgf@x=\dimen165
+\pgf@y=\dimen166
+\pgf@xa=\dimen167
+\pgf@ya=\dimen168
+\pgf@xb=\dimen169
+\pgf@yb=\dimen170
+\pgf@xc=\dimen171
+\pgf@yc=\dimen172
 \w@pgf@writea=\write3
 \r@pgf@reada=\read2
 \c@pgf@counta=\count123
@@ -752,7 +756,7 @@ Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
-\pgfmath@dimen=\dimen172
+\pgfmath@dimen=\dimen173
 \pgfmath@count=\count129
 \pgfmath@box=\box29
 \pgfmath@toks=\toks35
@@ -773,29 +777,29 @@ x) (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex)
 \c@pgfmathroundto@lastzeros=\count130
 )) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
-\pgf@picminx=\dimen173
-\pgf@picmaxx=\dimen174
-\pgf@picminy=\dimen175
-\pgf@picmaxy=\dimen176
-\pgf@pathminx=\dimen177
-\pgf@pathmaxx=\dimen178
-\pgf@pathminy=\dimen179
-\pgf@pathmaxy=\dimen180
-\pgf@xx=\dimen181
-\pgf@xy=\dimen182
-\pgf@yx=\dimen183
-\pgf@yy=\dimen184
-\pgf@zx=\dimen185
-\pgf@zy=\dimen186
+\pgf@picminx=\dimen174
+\pgf@picmaxx=\dimen175
+\pgf@picminy=\dimen176
+\pgf@picmaxy=\dimen177
+\pgf@pathminx=\dimen178
+\pgf@pathmaxx=\dimen179
+\pgf@pathminy=\dimen180
+\pgf@pathmaxy=\dimen181
+\pgf@xx=\dimen182
+\pgf@xy=\dimen183
+\pgf@yx=\dimen184
+\pgf@yy=\dimen185
+\pgf@zx=\dimen186
+\pgf@zy=\dimen187
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
-\pgf@path@lastx=\dimen187
-\pgf@path@lasty=\dimen188
+\pgf@path@lastx=\dimen188
+\pgf@path@lasty=\dimen189
 ) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
 File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
-\pgf@shorten@end@additional=\dimen189
-\pgf@shorten@start@additional=\dimen190
+\pgf@shorten@end@additional=\dimen190
+\pgf@shorten@start@additional=\dimen191
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
@@ -806,14 +810,14 @@ File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2014/11/02  (rcs-revision 1.12)
-\pgflinewidth=\dimen191
+\pgflinewidth=\dimen192
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.t
 ex
 File: pgfcoretransformations.code.tex 2015/08/07  (rcs-revision 1.20)
-\pgf@pt@x=\dimen192
-\pgf@pt@y=\dimen193
-\pgf@pt@temp=\dimen194
+\pgf@pt@x=\dimen193
+\pgf@pt@y=\dimen194
+\pgf@pt@temp=\dimen195
 ) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
 File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
 )
@@ -825,11 +829,11 @@ x
 File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
 ) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
 File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
-\pgfarrowsep=\dimen195
+\pgfarrowsep=\dimen196
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
-\pgf@max=\dimen196
+\pgf@max=\dimen197
 \pgf@sys@shading@range@num=\count132
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
@@ -856,8 +860,8 @@ File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
 )
 (/usr/share/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
 Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
-\pgf@nodesepstart=\dimen197
-\pgf@nodesepend=\dimen198
+\pgf@nodesepstart=\dimen198
+\pgf@nodesepend=\dimen199
 )
 (/usr/share/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
 Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
@@ -871,8 +875,8 @@ Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
 Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
 
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
-\pgffor@iter=\dimen199
-\pgffor@skip=\dimen256
+\pgffor@iter=\dimen256
+\pgffor@skip=\dimen257
 \pgffor@stack=\toks38
 \pgffor@toks=\toks39
 ))
@@ -883,14 +887,14 @@ Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
 x
 File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
 \pgf@plot@mark@count=\count133
-\pgfplotmarksize=\dimen257
+\pgfplotmarksize=\dimen258
 )
-\tikz@lastx=\dimen258
-\tikz@lasty=\dimen259
-\tikz@lastxsaved=\dimen260
-\tikz@lastysaved=\dimen261
-\tikzleveldistance=\dimen262
-\tikzsiblingdistance=\dimen263
+\tikz@lastx=\dimen259
+\tikz@lasty=\dimen260
+\tikz@lastxsaved=\dimen261
+\tikz@lastysaved=\dimen262
+\tikzleveldistance=\dimen263
+\tikzsiblingdistance=\dimen264
 \tikz@figbox=\box35
 \tikz@figbox@bg=\box36
 \tikz@tempbox=\box37
@@ -923,10 +927,10 @@ File: tikzlibraryquotes.code.tex 2014/03/21 v3.0.1a (rcs-revision 1.4)
 )
 (/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2015/05/13 v3.0.1a (rcs-revision 1.13)
-\pgfarrowinset=\dimen264
-\pgfarrowlength=\dimen265
-\pgfarrowwidth=\dimen266
-\pgfarrowlinewidth=\dimen267
+\pgfarrowinset=\dimen265
+\pgfarrowlength=\dimen266
+\pgfarrowwidth=\dimen267
+\pgfarrowlinewidth=\dimen268
 ))
 (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
 patterns.code.tex
@@ -970,29 +974,29 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 ) (./ordinal_games.aux)
 \openout1 = `ordinal_games.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 227.
-LaTeX Font Info:    ... okay on input line 227.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 227.
-LaTeX Font Info:    ... okay on input line 227.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 227.
-LaTeX Font Info:    ... okay on input line 227.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 227.
-LaTeX Font Info:    ... okay on input line 227.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 227.
-LaTeX Font Info:    ... okay on input line 227.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 227.
-LaTeX Font Info:    ... okay on input line 227.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 228.
+LaTeX Font Info:    ... okay on input line 228.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 228.
+LaTeX Font Info:    ... okay on input line 228.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 228.
+LaTeX Font Info:    ... okay on input line 228.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 228.
+LaTeX Font Info:    ... okay on input line 228.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 228.
+LaTeX Font Info:    ... okay on input line 228.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 228.
+LaTeX Font Info:    ... okay on input line 228.
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count145
-\scratchdimen=\dimen268
+\scratchdimen=\dimen269
 \scratchbox=\box39
 \nofMPsegments=\count146
 \nofMParguments=\count147
 \everyMPshowfont=\toks46
 \MPscratchCnt=\count148
-\MPscratchDim=\dimen269
+\MPscratchDim=\dimen270
 \MPnumerator=\count149
 \makeMPintoPDFobject=\count150
 \everyMPtoPDFconversion=\toks47
@@ -1050,44 +1054,44 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
 
 ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for U+msa on input line 233.
+LaTeX Font Info:    Try loading font information for U+msa on input line 234.
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 233.
+LaTeX Font Info:    Try loading font information for U+msb on input line 234.
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+cmllr on input line 233.
+LaTeX Font Info:    Try loading font information for U+cmllr on input line 234.
 
 
 (/usr/share/texmf-dist/tex/latex/cmll/ucmllr.fd)
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 243.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 244.
 
 
 (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 243.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 244.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5]
-Overfull \hbox (24.65974pt too wide) in paragraph at lines 352--353
+Overfull \hbox (24.65974pt too wide) in paragraph at lines 353--354
 \OT1/cmr/m/n/10.95 games mod-els; specif-i-cally, we shall use Blass's games an
 d Abramsky-Jagadeesan's
  []
 
 [6]
-Overfull \hbox (6.94476pt too wide) detected at line 403
+Overfull \hbox (6.94476pt too wide) detected at line 404
 [] \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/10.95 s \OMS/cmsy/m/
 n/10.95 2 \OML/cmm/m/it/10.95 M[]  [] []  []\OMS/cmsy/m/n/10.95 g
  []
 
 [7]
-Overfull \hbox (12.65497pt too wide) in paragraph at lines 419--420
+Overfull \hbox (12.65497pt too wide) in paragraph at lines 420--421
 []\OT1/cmr/m/n/10.95 It fol-lows im-me-di-ately from the def-i-ni-tions that $[
 ][][]\OML/cmm/m/it/10.95 A$ \OT1/cmr/m/n/10.95 is a well formed game. 
  []
@@ -1095,25 +1099,25 @@ Overfull \hbox (12.65497pt too wide) in paragraph at lines 419--420
 [8] [9]
 
 Package amsthm Warning: The \qedhere command may not work correctly here on inp
-ut line 510.
+ut line 511.
 
 
-Overfull \hbox (8.06586pt too wide) in paragraph at lines 507--512
+Overfull \hbox (8.06586pt too wide) in paragraph at lines 508--513
 []\OT1/cmr/m/n/10.95 (ii): $[] []$ 
  []
 
 [10]
-LaTeX Font Info:    Try loading font information for U+euf on input line 529.
+LaTeX Font Info:    Try loading font information for U+euf on input line 530.
  (/usr/share/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 ) [11]
-Overfull \hbox (0.40103pt too wide) in paragraph at lines 572--574
+Overfull \hbox (0.40103pt too wide) in paragraph at lines 573--575
 \OT1/cmr/m/n/10.95 if $\OML/cmm/m/it/10.95 A; B$ \OT1/cmr/m/n/10.95 are neg-a-t
 ive games. In other words, we can ig-nore the well-formedness
  []
 
 [12]
-Overfull \hbox (3.58801pt too wide) detected at line 614
+Overfull \hbox (3.58801pt too wide) detected at line 615
 \OMS/cmsy/m/n/10.95 f\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 s\OMS/cmsy/m/n/10.
 95 j[]\OML/cmm/m/it/10.95 ; s\OMS/cmsy/m/n/10.95 j[]\OT1/cmr/m/n/10.95 )  [] []
   []\OMS/cmsy/m/n/10.95 g \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 f\OT1/cmr/m/
@@ -1122,7 +1126,7 @@ n/10.95 (\OML/cmm/m/it/10.95 s[]\OMS/cmsy/m/n/10.95 j[]\OML/cmm/m/it/10.95 ; s[
  []
 
 [13] [14]
-Overfull \hbox (2.31253pt too wide) detected at line 653
+Overfull \hbox (2.31253pt too wide) detected at line 654
 []\OT1/cmr/m/n/10.95 (\U/euf/m/n/10.95 s\OMS/cmsy/m/n/10.95 j[]\OT1/cmr/m/n/10.
 95 ) \OMS/cmsy/m/n/10.95 ^^T []\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 s\OT1/cm
 r/m/n/10.95 ) = \OML/cmm/m/it/10.95 n \OMS/cmsy/m/n/10.95 ^^@ []\OT1/cmr/m/n/10
@@ -1133,21 +1137,21 @@ r/m/n/10.95 ) = \OML/cmm/m/it/10.95 n \OMS/cmsy/m/n/10.95 ^^@ []\OT1/cmr/m/n/10
  []
 
 
-Overfull \hbox (10.38564pt too wide) in paragraph at lines 657--658
+Overfull \hbox (10.38564pt too wide) in paragraph at lines 658--659
 \OT1/cmr/m/n/10.95 se-quence of length $0$, namely the empty se-quence, and its
  $\OML/cmm/m/it/10.95 A$\OT1/cmr/m/n/10.95 - and $\OML/cmm/m/it/10.95 C$\OT1/cm
 r/m/n/10.95 -components
  []
 
 [15] [16] [17] [18] [19] [20] [21]
-Overfull \hbox (7.85733pt too wide) in paragraph at lines 832--833
+Overfull \hbox (7.85733pt too wide) in paragraph at lines 833--834
 \OT1/cmr/m/n/10.95 win-game, then a \OT1/cmr/m/it/10.95 win-ning strat-egy \OT1
 /cmr/m/n/10.95 for $\OML/cmm/m/it/10.95 A$ \OT1/cmr/m/n/10.95 is a to-tal strat
 -egy for $(\OML/cmm/m/it/10.95 M[]; ^^U[]; ^^P[]; P[]\OT1/cmr/m/n/10.95 )$
  []
 
 [22] [23] [24] [25] [26] [27] [28]
-Overfull \hbox (22.26468pt too wide) in paragraph at lines 1050--1051
+Overfull \hbox (22.26468pt too wide) in paragraph at lines 1051--1052
 []\OT1/cmr/m/n/10.95 Setting $\OML/cmm/m/it/10.95 M[] \OT1/cmr/m/n/10.95 = \OML
 /cmm/m/it/10.95 M[] \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 M[] \OT1/cmr/m/n/1
 0.95 = \OML/cmm/m/it/10.95 M[] \OMS/cmsy/m/n/10.95 t \OML/cmm/m/it/10.95 M[]$\O
@@ -1155,7 +1159,7 @@ T1/cmr/m/n/10.95 , and re-strict-ing $\OML/cmm/m/it/10.95 ^^P[]; ^^P[]; ^^P[]$
  []
 
 
-Overfull \hbox (11.05331pt too wide) in paragraph at lines 1059--1061
+Overfull \hbox (11.05331pt too wide) in paragraph at lines 1060--1062
 \OT1/cmr/m/it/10.95 over, $\OML/cmm/m/it/10.95 P[]$ \OT1/cmr/m/it/10.95 is the 
 largest sub-set $\OML/cmm/m/it/10.95 X \OMS/cmsy/m/n/10.95 ^^Z \OML/cmm/m/it/10
 .95 P[]\OMS/cmsy/m/n/10.95 k\OML/cmm/m/it/10.95 P[]$ \OT1/cmr/m/it/10.95 such t
@@ -1164,7 +1168,7 @@ hat $\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 M[]; ^^U[]; ^^P[]; X\OT1/cmr/m/n/1
  []
 
 [29] [30] [31] [32]
-Overfull \hbox (5.74709pt too wide) in paragraph at lines 1135--1136
+Overfull \hbox (5.74709pt too wide) in paragraph at lines 1138--1139
 \OML/cmm/m/it/10.95 s\OMS/cmsy/m/n/10.95 j[]$ \OT1/cmr/m/n/10.95 and $\OML/cmm/
 m/it/10.95 s\OMS/cmsy/m/n/10.95 j[]$ \OT1/cmr/m/n/10.95 are both lim-it-ing pla
 ys. By Lemma 3.6[], $[](\OML/cmm/m/it/10.95 s\OMS/cmsy/m/n/10.95 j[]\OT1/cmr/m/
@@ -1172,38 +1176,48 @@ n/10.95 )\OML/cmm/m/it/10.95 ; []\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 s\OMS/
 cmsy/m/n/10.95 j[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ^^T
  []
 
-[33] [34] [35] (./ordinal_games.bbl [36]) [37] (./ordinal_games.aux) ) 
+[33] [34] [35] [36] [37]
+Overfull \hbox (2.25142pt too wide) in paragraph at lines 1273--1273
+[]|$[]$|  
+ []
+
+
+Overfull \hbox (2.50807pt too wide) in paragraph at lines 1275--1275
+[]|$[]$|  
+ []
+
+(./ordinal_games.bbl [38]) [39] (./ordinal_games.aux) ) 
 Here is how much of TeX's memory you used:
- 17066 strings out of 493014
- 332606 string characters out of 6139325
- 390351 words of memory out of 5000000
- 20197 multiletter control sequences out of 15000+600000
- 23186 words of font info for 94 fonts, out of 8000000 for 9000
+ 17073 strings out of 493014
+ 332868 string characters out of 6139325
+ 390783 words of memory out of 5000000
+ 20201 multiletter control sequences out of 15000+600000
+ 20662 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,15n,82p,1043b,327s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/sha
-re/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmbx9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/cmll/cmllr10.pfb></usr/s
-hare/texmf-dist/fonts/type1/public/cmll/cmllr8.pfb></usr/share/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
-i8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/
-share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
-r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfon
-ts/euler/eufm10.pfb></usr/share/texmf-dist/fonts/type1/public/mathabx-type1/mat
-hb10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on ordinal_games.pdf (37 pages, 343324 bytes).
+</usr/share/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmbx9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
+usr/share/texmf-dist/fonts/type1/public/cmll/cmllr10.pfb></usr/share/texmf-dist
+/fonts/type1/public/cmll/cmllr8.pfb></usr/share/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/sh
+are/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr
+/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10
+.pfb></usr/share/texmf-dist/fonts/type1/public/mathabx-type1/mathb10.pfb></usr/
+share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/tex
+mf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on ordinal_games.pdf (39 pages, 351910 bytes).
 PDF statistics:
- 217 PDF objects out of 1000 (max. 8388607)
- 154 compressed objects within 2 object streams
+ 223 PDF objects out of 1000 (max. 8388607)
+ 158 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

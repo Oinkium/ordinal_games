@@ -16,6 +16,7 @@
 \usepackage{url} % for \url
 \usepackage{IEEEtrantools} % for \IEEEeqnarray
 \usepackage{pbox} % for \pbox
+\usepackage{multirow,bigdelim} % for \multirow
 
 %%% ToC (table of contents) APPEARANCE
 \usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
@@ -1093,15 +1094,17 @@ As before, we want to show that if player $O$ switches games in the tensor produ
 
 We want to build a category $\G(\alpha)$ whose objects are games and whose morphisms are strategies on the linear implication of two games.  Given $\alpha$-games $A$, $B$ and $C$ and strategies $\sigma$ for $A\implies B$ and $\tau$ for $B\implies C$, we define
 \begin{gather*}
-  \sigma\|\tau = \left\{\s\in (M_A\cprd M_B\cprd M_C)^{*<\alpha2}\suchthat \s\vert_{A,B}\in\sigma,\;\s\vert_{B,C}\in\tau\right\}\\
+  \sigma\|\tau = \left\{\s\in (M_A\cprd M_B\cprd M_C)^{*<\alpha\#\alpha}\suchthat \s\vert_{A,B}\in\sigma,\;\s\vert_{B,C}\in\tau\right\}\\
   \comp\tau\sigma = \{\s\vert_{A,C}\suchthat \s\in\sigma\|\tau\}
 \end{gather*}
 
-Here, $\alpha2$ is intended to be an upper bound and indeed any sufficiently large ordinal will do without changing the elements of $\sigma\|\tau$.  For the functor $\cmap{\F}{\G(\alpha)}{\Rel}$, we shall want to show that
+Here, $\alpha\#\alpha$ is intended to be an upper bound and indeed any sufficiently large ordinal will do without changing the elements of $\sigma\|\tau$.  The symbol $\#$ denotes \emph{natural addition} on ordinals: if $\beta,\gamma$ are ordinals then the order type of $\beta\#\gamma$ is the largest well-ordering on the disjoint union $\beta\sqcup\gamma$ such that the restrictions to $\beta$ and $\gamma$ give the original orderings.  For example, we have $\omega\#1=\omega+1$, but $1\#\omega=\omega+1$ as well (and \emph{not} $1+\omega$, which equals $\omega$).  In any case, this is not an important point - we want to allow the sequences $\s$ to be as long as we need to be, but we need to introduce some bound to make it clear that the resulting collection of plays is a small set.  $\alpha\#\alpha$ turns out to be a suitable upper bound.
+
+For the functor $\cmap{\F}{\G(\alpha)}{\Rel}$, we shall want to show that
 \[
   \comp\tau\sigma = \left\{s\in P_{A\implies C}\suchthat\exists t\in\sigma,u\in\tau\esuchthat s\vert_A=t\vert_A,\;t\vert_B=u\vert_B,\;s\vert_C=u\vert_C\right\}
   \]
-To show this, we will want to show that for any such $s,t,u$ there is some interleaving $\s$ such that $\s\vert_{A,C}=s$, $\s\vert_{A,B}=t$ and $\s\vert_{B,C}=u$.  Even though $s$, $t$ and $u$ all have length less than $\alpha$, $\s$ might have longer length; it will, however, have length less than $\alpha2$.
+To show this, we will want to show that for any such $s,t,u$ there is some interleaving $\s$ such that $\s\vert_{A,C}=s$, $\s\vert_{A,B}=t$ and $\s\vert_{B,C}=u$.  Even though $s$, $t$ and $u$ all have length less than $\alpha$, $\s$ might have longer length; it will, however, have length less than $\alpha\#\alpha$.
 
 Note that it is not immediately clear that the elements of $\comp\tau\sigma$ have length less than $\alpha$.  We will have to show this.  First, though, we will need to restrict our class of games so that we do get a well-defined composition.
 
@@ -1168,7 +1171,7 @@ We shall also prove a version of a fact which we used implicitly a few times in 
 
 \begin{lemma}
   \label{AcnLocalSequences}
-  Let $A,B,C$ be acn $\alpha$-games, and let $\s\in(M_A\cprd M_B\cprd M_C)^{*<\alpha2}$ be such that $\s\vert_{A,B}\in P_{A\implies B}$ and $\s\vert_{B,C}\in P_{B\implies C}$.  If $a\in M_A$ occurs in the sequence $\s$, then it cannot be immediately followed by a move from $C$ and similarly if $c\in M_C$ occurs in $\s$, it cannot be immediately followed by a move from $A$.  
+  Let $A,B,C$ be acn $\alpha$-games, and let $\s\in(M_A\cprd M_B\cprd M_C)^{*<\alpha\#\alpha}$ be such that $\s\vert_{A,B}\in P_{A\implies B}$ and $\s\vert_{B,C}\in P_{B\implies C}$.  If $a\in M_A$ occurs in the sequence $\s$, then it cannot be immediately followed by a move from $C$ and similarly if $c\in M_C$ occurs in $\s$, it cannot be immediately followed by a move from $A$.  
   \begin{proof}
     Suppose that $a\in M_A$ and $\t a\prefix\s$ for some sequence $\t$.  If $\t\vert_B$ is a limiting play, then $\zeta_B(t\vert_B)=P$ [$\t\vert_B$ cannot be length maximal, since $\t\vert_{A,B}a\in P_{A\implies B}$ is longer].  But then since $(O\Rightarrow P)=(P\Rightarrow P)=P$, we end up with $\zeta_{A\implies B}(ta)=\zeta_{A\implies B}(t)$, contradicting alternation.  Therefore, $\t\vert_B$ is a successor play and there is a last $B$-move $b$ occurring in $\t a$.  
 
@@ -1178,7 +1181,7 @@ We shall also prove a version of a fact which we used implicitly a few times in 
   \end{proof}
 \end{lemma}
 
-\subsection{Interleavings and the functor into $\Rel$}
+\subsubsection{Interleavings and the functor into $\Rel$}
 
 We now set out to extend to the transfinite case some of the results that we proved in the previous section about plays and strategies for the game $A\implies B$.
 
@@ -1208,7 +1211,7 @@ We will postpone discussion of the functor $\cmap{\F(\alpha)}{\G(\alpha)}{\Rel}$
 
 \begin{lemma}
   \label{TransLiftingLemma}
-  Let $A,B,C$ be acn $\alpha$-games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Suppose that $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$.  Then there exists some ordinal $\beta<\alpha2$ such that for all $\gamma$ with $0\le\gamma\le\beta$ there is a unique sequence $\s^\gamma\in\sigma\|\tau$ of length $\gamma$ such that $\s^\gamma\vert_A\prefix s\vert_A$ and $\s\gamma\vert_C\prefix t\vert_C$.  Moreover, for this $\s^\gamma$ we have $\s^\gamma\vert_{A,B}\prefix s$ and $\s^\gamma\prefix t$ and if $\delta\le\gamma$ then $\s^\delta\prefix\s^\gamma$.  Lastly, we have $\s^\beta\vert_{A,B}=s$ and $\s^\beta\vert_{B,C}=t$.
+  Let $A,B,C$ be acn $\alpha$-games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Suppose that $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$.  Then there exists some ordinal $\beta<\alpha\#\alpha$ such that for all $\gamma$ with $0\le\gamma\le\beta$ there is a unique sequence $\s^\gamma\in\sigma\|\tau$ of length $\gamma$ such that $\s^\gamma\vert_A\prefix s\vert_A$ and $\s\gamma\vert_C\prefix t\vert_C$.  Moreover, for this $\s^\gamma$ we have $\s^\gamma\vert_{A,B}\prefix s$ and $\s^\gamma\prefix t$ and if $\delta\le\gamma$ then $\s^\delta\prefix\s^\gamma$.  Lastly, we have $\s^\beta\vert_{A,B}=s$ and $\s^\beta\vert_{B,C}=t$.
 \end{lemma}
 
 Note that we have no explicit formula for the ordinal $\beta$ as we did for the the numeral $n$ in Lemma \ref{LiftingLemma}, owing to the fact that addition of ordinals is less well-behaved than addition of numerals.  Nevertheless, this lemma shall be sufficient for our purposes.  
@@ -1218,10 +1221,64 @@ Note that we have no explicit formula for the ordinal $\beta$ as we did for the 
 
   There is a unique sequence of length $0$, namely the empty sequence and its $A$- and $C$-components are both empty, so are prefixes of $s$ and $t$.  
 
-  Now suppose that $\mu$ is a limit ordinal and that we have a chain of sequences $\s^\mu$ for all $\mu<\mu$ such that $\s^\gamma\vert_{A,B}\prefix s$ and $\s^\gamma\vert_{B,C}\prefix t$.  Then we may take the limit $\s^\mu$ of these sequences and we have $\s^\mu\vert_{A,B}\prefix s$ and $\s^\mu\vert_{B,C}\prefix t$.  For uniqueness, suppose that $\t^\mu$ has length $\mu$ and that $\t^\mu\vert_A\prefix s\vert_A$ and $\t^\mu\vert_C\prefix t\vert_C$.  Let $\gamma<\mu$, and let $\t^\gamma$ be the initial prefix of $\t^\mu$ of length $\gamma$.  Then $\t^\gamma\vert_A\prefix s\vert_A$ and $\t^\gamma\vert_C\prefix t\vert_C$, so $\t^\gamma=\s^\gamma$, by uniqueness.  Since $\gamma<\mu$ was arbitrary, it follows that $\t^\mu=\s^\mu$.  
+  Now suppose that $\mu$ is a limit ordinal and that we have a chain of sequences $\s^\gamma$ for all $\gamma<\mu$ such that $\s^\gamma\vert_{A,B}\prefix s$ and $\s^\gamma\vert_{B,C}\prefix t$.  Then we may take the limit $\s^\mu$ of these sequences and we have $\s^\mu\vert_{A,B}\prefix s$ and $\s^\mu\vert_{B,C}\prefix t$.  For uniqueness, suppose that $\t^\mu$ has length $\mu$ and that $\t^\mu\vert_A\prefix s\vert_A$ and $\t^\mu\vert_C\prefix t\vert_C$.  Let $\gamma<\mu$, and let $\t^\gamma$ be the initial prefix of $\t^\mu$ of length $\gamma$.  Then $\t^\gamma\vert_A\prefix s\vert_A$ and $\t^\gamma\vert_C\prefix t\vert_C$, so $\t^\gamma=\s^\gamma$, by uniqueness.  Since $\gamma<\mu$ was arbitrary, it follows that $\t^\mu=\s^\mu$.  
 
-  Now suppose that $\gamma=\mu+1$, where $\mu$ is some limit ordinal, and suppose that we have constructed $\s^\mu$ of length $\mu$ such that $\s^\mu\vert_{A,B}\prefix s$ and $\s^\mu\vert_{B,C}\prefix t$.  If we in fact have $\s^\mu\vert_{A,B}=s$ and $\s^\mu\vert_{B,C}=t$, then we terminate.  Otherwise, at least one of these prefix relations is proper.  
+  Lastly, suppose that $\gamma=\delta+1$ for some ordinal $\delta$ and suppose that we have already constructed the sequence $\s^\delta$.  If $X$ and $Y$ are acn $\alpha$-games and $r\in P_{X\implies Y}$ is not length maximal, then Proposition \ref{NiceAcnGames} tells us that either $\zeta_X(r\vert_X)=P$ or $\zeta_Y(r\vert_Y)=O$.  We have $\s^\delta\vert_{A,B}\in P_{A\implies B}$ and $\s^\delta\vert_{B,C}\in P_{B\implies C}$, so if we assume that $\s^\delta\vert_{A,B}$ and $\s^\delta\vert_{B,C}$ are not length maximal plays, this gives us four possible `sign profiles' for the components of the sequence $\s^\delta$:
+
+  \[
+    \begin{array}{c|ccc}
+      \textbf{Case} & \zeta_A(\s^\delta\vert_A) & \zeta_B(\s^\delta\vert_B) & \zeta_C(\s^\delta\vert_C) \\
+      \hline
+      \textbf{A} & P & P & P \\
+      \textbf{B} & P & P & O \\
+      \textbf{C} & P & O & O \\
+      \textbf{D} & O & O & O
+    \end{array}
+    \]
+
+  We now split the argument up according to cases:
+
+  \begin{description}
+    \item[Cases A and B: ] We have $\s^\delta\vert_{B,C}\prefix t$.  If in fact $\s^\delta\vert_{B,C}=t$, then we terminate and set $\beta=\delta$.  We claim that in this case we must have $\s^\beta\vert_{A,B}=s$.  Certainly, $\s^\beta\vert_{A,B}\prefix s$; if this prefix relation is proper then we must have $\s^\beta\vert_{A,B}x\prefix s$ for some move $x$.  Since $\zeta_A(\s^\beta\vert_A)=\zeta_B(\s^\beta\vert_B)=P$, $x$ must be an $O$-move and it must therefore take place in $B$, which is a contradiction, since $s\vert_B=t\vert_B$:
+      \[
+        \s^\beta\vert_Bx\prefix s\vert_B = t\vert_B=\s^\beta\vert_{B,C}\vert_B=\s^\beta\vert_B\quad\textbf{(contradictory)}
+        \]
+      Therefore, $\s^\beta\vert_{A,B}=s$.  We must have $\beta<\alpha\#\alpha$, since we may decompose the set of (distinct) moves in $\s^k$ as the disjoint union of the set of moves that occur in $A$ and the set of moves that occur in $B$ or $C$.  The induced ordering on each of these sets corresponds with the natural ordering of the moves as a play in $P_A$ or in $P_{B\implies C}$, and since $A$ and $B\implies C$ are both $\alpha$-games, this implies that these two orders are both less than $\alpha$.  
+
+      Now suppose instead that $\s^\delta\vert_{B,C}$ is a \emph{proper} prefix of $t$.  So $\s^\delta\vert_{B,C}x\prefix t$ for some move $x$.  We set $\s^{\delta+1}=\s^\delta x$.  Now certainly $\s^{\delta+1}\vert_{B,C}\prefix t$; we claim that $\s^{\delta+1}\vert_{A,B}\prefix s$.
+
+      If $x$ is a move from $C$ then $\s^{\delta+1}\vert_{A,B}=\s^\delta\vert_{A,B}\prefix s$.  So suppose that $x$ is a move from $B$ - so $\s^{\delta+1}\vert_{A,B}=\s^\delta\vert_{A,B}x$.  Since $s\vert_B=t\vert_B$, this must be a prefix of $s$ unless there is some move from $A$ that occurs immediately after $\s^\delta\vert_{A,B}$.  But this is impossible in \textbf{Cases A and B}, since $\s^\delta\vert_{A,B}$ is a $P$-position in $A\implies B$ while $\s^\delta\vert_A$ is an $O$-position in $\neggame A$, so any move following $\s^\delta\vert_{A,B}$ must be a move in $B$.
+
+      Lastly, we show uniqueness.  Suppose that $\t^{\delta+1}\in \sigma\|\tau$ has length $\delta+1$ and that $\t\vert_A\prefix s\vert_C$ and $\t\vert_C\prefix t\vert_C$.  Let $y$ be the last move of $\t^{\delta+1}$ and write $\t^{\delta+1}=\t^\delta y$.  Then we have
+      \[
+        \t^\delta\vert_A\prefix \t^{\delta+1}\vert_A\prefix s\vert_A\quad\t^\delta\vert_C\prefix\t^{\delta+1}\vert_C\prefix t\vert_C
+        \]
+      and so $\t^\delta=\s^\delta$ by uniqueness for sequences of length $\delta$.  We claim that $y=x$.  By our argument above, $y$ cannot be a move from $A$, so it is a move from $B$ or $C$.  Then we have:
+      \begin{gather*}
+        \s^\delta y\vert_{B,C} = \t^{\delta+1}\vert_{B,C}\in\tau \\
+        \s^\delta x\vert_{B,C} \prefix t\in\tau
+      \end{gather*}
+      In \textbf{Case B}, $\s^\delta\vert_{B,C}x,\s^\delta\vert_{B,C}y$ are both $P$-plays in $B\implies C$, so they must be equal, since $\tau$ is a strategy.  In \textbf{Case A}, $x$ and $y$ must both be $O$-moves in $C$.  So the fact that $\t^{\delta+1}\vert_C=\s^{\delta+1}\vert_C$ means that $x=y$.  
+
+      Therefore, $\t^{\delta+1}=\s^{\delta+1}$.  
+
+    \item[Cases C and D: ] Entirely symmetrical.  This time, we get the next move from $s$ instead of $t$, and uniqueness follows from the fact that $\sigma$ is a strategy. 
+  \end{description}
+
+  We still need to deal with the case that one of $\s^\delta\vert_{A,B},\s^\delta\vert_{B,C}$ is length maximal.  In that case, the `sign profile' for the components of $\s^\delta$ might not fit one of the cases in the table above, since Proposition \ref{NiceAcnGames} only holds for non-length maximal pays.  If the components of $\s^\delta$ do fit \textbf{Case A, B, C or D} above, then our existing argument is valid.  Otherwise, there are four new cases to consider:
+  \[
+    \begin{array}{c|cccl}
+      \textbf{Case} & \zeta_A(\s^\delta\vert_A) & \zeta_B(\s^\delta\vert_B) & \zeta_C(\s^\delta\vert_C) & \\
+      \cline{1-4}
+      \textbf{E} & O & P & P & \rdelim\}{2}{55mm}[where $\s^\delta\vert_{A,B}$ is length maximal] \\
+      \textbf{F} & O & P & O & \\
+      \textbf{G} & P & O & P & \rdelim\}{2}{55mm}[where $\s^\delta\vert_{B,C}$ is length maximal] \\
+      \textbf{H} & O & O & P &
+    \end{array}
+    \]
 \end{proof}
+
+Our first corolloray of this lemma will be to show that composition is well-defined for acn $\alpha$-games.
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
