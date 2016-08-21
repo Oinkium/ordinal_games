@@ -1098,7 +1098,7 @@ We want to build a category $\G(\alpha)$ whose objects are games and whose morph
   \comp\tau\sigma = \{\s\vert_{A,C}\suchthat \s\in\sigma\|\tau\}
 \end{gather*}
 
-Here, $\alpha\#\alpha$ is intended to be an upper bound and indeed any sufficiently large ordinal will do without changing the elements of $\sigma\|\tau$.  The symbol $\#$ denotes \emph{natural addition} on ordinals: if $\beta,\gamma$ are ordinals then the order type of $\beta\#\gamma$ is the largest well-ordering on the disjoint union $\beta\sqcup\gamma$ such that the restrictions to $\beta$ and $\gamma$ give the original orderings.  For example, we have $\omega\#1=\omega+1$, but $1\#\omega=\omega+1$ as well (and \emph{not} $1+\omega$, which equals $\omega$).  In any case, this is not an important point - we want to allow the sequences $\s$ to be as long as we need to be, but we need to introduce some bound to make it clear that the resulting collection of plays is a small set.  $\alpha\#\alpha$ turns out to be a suitable upper bound.
+Here, $\alpha\#\alpha$ is intended to be an upper bound and indeed any sufficiently large ordinal will do without changing the elements of $\sigma\|\tau$.  The symbol $\#$ denotes the so-called \emph{natural addition} on ordinals: if $\beta,\gamma$ are ordinals then the order type of $\beta\#\gamma$ is the largest well-ordering on the disjoint union $\beta\sqcup\gamma$ such that the restrictions to $\beta$ and $\gamma$ give the original orderings.  For example, we have $\omega\#1=\omega+1$, but $1\#\omega=\omega+1$ as well (and \emph{not} $1+\omega$, which equals $\omega$).  In any case, this is not an important point - we want to allow the sequences $\s$ to be as long as we need to be, but we need to introduce some bound to make it clear that the resulting collection of plays is a small set.  $\alpha\#\alpha$ turns out to be a suitable upper bound.
 
 For the functor $\cmap{\F}{\G(\alpha)}{\Rel}$, we shall want to show that
 \[
@@ -1223,7 +1223,7 @@ Note that we have no explicit formula for the ordinal $\beta$ as we did for the 
 
   Now suppose that $\mu$ is a limit ordinal and that we have a chain of sequences $\s^\gamma$ for all $\gamma<\mu$ such that $\s^\gamma\vert_{A,B}\prefix s$ and $\s^\gamma\vert_{B,C}\prefix t$.  Then we may take the limit $\s^\mu$ of these sequences and we have $\s^\mu\vert_{A,B}\prefix s$ and $\s^\mu\vert_{B,C}\prefix t$.  For uniqueness, suppose that $\t^\mu$ has length $\mu$ and that $\t^\mu\vert_A\prefix s\vert_A$ and $\t^\mu\vert_C\prefix t\vert_C$.  Let $\gamma<\mu$, and let $\t^\gamma$ be the initial prefix of $\t^\mu$ of length $\gamma$.  Then $\t^\gamma\vert_A\prefix s\vert_A$ and $\t^\gamma\vert_C\prefix t\vert_C$, so $\t^\gamma=\s^\gamma$, by uniqueness.  Since $\gamma<\mu$ was arbitrary, it follows that $\t^\mu=\s^\mu$.  
 
-  Lastly, suppose that $\gamma=\delta+1$ for some ordinal $\delta$ and suppose that we have already constructed the sequence $\s^\delta$.  If $X$ and $Y$ are acn $\alpha$-games and $r\in P_{X\implies Y}$ is not length maximal, then Proposition \ref{NiceAcnGames} tells us that either $\zeta_X(r\vert_X)=P$ or $\zeta_Y(r\vert_Y)=O$.  We have $\s^\delta\vert_{A,B}\in P_{A\implies B}$ and $\s^\delta\vert_{B,C}\in P_{B\implies C}$, so if we assume that $\s^\delta\vert_{A,B}$ and $\s^\delta\vert_{B,C}$ are not length maximal plays, this gives us four possible `sign profiles' for the components of the sequence $\s^\delta$:
+  Lastly, suppose that $\gamma=\delta+1$ for some ordinal $\delta$ and suppose that we have already constructed the sequence $\s^\delta$.  If $X$ and $Y$ are acn $\alpha$-games and $r\in P_{X\implies Y}$ is not length maximal, then Proposition \ref{NiceAcnGames}(i) tells us that either $\zeta_X(r\vert_X)=P$ or $\zeta_Y(r\vert_Y)=O$.  We have $\s^\delta\vert_{A,B}\in P_{A\implies B}$ and $\s^\delta\vert_{B,C}\in P_{B\implies C}$, so if we assume that $\s^\delta\vert_{A,B}$ and $\s^\delta\vert_{B,C}$ are not length maximal plays, this gives us four possible `sign profiles' for the components of the sequence $\s^\delta$:
 
   \[
     \begin{array}{c|ccc}
@@ -1265,7 +1265,7 @@ Note that we have no explicit formula for the ordinal $\beta$ as we did for the 
     \item[Cases C and D: ] Entirely symmetrical.  This time, we get the next move from $s$ instead of $t$, and uniqueness follows from the fact that $\sigma$ is a strategy. 
   \end{description}
 
-  We still need to deal with the case that one of $\s^\delta\vert_{A,B},\s^\delta\vert_{B,C}$ is length maximal.  In that case, the `sign profile' for the components of $\s^\delta$ might not fit one of the cases in the table above, since Proposition \ref{NiceAcnGames} only holds for non-length maximal pays.  If the components of $\s^\delta$ do fit \textbf{Case A, B, C or D} above, then our existing argument is valid.  Otherwise, there are four new cases to consider:
+  We still need to deal with the case that one of $\s^\delta\vert_{A,B},\s^\delta\vert_{B,C}$ is length maximal.  In that case, the `sign profile' for the components of $\s^\delta$ might not fit one of the cases in the table above, since Proposition \ref{NiceAcnGames}(i) only holds for non-length maximal pays.  If the components of $\s^\delta$ do fit \textbf{Case A, B, C or D} above, then our existing argument is valid.  Otherwise, there are four new cases to consider:
   \[
     \begin{array}{c|cccl}
       \textbf{Case} & \zeta_A(\s^\delta\vert_A) & \zeta_B(\s^\delta\vert_B) & \zeta_C(\s^\delta\vert_C) & \\
@@ -1276,9 +1276,44 @@ Note that we have no explicit formula for the ordinal $\beta$ as we did for the 
       \textbf{H} & O & O & P &
     \end{array}
     \]
+
+  In \textbf{Cases E and F}, we must have $\s^\delta\vert_{A,B}=s$, since it is already length maximal.  If we also have $\s^\delta\vert_{B,C}=t$ then we set $\beta=\delta$ and terminate.  Otherwise, we have $\s^\delta\vert_{B,C}x\prefix t$ for some move $x$, and we set $\s^{\delta+1}=\s^\delta x$.  Then we certainly have $\s^{\delta+1}\vert_{A,B}\prefix s$ and $\s^{\delta+1}\vert_{B,C}\prefix t$.  
+
+  For uniqueness, suppose that $\t^{\delta+1}\in\sigma\|\tau$ has length $\delta+1$ and that $\t^{\delta+1}\vert_A\prefix s\vert_A$ and $\t^{\delta+1}\vert_C\prefix t\vert_C$.  As before, the induction hypothesis tells us that $\t^{\delta+1}$ must be of the form $\s^\delta y$ for some move $y$.  We claim that $x$ and $y$ must both be moves in $C$: if $x$ is a move in $A$ or $B$ then we have $\s^\delta\vert_{A,B}x\prefix s$, contradicting length maximality of $\s^\delta\vert_{A,B}$.  If $y$ is a move in $A$ or $B$ then we have $\t^{\delta+1}\vert_{A,B}=\s^\delta\vert_{A,B}y\in\sigma$, and this also contradicts length maximality of $\s^\delta\vert_{A,B}$.  It follows that $x$ and $y$ are both moves in $C$, so they are identical, since $\s^{\delta+1}\vert_C=\t^{\delta+1}\vert_C$.
+
+  We deal with \textbf{Cases G and H} using a symmetrical argument.
 \end{proof}
 
 Our first corolloray of this lemma will be to show that composition is well-defined for acn $\alpha$-games.
+
+\begin{corollary}
+  Let $A,B,C$ be acn $\alpha$-games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Set
+  \[
+    \comp\tau\sigma = \{\s\vert_{A,C}\suchthat\s\in\sigma\|\tau\}
+    \]
+  as before.  Then $\comp\tau\sigma$ is a strategy for $A\implies C$.
+
+  \begin{proof}
+    Certainly $\comp\tau\sigma\subset P_A\|P_C$: if $\s\in\sigma\|\tau$, then $\s\vert_{A,C}\vert_A=\s\vert_{A,B}\vert_A\in P_A$ and similarly $\s\vert_{A,C}\vert_C=\s\vert_{B,C}\vert_C\in P_C$.  To show that $\comp\tau\sigma\subset P_{A\implies C}$, it suffices by Proposition \ref{NiceAcnGames}(ii) to show that $\comp\tau\sigma$ is alternating with respect to $\zeta_{A\implies C}$.
+
+    Suppose $\s a\in\sigma\|\tau$ and that $\s\vert_{A,C}a\in\comp\tau\sigma$, for some move $a\in M_A$.  By the proof of Lemma \ref{TransLiftingLemma}, we must be in \textbf{Case C, D, G or H} above.  If we can show that $\zeta_{A\implies B}(\s\vert_{A,B})=\zeta_{A\implies C}(\s\vert_{A,C})$, then we win, for we have:
+    \[
+      \lambda_{A\implies C}(a)=\lambda_{A\implies B}(a) = \neg\zeta_{A\implies B}(\s\vert_{A,B})=\neg\zeta_{A\implies C}(\s\vert_{A,C})
+      \]
+    The following table shows that this is true in \textbf{Cases C, D and H}:
+    \[
+      \begin{array}{c|ccc|cc}
+        \textbf{Case} & \zeta_A(\s\vert_A) & \zeta_B(\s\vert_B) & \zeta_C(\s\vert_C) & \zeta_{A\implies B}(\s\vert_{A,B}) & \zeta_{A\implies C}(\s\vert_{A,C}) \\
+        \hline
+        \textbf{C} & P & O & O & O & O \\
+        \textbf{D} & O & O & O & P & P \\
+        \textbf{G} & P & O & P & O & P \\
+        \textbf{H} & O & O & P & P & P \\
+      \end{array}
+      \]
+    Therefore, it will suffice to show that \textbf{Case G} does not occur.
+  \end{proof}
+\end{corollary}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
