@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2016.8.21)  21 AUG 2016 14:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2016.8.14)  21 AUG 2016 19:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **ordinal_games
 (./ordinal_games.tex
-LaTeX2e <2016/03/31> patch level 3
+LaTeX2e <2016/03/31> patch level 1
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (/usr/share/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
@@ -345,7 +345,7 @@ Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks16
 )
 (/usr/share/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2016/07/10 v1.0t Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2016/06/02 v1.0s Standard LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
@@ -355,8 +355,8 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
-(/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2016/07/10 v0.06j Graphics/color for pdfTeX
+(/usr/share/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2016/06/17 v0.06h Graphics/color for pdfTeX
 
 (/usr/share/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
@@ -467,7 +467,7 @@ LaTeX Info: Redefining \addtolength on input line 81.
 Package: mhsetup 2010/01/21 v1.2a programming setup (MH)
 )
 (/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2016/06/28 v2.15d AMS math features
+Package: amsmath 2016/03/10 v2.15b AMS math features
 \@mathmargin=\skip57
 
 For additional information on amsmath, use the `?' option.
@@ -649,7 +649,7 @@ LaTeX Font Info:    Overwriting symbol font `llsymbols' in version `bold'
 (Font)                  U/cmllr/m/n --> U/cmllr/bx/n on input line 49.
 )
 (/usr/share/texmf-dist/tex/latex/tools/bm.sty
-Package: bm 2016/07/07 v1.2b Bold Symbol Support (DPC/FMi)
+Package: bm 2016/02/27 v1.2a Bold Symbol Support (DPC/FMi)
 \symboldoperators=\mathgroup7
 \symboldletters=\mathgroup8
 \symboldsymbols=\mathgroup9
@@ -1177,24 +1177,29 @@ cmsy/m/n/10.95 j[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ^^T
  []
 
 [33] [34] [35] [36] [37]
-Overfull \hbox (2.25142pt too wide) in paragraph at lines 1273--1273
+Overfull \hbox (9.4125pt too wide) in paragraph at lines 1273--1273
 []|$[]$|  
  []
 
 
-Overfull \hbox (2.50807pt too wide) in paragraph at lines 1275--1275
+Overfull \hbox (9.4125pt too wide) in paragraph at lines 1275--1275
 []|$[]$|  
  []
 
-[38] (./ordinal_games.bbl [39]) [40] (./ordinal_games.aux) ) 
+
+Overfull \hbox (6.9344pt too wide) detected at line 1278
+[]
+ []
+
+[38] [39] (./ordinal_games.bbl) [40] (./ordinal_games.aux) ) 
 Here is how much of TeX's memory you used:
- 17074 strings out of 493013
- 332889 string characters out of 6139317
- 390866 words of memory out of 5000000
- 20203 multiletter control sequences out of 15000+600000
+ 17073 strings out of 493014
+ 332868 string characters out of 6139325
+ 390783 words of memory out of 5000000
+ 20201 multiletter control sequences out of 15000+600000
  20662 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,15n,82p,1043b,327s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,17n,82p,1043b,327s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
@@ -1214,7 +1219,7 @@ sfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/e
 ufm10.pfb></usr/share/texmf-dist/fonts/type1/public/mathabx-type1/mathb10.pfb><
 /usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/shar
 e/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on ordinal_games.pdf (40 pages, 355530 bytes).
+Output written on ordinal_games.pdf (40 pages, 356947 bytes).
 PDF statistics:
  226 PDF objects out of 1000 (max. 8388607)
  160 compressed objects within 2 object streams

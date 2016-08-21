@@ -1270,9 +1270,9 @@ Note that we have no explicit formula for the ordinal $\beta$ as we did for the 
     \begin{array}{c|cccl}
       \textbf{Case} & \zeta_A(\s^\delta\vert_A) & \zeta_B(\s^\delta\vert_B) & \zeta_C(\s^\delta\vert_C) & \\
       \cline{1-4}
-      \textbf{E} & O & P & P & \rdelim\}{2}{55mm}[where $\s^\delta\vert_{A,B}$ is length maximal] \\
+      \textbf{E} & O & P & P & \rdelim\}{2}{60mm}[\parbox{60mm}{\hangindent=1em where $\s^\delta\vert_{A,B}$ is a length maximal \\ limiting play}] \\
       \textbf{F} & O & P & O & \\
-      \textbf{G} & P & O & P & \rdelim\}{2}{55mm}[where $\s^\delta\vert_{B,C}$ is length maximal] \\
+      \textbf{G} & P & O & P & \rdelim\}{2}{60mm}[\parbox{60mm}{\hangindent=1em where $\s^\delta\vert_{B,C}$ is a length maximal \\ limiting play}] \\
       \textbf{H} & O & O & P &
     \end{array}
     \]
@@ -1296,7 +1296,7 @@ Our first corolloray of this lemma will be to show that composition is well-defi
   \begin{proof}
     Certainly $\comp\tau\sigma\subset P_A\|P_C$: if $\s\in\sigma\|\tau$, then $\s\vert_{A,C}\vert_A=\s\vert_{A,B}\vert_A\in P_A$ and similarly $\s\vert_{A,C}\vert_C=\s\vert_{B,C}\vert_C\in P_C$.  To show that $\comp\tau\sigma\subset P_{A\implies C}$, it suffices by Proposition \ref{NiceAcnGames}(ii) to show that $\comp\tau\sigma$ is alternating with respect to $\zeta_{A\implies C}$.
 
-    Suppose $\s a\in\sigma\|\tau$ and that $\s\vert_{A,C}a\in\comp\tau\sigma$, for some move $a\in M_A$.  By the proof of Lemma \ref{TransLiftingLemma}, we must be in \textbf{Case C, D, G or H} above.  If we can show that $\zeta_{A\implies B}(\s\vert_{A,B})=\zeta_{A\implies C}(\s\vert_{A,C})$, then we win, for we have:
+    Suppose $\s a\in\sigma\|\tau$ for some move $a\in M_A$.  By the proof of Lemma \ref{TransLiftingLemma}, we must be in \textbf{Case C, D, G or H} above.  If we can show that $\zeta_{A\implies B}(\s\vert_{A,B})=\zeta_{A\implies C}(\s\vert_{A,C})$, then we win, for we have:
     \[
       \lambda_{A\implies C}(a)=\lambda_{A\implies B}(a) = \neg\zeta_{A\implies B}(\s\vert_{A,B})=\neg\zeta_{A\implies C}(\s\vert_{A,C})
       \]
@@ -1311,7 +1311,11 @@ Our first corolloray of this lemma will be to show that composition is well-defi
         \textbf{H} & O & O & P & P & P \\
       \end{array}
       \]
-    Therefore, it will suffice to show that \textbf{Case G} does not occur.
+    It remains to deal with \textbf{Case G}.  In this case, we know that $\s\vert_{B,C}$ is length maximal; we claim that $\s\vert_{A,B}$ is length maximal as well, which will contradict the fact that $\s\vert_{A,B}a\in\sigma$.  To show that $\s\vert_{A,B}$ is length maximal we will show that $\s\vert_B$ is length maximal.  Since $\zeta_B(\s\vert_B)=O$, it will suffice to prove that $\s\vert_B$ is a limiting play.
+
+    Suppose instead that $\s\vert_B$ is a successor play.  Since $\s\vert_{B,C}$ is a limiting play, we must have at least one move from $C$ occurring after the last move from $\s\vert_B$.  Since player $P$ switches games in $B\implies C$, that would imply that $\zeta_B(\s\vert_B)=P$ -- but we had supposed that $\zeta_B(\s\vert_B)=O$.  
+
+    In all cases, we have $\lambda_{A\implies C}(a)=\neg\zeta_{A\implies C}(\s\vert_{A,C})$.  Now suppose that $\s c\in\sigma\|\tau$ for some move $c\in M_C$.  By the proof of Lemma \ref{TransLiftingLemma}, we must be in \textbf{Case A, B, E or F}.  In \textbf{Cases A, B and F}, we have $\zeta_{A\implies C}(\s\vert_{A,C})=\zeta_{B\implies C}(\s\vert_{B,C})$, so we get that $\lambda_{A\implies C}(c)=\neg\zeta_{A\implies C}(\s\vert_{A,C})$, as before.  It remains to deal with \textbf{Case E}.  
   \end{proof}
 \end{corollary}
 
