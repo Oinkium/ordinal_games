@@ -739,6 +739,7 @@ Now we are ready to define our category $\G$ of games.  We have defined composit
 We can now state our first main result.
 
 \begin{theorem}
+  \label{IsCategory}
   The collection of negative games, with morphisms from $A$ to $B$ given by strategies on $A\implies B$ with the notions of composition and identity given above, forms a category $\G$.  Moreover, there is a faithful functor $\F\from\G\to\Rel$, where $\Rel$ is the category of sets and relations, given by sending a game $A$ to the set of plays $P_A$ and sending a strategy $\sigma\from A\implies B$ to the set
   \[
     \grel{\sigma}=\{(s\vert_A,s\vert_B)\suchthat \textrm{$s\in\sigma$ is a $P$-position}\}\subset P_A\times P_B
@@ -1098,7 +1099,7 @@ We want to build a category $\G(\alpha)$ whose objects are games and whose morph
   \comp\tau\sigma = \{\s\vert_{A,C}\suchthat \s\in\sigma\|\tau\}
 \end{gather*}
 
-Here, $\alpha\#\alpha$ is intended to be an upper bound and indeed any sufficiently large ordinal will do without changing the elements of $\sigma\|\tau$.  The symbol $\#$ denotes the so-called \emph{natural addition} on ordinals: if $\beta,\gamma$ are ordinals then the order type of $\beta\#\gamma$ is the largest well-ordering on the disjoint union $\beta\sqcup\gamma$ such that the restrictions to $\beta$ and $\gamma$ give the original orderings.  For example, we have $\omega\#1=\omega+1$, but $1\#\omega=\omega+1$ as well (and \emph{not} $1+\omega$, which equals $\omega$).  In any case, this is not an important point - we want to allow the sequences $\s$ to be as long as we need to be, but we need to introduce some bound to make it clear that the resulting collection of plays is a small set.  $\alpha\#\alpha$ turns out to be a suitable upper bound.
+Here, $\alpha\#\alpha$ is intended to be an upper bound and indeed any sufficiently large ordinal will do without changing the elements of $\sigma\|\tau$.  The symbol $\#$ denotes the so-called \emph{natural addition} on ordinals: if $\beta,\gamma$ are ordinals then the order type of $\beta\#\gamma$ is the largest well-ordering on the disjoint union $\beta\sqcup\gamma$ such that the restrictions to $\beta$ and $\gamma$ give the original orderings\footnote{Alternatively, $\#$ represents the coproduct in the category of well-ordered sets and order-preserving maps.}.  For example, we have $\omega\#1=\omega+1$, but $1\#\omega=\omega+1$ as well (and \emph{not} $1+\omega$, which equals $\omega$).  In any case, this is not an important point - we want to allow the sequences $\s$ to be as long as we need to be, but we need to introduce some bound to make it clear that the resulting collection of plays is a small set.  $\alpha\#\alpha$ turns out to be a suitable upper bound.
 
 For the functor $\cmap{\F}{\G(\alpha)}{\Rel}$, we shall want to show that
 \[
@@ -1133,15 +1134,16 @@ Note that for most ordinals $\alpha$ there is no difference between being comple
 Our category will have acn $\alpha$-games as objects and the morphisms from $A$ to $B$ will be partial strategies for $A\implies B$.  Later we will consider the total strategy case.
 
 \begin{proposition}
-  Let $A,B$ be acn $\alpha$-games.  Then $A\tensor B$ and $A\implies B$ are acn.
+  \label{TensorIsAcn}
+  Let $A,B$ be acn $\alpha$-games.  Then $A\tensor B$ is acn
   \begin{proof}
     Let $s\in P_{A\tensor B}$ be a limiting play that is not length maximal.  Then at least one of $s\vert_A$ and $s\vert_B$ must be a limiting play (otherwise they both have last moves and the later of the two will be the last move in $s$).  Suppose that $s\vert_A$ and $s\vert_B$ are both limiting plays.  By Lemma \ref{TechnicalOrdinalLemma}, $\length(s\vert_A),\length(s\vert_B)\le\length(s)$, so neither $s\vert_A$ nor $s\vert_B$ is length maximal, since $s$ is not.  Therefore, $\zeta_A(s\vert_A)=\zeta_B(s\vert_B)=P$, since $A$ and $B$ are acn.  Therefore, $\zeta_{A\tensor B}(s)=P$, since $P\wedge P=P$.
 
     Suppose instead that $s\vert_A$ is a successor play.  Then $s\vert_B$ is a limiting play.  Since $s$ is a limiting play, there must be moves from $B$ in $s$ that occur after the last move in $s\vert_A$.  Therefore, $\zeta_A(s\vert_A)=P$ by Proposition \ref{TransWhoSwitchesGames}.  Now $s\vert_B$ is a limiting play and not length maximal, so $\zeta_B(s\vert_B)=P$ and therefore $\zeta_{A\tensor B}(s)=P$.  The case where $s\vert_B$ is a successor play and $s\vert_A$ is a limiting play is similar.
-
-    Similarly, if $s\in P_{A\implies B}$ is a limiting play that is not length maximal, the equation $(P\Rightarrow P)=P$ proves that $\zeta_{A\implies B}(s)=P$.
   \end{proof}
 \end{proposition}
+
+TODOVERYIMPORTANT: mention that $A\implies B$ is not necessarily acn, and give the example.
 
 We shall want a version of Proposition \ref{nice-negative-games} to record the properties of negative games that make them so useful for our definition of composition.
 
@@ -1378,7 +1380,7 @@ Therefore we shall restrict for now to ordinals $\alpha$ of the form $\omega^\be
 Now we have made this restriction on $\alpha$, the fact that composition is well-defined follows as a corollary of Lemma \ref{TransLiftingLemma}.  
 
 \begin{corollary}
-  Let $\alpha$ be an ordinal of the form $\omega^beta$.  Let $A,B,C$ be acn $\alpha$-games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Set
+  Let $\alpha$ be an ordinal of the form $\omega^beta$.  Let $A,B,C$ be completely negative $\alpha$-games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Set
   \[
     \comp\tau\sigma = \{\s\vert_{A,C}\suchthat\s\in\sigma\|\tau\}
     \]
@@ -1409,9 +1411,80 @@ Now we have made this restriction on $\alpha$, the fact that composition is well
       \]
     as desired.  The case when we have $\s c\in\tau\|\sigma$ for some $c\in M_C$ is entirely symmetrical, working in \textbf{Cases A and B} this time.  Therefore, $\comp\tau\sigma\subset P_{A\implies C}$.  
 
-    We now need to show that the two strategy conditions are satisfied.  
+    We now need to show that the two strategy conditions are satisfied.  Let $\s\in\sigma\|\tau$ and suppose that $\s\vert_{A,C}$ is a $P$-position and that $a\in M_A$ is an $O$-move in $A$ such that $\s\vert_{A,C}a \in P_{A\implies C}$.  We want to show that $\s\vert_{A,C}a\in \comp\tau\sigma$.  Since $\s\vert_{A,C}$ is a $P$-position, we must be in \textbf{Case A or Case D}.  In that case, $\s\vert_{A,B}$ is a $P$-position and we know that $\s\vert_Aa\in P_A$, so $\s\vert_{A,B}a\in P_{A\implies B}$.  Since $\sigma$ is a strategy, that implies that $\s\vert_{A,B}a\in\sigma$ and therefore $\s a\in\sigma\|\tau$.  So we have $\s\vert_{A,C}a=\s a\vert_{A,C}\in\comp\tau\sigma$.
+
+    A symmetrical argument shows that if $c\in M_C$ is an $O$-move in $C$ and $\s\vert_{A,C}c\in P_{A\implies C}$ then $\s\vert_{A,C}c\in\comp\tau\sigma$.  
+
+    Lastly, suppose that we have $s\in P_{A\implies C}$ is an $O$-position and that $x,y\in M_{A\implies C}$ are $P$-moves such that $sx,sy\in\comp\tau\sigma$.  We need to show that $x=y$.  By the definition of $\comp\tau\sigma$, there are sequences $\s,\t\in\sigma\|\tau$ with $\s\vert_{A,C}=sx$ and $\t\vert_{A,C}=sy$.  We may write:
+    \begin{gather*}
+      \s = \s'x \\
+      \t = \t'y
+    \end{gather*}
+
+    Without loss of generality, assume that $\length(\s')\le\length(\t')$ and write $\t'=\t''\r$, where $\t''$ has the same length as $\s'$.  Then $\t''\vert_A\prefix\s'\vert_A$ and $\t''\vert_C\prefix\s'\vert_C$, so $\t''=\s'$ by Lemma \ref{TransLiftingLemma}.  
+
+    We claim that $\r=\emptyplay$.  Indeed, suppose $\r$ is non-empty.  We have
+    \[
+      \t''\r\vert_{A,C}=\t'\vert_{A,C}=s=\s'\vert_{A,C}=\t''\vert_{A,C}
+      \]
+    and so $\r$ must be entirely composed of moves from $B$.  Let $b$ be the first move in $\r$.  Then $\s'x$ and $\s'b$ have the same length and we have $\s'b\vert_A\prefix\s'x\vert_A$ and $\s'b\vert_C\prefix\s'x\vert_C$, so $b=a$, which is impossible.  
+
+    Therefore, we must have $\s'x, \s'y\in\sigma\|\tau$.  Since $x,y$ are $P$-moves in $A\implies C$, each must be either an $O$-move in $A$ or a $P$-move in $C$.  It follows that either $\s'$ is in \textbf{Case B} and $x$ and $y$ are both moves in $C$ or that $\s'$ is in \textbf{Case C} and $x$ and $y$ areboth moves in $A$.  Suppose $\s'$ is in \textbf{Case B} and $x$ and $y$ are moves in $C$.  Then $\s'\vert_{B,C}x,\s'\vert_{B,C}\in\tau$ and so $x=y$, since they are $P$-moves and $\tau$ is a strategy.  Similarly, if $\s'$ is in \textbf{Case C} and $x$ and $y$ are moves in $A$, we have $\s'\vert_{A,B}x,\s'\vert_{A,B}y\in\sigma$ and so $x=y$ since $\sigma$ is a strategy.
   \end{proof}
 \end{corollary}
+
+As a second corollary of Lemma \ref{TransLiftingLemma}, we show that the relational presentation of games and strategies respects composition:
+
+\begin{corollary}
+  Let $\alpha=\omega^\beta$ for some $\beta$ and let $A,B,C$ be completely negative $\alpha$-games.  Let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Then we have:
+  \[
+    \grel{\comp\tau\sigma} = \comp{\grel\tau}{\grel\sigma}
+    \]
+  \begin{proof}
+    We have 
+    \begin{gather*}
+      \grel{\comp\tau\sigma} = \left\{(s\vert_A,s\vert_C)\suchthat\textrm{$s\in\comp\tau\sigma$ is a $P$-play}\right\} \\
+      \comp{\grel\tau}{\grel\sigma}=\{(s,t)\in P_A\times P_C\suchthat\exists u\in P_B\esuchthat (s,u)\in\grel\tau,\;(u,t)\in\grel\sigma\}
+    \end{gather*}
+    Suppose $s\in\comp\tau\sigma$ is a $P$-play and write $s=\s\vert_{A,C}$, where $\s\in\sigma\|\tau$.  Then we have $\s\vert_{A,B}\in\sigma$ and $\s\vert_{B,C}\in\tau$.  Since $s=\s\vert_{A,C}$ is a $P$-play, $\s$ must be in \textbf{Case A or Case D}, so $\s\vert_{A,B}$ and $\s\vert_{B,C}$ are both $P$-plays.  Therefore, we have
+    \begin{gather*}
+      (s\vert_A,\s\vert_B)\in\grel\sigma\\
+      (\s\vert_B,s\vert_C)\in\grel\tau
+    \end{gather*}
+    and therefore $(s\vert_A,s\vert_C)\in\comp{\grel\tau}{\grel\sigma}$.  Conversely, suppose $(s, t)\in\comp{\grel\tau}{\grel\sigma}$.  Then there exist $S\in\sigma,T\in\tau$ such that $S\vert_A=s$, $S\vert_B=T\vert_B$ and $T\vert_C=t$.  By Lemma \ref{TransLiftingLemma}, there is some $\s\in\sigma\|\tau$ such that $\s\vert_A=s$ and $\s\vert_C=t$.  So $(s,t)\in\grel{\comp\tau\sigma}$.
+  \end{proof}
+\end{corollary}
+
+\begin{corollary}
+  \label{TransIsCategory}
+  Let $\alpha=\omega^\beta$ for some $\beta$.  Then we can define a category $\G(\alpha)$ as follows - the objects are completely negative $\alpha$-games, and if $A,B$ are two objects then a morphism from $A$ to $B$ is given by a strategy for $A\implies B$.  We compose strategies as above.  If $A$ is an object, then the identity morphism on $A$ is given by
+  \[
+    \id_A = \left\{s\in P_{A\implies A}\suchthat\textrm{for all $P$-positions $t\prefix s$, $t\vert_A=t\vert_\bneggame{A}$}\right\}
+    \]
+  \begin{proof}
+    We need to check that this is indeed an identity and that composition is associative.  We do this using the relational presentation exactly as in Theorem \ref{IsCategory}.  
+  \end{proof}
+\end{corollary}
+
+\subsubsection{Monoidal structure}
+
+In this section, we shall fix an ordinal $\alpha=\omega^\beta$.  The tensor product $\tensor$ on $\alpha$-games makes the category $\G(\alpha)$ into a monoidal category.  If $A,B$ are objects of $\G(\alpha)$, then Proposition \ref{TensorIsAcn} tells us that $A\tensor B$ is an object of $\G(\alpha)$.  In fact, $\tensor$ gives us a functor $\G(\alpha)\times\G(\alpha)\to\G(\alpha)$ as follows: let $A,A',B,B'$ be completely negative $\alpha$-games, let $\sigma$ be a strategy for $A'\implies A$ and let $\tau$ be a strategy for $B'\implies B$.  Then we define a strategy $\sigma\tensor\tau$ for $(A'\tensor B')\implies (A\tensor B)$ as follows:
+\[
+  \sigma\tensor\tau = \{s\in P_{(A'\tensor B')\implies(A\tensor B)}\suchthat s\vert_{A',A}\in\sigma,\;s\vert_{B',B}\in\tau\}
+  \]
+To show that this is indeed a strategy for $(A'\tensor B')\implies (A\tensor B)$, suppose that $s\in\sigma\tensor\tau$ is a $P$-position and that $sx\in P_{(A'\tensor B')\implies (A\tensor B)}$.  We need to show that $sx\vert_{A',A}\in\sigma$ and that $sx\vert_{B', B}\in\tau$.  
+
+We claim that $s\vert_{A',A}$ and $s\vert_{B',B}$ are $P$-positions in $A'\implies A$ and $B'\implies B$.  Indeed, suppose without loss of generality that $s\vert_{A',A}$ is an $O$-position in $A'\implies A$.  We will show that $s$ is an $O$-position in $(A'\tensor B')\implies (A\tensor B)$, contradicting our assumptions.
+
+If $s\vert_{A',A}$ is an $O$-position, then $s\vert_{A'}$ is a $P$-position in $A'$ and $s\vert_A$ is an $O$-position in $A$.  Now, $s\vert_{A,B}$ is a play in $A\tensor B$, so Proposition \ref{NiceAcnGames}(i) tells us that $s\vert_B$ must be a $P$-position in $B$.  
+
+Now $s\vert_{B',B}$ is a play in $\tau\subset P_{B'\implies B}$, so Proposition \ref{NiceAcnGames}(i) now tells us that $s\vert_{B'}$ is a $P$-position in $B'$.  It follows that $s\vert_{A',B'}$ is a $P$-position in $A'\tensor B'$ and that $s\vert_{A,B}$ is an $O$-position in $A\tensor B$, so $s$ is an $O$-position in $(A'\tensor B')\implies (A\tensor B)$, which is the desired contradiction.
+
+Without loss of generality, suppose that the move $x$ occurs in $A'$ or $A$.  Since $s\vert_{A', A}$ is a $P$-position, we must have $sx\vert_{A',A}\in\sigma$, by the definition of a strategy, and then $s x\vert_{B',B}=s\vert_{B',B}\in\tau$.  So $sx\in\sigma\tensor\tau$.
+
+For the second strategy condition, suppose that $sx, sy\in\sigma\tensor \tau$, where $s$ is an $O$-position in $(A'\tensor B')\implies(A\tensor B)$ and $x,y$ are $P$-moves.  Then $s\vert_{A',B'}$ is a $P$-position in $A'\tensor B'$ and $s\vert_{A,B}$ is an $O$-position in $A\tensor B$.  
+
+This immediately tells us that $s\vert_{A'}$ is a $P$-position in $A'$ and that $s\vert_{B'}$ is a $P$-position in $B'$.  
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
