@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2016.8.14)  21 AUG 2016 19:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2016.8.21)  23 AUG 2016 13:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **ordinal_games
 (./ordinal_games.tex
-LaTeX2e <2016/03/31> patch level 1
+LaTeX2e <2016/03/31> patch level 3
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (/usr/share/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
@@ -345,7 +345,7 @@ Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks16
 )
 (/usr/share/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2016/06/02 v1.0s Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2016/07/10 v1.0t Standard LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
@@ -355,8 +355,8 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
-(/usr/share/texmf-dist/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2016/06/17 v0.06h Graphics/color for pdfTeX
+(/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2016/07/10 v0.06j Graphics/color for pdfTeX
 
 (/usr/share/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
@@ -467,7 +467,7 @@ LaTeX Info: Redefining \addtolength on input line 81.
 Package: mhsetup 2010/01/21 v1.2a programming setup (MH)
 )
 (/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2016/03/10 v2.15b AMS math features
+Package: amsmath 2016/06/28 v2.15d AMS math features
 \@mathmargin=\skip57
 
 For additional information on amsmath, use the `?' option.
@@ -649,7 +649,7 @@ LaTeX Font Info:    Overwriting symbol font `llsymbols' in version `bold'
 (Font)                  U/cmllr/m/n --> U/cmllr/bx/n on input line 49.
 )
 (/usr/share/texmf-dist/tex/latex/tools/bm.sty
-Package: bm 2016/02/27 v1.2a Bold Symbol Support (DPC/FMi)
+Package: bm 2016/07/07 v1.2b Bold Symbol Support (DPC/FMi)
 \symboldoperators=\mathgroup7
 \symboldletters=\mathgroup8
 \symboldsymbols=\mathgroup9
@@ -1116,7 +1116,7 @@ Overfull \hbox (0.40103pt too wide) in paragraph at lines 573--575
 ive games. In other words, we can ig-nore the well-formedness
  []
 
-[12]
+[12] [13]
 Overfull \hbox (3.58801pt too wide) detected at line 615
 \OMS/cmsy/m/n/10.95 f\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 s\OMS/cmsy/m/n/10.
 95 j[]\OML/cmm/m/it/10.95 ; s\OMS/cmsy/m/n/10.95 j[]\OT1/cmr/m/n/10.95 )  [] []
@@ -1125,7 +1125,7 @@ n/10.95 (\OML/cmm/m/it/10.95 s[]\OMS/cmsy/m/n/10.95 j[]\OML/cmm/m/it/10.95 ; s[
 ]\OMS/cmsy/m/n/10.95 j[]\OT1/cmr/m/n/10.95 )  [] []  []\OMS/cmsy/m/n/10.95 g
  []
 
-[13] [14]
+[14]
 Overfull \hbox (2.31253pt too wide) detected at line 654
 []\OT1/cmr/m/n/10.95 (\U/euf/m/n/10.95 s\OMS/cmsy/m/n/10.95 j[]\OT1/cmr/m/n/10.
 95 ) \OMS/cmsy/m/n/10.95 ^^T []\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 s\OT1/cm
@@ -1158,7 +1158,7 @@ Overfull \hbox (22.26468pt too wide) in paragraph at lines 1051--1052
 T1/cmr/m/n/10.95 , and re-strict-ing $\OML/cmm/m/it/10.95 ^^P[]; ^^P[]; ^^P[]$
  []
 
-
+[29]
 Overfull \hbox (11.05331pt too wide) in paragraph at lines 1060--1062
 \OT1/cmr/m/it/10.95 over, $\OML/cmm/m/it/10.95 P[]$ \OT1/cmr/m/it/10.95 is the 
 largest sub-set $\OML/cmm/m/it/10.95 X \OMS/cmsy/m/n/10.95 ^^Z \OML/cmm/m/it/10
@@ -1167,7 +1167,7 @@ hat $\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 M[]; ^^U[]; ^^P[]; X\OT1/cmr/m/n/1
 0.95 )$
  []
 
-[29] [30] [31] [32]
+[30] [31] [32]
 Overfull \hbox (5.74709pt too wide) in paragraph at lines 1138--1139
 \OML/cmm/m/it/10.95 s\OMS/cmsy/m/n/10.95 j[]$ \OT1/cmr/m/n/10.95 and $\OML/cmm/
 m/it/10.95 s\OMS/cmsy/m/n/10.95 j[]$ \OT1/cmr/m/n/10.95 are both lim-it-ing pla
@@ -1191,38 +1191,38 @@ Overfull \hbox (6.9344pt too wide) detected at line 1278
 []
  []
 
-[38] [39] (./ordinal_games.bbl) [40] (./ordinal_games.aux) ) 
+[38] [39] [40] [41] (./ordinal_games.bbl [42]) [43] (./ordinal_games.aux) ) 
 Here is how much of TeX's memory you used:
- 17073 strings out of 493014
- 332868 string characters out of 6139325
- 390783 words of memory out of 5000000
- 20201 multiletter control sequences out of 15000+600000
+ 17077 strings out of 493013
+ 332930 string characters out of 6139317
+ 399891 words of memory out of 5000000
+ 20206 multiletter control sequences out of 15000+600000
  20662 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,17n,82p,1043b,327s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmbx9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.p
-fb></usr/share/texmf-dist/fonts/type1/public/cmll/cmllr10.pfb></usr/share/texmf
--dist/fonts/type1/public/cmll/cmllr8.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
-sr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb>
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/e
-ufm10.pfb></usr/share/texmf-dist/fonts/type1/public/mathabx-type1/mathb10.pfb><
-/usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/shar
-e/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on ordinal_games.pdf (40 pages, 356947 bytes).
+</us
+r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/cmll/cmllr10.pfb></
+usr/share/texmf-dist/fonts/type1/public/cmll/cmllr8.pfb></usr/share/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><
+/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/a
+msfonts/euler/eufm10.pfb></usr/share/texmf-dist/fonts/type1/public/mathabx-type
+1/mathb10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10
+.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on ordinal_games.pdf (43 pages, 366107 bytes).
 PDF statistics:
- 226 PDF objects out of 1000 (max. 8388607)
- 160 compressed objects within 2 object streams
+ 236 PDF objects out of 1000 (max. 8388607)
+ 167 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

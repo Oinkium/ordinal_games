@@ -523,7 +523,7 @@ Following \cite{joyalgames} and \cite{abramskyjagadeesangames}, we define a cate
 \end{gather*}
 tell us that the class of negative games is closed under $\tensor$ and $\implies$ (since $P\vee P=P$, it is also closed under $\parr$, but the par of two negative games has no legal moves in our presentation, so it does not give a good model of the $\parr$ connective in linear logic and we will not consider it).
 
-In order to get a category, we need a way to compose a strategy for $A\implies B$ with a strategy for $B\implies C$.  Our treatment of composition is heavily influenced by work done by Hyland and Schalk (see \cite{hyland1997games} and \cite{hylandschalkgames}).  
+In order to get a category, we need a way to compose a strategy for $A\implies B$ with a strategy for $B\implies C$.  Our treatment of composition is heavily influenced by work done by Hyland and Schalk (see \cite{hyland1997games}, \cite{hylandschalkgames} and the excellent set of notes \cite{Schalk2001GsNotes}).  
 
 We shall use the usual definition of composition.  If $\sigma$ is a strategy for $A\implies B$ and $\tau$ is a strategy for $B\implies C$, we define a set
 \[
@@ -1284,38 +1284,132 @@ Note that we have no explicit formula for the ordinal $\beta$ as we did for the 
   We deal with \textbf{Cases G and H} using a symmetrical argument.
 \end{proof}
 
-Our first corolloray of this lemma will be to show that composition is well-defined for acn $\alpha$-games.
+We shall use (the proof of) this lemma to show that composition is well defined for acn $\alpha$-games.  First, though, we shall need to impose some conditions on the ordinal $\alpha$.  To start with, we shall assume that $\alpha=\omega^\beta$ for some $\beta$.  It is well known that these are precisely the \emph{additively closed} ordinals -- so if $\gamma,\delta<\omega^\beta$ then $\gamma+\delta<\omega^\beta$.  We shall want a stronger property though -- the ordinals of the form $\omega^\beta$ are closed under the natural addition $\#$ that we introduced earlier.
+
+To see this, suppose that $\gamma,\delta<\omega^\beta$.  We may write $\gamma$ and $\delta$ in their \emph{Cantor normal forms}:
+\begin{gather*}
+  \gamma = \omega^{\beta_1}.j_1 + \omega^{\beta_2}.j_2 + \cdots + \omega^{\beta_n}.j_n \\
+  \delta = \omega^{\beta_1}.k_1 + \omega^{\beta_2}.k_2 + \cdots + \omega^{\beta_n}.k_n
+\end{gather*}
+Here, $\beta_1>\beta_2>\cdots>\beta_n$, and $n,j_1,\dots,j_n,k_1,\dots,k_n<\omega$ (We allow $j_i,k_i$ to be zero so that we can use the same sequence $\beta_i$ in both cases.)  Then we may write
+\[
+  \gamma\#\delta = \omega^{\beta_1}.(j_1+k_1) + \omega^{\beta_2}.(j_2+k_2) + \cdots + \omega^{\beta_n}.(j_n+k_n)
+  \]
+using the fact that $\omega^\xi+\omega^\eta=\omega^\xi\#\omega^\eta$ if $\xi\ge\eta$ and the fact that the natural addition $\#$ is commutative.  Since $\gamma,\delta<\omega^\beta$, we must have $\beta_i<\beta$ for each $i$ and therefore $\gamma\#\delta<\omega^\beta$, since $\omega^\beta$ is additively closed.
+
+The reason that this is good for us is that it means that if $A,B,C$ are completely negative $\omega^\beta$-games, and if $\sigma$ is a strategy for $A\implies B$ and $\tau$ is a strategy for $B\implies C$ then any sequence $\s\in\sigma\|\tau$ must have length less than $\omega^\beta$.  Indeed, we may split $\s$ into its $A,B$-component and its $C$-component -- if these have lengths $\gamma,\delta<\omega^\beta$ then the full sequence has length at most $\gamma\#\delta<\omega^\beta$.  This allows us to ensure that $\s\vert_{A,C}$ has length at most $\omega^\beta$ -- so that it is a valid play in $A\implies C$.
+
+To get an idea of why we need to make some restriction on the ordinal $\alpha$, consider the situation when $\alpha=\omega^2+1$.  We define a game $\st$ as before:
+\begin{gather*}
+  M_{\st} = \{q,a\} \\
+  \lambda_{\st}(q) = O,\;\lambda_{\st}(a)=P \\
+\end{gather*}
+$P_\st$ will be the set of all plays $s\in M_\st^{*<\omega^2+1}$ such that $q$ is always followed by $a$, $a$ is always followed by $q$ and a limiting play is always followed by $q$.  We define $\zeta_\st$ to make $\st$ into a completely negative game.  
+
+Let $A=B=C=\st$.  Consider the sequence of plays $s_0,s_1,\dots,s_{\omega^2}$ in $A\implies B$ shown in Figure \ref{TooLongAB} and the sequence $t_0,t_1,\dots,t_{\omega+1}$ in $B\implies C$ shown in Figure \ref{TooLongBC}.  These sequences have matching $B$-components, so Lemma \ref{TransLiftingLemma} tells us that we can interleave them to give a sequence $\s$.  But now $\s\vert_{A,C}$ consists in a single move in $C$ followed by a play of length $\omega^2$ in $A$, followed by a single move in $C$ - in other words, it has length $\omega^2+1$, which is too long.  
+\begin{figure}[!ht]
+  \[
+    \begin{array}{ccccc}
+      \delta & A & B & \zeta_A(s_\delta\vert_A) & \zeta_B(s_\delta\vert_B) \\
+      \hline
+      0 & & & P & P \\
+      \hline
+      1 & & q & P & O \\
+      2 & q & & O & O \\
+      3 & a & & P & O \\
+      4 & q & & O & O \\
+      5 & a & & P & O \\
+      \vdots & \vdots & & \vdots & \vdots \\
+      \hline
+      \omega & & & P & O \\
+      \hline
+      \omega+1 & & a & P & P \\
+      \omega+2 & & q & P & O \\
+      \omega+3 & q & & O & O \\
+      \omega+4 & a & & P & O \\
+      \vdots & \vdots & & \vdots & \vdots \\
+      \hline
+      \omega2 & & & P & O \\
+      \hline
+      \omega2+1 & & a & P & P \\
+      \omega2+2 & & q & P & O \\
+      \omega2+3 & q & & O & O \\
+      \omega2+4 & a & & P & O \\
+      \vdots & \vdots & & \vdots & \vdots \\
+      \hline
+      \omega3 & & & P & O \\
+      \hline
+      \multicolumn{5}{c}{\vdots}\\
+      \multicolumn{5}{c}{\vdots}\\
+      \hline
+      \omega^2 & & & P & P \\
+      \hline
+    \end{array}
+    \]
+  \caption{Diagrammatic representation of a play $s$ of length $\omega^2$ in $A\implies B=\st\implies \st$.  Here $\s_\delta$ is the initial segment of $s$ of length $\delta$.  Note that $s\vert_A$ has length $\omega^2$, while $s\vert_B$ has length $\omega$, since only finitely many moves from $B$ are played in each $\omega$-segment.}
+  \label{TooLongAB}
+\end{figure}
+
+\begin{figure}[!ht]
+  \[
+    \begin{array}{ccccc}
+      \delta & B & C & \zeta_B(t_\delta\vert_B) & \zeta_C(t_\delta\vert_C) \\
+      \hline
+      0 & & & P & P \\
+      \hline
+      1 & & q & P & O \\
+      2 & q & & O & O \\
+      3 & a & & P & O \\
+      4 & q & & O & O \\
+      5 & a & & P & O \\
+      \vdots & \vdots & & \vdots & \vdots \\
+      \hline
+      \omega & & & P & O \\
+      \hline
+      \omega+1 & & a & P & P \\
+    \end{array}
+    \]
+  \caption{Diagrammatic representation of a play $t$ of length $\omega+1$ in $B\implies C=\st\implies \st$.  Compare with Figure \ref{TooLongAB} and notice that the $B$-component of this sequence is exactly the same as the $B$-component in that sequence.}
+  \label{TooLongBC}
+\end{figure}
+
+Therefore we shall restrict for now to ordinals $\alpha$ of the form $\omega^\beta$.  This means in particular that there is no distinction between completely negative $\alpha$-games and acn $\alpha$-games, so we shall deal with completely negative games for simplicity.  Later on, we shall mimic the construction of win-games to construct categories of games over ordinals of the form $\omega^\beta+1$, but for the reasons outlined above this will not be as simple as changing the ordinal from $\omega^\beta$ to $\omega^\beta+1$ in our definitions.
+
+Now we have made this restriction on $\alpha$, the fact that composition is well-defined follows as a corollary of Lemma \ref{TransLiftingLemma}.  
 
 \begin{corollary}
-  Let $A,B,C$ be acn $\alpha$-games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Set
+  Let $\alpha$ be an ordinal of the form $\omega^beta$.  Let $A,B,C$ be acn $\alpha$-games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Set
   \[
     \comp\tau\sigma = \{\s\vert_{A,C}\suchthat\s\in\sigma\|\tau\}
     \]
   as before.  Then $\comp\tau\sigma$ is a strategy for $A\implies C$.
 
   \begin{proof}
-    Certainly $\comp\tau\sigma\subset P_A\|P_C$: if $\s\in\sigma\|\tau$, then $\s\vert_{A,C}\vert_A=\s\vert_{A,B}\vert_A\in P_A$ and similarly $\s\vert_{A,C}\vert_C=\s\vert_{B,C}\vert_C\in P_C$.  To show that $\comp\tau\sigma\subset P_{A\implies C}$, it suffices by Proposition \ref{NiceAcnGames}(ii) to show that $\comp\tau\sigma$ is alternating with respect to $\zeta_{A\implies C}$.
+    We first claim that if $\s\in\sigma\|\tau$ then $\length(\s)<\alpha$.  Indeed, suppose that $\length(\s\vert_{A,B})=\gamma$ and $\length(\s\vert_C)=\delta$.  Then $\gamma,\delta<\alpha$, since $\s\vert_{A,B}\in P_{A\implies C}$ and $\s\vert_C\in P_C$.  We have order-preserving inclusions
+    \begin{gather*}
+      \gamma\hookrightarrow\length(\s)\\
+      \delta\hookrightarrow\length(\s)
+    \end{gather*}
+    that make the underlying set of $\length(\s)$ into the disjoint union $\gamma\sqcup\delta$.  Then the induced orderings on $\gamma,\delta$ are the same as their original orderings, so we must have $\length(\s)\le\gamma\#\delta$.  Since $\alpha$ is closed under natural addition $\#$, this means that $\length(\s)<\alpha$.  
 
-    Suppose $\s a\in\sigma\|\tau$ for some move $a\in M_A$.  By the proof of Lemma \ref{TransLiftingLemma}, we must be in \textbf{Case C, D, G or H} above.  If we can show that $\zeta_{A\implies B}(\s\vert_{A,B})=\zeta_{A\implies C}(\s\vert_{A,C})$, then we win, for we have:
-    \[
-      \lambda_{A\implies C}(a)=\lambda_{A\implies B}(a) = \neg\zeta_{A\implies B}(\s\vert_{A,B})=\neg\zeta_{A\implies C}(\s\vert_{A,C})
-      \]
-    The following table shows that this is true in \textbf{Cases C, D and H}:
+    Now we see that $\comp\tau\sigma\subset P_A\|P_C$: if $\s\in\sigma\|\tau$, then $\s\vert_{A,C}\vert_A=\s\vert_{A,B}\vert_A\in P_A$ and similarly $\s\vert_{A,C}\vert_C=\s\vert_{B,C}\vert_C\in P_C$.  To show that $\comp\tau\sigma\subset P_{A\implies C}$, it suffices by Proposition \ref{NiceAcnGames}(ii) to show that $\comp\tau\sigma$ is alternating with respect to $\zeta_{A\implies C}$.
+
+    Suppose $\s a\in\sigma\|\tau$ for some move $a\in M_A$.  By the proof of Lemma \ref{TransLiftingLemma}, we must be in \textbf{Case C or D} (there are no length maximal plays, so \textbf{Cases G and H} never occur).  The following table shows that we must have $\zeta_{A\implies B}(\s\vert_{A,B})=\zeta_{A\implies C}(\s\vert_{A,C})$:
     \[
       \begin{array}{c|ccc|cc}
         \textbf{Case} & \zeta_A(\s\vert_A) & \zeta_B(\s\vert_B) & \zeta_C(\s\vert_C) & \zeta_{A\implies B}(\s\vert_{A,B}) & \zeta_{A\implies C}(\s\vert_{A,C}) \\
         \hline
         \textbf{C} & P & O & O & O & O \\
         \textbf{D} & O & O & O & P & P \\
-        \textbf{G} & P & O & P & O & P \\
-        \textbf{H} & O & O & P & P & P \\
       \end{array}
       \]
-    It remains to deal with \textbf{Case G}.  In this case, we know that $\s\vert_{B,C}$ is length maximal; we claim that $\s\vert_{A,B}$ is length maximal as well, which will contradict the fact that $\s\vert_{A,B}a\in\sigma$.  To show that $\s\vert_{A,B}$ is length maximal we will show that $\s\vert_B$ is length maximal.  Since $\zeta_B(\s\vert_B)=O$, it will suffice to prove that $\s\vert_B$ is a limiting play.
+    Then we get:
+    \[
+      \lambda_{A\implies C}(a) = \lambda_{A\implies B}(a) = \neg\zeta_{A\implies B}(\s) = \neg\zeta_{A\implies C}(\s)
+      \]
+    as desired.  The case when we have $\s c\in\tau\|\sigma$ for some $c\in M_C$ is entirely symmetrical, working in \textbf{Cases A and B} this time.  Therefore, $\comp\tau\sigma\subset P_{A\implies C}$.  
 
-    Suppose instead that $\s\vert_B$ is a successor play.  Since $\s\vert_{B,C}$ is a limiting play, we must have at least one move from $C$ occurring after the last move from $\s\vert_B$.  Since player $P$ switches games in $B\implies C$, that would imply that $\zeta_B(\s\vert_B)=P$ -- but we had supposed that $\zeta_B(\s\vert_B)=O$.  
-
-    In all cases, we have $\lambda_{A\implies C}(a)=\neg\zeta_{A\implies C}(\s\vert_{A,C})$.  Now suppose that $\s c\in\sigma\|\tau$ for some move $c\in M_C$.  By the proof of Lemma \ref{TransLiftingLemma}, we must be in \textbf{Case A, B, E or F}.  In \textbf{Cases A, B and F}, we have $\zeta_{A\implies C}(\s\vert_{A,C})=\zeta_{B\implies C}(\s\vert_{B,C})$, so we get that $\lambda_{A\implies C}(c)=\neg\zeta_{A\implies C}(\s\vert_{A,C})$, as before.  It remains to deal with \textbf{Case E}.  
+    We now need to show that the two strategy conditions are satisfied.  
   \end{proof}
 \end{corollary}
 
