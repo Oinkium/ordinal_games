@@ -1484,7 +1484,43 @@ Without loss of generality, suppose that the move $x$ occurs in $A'$ or $A$.  Si
 
 For the second strategy condition, suppose that $sx, sy\in\sigma\tensor \tau$, where $s$ is an $O$-position in $(A'\tensor B')\implies(A\tensor B)$ and $x,y$ are $P$-moves.  Then $s\vert_{A',B'}$ is a $P$-position in $A'\tensor B'$ and $s\vert_{A,B}$ is an $O$-position in $A\tensor B$.  
 
-This immediately tells us that $s\vert_{A'}$ is a $P$-position in $A'$ and that $s\vert_{B'}$ is a $P$-position in $B'$.  
+This immediately tells us that $s\vert_{A'}$ is a $P$-position in $A'$ and that $s\vert_{B'}$ is a $P$-position in $B'$.  Moreover, by Proposition \ref{NiceAcnGames}(i), we know that either $s\vert_{A}$ is a $P$-position in $A$ and $s\vert_{B}$ is an $O$-position in $B$ or that $s\vert_A$ is an $O$-position in $A$ and $s\vert_B$ is a $P$-position in $B$.  
+
+That is, we find ourselves in one of the following cases:
+\[
+  \begin{array}{c|cccc}
+    \textbf{Case} & \zeta_{A'}(s\vert_{A'}) & \zeta_{B'}(s\vert_{B'}) & \zeta_A(s\vert_A) & \zeta_B(s\vert_B) \\
+    \hline
+    \textbf{1} & P & P & P & O\\
+    \textbf{2} & P & P & O & P
+  \end{array}
+  \]
+
+Suppose we are in \textbf{Case 1}.  Then $x$ cannot be a move in $A$ or $A'$: indeed, it is a $P$-move in $(A'\tensor B')\implies (A\tensor B)$, so it would be a $P$-move in $A'\implies A$.  But $s\vert_{A',A}$ is a $P$-position in $A'\implies A$.  Similarly, $y$ cannot be a move in $A$ or $A'$.  Therefore, $x$ and $y$ are both $P$-moves in $B\implies B'$, and then the fact that $\tau$ is a strategy implies that $x=x'$.  
+
+In \textbf{Case 2}, we can use a symmetrical argument, this time using the fact that $\sigma$ is a strategy.  
+
+It is easy to show that this tensor action on strategies respects composition: indeed, if we have morphisms
+\begin{gather*}
+  A''\xrightarrow{\sigma'}A'\xrightarrow{\sigma}A\\
+  B''\xrightarrow{\tau'}B'\xrightarrow{\tau}B
+\end{gather*}
+then we have
+\begin{gather*}
+  (\comp\sigma{\sigma'})\tensor(\comp\tau{\tau'}) = \left\{s\in P_{(A''\tensor B'')\implies(A\tensor B)}\suchthat s\vert_{A'', A}\in\comp\sigma{\sigma'},\;s\vert_{B'', B}\in\comp\tau{\tau'}\right\}
+\end{gather*}
+Meanwhile:
+\begin{align*}
+  (\sigma'\tensor\tau')\|(\sigma\tensor\tau) &= \left\{\s\in (M_{A''\tensor B''}\cprd M_{A'\tensor B'}\cprd M_{A\tensor B})^{*<\alpha}\;\middle|\;{\mbox{\begin{minipage}{120pt}{
+    \setlength{\abovedisplayskip}{-5pt}
+    \setlength{\belowdisplayskip}{-10pt}
+    \begin{IEEEeqnarray*}{cCc}
+      \s\vert_{A''\tensor B'',A'\tensor B'} & \in & \sigma'\tensor\tau' \\
+      \s\vert_{A'\tensor B',A\tensor B} & \in & \sigma\tensor\tau
+    \end{IEEEeqnarray*}}
+    \normalsize
+  \end{minipage}}}\right\}
+\end{align*}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
