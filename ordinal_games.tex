@@ -219,6 +219,16 @@
 \newcommand{\bbeta}{{\bm{\beta}}}
 \newcommand{\st}{{\Sigma^*}}
 \renewcommand{\S}{{\mathfrak{S}}}
+\DeclareMathOperator{\cc}{cc}
+\newcommand{\B}{\mathcal B}
+\renewcommand{\H}{\mathcal H}
+\DeclareMathOperator{\assoc}{assoc}
+\DeclareMathOperator{\lunit}{lunit}
+\DeclareMathOperator{\runit}{runit}
+\DeclareMathOperator{\braid}{braid}
+\newcommand{\blank}{\;\underline{\hspace{1.5ex}}\;}
+\DeclareMathOperator{\cn}{cn}
+\newcommand{\impliescn}{\overset{\cn}{\implies}}
 
 \let\oldemptyset\emptyset
 \let\emptyset\varnothing
@@ -1466,7 +1476,7 @@ As a second corollary of Lemma \ref{TransLiftingLemma}, we show that the relatio
   \end{proof}
 \end{corollary}
 
-\subsubsection{Monoidal structure}
+\subsubsection{Symmetric monoidal structure}
 
 In this section, we shall fix an ordinal $\alpha=\omega^\beta$.  The tensor product $\tensor$ on $\alpha$-games makes the category $\G(\alpha)$ into a monoidal category.  If $A,B$ are objects of $\G(\alpha)$, then Proposition \ref{TensorIsAcn} tells us that $A\tensor B$ is an object of $\G(\alpha)$.  In fact, $\tensor$ gives us a functor $\G(\alpha)\times\G(\alpha)\to\G(\alpha)$ as follows: let $A,A',B,B'$ be completely negative $\alpha$-games, let $\sigma$ be a strategy for $A'\implies A$ and let $\tau$ be a strategy for $B'\implies B$.  Then we define a strategy $\sigma\tensor\tau$ for $(A'\tensor B')\implies (A\tensor B)$ as follows:
 \[
@@ -1519,8 +1529,328 @@ Meanwhile:
       \s\vert_{A'\tensor B',A\tensor B} & \in & \sigma\tensor\tau
     \end{IEEEeqnarray*}}
     \normalsize
+  \end{minipage}}}\right\} \\[1em]
+  &= \left\{\s\in (M_{A''\tensor B''}\cprd M_{A'\tensor B'}\cprd M_{A\tensor B})^{*<\alpha}\;\middle|\;{\mbox{\begin{minipage}{80pt}{
+    \setlength{\abovedisplayskip}{-5pt}
+    \setlength{\belowdisplayskip}{-10pt}
+    \begin{IEEEeqnarray*}{cCc}
+      \s\vert_{A'', A'} & \in & \sigma' \\
+      \s\vert_{A', A} & \in & \sigma \\
+      \s\vert_{B'', B'} & \in & \tau' \\
+      \s\vert_{B', B} & \in & \tau
+    \end{IEEEeqnarray*}}
+    \normalsize
+  \end{minipage}}}\right\} \\[1em]
+  &= \left\{\s\in (M_{A''\tensor B''}\cprd M_{A'\tensor B'}\cprd M_{A\tensor B})^{*<\alpha}\;\middle|\;{\mbox{\begin{minipage}{80pt}{
+    \setlength{\abovedisplayskip}{-5pt}
+    \setlength{\belowdisplayskip}{-10pt}
+    \begin{IEEEeqnarray*}{cCc}
+      \s\vert_{A'', A', A} & \in & \sigma'\|\sigma \\
+      \s\vert_{B'', B', B} & \in & \tau'\|\tau
+    \end{IEEEeqnarray*}}
+    \normalsize
   \end{minipage}}}\right\}
 \end{align*}
+
+It follows that
+\[
+  \comp{(\sigma\tensor\tau)}{(\sigma'\tensor\tau')}
+  = \left\{\s\vert_{A''\tensor B'', A\tensor B}\suchthat\s\in(\sigma'\tensor\tau')\|(\sigma\tensor\tau)\right\}
+  = (\comp\sigma{\sigma'})\tensor(\comp\tau{\tau'})
+  \]
+To define the associators and unitors (which are the obvious choices) for our tensor product, we introduce a bit more technology.  Let $A',A$ be $\alpha$-games.  We call a bijective function $\cmap{f}{P_{A'}}{P_A}$ a \emph{tree isomorphism} if $f$ preserves length and the prefix ordering and commutes with $\zeta_A,\zeta_{A'}$.  If $A,A'$ are completely negative, then we have a strategy $\sigma_f$ for $A'\implies A$ given by
+\[
+  \sigma_f = \left\{s\in P_{A'\implies A}\suchthat \textrm{for all $P$-positions $t\prefix s$, we have $t\vert_A = f\left(t\vert_{A'}\right)$}\right\}
+  \]
+We check that $\sigma_f$ is indeed a strategy.  It is clearly prefix-closed and satisfies the limit condition by the definition.  If $s\in\sigma_f$ is a $P$-position, then we must have $sx\in\sigma_f$ for all $sx\in P_{A'\implies A}$.  Now suppose that $sx,sy\in \sigma_f$.  We first claim that $x$ and $y$ take place in the same game.  Indeed, suppose instead that $x$ is a move in $A'$ and $y$ is a move in $A$.  Then we have
+\begin{gather*}
+  s\vert_A = f\bracketed{s\vert_{A'}x} \\
+  s\vert_Ay = f\bracketed{s\vert_{A'}}
+\end{gather*}
+But this is impossible, since $f$ preserves lengths.  Therefore, $x$ and $y$ take place in the same game.  If they are moves in $A$, we have
+\[
+  s\vert_Ax = f\bracketed{s\vert_{A'}} = s\vert_Ay
+  \]
+and so $x=y$, and if they are moves in $A'$, we have
+\[
+  s\vert_{A'}x = f\inv\bracketed{s\vert_A} = s\vert_{A'}y
+  \]
+and so $x=y$ again.
+
+We call a strategy $\sigma_f$ arising from a tree isomorphism $f$ a \emph{copycat strategy}.  The relational presentation $\grel{\sigma_f}$ of such a strategy $\sigma_f$ is the graph of the function $\cmap{f}{P_{A'}}{P_A}$, and therefore the function $f$ is determined uniquely by the strategy $f$.  Moreover, if we have competely negative $\alpha$-games $A'', A', A$ and tree isomorphisms $A''\xrightarrow{f'}A'\xrightarrow{f}A$, then we must have
+\[
+  \comp{\sigma_f}{\sigma_{f'}} = \sigma_{\comp{f}{f'}}
+  \]
+We therefore have a full-on-objects subcategory $\G_{\cc}(\alpha)$ of $\G(\alpha)$ of games and copycat strategies that comes equipped with a natural functor $\cmap{\H}{\G_{\cc}(\alpha)}{\Set}$ that sends a game $A$ to $P_A$ and a copycat strategy $\sigma_f$ to the function $f$.  We get a commutative square in $\CAT$:
+\[
+  \begin{tikzcd}
+    \G_{\cc}(\alpha) \arrow[r, hook] \arrow[d, "\H"']
+      & \G(\alpha) \arrow[d, "\F"] \\
+    \Set \arrow[r, hook]
+      & \Rel
+  \end{tikzcd}
+  \]
+where all the functors in the diagram are faithful.  
+
+Given sets $X,Y$ and a function $\cmap{\phi}{X}{Y}$, we write $\overline\phi\from X^{*<\alpha}\to Y^{*<\alpha}$ for the induced map that acts pointwise via $\phi$.  Observe that disjoint union induces the structure of a symmetric monoidal category on $\Set$ with associators, unitors and braiding:
+\begin{gather*}
+  \assoc_{X,Y,Z}\from (X\cprd Y)\cprd Z\to X\cprd(Y\cprd Z)\\
+  \lunit_X\from \emptyset\cprd X\to X\\
+  \runit_X\from X\cprd\emptyset\to X\\
+  \braid_{X,Y}\from X\cprd Y\to Y\cprd X
+\end{gather*}
+
+Suppose $A,B,C$ are completely negative $\alpha$-games.  We have a function
+\[
+  \assoc_{M_A,M_B,M_C}\from M_{(A\tensor B)\tensor C}\to M_{A\tensor(B\tensor C)}
+  \]
+and it is clear from the definition that this gives rise to a function
+\[
+  \overline{\assoc_{M_A,M_B,M_C}}\from P_{(A\tensor B)\tensor C}\to P_{A\tensor(B\tensor C)}
+  \]
+The tensor unit in our category will be the empty game $I=(\emptyset, \emptyset, \emptyset, \{\emptyplay\})$.  If $A$ is a completely negative $\alpha$-game, we get natural maps
+\begin{gather*}
+  \lunit_{M_A}\from M_{I\tensor A}\to M_A \\
+  \runit_{M_A}\from M_{A\tensor I}\to M_A
+\end{gather*}
+and these give rise to maps
+\begin{gather*}
+  \overline{\lunit_{M_A}}\from P_{I\tensor A}\to P_A\\
+  \overline{\runit_{M_A}}\from P_{A\tensor I}\to P_A
+\end{gather*}
+Lastly, we have a map
+\[
+  \braid_{M_A,M_B}\from M_{A\tensor B}\to M_{B\tensor A}
+  \]
+inducing a map
+\[
+  \overline{\braid_{M_A,M_B}}\from P_{A\tensor B}\to P_{B\tensor A}
+  \]
+It is clear that these maps on sets of plays are all tree isomorphisms, so they give rise to ismorphisms in $\G(\alpha)$:
+\begin{gather*}
+  \assoc_{A,B,C}\from (A\tensor B)\tensor C\to A\tensor (B\tensor B)\\
+  \lunit_A\from I\tensor A\to A\\
+  \runit_A\from A\tensor I\to A\\
+  \braid_{A,B}\from A\tensor B\to B\tensor A
+\end{gather*}
+Since the original isomorphisms in $\Set$ satisfy the pentagon, triangle and hexagon identities, and since all the functors we are considering are faithful, our isomorphisms in $\G(\alpha)$ must satisfy the pentagon, triangle and hexagon identities as well.  We give the argument in the case of the pentagon identity.  
+
+Given completely negative $\alpha$-games $A,B,C,D$, we have the following commutative diagram in $\Set$:
+\[
+  \begin{tikzpicture}[commutative diagrams/every diagram]
+    \node (P0) at (90:2.3cm) {$M_{(A\tensor B)\tensor(C\tensor D)}$};
+    \node (P1) at (90+72:2cm) {$M_{((A\tensor B)\tensor C)\tensor D}$} ;
+    \node (P2) at (90+2*72:2cm) {\makebox[5ex][r]{$M_{(A\tensor(B\tensor C))\tensor D}$}};
+    \node (P3) at (90+3*72:2cm) {\makebox[5ex][l]{$ M_{A\tensor((B\tensor C)\tensor D)} $}};
+    \node (P4) at (90+4*72:2cm) {$ M_{A\tensor(B\tensor(C\tensor D))} $};
+  \path[commutative diagrams/.cd, every arrow, every label]
+    (P1) edge node {$\assoc_{M_{A\tensor B},M_C,M_D}$} (P0)
+    (P1) edge node[swap] {$\assoc_{M_A,M_B,M_C}\tensor\id_D$} (P2)
+    (P2) edge node[swap, yshift=-1em] {$\assoc_{M_A,M_{B\tensor C},M_D}$} (P3)
+    (P3) edge node[swap] {$\id_A\tensor\assoc_{M_B,M_C,M_D}$} (P4)
+    (P0) edge node {$\assoc_{M_A,M_B,M_{C\tensor D}}$} (P4);
+  \end{tikzpicture}
+  \]
+which immediately gives rise to a second commutative diagram in $\Set$:
+\[
+  \begin{tikzpicture}[commutative diagrams/every diagram]
+    \node (P0) at (90:2.3cm) {$P_{(A\tensor B)\tensor(C\tensor D)}$};
+    \node (P1) at (90+72:2cm) {$P_{((A\tensor B)\tensor C)\tensor D}$} ;
+    \node (P2) at (90+2*72:2cm) {\makebox[5ex][r]{$P_{(A\tensor(B\tensor C))\tensor D}$}};
+    \node (P3) at (90+3*72:2cm) {\makebox[5ex][l]{$ P_{A\tensor((B\tensor C)\tensor D)} $}};
+    \node (P4) at (90+4*72:2cm) {$ P_{A\tensor(B\tensor(C\tensor D))} $};
+  \path[commutative diagrams/.cd, every arrow, every label]
+    (P1) edge node {$\overline{\assoc_{M_{A\tensor B},M_C,M_D}}$} (P0)
+    (P1) edge node[swap] {$\overline{\assoc_{M_A,M_B,M_C}\tensor\id_D}$} (P2)
+    (P2) edge node[swap, yshift=-1em] {$\overline{\assoc_{M_A,M_{B\tensor C},M_D}}$} (P3)
+    (P3) edge node[swap] {$\overline{\id_A\tensor\assoc_{M_B,M_C,M_D}}$} (P4)
+    (P0) edge node {$\overline{\assoc_{M_A,M_B,M_{C\tensor D}}}$} (P4);
+  \end{tikzpicture}
+  \]
+But this is the image under the functor $\H$ of the following diagram in $\G_{\cc}(\alpha)$:
+\[
+  \begin{tikzpicture}[commutative diagrams/every diagram]
+    \node (P0) at (90:2.3cm) {${(A\tensor B)\tensor(C\tensor D)}$};
+    \node (P1) at (90+72:2cm) {${((A\tensor B)\tensor C)\tensor D}$} ;
+    \node (P2) at (90+2*72:2cm) {\makebox[5ex][r]{${(A\tensor(B\tensor C))\tensor D}$}};
+    \node (P3) at (90+3*72:2cm) {\makebox[5ex][l]{${A\tensor((B\tensor C)\tensor D)} $}};
+    \node (P4) at (90+4*72:2cm) {${A\tensor(B\tensor(C\tensor D))} $};
+  \path[commutative diagrams/.cd, every arrow, every label]
+    (P1) edge node {$\assoc_{{A\tensor B},C,D}$} (P0)
+    (P1) edge node[swap] {$\assoc_{A,B,C}\tensor\id_D$} (P2)
+    (P2) edge node[swap, yshift=-1em] {$\assoc_{A,{B\tensor C},D}$} (P3)
+    (P3) edge node[swap] {$\id_A\tensor\assoc_{B,C,D}$} (P4)
+    (P0) edge node {$\assoc_{A,B,{C\tensor D}}$} (P4);
+  \end{tikzpicture}
+  \]
+Since $\H$ is a faithful functor and the second diagram commutes, this last diagram must commute as well.  
+
+It remains to show that $\assoc_{A,B,C},\lunit_A,\runit_A,\braid_{A,B}$ are natural transformations.  We show this for $\assoc_{A,B,C}$ and the other cases are entirely similar.  
+
+Showing that $\assoc_{A,B,C}$ is a natural transformation from $((\blank\tensor \blank)\tensor \blank)$ to $(\blank\tensor(\blank\tensor \blank)\from \G(\alpha)\times\G(\alpha)\times\G(\alpha)\to\G(\alpha)$ means showing that the following diagram commutes for all completely negative $\alpha$-games $A',B',C',A,B,C$ and all morphisms $\sigma\from A'\to A,\tau\from B'\to B,\upsilon\from C'\to C$:
+\[
+  \begin{tikzcd}
+    (A'\tensor B')\tensor C' \arrow[r, "(\sigma\tensor\tau)\tensor\upsilon"'] \arrow[d, "\assoc_{A', B', C'}"']
+      & (A\tensor B)\tensor C \arrow[d, "\assoc_{A,B,C}"] \\
+    A'\tensor(B'\tensor C') \arrow[r, "\sigma\tensor(\tau\tensor\upsilon)"']
+      & A\tensor(B\tensor C)
+  \end{tikzcd}
+  \]
+It is easy to check that this diagram commutes by applying the functor $\F\colon\G(\alpha)\to\Rel$.  The relational content $\grel{\assoc_{A,B,C}}$ of the strategy $\assoc_{A,B,C}$ is the graph of the function 
+\[
+  \overline{\assoc_{M_A,M_B,M_C}}\from P_{(A\tensor B)\tensor C}\to P_{A\tensor(B\tensor C)}
+  \]
+and its action by left composition on $\grel{(\sigma\tensor\tau)\tensor\upsilon}\subset P_{(A'\tensor B')\tensor C'}\times P_{(A\tensor B)\tensor C}$ is pointwise application of this function.  We find that
+\begin{align*}
+  \grel{\comp{\assoc_{A,B,C}}{(\sigma\tensor\tau)\tensor\upsilon}}
+  &=\comp{\grel{\assoc_{A,B,C}}}{\grel{(\sigma\tensor\tau)\tensor\upsilon}}\\
+  &=\left\{(s,t)\in P_{(A'\tensor B')\tensor C'}\times P_{A\tensor(B\tensor C)}\;\middle|\;\mbox{\pbox{\textwidth}{$(s\vert_{A'},t\vert_A)\in\grel{\sigma}$\\$(s\vert_{B'},t\vert_B)\in\grel\tau$\\$(s\vert_{C'},t\vert_C)\in\grel\upsilon$}}\right\}
+\end{align*}
+A similar argument now shows that $\grel{\comp{\sigma\tensor(\tau\tensor\upsilon)}{\assoc_{A', B', C'}}}$ is equal to the same set, and so we have a commutative diagram in $\Rel$:
+\[
+  \begin{tikzcd}
+    P_{(A'\tensor B')\tensor C'} \arrow[r, "\grel{(\sigma\tensor\tau)\tensor\upsilon}"'] \arrow[d, "\grel{\assoc_{A', B', C'}}"']
+      & P_{(A\tensor B)\tensor C} \arrow[d, "\grel{\assoc_{A,B,C}}"] \\
+    P_{A'\tensor(B'\tensor C')} \arrow[r, "\grel{\sigma\tensor(\tau\tensor\upsilon)}"']
+      & P_{A\tensor(B\tensor C)}
+  \end{tikzcd}
+  \]
+Therefore, our original diagram in $\G(\alpha)$ is commutative, since the functor $\F$ is faithful.  
+
+We therefore have the structure of a symmetric monoidal category on $\G(\alpha)$.  
+
+\subsubsection{Symmetric monoidal closed structure}
+
+In existing finitary models of game semantics, the category of games is made into a symmetric monoidal closed category where the linear implication of two objects is given by the connective $\implies$.  As we remarked earlier, this approach will not work immediately for us, since $A\implies B$ need not be completely negative even if $A$ and $B$ are.  Our solution will be to modify $A\implies B$ so that it becomes completely negative.  
+
+\begin{definition}
+  Let $A$ be an $\alpha$-game.  We form a completely negative $\alpha$-game $A^{\cn}$ as follows:
+  \begin{itemize}
+    \item $M_{A^{\cn}}=M_A\cprd \{*_t\suchthat \textrm{$t\in P_A$ is a limiting $O$-play}\}$
+    \item $\lambda_{A^{\cn}}(x)=\lambda_A(x)$ for all $x\in M_A$.  $\lambda_{A^{\cn}}(*_s)=O$
+    \item $\zeta_{A^{\cn}}(sx)=\lambda_{A^{\cn}}(x)$ for $sx\in P_{A^{\cn}}$ a successor play.
+    \item $\zeta_{A^{\cn}}(s)=P$ for $s\in P_{A^{\cn}}$ a limiting play.
+  \end{itemize}
+  \[
+    P_{A^{\cn}} = \left\{s\in \left(M_{A^{\cn}}\right)^{*<\alpha}\;\middle|\;\mbox{\pbox{200px}{
+      $t\vert_{M_A}\in P_A$\\
+      If $u*_t\prefix s$ then $u=t$. \\
+      If $vx\prefix s$ and $v\vert_{M_A}$ is a limiting $O$-play in $P_A$ then $x=*_v$
+    }}\right\}
+    \]
+
+  In other words, we force $A$ to be completely negative by making all limiting plays be $P$-plays.  If $u$ was a limiting $O$-play in $A$, then it becomes a $P$-play in $A^{\cn}$.  Since the moves that follow $u$ in $A$ are $P$-moves, we add in an extra $O$-move $*_u$ in order to preserve the alternating condition.
+\end{definition}
+
+Given an $\alpha$-game $A$, there is a natural strategy $\cn_A$ for $A^{\cn}\implies A$ given by
+\[
+  \cn_A = \left\{s\in P_{A^{\cn}\implies A}\suchthat\textrm{for all $P$-positions $t\prefix s$, $t\vert_{A^{\cn}}\vert_{M_A}=t\vert_A$}\right\}
+  \]
+Concretely, this strategy is the copycat strategy for $A$, with the difference that whenever we reach a limiting $O$-play $u$ in $A$, player $P$ plays the extra move $*_u$ in $A^{\cn}$ before continuing.
+
+\begin{proposition}
+  \label{CnUniversalProperty}
+  $\cn_A$ is a total strategy for $A^{\cn}\implies A$.  Moreover, $\cn_A$ satisfies the following universal property: given a completely negative $\alpha$-game $B$ and a strategy $\sigma$ for $B\implies A$, there is a unique strategy $\sigma^{\cn}$ for $B\implies A^{\cn}$ such that the following diagram commutes in $\Rel$:
+  \[
+    \begin{tikzcd}
+      P_{B} \arrow[r, "\grel{\sigma^{\cn}}"] \arrow[dr, "\grel\sigma"']
+        & P_{A^{\cn}} \arrow[d, "\grel{\cn_A}"] \\
+      %
+        & P_A
+    \end{tikzcd}
+    \]
+\end{proposition}
+
+\begin{note}
+  The reason for using the relational presentation of games and strategies here is that we have not got a working definition of composition of strategies between games that are not completely negative.  
+\end{note}
+
+\begin{proof}[Proof of Proposition \ref{CnUniversalProperty}]
+  We first show that $\cn_A$ is a valid strategy for $A^{\cn}\implies A$.  It is certainly prefix closed and satisfies the limiting condition by definition.  Moreover, if $s\in\cn_A$ is a $P$-position and $sx\in P_{A^{\cn}\implies A}$ then $sx$ satisfies the conditions to be an element of $\cn_A$.
+
+  Suppose that $sx, sy\in \cn_A$ are $P$-positions.  Suppose first that neither $x$ nor $y$ is a move of the form $*_t$.  We claim that $sx,sy$ take place in the same game.  Indeed, suppose instead that $x$ is a move in $A^{\cn}$ and $y$ is a move in $A$.  Then we have:
+  \begin{gather*}
+    s\vert_{A^{\cn}}\vert_{M_A}x = sx\vert_{A^{\cn}}\vert_{M_A} = sx\vert_A = s\vert_A\\
+    s\vert_{A^{\cn}}\vert_{M_A} = sy\vert_{A^{\cn}}\vert_{M_A} = sy\vert_A = s\vert_Ay
+  \end{gather*}
+  which is a contradiction since it implies that $s\vert_{A^{\cn}}\vert_{M_A}$ is simultaneously a shorter sequence than $s\vert_A$ and a longer sequence than $s\vert_A$.
+
+  If $x,y$ are both moves in $A^{\cn}$ then we have
+  \begin{align*}
+    s\vert_{A^{\cn}}\vert_{M_A}x &= sx\vert_{A^{\cn}}\vert_{M_A} \\
+    & = sx\vert_A\\
+    & = s\vert_A
+  \end{align*}
+  and $s\vert_{A^{\cn}}\vert_{M_A}y=s\vert_A$ by an identical argument, and so $x=y$.  Similarly, if $x,y$ are both moves in $A$, then we have:
+  \begin{align*}
+    s\vert_Ax &= sx\vert_A \\
+    &= sx\vert_{A^{\cn}}\vert_{M_A}\\
+    &= s\vert_{A^{\cn}}\vert_{M_A}
+  \end{align*}
+  and similarly for $y$, so $x=y$.
+
+  Now, without loss of generality assume that $x=*_t$ for some $t$.  Then $s\vert_{A^{\cn}}\vert_{M_A}$ is a limiting play.  Suppose for a contradiction that $y$ is a move in $A$.  Then we have:
+  \[
+    s\vert_{A^{\cn}}\vert_{M_A} = sy\vert_{A^{\cn}}\vert_{M_A}=sy\vert_A = s\vert_Ay
+    \]
+  which is a contradiction, since $s\vert_Ay$ is a successor play.  Therefore, $y$ is a move in $A^{\cn}$.  We have:
+  \begin{align*}
+    t &= s\vert_{A^{\cn}}\vert_{M_A}\\
+    &= s*_t\vert_{A^{\cn}}\vert_{M_A}\\
+    &= s*_t\vert_{A^{\cn}}\vert_{M_A}\\
+    &= s\vert_{A^{\cn}}\vert_{M_A}
+  \end{align*}
+  Therefore, $s\vert_{A^{\cn}}\vert_{M_A}$ is a limiting $O$-play in $A$ and therefore we have $x=y=*_t$ by the definition of $A^{\cn}$.  
+
+  Now we show that $\cn_A$ is total.  Suppose that $s\in\cn_A$ is an $O$-position.  Then $s\vert_{A^{\cn}}$ is a $P$-position and $s\vert_A$ is an $O$-position.  Suppose that $s=ty$ is a successor play.  Note that $y$ cannot be a $*$-move, since these are all $O$-moves occurring in $A^{\cn}$.  If $y$ takes place in $A^{\cn}$ then we have $t\vert_{A^{\cn}}\vert_{M_A}=t\vert_A$ and therefore player $P$ can play $y$ in $A$ and still be playing according to $\cn$.  Similarly, if $y$ takes place in $A$, then player $P$ can play $y$ in $A^{\cn}$ and be in accordance with $\cn_A$.  
+
+  Suppose instead that $s$ is a limiting play.  It is clear from the definition that $s\vert_{A^{\cn}}\vert_A$ and $s\vert_A$ are both cofinal in $s$, so they are both limiting plays.  Therefore, $s\vert_A$ is a limiting $O$-play in $A$ and $s\vert_{A^{\cn}}\vert_{M_A}$ must be the corresponding $P$-play in $A^{\cn}$.  Therefore, player $P$ may play $*_t$ (where $t=s\vert_A$) in $A^{\cn}$ and still be in accordance with $A^{\cn}$.  So $\cn_A$ is total.
+
+  Let $q\in P_A$.  We claim that there is some $s\in\cn_A$ such that $s\vert_A=q$.  Indeed, since Player $P$ makes all $*$-moves in $A^{\cn}\implies A$, player $O$ has a strategy for $A^{\cn}\implies A$ in which he plays the moves of the sequence $q$ in order.  Since the strategy $\cn_A$ is total, player $P$ always has a reply to Player $O$'s moves and the resulting sequence $s$ satisfies $s\vert_A=q$.  
+
+  Therefore, the relational presentation of $\cn_A$ has the following property: for all sequences $q\in P_A$, there exists some $r\in P_{A^{\cn}}$ such that $(r,q)\in\grel{\cn_A}$.  Moreover, it is not difficult to see that this $r$ is unique, since play passes from $A$ to $A^{\cn}$ without fail at each turn, so a $P$-position in $\cn_A$ is uniquely determined by its sequence of $O$-moves, which must agree with its $A$-component.  
+
+  In other words, the relational presentation $\grel{\cn_A}$ is the graph of an injective function $f\colon P_A\to P_{A^{\cn}}$, so it is a split epimorphism in $\Rel$.  It follows that there is
+\end{proof}
+
+\begin{example}
+  If $\alpha=\omega$ and $A$ is a negative game then we have $\bneggame A^{\cn}\cong A\implies\bot$: the single move in $\bot$ takes the role of $*_{\emptyplay}$.  However, if $\alpha$ is a higher ordinal, then this does not hold, since $A\implies\bot$ is no longer a completely negative game.  
+
+  If $A,B$ are completely negative $\alpha$-games, we define $A\impliescn B$ to stand for $(A\implies B)^{\cn}$.  Then we do have $\bneggame{A}^{\cn}\cong A\impliescn \bot$.  The object $A\impliescn B$ will be the linear implication in our category.
+\end{example}
+
+To start with, we want to show that if $A,B,C$ are completely negative $\alpha$-games then we have:
+\[
+  \G(\alpha)(A\tensor B, C)\cong\G(\alpha)(A, B\impliescn C)
+  \]
+
+\begin{proposition}
+  \label{impliesTreeIsom}
+  Let $A,B,C$ be completely negative $\alpha$ games.  Then the games $(A\tensor B)\implies C$ and $A\implies(B\implies C)$ are tree isomorphic.
+\end{proposition}
+
+\begin{note}
+  Since $(A\tensor B)\implies C$ is not a completely negative game in general, we cannot say that these games are isomorphic as objects of $\G(\alpha)$, but it will help us to know that they are tree-isomorphic as games.
+\end{note}
+
+\begin{proof}[Proof of Proposition \ref{impliesTreeIsom}]
+  The sets of plays $P_{(A\tensor B)\implies C}$ and $P_{A\implies(B\implies C)}$ are both appropriate subsets of $P_A\|P_B\|P_C$.  We just need to check that $\lambda_{(A\tensor B)\implies C}=\lambda_{A\implies(B\implies C)}$ and that $\zeta_{(A\tensor B)\implies C}=\zeta_{A\implies(B\implies C}$.  
+
+  We have
+  \begin{align*}
+    \lambda_{(A\tensor B)\implies C} &= \neg\circ\lambda_{A\tensor B}\cprd\lambda_C\\
+    &= \neg\circ\lambda_A\cprd\neg\circ\lambda_B\cprd\lambda_C\\
+    &= \neg\circ\lambda_A\cprd\lambda_{B\implies C}\\
+    &= \lambda_{A\implies(B\implies C)}
+  \end{align*}
+  and
+  \begin{align*}
+    \zeta_{(A\tensor B)\implies C}(s) & = ((\zeta_A(s\vert_A)\wedge\zeta_B(s\vert_B))\Rightarrow\zeta_C(s\vert_C))\\
+    &=(\zeta_A(s\vert_A)\Rightarrow(\zeta_B(s\vert_B)\Rightarrow\zeta_C(s\vert_C))) \\
+    &=\zeta_{A\implies(B\implies C)}(s)
+  \end{align*}
+  where we can prove the second equality as follows: if $p,q,r\in\OP$, then $((p\wedge q)\Rightarrow r) = O$ if and only if $p=q=P$ and $r=O$.  Meanwhile, $(p\Rightarrow (q\Rightarrow r))=O$ if and only if $p=q=P$ and $r=O$.  So $((p\wedge q)\Rightarrow r) = (p\Rightarrow(q\Rightarrow r))$.
+\end{proof}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
