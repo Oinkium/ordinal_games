@@ -1810,7 +1810,27 @@ Concretely, this strategy is the copycat strategy for $A$, with the difference t
 
   Therefore, the relational presentation of $\cn_A$ has the following property: for all sequences $q\in P_A$, there exists some $r\in P_{A^{\cn}}$ such that $(r,q)\in\grel{\cn_A}$.  Moreover, it is not difficult to see that this $r$ is unique, since play passes from $A$ to $A^{\cn}$ without fail at each turn, so a $P$-position in $\cn_A$ is uniquely determined by its sequence of $O$-moves, which must agree with its $A$-component.  
 
-  In other words, the relational presentation $\grel{\cn_A}$ is the graph of an injective function $f\colon P_A\to P_{A^{\cn}}$, so it is a split epimorphism in $\Rel$.  It follows that there is
+  In other words, the relational presentation $\grel{\cn_A}$ is the graph of an injective function $h\colon P_A\to P_{A^{\cn}}$.
+
+  Let $B$ be a completely negative $\alpha$-game and let $\sigma$ be a strategy for $B\implies A$.  We define the strategy $\sigma^{\cn}$ for $B\implies A^{\cn}$ as follows:
+  \[
+    \sigma^{\cn} = \{s\in P_{B\implies A^{\cn}}\suchthat s\vert_{B,M_A}\in\sigma\}
+    \]
+  where we write $s\vert_{B,M_A}$ for the sequence obtained by deleting all $*$-moves from $s$.  
+
+  $\sigma^{\cn}$ is prefix closed, since $\sigma$ is, and satisfies the limit condition, since $\sigma$ does.  Suppose that $s\in\sigma^{\cn}$ is a $P$-position and that $sx\in P_{B\implies A^{\cn}}$.  If $x$ is a $*$-move, then we have $sx\vert_{B,M_A}=s\vert_{B,M_A}\in\sigma$, so $sx\in\sigma^{\cn}$.  Otherwise, we have $sx\vert_{B,M_A}=s\vert_{B,M_A}x$.  
+
+  If $s\vert_{B,M_A}$ is a $P$-position in $B\implies A$ then $s\vert_{B,M_A}x\in\sigma$ and therefore $sx\in\sigma^{\cn}$.  So suppose instead that $s\vert_{B,M_A}$ is an $O$-position.  If $s=ty$ is a successor position then $y$ is a $P$-move in $B\implies A^{\cn}$, so in particular $y$ is not a $*$-move and therefore $s\vert_{B,M_A}=t\vert_{B,M_A}y$ is a $P$-position.  Therefore, $s$ must be a limiting play.  
+
+  Since $s$ is a $P$-position, $s\vert_B$ must be a $P$-position, $s\vert_{A^{\cn}}\vert_{M_A}$ must be an $O$-position in $A$ and $s\vert_{A^{\cn}}$ must be a $P$-position in $A^{\cn}$.  It follows that $u\coloneqq s\vert_{A^{\cn}}\vert_{M_A}$ is a limiting $O$-play.  It follows that $x$ is a move in $A^{\cn}$, and therefore that $x=*_u$, which is a case we have already dealt with.
+
+  Next, suppose that $sx, sy\in\sigma^{\cn}$ are $P$-positions.  In particular, $x,y$ are not $*$-moves and we have $s\vert_{B,M_A}x,s\vert_{B,M_A}y\in\sigma$.  Therefore, $x=y$.  So $\sigma^{\cn}$ is a strategy.
+
+  Lastly, suppose that $\sigma$ is a total strategy.  Let $s\in\sigma^{\cn}$ be an $O$-position in $B\implies A^{\cn}$.  Then $s\vert_B$ is a $P$-position in $B$ and $s\vert_{A^{\cn}}$ is an $O$-position in $A^{\cn}$.  So $s\vert_{A^{\cn}}$ is a successor play in $A^{\cn}$, since $A^{\cn}$ is completely negative.  If the last move of $s\vert_{A^{\cn}}$ is not a $*$-move then $s\vert_{A^{\cn}}\vert_{M_A}$ has the same last move as $s\vert_{A^{\cn}}$ and is therefore an $O$-position as well.  Then $s\vert_{B,M_A}$ is an $O$-position and so there is some $x\in P_{B\implies A}$ such that $s\vert_{B,M_A}x\in\sigma$. Then $sx\in P_{B\implies A^{\cn}}$ and so $sx\in\sigma^{\cn}$.  
+
+  Suppose instead that $s\vert_{A^{\cn}}=t*_u$, where $u=t\vert_{M_A}$.  Then $u$ is an $O$-position in $A$, so $s\vert_{B,M_A}$ is an $O$-position in $B\implies A$ and therefore there is some $x\in P_{B\implies A}$ such that $s\vert_{B,M_A}x\in\sigma$.  Then $sx\in\sigma^{\cn}$.  So $\sigma^{\cn}$ is a total strategy.
+
+  We claim that $\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}=\grel{\sigma}$.  If $(s,t)\in\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}$ then there exists $u\in P_{A^{\cn}}$ such that $(s,u)\in\grel{\sigma^{\cn}}$ and $(u,t)\in\grel{\cn_A}$.  That means that $(s,u\vert_{M_A})$ in $\grel\sigma$ and $u\vert_{M_A}=t$.  Therefore, $(s,t)\in\grel\sigma$.  So $\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}\subset\grel\sigma$.  
 \end{proof}
 
 \begin{example}

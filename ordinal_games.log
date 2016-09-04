@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2016.8.14)  3 SEP 2016 10:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2016.8.14)  3 SEP 2016 15:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1226,15 +1226,15 @@ l cat-e-gory on $\OMS/cmsy/m/n/10.95 G\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 
 \OT1/cmr/m/n/10.95 )$. 
  []
 
-[51] [52] [53]
-Overfull \hbox (16.99615pt too wide) in paragraph at lines 1837--1838
+[51] [52] [53] [54]
+Overfull \hbox (16.99615pt too wide) in paragraph at lines 1857--1858
 \OT1/cmr/m/n/10.95 both ap-pro-pri-ate sub-sets of $\OML/cmm/m/it/10.95 P[]\OMS
 /cmsy/m/n/10.95 k\OML/cmm/m/it/10.95 P[]\OMS/cmsy/m/n/10.95 k\OML/cmm/m/it/10.9
 5 P[]$\OT1/cmr/m/n/10.95 . We just need to check that $\OML/cmm/m/it/10.95 ^^U[
 ] \OT1/cmr/m/n/10.95 =
  []
 
-[54] (./ordinal_games.bbl [55]) [56] (./ordinal_games.aux) ) 
+[55] (./ordinal_games.bbl [56]) [57] (./ordinal_games.aux) ) 
 Here is how much of TeX's memory you used:
  17398 strings out of 493014
  340240 string characters out of 6139325
@@ -1262,10 +1262,10 @@ sfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/e
 ufm10.pfb></usr/share/texmf-dist/fonts/type1/public/mathabx-type1/mathb10.pfb><
 /usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/shar
 e/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on ordinal_games.pdf (56 pages, 416203 bytes).
+Output written on ordinal_games.pdf (57 pages, 420233 bytes).
 PDF statistics:
- 277 PDF objects out of 1000 (max. 8388607)
- 195 compressed objects within 2 object streams
+ 280 PDF objects out of 1000 (max. 8388607)
+ 197 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
