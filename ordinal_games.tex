@@ -229,6 +229,8 @@
 \newcommand{\blank}{\;\underline{\hspace{1.5ex}}\;}
 \DeclareMathOperator{\cn}{cn}
 \newcommand{\impliescn}{\overset{\cn}{\implies}}
+\newcommand{\C}{{\mathcal{C}}}
+\DeclareMathOperator{\ev}{ev}
 
 \let\oldemptyset\emptyset
 \let\emptyset\varnothing
@@ -1159,39 +1161,32 @@ We shall want a version of Proposition \ref{nice-negative-games} to record the p
 
 \begin{proposition}
   \label{NiceAcnGames}
-  Let $A,B$ be acn $\alpha$-games and suppose that $s\in P_A\|P_B$ is alternating with respect to $\zeta_{A\tensor B}$.  Then:
+  a) Let $A,B$ be acn $\alpha$-games and suppose that $s\in P_A\|P_B$ is alternating with respect to $\zeta_{A\tensor B}$.  Then:
   \begin{enumerate}[i)]
     \item If $s$ is not a length maximal limiting play, then either $\zeta_A(s\vert_A)=P$ or $\zeta_B(s\vert_B)=P$.  
     \item $s$ is well formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$ (so $s\in P_{A\tensor B}$).
   \end{enumerate}
-  Furthermore, (i) and (ii) hold if we replace $\tensor$ with $\implies$ throughout and if we change the second `$P$' to an `$O$' in part (i).
+
+  b) Let $A$ be an acn $\alpha$-game, let $B$ be an arbitrary $\alpha$-game and suppose that $s\in P_A\|P_B$ is alternating with respect to $\zeta_{A\implies B}$.  Then:
+  \begin{enumerate}[i)]
+    \item If $s$ is not a length maximal limiting play, then either $\zeta_A(s\vert_A)=P$ or $\zeta_B(s\vert_B)=O$.
+    \item $s$ is well formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$ (so $s\in P_{A\tensor B}$).
+  \end{enumerate}
 \end{proposition}
 
 Note that the extra hypothesis on (i) is necessary: suppose $\alpha=\omega+1$ and let $\st$ be as defined above where the unique infinite play is $O$-winning.  Then $\st\tensor\st$ contains an infinite play $s$ both of whose components are infinite and we have $\zeta_A(s\vert_A)=\zeta_B(s\vert_B)=O$.  
 
 \begin{proof}[Proof of Proposition \ref{NiceAcnGames}]
-  By Proposition \ref{TransTensorWellFormed}, for part (ii) it suffices to show that the set of alternating plays in $P_A\|P_B$ is well-formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$ - i.e., that if $s,sx\in P_A\|P_B$ are alternating then $\zeta_{A\tensor B}(sx)=\lambda_{A\tensor B}(x)$.
+  (a): By Proposition \ref{TransTensorWellFormed}, for part (ii) it suffices to show that the set of alternating plays in $P_A\|P_B$ is well-formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$ - i.e., that if $s,sx\in P_A\|P_B$ are alternating then $\zeta_{A\tensor B}(sx)=\lambda_{A\tensor B}(x)$.
 
   If $s$ is a limiting play, then one of $s\vert_A,s\vert_B$ must be a limiting play.  By Lemma \ref{TechnicalOrdinalLemma}, $\length(s\vert_A),\length(s\vert_B)\le\length(s)$, so $s\vert_A$ and $s\vert_B$ are not length maximal if $s$ is not.  Therefore, either $\zeta_A(s\vert_A)=P$ or $\zeta_B(s\vert_B)=P$, since $A$ and $B$ are both acn.  
 
   We may now prove (i) and (ii) for all successor plays by induction on their length, exactly as we did in Proposition \ref{nice-negative-games}.  
 
-  The $\implies$ result follows from the $\tensor$ result after writing $A\implies B=\neggame{(A\tensor\neggame B)}$.
+  (b): Again, by Proposition \ref{TransTensorWellFormed}, for part (ii) it suffices to show that the set of alternating plays in $P_A\|P_B$ is well-formed with respect to $\zeta_{A\implies B},\lambda_{A\implies B}$ - i.e., that if $s,sx\in P_A\|P_B$ are alternating then $\zeta_{A\implies B}(sx)=\lambda_{A\tensor B}(x)$.  
+
+  We prove this by induction on the length of the play $s$; the successor case is exactly as in Proposition \ref{nice-negative-games}.  Suppose that $s$ is a non-length maximal limiting play.  If $s\vert_A$ is a limiting play, then we are done, since $A$ is acn and $s\vert_A$ is not length maximal by Lemma \ref{TechnicalOrdinalLemma}.  Otherwise, if $s\vert_A$ is a successor play, then it has a last move $a$.  Since $s$ is a limiting play, there must be moves from $B$ occurring later in $s$ than $a$, so $a$ is an $O$-move in $A\implies B$ by Proposition \ref{TransWhoSwitchesGames}, so it is a $P$-move in $A$.
 \end{proof}
-
-We shall also prove a version of a fact which we used implicitly a few times in the finitary case: if $A,B,C$ are negative games, $\sigma$ is a strategy for $A\implies B$ and $\tau$ is a strategy for $B\implies C$, then any sequence $\s\in\sigma\|\tau$ is \emph{local} - that is, it contains no adjacent pair $ac$ or $ca$, where $a\in M_A$ and $c\in M_C$.  We will prove this for our $\alpha$-games:
-
-\begin{lemma}
-  \label{AcnLocalSequences}
-  Let $A,B,C$ be acn $\alpha$-games, and let $\s\in(M_A\cprd M_B\cprd M_C)^{*<\alpha\#\alpha}$ be such that $\s\vert_{A,B}\in P_{A\implies B}$ and $\s\vert_{B,C}\in P_{B\implies C}$.  If $a\in M_A$ occurs in the sequence $\s$, then it cannot be immediately followed by a move from $C$ and similarly if $c\in M_C$ occurs in $\s$, it cannot be immediately followed by a move from $A$.  
-  \begin{proof}
-    Suppose that $a\in M_A$ and $\t a\prefix\s$ for some sequence $\t$.  If $\t\vert_B$ is a limiting play, then $\zeta_B(t\vert_B)=P$ [$\t\vert_B$ cannot be length maximal, since $\t\vert_{A,B}a\in P_{A\implies B}$ is longer].  But then since $(O\Rightarrow P)=(P\Rightarrow P)=P$, we end up with $\zeta_{A\implies B}(ta)=\zeta_{A\implies B}(t)$, contradicting alternation.  Therefore, $\t\vert_B$ is a successor play and there is a last $B$-move $b$ occurring in $\t a$.  
-
-    Now $b$ is immediately followed in $\t a\vert_{A,B}$ by a move from $A$ (since there is at least one $A$-move occurring later in the sequence and there are no more $B$-moves by assumption), so by Proposition \ref{TransWhoSwitchesGames} $b$ must be an $O$-move in $A\implies B$, so must be a $P$-move in $B\implies C$.  Then $b$ can only be followed in $\t a\vert_{B,C}$ by another $B$-move; since it is the last $B$-move in $\t a$, it must be the last move occurring in $\t a\vert_{B,C}$.  Then the next move in $\s\vert_{B,C}$ must be a $B$-move; in particular, if $\t ax\prefix \s$, then $x$ is either an $A$-move or a $B$-move.
-
-    Now suppose that $c\in M_C$ and $\t c\prefix\s$ for some sequence $\t$.  If $\t\vert_B$ is a successor play, then we can use an symmetrical argument, but this time it is possible for $\t\vert_B$ to be a limiting play (for example, $\t$ could be entirely composed of $C$-moves).  However, if $\t ca\prefix\s$ for some $A$-move $a$, then the argument from earlier in the proof shows that $\t\vert_B$ cannot be a limit play.  It follows that if $\t cx\prefix\s$ then $x$ is a $B$-move or a $C$-move - indeed, if $x$ is an $A$-move then $\t\vert_B$ is a successor play and we are done by the argument from earlier.
-  \end{proof}
-\end{lemma}
 
 \subsubsection{Interleavings and the functor into $\Rel$}
 
@@ -1223,7 +1218,7 @@ We will postpone discussion of the functor $\cmap{\F(\alpha)}{\G(\alpha)}{\Rel}$
 
 \begin{lemma}
   \label{TransLiftingLemma}
-  Let $A,B,C$ be acn $\alpha$-games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Suppose that $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$.  Then there exists some ordinal $\beta<\alpha\#\alpha$ such that for all $\gamma$ with $0\le\gamma\le\beta$ there is a unique sequence $\s^\gamma\in\sigma\|\tau$ of length $\gamma$ such that $\s^\gamma\vert_A\prefix s\vert_A$ and $\s\gamma\vert_C\prefix t\vert_C$.  Moreover, for this $\s^\gamma$ we have $\s^\gamma\vert_{A,B}\prefix s$ and $\s^\gamma\prefix t$ and if $\delta\le\gamma$ then $\s^\delta\prefix\s^\gamma$.  Lastly, we have $\s^\beta\vert_{A,B}=s$ and $\s^\beta\vert_{B,C}=t$.
+  Let $A,B$ be acn $\alpha$-games, let $C$ be an arbitrary $\alpha$-game, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Suppose that $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$.  Then there exists some ordinal $\beta<\alpha\#\alpha$ such that for all $\gamma$ with $0\le\gamma\le\beta$ there is a unique sequence $\s^\gamma\in\sigma\|\tau$ of length $\gamma$ such that $\s^\gamma\vert_A\prefix s\vert_A$ and $\s\gamma\vert_C\prefix t\vert_C$.  Moreover, for this $\s^\gamma$ we have $\s^\gamma\vert_{A,B}\prefix s$ and $\s^\gamma\prefix t$ and if $\delta\le\gamma$ then $\s^\delta\prefix\s^\gamma$.  Lastly, we have $\s^\beta\vert_{A,B}=s$ and $\s^\beta\vert_{B,C}=t$.
 \end{lemma}
 
 Note that we have no explicit formula for the ordinal $\beta$ as we did for the the numeral $n$ in Lemma \ref{LiftingLemma}, owing to the fact that addition of ordinals is less well-behaved than addition of numerals.  Nevertheless, this lemma shall be sufficient for our purposes.  
@@ -1235,7 +1230,7 @@ Note that we have no explicit formula for the ordinal $\beta$ as we did for the 
 
   Now suppose that $\mu$ is a limit ordinal and that we have a chain of sequences $\s^\gamma$ for all $\gamma<\mu$ such that $\s^\gamma\vert_{A,B}\prefix s$ and $\s^\gamma\vert_{B,C}\prefix t$.  Then we may take the limit $\s^\mu$ of these sequences and we have $\s^\mu\vert_{A,B}\prefix s$ and $\s^\mu\vert_{B,C}\prefix t$.  For uniqueness, suppose that $\t^\mu$ has length $\mu$ and that $\t^\mu\vert_A\prefix s\vert_A$ and $\t^\mu\vert_C\prefix t\vert_C$.  Let $\gamma<\mu$, and let $\t^\gamma$ be the initial prefix of $\t^\mu$ of length $\gamma$.  Then $\t^\gamma\vert_A\prefix s\vert_A$ and $\t^\gamma\vert_C\prefix t\vert_C$, so $\t^\gamma=\s^\gamma$, by uniqueness.  Since $\gamma<\mu$ was arbitrary, it follows that $\t^\mu=\s^\mu$.  
 
-  Lastly, suppose that $\gamma=\delta+1$ for some ordinal $\delta$ and suppose that we have already constructed the sequence $\s^\delta$.  If $X$ and $Y$ are acn $\alpha$-games and $r\in P_{X\implies Y}$ is not length maximal, then Proposition \ref{NiceAcnGames}(i) tells us that either $\zeta_X(r\vert_X)=P$ or $\zeta_Y(r\vert_Y)=O$.  We have $\s^\delta\vert_{A,B}\in P_{A\implies B}$ and $\s^\delta\vert_{B,C}\in P_{B\implies C}$, so if we assume that $\s^\delta\vert_{A,B}$ and $\s^\delta\vert_{B,C}$ are not length maximal plays, this gives us four possible `sign profiles' for the components of the sequence $\s^\delta$:
+  Lastly, suppose that $\gamma=\delta+1$ for some ordinal $\delta$ and suppose that we have already constructed the sequence $\s^\delta$.  If $X$ is an acn $\alpha$-games, $y$ is an arbitrary $\alpha$-game and $r\in P_{X\implies Y}$ is not length maximal, then Proposition \ref{NiceAcnGames}(i) tells us that either $\zeta_X(r\vert_X)=P$ or $\zeta_Y(r\vert_Y)=O$.  We have $\s^\delta\vert_{A,B}\in P_{A\implies B}$ and $\s^\delta\vert_{B,C}\in P_{B\implies C}$, so if we assume that $\s^\delta\vert_{A,B}$ and $\s^\delta\vert_{B,C}$ are not length maximal plays, this gives us four possible `sign profiles' for the components of the sequence $\s^\delta$:
 
   \[
     \begin{array}{c|ccc}
@@ -1390,7 +1385,7 @@ Therefore we shall restrict for now to ordinals $\alpha$ of the form $\omega^\be
 Now we have made this restriction on $\alpha$, the fact that composition is well-defined follows as a corollary of Lemma \ref{TransLiftingLemma}.  
 
 \begin{corollary}
-  Let $\alpha$ be an ordinal of the form $\omega^beta$.  Let $A,B,C$ be completely negative $\alpha$-games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Set
+  Let $\alpha$ be an ordinal of the form $\omega^{\beta}$.  Let $A,B$ be completely negative $\alpha$-games, let $C$ be an arbitrary $\alpha$-game, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Set
   \[
     \comp\tau\sigma = \{\s\vert_{A,C}\suchthat\s\in\sigma\|\tau\}
     \]
@@ -1446,6 +1441,7 @@ Now we have made this restriction on $\alpha$, the fact that composition is well
 As a second corollary of Lemma \ref{TransLiftingLemma}, we show that the relational presentation of games and strategies respects composition:
 
 \begin{corollary}
+  \label{TransHylandSchalkIsFunctor}
   Let $\alpha=\omega^\beta$ for some $\beta$ and let $A,B,C$ be completely negative $\alpha$-games.  Let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Then we have:
   \[
     \grel{\comp\tau\sigma} = \comp{\grel\tau}{\grel\sigma}
@@ -1723,6 +1719,45 @@ We therefore have the structure of a symmetric monoidal category on $\G(\alpha)$
 
 In existing finitary models of game semantics, the category of games is made into a symmetric monoidal closed category where the linear implication of two objects is given by the connective $\implies$.  As we remarked earlier, this approach will not work immediately for us, since $A\implies B$ need not be completely negative even if $A$ and $B$ are.  Our solution will be to modify $A\implies B$ so that it becomes completely negative.  
 
+Remember that when we proved that the composition of strategies $\sigma\from A\implies B$ and $\tau\from B\implies C$ is well defined, we were careful not to require that $C$ be acn (or completely negative).  From the point of view of constructing a category whose objects are $\alpha$-games, this is not useful, but it does allow us to construct certain alternative categories.
+
+\begin{definition}
+  Recall that if $\C$ is a category and $A$ is an object of $\C$, then the \emph{slice category} $\C/A$ is the category where the objects are morphisms
+  \[
+    \map{f}{B}{A}
+    \]
+  where $B$ is an object of $\C$ and where the morphisms between an object $\map{f}{B}{A}$ and an object $\map{g}{C}{A}$ are commutative triangles:
+  \[
+    \begin{tikzcd}
+      B \arrow[r, "f"] \arrow[d, "h"']
+       & A \\
+      C \arrow[ur, "g"]
+        &
+    \end{tikzcd}
+    \]
+  Let $A$ be a (not necessarily completely negative) $\alpha$-game.  Abusing notation slightly, we write $\G(\alpha)/A$ for the category whose objects are strategies
+  \[
+    \sigma\from B\implies A
+    \]
+  for $B$ a \emph{completely negative} $\alpha$-game and where the morphisms from an object $\map{\sigma}{B}{A}$ to an object $\map{\tau}{C}{A}$ are commutative triangles of the form
+  \[
+    \begin{tikzcd}
+      B \arrow[r, "\sigma"] \arrow[d, "\upsilon"']
+       & A \\
+      C \arrow[ur, "\tau"]
+        &
+    \end{tikzcd}
+    \]
+\end{definition}
+
+The main technical result we shall use to construct our closed monoidal structure is the following theorem:
+\begin{theorem}
+  \label{SliceTerminalObject}
+  Let $A$ be an $\alpha$-game.  Then the category $\G(\alpha)/A$ has a terminal object.
+\end{theorem}
+
+Note that if $A$ is completely negative, then the terminal object of $\G(\alpha)/A$ is the identity strategy $\map{\id_A}{A}{A}$, as is standard for slice categories.  If $A$ is not completely negative, then we will need to use a different construction.
+
 \begin{definition}
   Let $A$ be an $\alpha$-game.  We form a completely negative $\alpha$-game $A^{\cn}$ as follows:
   \begin{itemize}
@@ -1742,31 +1777,35 @@ In existing finitary models of game semantics, the category of games is made int
   In other words, we force $A$ to be completely negative by making all limiting plays be $P$-plays.  If $u$ was a limiting $O$-play in $A$, then it becomes a $P$-play in $A^{\cn}$.  Since the moves that follow $u$ in $A$ are $P$-moves, we add in an extra $O$-move $*_u$ in order to preserve the alternating condition.
 \end{definition}
 
+\begin{example}
+  If $\alpha=\omega$ and $A$ is a negative game then we have $\bneggame A^{\cn}\cong A\implies\bot$: the single move in $\bot$ takes the role of $*_{\emptyplay}$.  However, if $\alpha$ is a higher ordinal, then this does not hold, since $A\implies\bot$ is no longer a completely negative game.  
+
+  If $A,B$ are completely negative $\alpha$-games, we define $A\impliescn B$ to stand for $(A\implies B)^{\cn}$.  Then we do have $\bneggame{A}^{\cn}\cong A\impliescn \bot$.  The object $A\impliescn B$ will be the linear implication in our category.
+\end{example}
+
 Given an $\alpha$-game $A$, there is a natural strategy $\cn_A$ for $A^{\cn}\implies A$ given by
 \[
   \cn_A = \left\{s\in P_{A^{\cn}\implies A}\suchthat\textrm{for all $P$-positions $t\prefix s$, $t\vert_{A^{\cn}}\vert_{M_A}=t\vert_A$}\right\}
   \]
 Concretely, this strategy is the copycat strategy for $A$, with the difference that whenever we reach a limiting $O$-play $u$ in $A$, player $P$ plays the extra move $*_u$ in $A^{\cn}$ before continuing.
 
+We claim that $\map{\cn_A}{A^{\cn}}{A}$ is the terminal object in the category $\G(\alpha)/A$.  To do that, it will suffice to prove the following proposition:
+
 \begin{proposition}
   \label{CnUniversalProperty}
-  $\cn_A$ is a total strategy for $A^{\cn}\implies A$.  Moreover, $\cn_A$ satisfies the following universal property: given a completely negative $\alpha$-game $B$ and a strategy $\sigma$ for $B\implies A$, there is a unique strategy $\sigma^{\cn}$ for $B\implies A^{\cn}$ such that the following diagram commutes in $\Rel$:
+  $\cn_A$ is a total strategy for $A^{\cn}\implies A$.  Moreover, $\cn_A$ satisfies the following universal property: given a completely negative $\alpha$-game $B$ and a strategy $\sigma$ for $B\implies A$, there is a unique strategy $\sigma^{\cn}$ for $B\implies A^{\cn}$ such that the following diagram commutes:
   \[
     \begin{tikzcd}
-      P_{B} \arrow[r, "\grel{\sigma^{\cn}}"] \arrow[dr, "\grel\sigma"']
-        & P_{A^{\cn}} \arrow[d, "\grel{\cn_A}"] \\
+      B \arrow[r, "\sigma^{\cn}"] \arrow[dr, "\sigma"']
+        & A^{\cn} \arrow[d, "\cn_A"] \\
       %
-        & P_A
+        & A
     \end{tikzcd}
     \]
 \end{proposition}
 
-\begin{note}
-  The reason for using the relational presentation of games and strategies here is that we have not got a working definition of composition of strategies between games that are not completely negative.  
-\end{note}
-
-\begin{proof}[Proof of Proposition \ref{CnUniversalProperty}]
-  We first show that $\cn_A$ is a valid strategy for $A^{\cn}\implies A$.  It is certainly prefix closed and satisfies the limiting condition by definition.  Moreover, if $s\in\cn_A$ is a $P$-position and $sx\in P_{A^{\cn}\implies A}$ then $sx$ satisfies the conditions to be an element of $\cn_A$.
+\begin{proof}
+  We first show that $\cn_A$ is a valid strategy for $A^{\cn}\implies A$.  It is certainly prefix closed and satisfies the limiting condition by its definition.  Moreover, if $s\in\cn_A$ is a $P$-position and $sx\in P_{A^{\cn}\implies A}$ then $sx$ satisfies the conditions to be an element of $\cn_A$.
 
   Suppose that $sx, sy\in \cn_A$ are $P$-positions.  Suppose first that neither $x$ nor $y$ is a move of the form $*_t$.  We claim that $sx,sy$ take place in the same game.  Indeed, suppose instead that $x$ is a move in $A^{\cn}$ and $y$ is a move in $A$.  Then we have:
   \begin{gather*}
@@ -1830,19 +1869,90 @@ Concretely, this strategy is the copycat strategy for $A$, with the difference t
 
   Suppose instead that $s\vert_{A^{\cn}}=t*_u$, where $u=t\vert_{M_A}$.  Then $u$ is an $O$-position in $A$, so $s\vert_{B,M_A}$ is an $O$-position in $B\implies A$ and therefore there is some $x\in P_{B\implies A}$ such that $s\vert_{B,M_A}x\in\sigma$.  Then $sx\in\sigma^{\cn}$.  So $\sigma^{\cn}$ is a total strategy.
 
-  We claim that $\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}=\grel{\sigma}$.  If $(s,t)\in\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}$ then there exists $u\in P_{A^{\cn}}$ such that $(s,u)\in\grel{\sigma^{\cn}}$ and $(u,t)\in\grel{\cn_A}$.  That means that $(s,u\vert_{M_A})$ in $\grel\sigma$ and $u\vert_{M_A}=t$.  Therefore, $(s,t)\in\grel\sigma$.  So $\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}\subset\grel\sigma$.  
+  We claim that $\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}=\grel\sigma$.  Then we will have $\comp{\cn_A}{\sigma^{\cn}}=\sigma$ by Lemma \ref{TransHylandSchalkFaithful} and Corollary \ref{TransHylandSchalkIsFunctor}.  Suppose $(s,t)\in\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}$.  Then there is some $u\in P_{A^{\cn}}$ such that $(s,u)\in\grel{\sigma^{\cn}}$ and $(u,t)\in\grel{\cn_A}$.  Therefore, $(s,u\vert_{M_A})\in\grel\sigma$ and $t=u\vert_{M_A}$.  It follows that $(s,t)\in\grel{\sigma}$, so $\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}\subseteq\grel\sigma$.  
+
+  To show the reverse inclusion, we shall use the following lemma, which we shall prove later.  
+
+  \begin{lemma}
+    \label{CnLiftingLemma}
+    Let $B$ be a completely negative $\alpha$-game, let $A$ be an arbitrary $\alpha$-game and let $\sigma$ be a strategy for $B\implies A$.  Let $s\in\sigma$ be a $P$-position.  Then there is a unique $P$-position $t\in B\implies A^{\cn}$ such that $t\vert_{B,M_A}=s$.
+  \end{lemma}
+
+  We use Lemma \ref{CnLiftingLemma} to show the reverse inclusion as follows: let $s\in\sigma$ be a $P$-position -- so $(s\vert_B,s\vert_A)$ is an arbitrary element of $\grel\sigma$.  By Lemma \ref{CnLiftingLemma} there exists $t\in B\implies A^{\cn}$ such that $t\vert_{B,M_A}=s$.  In particular, $t\vert_{A^{\cn}}\vert_{M_A}=s\vert_A$ and $t\vert_B=s\vert_B$.  So we have $(s\vert_B,t\vert_{A^{\cn}})\in\grel{\sigma^{\cn}}$ and $(t\vert_{A^{\cn}},s\vert_A)\in\grel{\cn_A}$.  It follows that $(s\vert_B,s\vert_A)\in\grel{\sigma}$.  So $\grel\sigma\subseteq\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}$.  
+
+  Lastly, we need to show that the strategy $\sigma^{\cn}$ is unique.  Suppose that there were some other strategy $\tau$ for $B\implies A^{\cn}$ making the diagram commute:
+  \[
+    \begin{tikzcd}
+      B \arrow[r, "\tau"] \arrow[dr, "\sigma"']
+        & A^{\cn} \arrow[d, "\cn_A"] \\
+      %
+        & A
+    \end{tikzcd}
+    \]
+  We shall show that $\grel\tau=\grel{\sigma^{\cn}}$ -- so $\tau=\sigma^{\cn}$.  First suppose that $s\in\sigma^{\cn}$ is a $P$-position.  Since $\sigma = \comp{\cn_A}{\tau}$, there is some sequence $\s\in\tau\|\cn_A$ such that $\s\vert_{B,A}=s\vert_{B,M_A}$.  We have $\s\vert_{A^{\cn}}\vert_{M_A}=\s\vert_A$ and therefore $s\vert_{B,M_A}=\s\vert_{B,A^{\cn}}\vert_{B,M_A}$.  Therefore, $s=\s\vert_{B,A^{\cn}}\in\tau$, by uniqueness in Lemma \ref{CnLiftingLemma}.  So $\grel{\sigma^{\cn}}\subseteq\grel{\tau}$.  
+
+  Conversely, suppose that $s\in\tau$ is a $P$-position.  Then our argument above tells us that we have $(s\vert_{A^{\cn}},s\vert_{A^{\cn}}\vert_A)\in\grel{\cn_A}$.  So $(s\vert_B,s\vert_{A^{\cn}}\vert_{M_A})\in\grel\sigma$.  Therefore there is some $P$-position $u\in\sigma$ such that $u\vert_B=s\vert_B$ and $u\vert_A=s\vert_{A^{\cn}}\vert_{M_A}$.  By Lemma \ref{CnLiftingLemma}, there is a sequence $t\in\sigma^{\cn}$ with $t\vert_{B,M_A}=s$.  Then we have
+  \[
+    (s\vert_B,s\vert_{A^{\cn}})=(t\vert_B,t\vert_{A^{\cn}})\in\grel{\sigma^{\cn}}
+    \]
+  and therefore $\grel\tau\subseteq\grel{\sigma^{\cn}}$.  
 \end{proof}
 
-\begin{example}
-  If $\alpha=\omega$ and $A$ is a negative game then we have $\bneggame A^{\cn}\cong A\implies\bot$: the single move in $\bot$ takes the role of $*_{\emptyplay}$.  However, if $\alpha$ is a higher ordinal, then this does not hold, since $A\implies\bot$ is no longer a completely negative game.  
+It remains to prove Lemma \ref{CnLiftingLemma}.  
 
-  If $A,B$ are completely negative $\alpha$-games, we define $A\impliescn B$ to stand for $(A\implies B)^{\cn}$.  Then we do have $\bneggame{A}^{\cn}\cong A\impliescn \bot$.  The object $A\impliescn B$ will be the linear implication in our category.
-\end{example}
+\begin{proof}[Proof of Lemma \ref{CnLiftingLemma}]
+  This proof is similar to the proof of \ref{TransLiftingLemma}.  We inductively construct a sequence $t^0\prefix t^1\prefix\dots\prefix t^\gamma\prefix\dots\prefix t^\beta$, where $t^\gamma$ has length $\gamma$ and $t^\beta$ is our desired sequence $t$.  We shall prove inductively that $t^\gamma$ is the unique element $u\in\sigma^{\cn}$ of length $\gamma$ such that $u\vert_{B,M_A}=t$.
 
-To start with, we want to show that if $A,B,C$ are completely negative $\alpha$-games then we have:
-\[
-  \G(\alpha)(A\tensor B, C)\cong\G(\alpha)(A, B\impliescn C)
-  \]
+  If $\gamma$ is a limit ordinal, then set $t^\gamma$ to be the limit of all the sequences $t^\delta$ for $\delta<\gamma$.  We have $r\vert_{B,M_A}\prefix s$ for all proper prefixes $r\pprefix t^{\gamma}$ and therefore $t^\gamma\vert_{B,M_A}\prefix s$.  For uniqueness, suppose that $u^\gamma$ has length $\gamma$ and $u^\gamma\vert_{B,M_A}\prefix s$.  If $\delta<\gamma$ and we write $u^\delta$ for the prefix of $u^\gamma$ of length $\delta$ then we have $u^\delta=t^\delta$ by uniqueness and it follows that $u^\gamma=t^\gamma$.
+
+  Suppose instead that $\gamma=\delta+1$ is a successor ordinal.  We have a sequence $t^\delta$ of length $\delta$.  
+
+  Suppose first that $t^\delta$ is an $O$-position.  Then, as usual, $t^\delta\vert_{B,M_A}$ is an $O$-position.  We have $t^\delta\vert_{B,M_A}\prefix s$; since $s$ is a $P$-position, this must be a proper prefix, so there is some move $x$ such that $t^\delta\vert_{B,M_A}x\prefix s$.  By the argument above (showing that $\sigma^{\cn}$ is total if $\sigma$ is total), we must have $t^\delta x\in\sigma$.  We set $t^{\delta+1}=t^\delta x$.  Then $t^{\delta+1}\vert_{B,M_A}\prefix s$.  
+
+  For uniqueness, suppose that $u^{\delta+1}$ is some other sequence of length $\delta+1$ with $u^{\delta+1}\vert_{B,M_A}\prefix s$.  Writing $u^{\delta+1}=u^\delta y$, we have $u^{\delta}=t^\delta$ by uniqueness for sequences of length $\delta$.  Then $t^\delta x,t^\delta y\in\sigma$ and so $x=y$.  So $u^{\delta+1}=t^{\delta+1}$.  
+
+  Now suppose that $t^\delta$ is a $P$-position.  We have $t^\delta\vert_{B,M_A}\prefix s$.  If $t^\delta\vert_{B,M_A}=s$ then we terminate, setting $\beta=\delta$.  Otherwise, there is some move $x$ such that $t^\delta\vert_{B,M_A}x\prefix s$.  
+
+  Suppose that $t^\delta\vert_{B,M_A}$ is a $P$-position.  Then $x$ is an $O$-move, so $t^\delta x$ is alternating.  \textbf{Since $B$ is completely negative}, Proposition \ref{NiceAcnGames} tells us that $t^\delta x\in P_{B\implies A^{\cn}}$.  Therefore, $t^\delta x\in\sigma^{\cn}$, since $\sigma^{\cn}$ is a strategy.  We set $t^{\delta+1}=t^\delta x$.  Then we certainly have $t^{\delta+1}\vert_{B,M_A}\prefix s$.  For uniqueness, suppose that $u^{\delta+1}$ has length $\delta+1$ and that $u^{\delta+1}\vert_{B,M_A}\prefix s$.  Then $u^{\delta+1}=t^\delta y$ for some $y$ by uniqueness for sequences of length $\delta$.  Since $t^\delta\vert_{B,M_A}$ is a $P$-position, it is in particular not a limiting $O$-play, so $y$ cannot be a $*$-move.  Therefore, we have $u^{\delta}\vert_{B,M_A}y\prefix s$ and so $x=y$.  
+
+  Suppose instead that $t^\delta\vert_{B,M_A}$ is an $O$-position.  Then $v\coloneqq t^\delta\vert_{A^{\cn}}\vert_{M_A}$ must be a limiting $O$-play.  We set $t^{\delta+1}=t^\delta *_v$.  Since $*_v$ is the only move possible in position $t^\delta$, this must certainly be unique, and we have $t^\delta *_v\vert_{B,M_A}=t^\delta\vert_{B,M_A}\prefix s$.  
+
+  This completes the proof by induction.
+\end{proof}
+
+\subsubsection{A digression}
+
+Earlier on, we defined a category $\G(\alpha)/A$ for $A$ an arbitrary $\alpha$-game.  At this point, it is tempting to define a category as follows:
+
+\begin{definition}
+  The objects of the category $\tilde{\G}(\alpha)$ are (not necessarily completely negative) $\alpha$-games.  If $A,B$ are $\alpha$-games, a morphism in $\tilde{\G}(\alpha)$ from $A$ to $B$ is a functor
+  \[
+    \F\from\G(\alpha)/A\to\G(\alpha)/B
+    \]
+  that commutes with the natural projection functors $p_A\from\G(\alpha)/A\to\G(\alpha)$ and $p_B\from\G(\alpha)/B\to\G(\alpha)$.  
+\end{definition}
+
+This definition is useful because we have a natural embedding (the $2$-Yoneda embedding) of $\G(\alpha)$ into the category $\tilde{\G}(\alpha)$ that sends a completely negative game $N$ to the category $\G/N$ and sends a morphism $\sigma\from M\implies N$ to the `post-composition with $\sigma$' functor between the slice categories $\G(\alpha)//M$ and $\G(\alpha)/N$.  
+
+It is well known that this is a fully faithful embedding.  I claim that it is also essentially surjective, so it is in fact an equivalence of categories.  Indeed, this follows from what we have just shown:
+
+\begin{proposition}
+  Let $A$ be an arbitrary $\alpha$ game.  Then the categories $\G(\alpha)/A$ and $\G(\alpha)/A^{\cn}$ are isomorphic as categories, via an isomorphism that commutes with the proection functors.
+
+  \begin{proof}
+    We have a natural functor from $\G(\alpha)/A^{\cn}$ to $\G(\alpha)/A$ given by post-composition with $\cn_A$, where functoriality follows from associativity of composition.  This functor certainly commutes with the projection functors.  Then Proposition \ref{CnUniversalProperty} tells us that it is fully faithful and a bijection on objects, so it is a categorical isomorphism.
+  \end{proof}
+\end{proposition}
+
+Therefore, the categories $\G(\alpha)$ and $\tilde{\G}(\alpha)$ are equivalent.  This suggests one strategy for defining a symmetric monoidal closed structure on $\G(\alpha)$: since the objects of $\tilde{\G}(\alpha)$ are not required to be completely negative, we may freely define a closed monoidal structure on $\tilde{\G}(\alpha)$ by setting the linear implication between games $A$ and $B$ to be the game $A\implies B$ and the tensor product to be the game $A\tensor B$.  This symmetric monoidal closed structure will give rise to a symmetric monoidal closed structure on $\G(\alpha)$ via the equivalence of categories.  
+
+However, there is still quite a lot of work to show that this does indeed give a symmetric monoidal closed structure on $\tilde{\G}(\alpha)$, and it will be easier to construct the closed structure on $\G(\alpha)$ directly.
+
+\subsubsection{The completely negative linear implication $A\impliescn B$}
+
+Let $A,B$ be completely negative $\alpha$-games.  We have a completely negative $\alpha$-game $A\impliescn B\coloneqq (A\implies B)^{\cn}$.  We shall construct a monoidal closed structure on $\G(\alpha)$ where the linear implication between $A$ and $B$ is $A\impliescn B$.  
+
+We shall start off with the relevant result about the (usual) implication $A\implies B$:
 
 \begin{proposition}
   \label{impliesTreeIsom}
@@ -1854,7 +1964,7 @@ To start with, we want to show that if $A,B,C$ are completely negative $\alpha$-
 \end{note}
 
 \begin{proof}[Proof of Proposition \ref{impliesTreeIsom}]
-  The sets of plays $P_{(A\tensor B)\implies C}$ and $P_{A\implies(B\implies C)}$ are both appropriate subsets of $P_A\|P_B\|P_C$.  We just need to check that $\lambda_{(A\tensor B)\implies C}=\lambda_{A\implies(B\implies C)}$ and that $\zeta_{(A\tensor B)\implies C}=\zeta_{A\implies(B\implies C}$.  
+  The sets of plays $P_{(A\tensor B)\implies C}$ and $P_{A\implies(B\implies C)}$ are both appropriate subsets of $P_A\|P_B\|P_C$.  We just need to check that $\lambda_{(A\tensor B)\implies C}=\lambda_{A\implies(B\implies C)}$ and that $\zeta_{(A\tensor B)\implies C}=\zeta_{A\implies(B\implies C)}$.  
 
   We have
   \begin{align*}
@@ -1871,6 +1981,95 @@ To start with, we want to show that if $A,B,C$ are completely negative $\alpha$-
   \end{align*}
   where we can prove the second equality as follows: if $p,q,r\in\OP$, then $((p\wedge q)\Rightarrow r) = O$ if and only if $p=q=P$ and $r=O$.  Meanwhile, $(p\Rightarrow (q\Rightarrow r))=O$ if and only if $p=q=P$ and $r=O$.  So $((p\wedge q)\Rightarrow r) = (p\Rightarrow(q\Rightarrow r))$.
 \end{proof}
+
+To construct the monoidal closed structure, it suffices to give a morphism
+\[
+  \ev_{A,B}\from (A\impliescn B)\tensor A\to B
+  \]
+for all pairs $(A,B)$ of completely negative $\alpha$-games, such that for all completely negative $\alpha$-games $X$ and all morphisms $\sigma\from X\tensor A\to B$ there is a unique morphism $\upsilon\from X\to A\impliescn B$ making the following diagram commute:
+\[
+  \begin{tikzcd}
+    X\tensor A_3 \arrow[r, "\sigma"] \arrow[d, "\upsilon\tensor\id_A"']
+      & B_2 \\
+    (A_1\impliescn B_1)\tensor A_2 \arrow[ur, "\ev_{A,B}"']
+      &
+  \end{tikzcd}
+  \]
+(Here we have numbered the copies of $A$ and $B$ so we can refer to them individually).
+
+The strategy $\ev_{A,B}$ for $((A\impliescn B)\tensor A)\implies B$ is constructed as follows: we have our strategy $\cn_{A\implies B}$ for $(A\impliescn B)\implies(A\implies B)$.  By Proposition \ref{impliesTreeIsom}, this game is tree isomorphic to the game $((A\impliescn B)\tensor A)\implies B$, so we get the strategy $\ev_{A,B}$ by applying this tree isomorphism to the strategy $\cn_{A\implies B}$.  
+
+We need to show that the strategy $\ev_{A,B}$ satisfies the property given above.  Let $X$ be a completely negative $\alpha$-game and let $\sigma$ be a strategy for $(X\tensor A)\implies B$.  Then $\sigma$ gives rise, via the tree isomorphism above, to a strategy $\tilde{\sigma}$ for $X\implies(A\implies B)$.  Since the tree isomorphism does nothing more than identify $P_{(X\tensor A)\implies B}$ with $P_{X\implies(A\implies B)}$ as subsets of $(M_X\cprd M_B\cprd M_C)^{*<\alpha}$, we may identify $\sigma$ and $\tilde{\sigma}$ as subsets of $(M_X\cprd M_A\cprd M_B)$.  
+
+Similarly, we may identify $\ev_{A,B}$ with $\cn_{A\implies B}$ as subsets of 
+\[
+  \left(M_{A_1}\cprd M_{B_1}\cprd M_{A_2}\cprd M_{B_2}\right)^{*<\alpha}
+  \]
+where we have again labelled the different copies of $A$ and $B$ to avoid confusion.
+
+The strategy $\tilde{\sigma}$ gives rise to a strategy ${\tilde{\sigma}}^{\cn}$ for $X\implies(A\impliescn B)$.  We claim that this ${\tilde{\sigma}}^{\cn}$ satisfies the property above.  
+
+First, we show that $\comp{\ev_{A,B}}{({\tilde{\sigma}}^{\cn}\tensor\id_A)}=\sigma$.  By the definition of ${\tilde{\sigma}}^{\cn}$, we know that it mkes the following diagram commute:
+\[
+  \begin{tikzcd}
+    X \arrow[r, "{\tilde{\sigma}}^{\cn}"] \arrow[dr, "\tilde\sigma"']
+      & A_1\impliescn B_1 \arrow[d, "\cn_{A\implies B}"] \\
+    %
+      & A_2\implies B_2
+  \end{tikzcd}
+  \]
+where we have labelled the copies of $A$ and $B$ so we can tell them apart.  Therefore, we have
+\[
+  \tilde\sigma = \{\s\vert_{X,A_2,B_2}\suchthat \s\in{\tilde\sigma}^{\cn}\|\cn_{A\implies B}\}
+  \]
+where
+\[
+  {\tilde\sigma}^{\cn}\|\cn_{A\implies B} = \left\{\s\in \left(M_X\cprd M_{A_1}\cprd M_{B_1}\cprd M_{A_2}\cprd M_{B_2}\right)^{*<\alpha}\;\middle|\;\mbox{\pbox{\textwidth}{
+    $\s\vert_{X,A_1,B_1}\in{\tilde\sigma}^{\cn}$\\
+    $\s\vert_{A_1,B_1,A_2,B_2}\in\cn_{A\implies B}$
+  }}\right\}
+  \]
+Now we have
+\[
+  \comp{\ev_{A,B}}{({\tilde\sigma}^{\cn}\tensor\id_A)}=
+  \left\{\t\vert_{X,A_2,B_2}\suchthat\t\in\left({\tilde\sigma}^{\cn}\tensor\id_A\right)\|\ev_{A,B}\right\}
+  \]
+where
+\[
+  \left({\tilde\sigma}^{\cn}\tensor\id_A\right)\|\ev_{A,B}
+  =\left\{\t\in\left(M_X\cprd M_{A_3}\cprd M_{A_1}\cprd M_{B_1}\cprd M_{A_2}\cprd M_{B_2}\right)^{*<\alpha}\;\middle|\;
+  \mbox{\pbox{\textwidth}{
+    $\t\vert_{X,A_1,B_1}\in{\tilde\sigma}^{\cn}$\\
+    $\t\vert_{A_3,A_2}\in\id_A$\\
+    $\t\vert_{A_2,B_2}\in\ev_{A,B}$
+  }}\right\}
+  \]
+Remembering that we may identify $\ev_{A,B}$ with $\cn_{A\implies B}$ as sets of plays, we see that
+\[
+  \comp{\ev_{A,B}}{({\tilde\sigma}^{\cn}\tensor\id_A)}\subseteq\tilde\sigma=\sigma
+  \]
+since if $\t\in\left({\tilde\sigma}^{\cn}\tensor\id_A\right)\|\ev_{A,B}$ then we have $\t\vert_{X,A_1,B_1,A_2,B_2}\in{\tilde\sigma}^{\cn}\|\cn_{A\implies B}$ and so $\t\vert_{X,A_2,B_2}\in\tilde\sigma$.  
+
+Conversely, let $s\in\tilde\sigma$ and write $s=\s\vert_{X,A_2,B_2}$, where $\s\in{\tilde\sigma}^{\cn}\|\cn_{A\implies B}$.  We may construct a sequence $\t\in\left({\tilde\sigma}^{\cn}\tensor\id_A\right)\|\ev_{A,B}$ with $\t\vert_{X,A_1,B_1,A_2,B_2}=\s$ by inserting before each $P$-move in $A_2$ the corresponding move in $A_3$ and inserting \emph{after} each $O$-move in $A_2$ the corresponding move in $A_3$.  Therefore:
+\[
+  \sigma\subseteq\comp{\ev_{A,B}}{({\tilde\sigma}^{\cn}\tensor\id_A)}
+  \]
+For uniqueness, suppose that we have a strategy $\upsilon$ for $X\implies(A\impliescn B)$ making the following diagram commute:
+\[
+  \begin{tikzcd}
+    X\tensor A_3 \arrow[r, "\sigma"] \arrow[d, "\upsilon\tensor\id_A"']
+      & B_2 \\
+    (A_1\impliescn B_1)\tensor A_2 \arrow[ur, "\ev_{A,B}"']
+      &
+  \end{tikzcd}
+  \]
+Exactly the same argument then tells us that
+\[
+  \comp{\cn_{A\implies B}}{\upsilon}=\comp{\ev_{A,B}}{\upsilon\tensor\id_A}=\sigma=\tilde\sigma
+  \]
+(as sets of plays) and so $\upsilon={\tilde\sigma}^{\cn}$ by the uniqueness part of Proposition \ref{CnUniversalProperty}.
+
+Therefore $\G(\alpha)$ has the structure of a symmetric monoidal category with tensor product given by $\tensor$ and linear implication given by $\impliescn$.  
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
