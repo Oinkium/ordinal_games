@@ -49,6 +49,11 @@ Andr\'{e} Joyal.
 \newblock Remarques sur la th\'{e}orie des jeux \`{a} deux personnes.
 \newblock {\em Gazette des sciences mathematiques de Quebec}, 1(4), 1977.
 
+\bibitem[Lai02]{laird02}
+J.~Laird.
+\newblock A categorical semantics of higher-order store.
+\newblock In {\em Proceedings of CTCS '02}, number~69 in ENTCS. Elsevier, 2002.
+
 \bibitem[Sch01]{Schalk2001GsNotes}
 Andrea Schalk.
 \newblock Games for semantics: An introduction, March 2001.

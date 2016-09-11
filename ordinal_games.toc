@@ -1,0 +1,21 @@
+\contentsline {section}{\numberline {1}Introduction}{2}
+\contentsline {section}{\numberline {2}Our starting category of games}{2}
+\contentsline {subsection}{\numberline {2.1}Games and strategies}{2}
+\contentsline {subsection}{\numberline {2.2}Positive and negative games, ownership of plays and connectives}{4}
+\contentsline {subsection}{\numberline {2.3}Our definition of games and strategies}{7}
+\contentsline {subsection}{\numberline {2.4}Connectives}{8}
+\contentsline {subsection}{\numberline {2.5}A category of games and partial strategies}{11}
+\contentsline {subsection}{\numberline {2.6}Total strategies and winning conditions}{21}
+\contentsline {section}{\numberline {3}Transfinite games}{26}
+\contentsline {subsection}{\numberline {3.1}Transfinite Games and Strategies}{26}
+\contentsline {subsection}{\numberline {3.2}Connectives}{28}
+\contentsline {subsection}{\numberline {3.3}Categories of transfinite games and strategies}{32}
+\contentsline {subsubsection}{\numberline {3.3.1}Completely negative and almost completely negative $\alpha $-games}{32}
+\contentsline {subsubsection}{\numberline {3.3.2}Interleavings and the functor into ${\normalfont \textbf {Rel}}$}{36}
+\contentsline {subsubsection}{\numberline {3.3.3}Symmetric monoidal structure}{45}
+\contentsline {subsubsection}{\numberline {3.3.4}Symmetric monoidal closed structure}{52}
+\contentsline {subsubsection}{\numberline {3.3.5}A digression}{59}
+\contentsline {subsubsection}{\numberline {3.3.6}The completely negative linear implication $A\overset {\cn }{\multimap }B$}{60}
+\contentsline {subsubsection}{\numberline {3.3.7}Win-games and winning strategies}{63}
+\contentsline {section}{\numberline {4}Exponentials}{63}
+\contentsline {section}{References}{66}

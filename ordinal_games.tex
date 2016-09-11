@@ -228,16 +228,26 @@
 \DeclareMathOperator{\braid}{braid}
 \newcommand{\blank}{\;\underline{\hspace{1.5ex}}\;}
 \DeclareMathOperator{\cn}{cn}
-\newcommand{\impliescn}{\overset{\cn}{\implies}}
+\newcommand{\impliescn}{\protect\overset{\cn}{\implies}}
 \newcommand{\C}{{\mathcal{C}}}
 \DeclareMathOperator{\ev}{ev}
+\newcommand{\der}{{\texttt{der}}}
 
 \let\oldemptyset\emptyset
 \let\emptyset\varnothing
 
 %%% END Article customizations
 
+\title{Games with ordinal sequences of moves}
+\author{John Gowers}
+\date{}
+
 \begin{document}
+\maketitle
+
+\tableofcontents
+
+\setcounter{tocdepth}{2}
 
 \section{Introduction}
 
@@ -904,34 +914,6 @@ We get another result:
   \end{proof}
 \end{theorem}
 
-\subsection{Monoidal and sequoidal category structure}
-
-The tensor product $\tensor$ makes $\G$ into a monoidal category.  To show this, we will introduce a few more technical tools.
-
-\subsubsection{Copycat strategies}
-
-We have already introduced the copycat strategy $\id_A$ on a game $A$.  We can extend this idea to more general strategies as follows:
-
-\begin{definition}
-  Let $A,B$ be games, and let $\cmap{f}{P_A}{P_B}$ be a bijective function that preserves length and preserves the prefix ordering (i.e., a \emph{tree isomorphism}).  The \emph{copycat strategy} corresponding to $f$ is given by
-  \[
-    \sigma_f = \left\{s\in P_{A\implies B}\suchthat\textrm{for all even length $t\prefix s$, $t\vert_B=f(t\vert_A)$}\right\}
-    \]
-\end{definition}
-
-\begin{proposition}
-  \begin{enumerate}[i)]
-    \item For any tree isomorphism $\cmap{f}{P_A}{P_B}$, $\sigma_f$ is a strategy on $A\implies B$.
-
-    \item If $A,B,C$ are games, $\cmap{f}{P_A}{P_B}$ is a tree isomorphism and $\sigma$ is a strategy for $B\implies C$, then the composition of $\sigma$ and $\sigma_f$ is given by:
-      \[
-        \comp\sigma{\sigma_f} =
-        \]
-  \end{enumerate}
-\end{proposition}
-
-TODO: come back to this maybe.
-
 \section{Transfinite games}
 
 \begin{note}
@@ -1155,9 +1137,23 @@ Our category will have acn $\alpha$-games as objects and the morphisms from $A$ 
   \end{proof}
 \end{proposition}
 
-TODOVERYIMPORTANT: mention that $A\implies B$ is not necessarily acn, and give the example.
+Note, however, that $A\implies B$ is not necessarily acn, even if $A,B$ are completely negative.  This is a direct consequence of the extension of the definitions to ordinals greater than $\omega$.  For negative $\omega$-games $A,B$, the only limiting play is the empty play and its components are both necessarily empty, so they are also limiting plays.  Therefore, $A\implies B$ is a negative game, by the equation $(P\Rightarrow P) = P$.  
 
-We shall want a version of Proposition \ref{nice-negative-games} to record the properties of negative games that make them so useful for our definition of composition.
+However, when we move beyond $\omega$, it is no longer true that the components of a limiting play are always limiting plays, so we cannot be sure that they are $P$-positions, and this means that $A\implies B$ is not necessarily completely negative, even if $A,B$ are.  As an example, we take the completely negative game
+\[
+  \bot=\{\{*\},\{*\mapsto O\},\{\emptyplay\mapsto P,\;*\mapsto O\}, \{\emptyplay, *\}\}
+  \]
+which has a single $O$-move with no $P$-replies.  If $A$ is an acn $\alpha$-game, then $A\implies\bot$ is the same as the game $\neggame A$, but with the extra $O$-move $*$ attached to the start.  For $\omega$-games, this extra $O$-move means that $A\implies\bot$ is negative if $A$ is negative, but if $A$ contains plays of length greater than $\omega$ then $A\implies\bot$ is not completely negative if $A$ is completely negative: indeed, if $s\in P_A$ is a non-empty limiting play, then we have
+\[
+  \zeta_{A\implies\bot}(*s)=(\zeta_A(s)\Rightarrow\zeta_\bot(*))=(P\Rightarrow O) = O
+  \]
+But $*s$ is a limiting play, so $A\implies\bot$ is not completely negative.
+
+This will pose a problem for our categorical semantics.  We want to build a category where the objects are acn $\alpha$-games and where the morphisms from a game $A$ to a game $B$ are strategies for $A\implies B$.  We also want the category to be monoidal closed, which means that we would really like $A\implies B$ to be an object of the category.  As we have just seen, this is not the case in general.
+
+We take the following approach: we define a morphism in our category between objects $A$ and $B$ to be a strategy for $A\implies B$, ignoring the fact that this is not an object of our category.  We will get a working definition of the composition of strategies.  Then, when we come to define the monoidal closed structure on the category, we will use a slightly modified form of $A\implies B$ for our linear implication.  This modified form will be, in a sense we shall make precise, the smallest modification of $A\implies B$ that is completely negative, and this will be enough to show that it does indeed give us a monoidal closed structure.  
+
+Before moving on to the discussion of composition of strategies, we shall want a version of Proposition \ref{nice-negative-games} to record the properties of negative games that make them so useful for our definition of composition.
 
 \begin{proposition}
   \label{NiceAcnGames}
@@ -2070,6 +2066,129 @@ Exactly the same argument then tells us that
 (as sets of plays) and so $\upsilon={\tilde\sigma}^{\cn}$ by the uniqueness part of Proposition \ref{CnUniversalProperty}.
 
 Therefore $\G(\alpha)$ has the structure of a symmetric monoidal category with tensor product given by $\tensor$ and linear implication given by $\impliescn$.  
+
+\subsubsection{Win-games and winning strategies}
+
+TODO: Write this section.
+
+\section{Exponentials}
+
+We want to model the exponential connective $\oc$ from linear logic in our game semantics.  We adapt the approach taken in \cite{laird02} and \cite{martinsthesis} to our transfinite games.
+
+\begin{definition}
+  Let $\G(\alpha)$ be a category of transfinite games and let $A$ be an object of $\G(\alpha)$.  Then the \emph{exponential} $\oc A$ is given as follows:
+  \begin{itemize}
+    \item $M_{\oc A} = A\times\omega$
+    \item $\lambda_{\oc A} = \lambda_A\circ\pr_1$
+  \end{itemize}
+
+  Given an ordinal-indexed sequence $s$ taking values in $M_{\oc A}$ and some $n\in\omega$, we write $s\vert_n$ for the subsequence of $s$ consisting of terms of the form $(a,n)$.  Then define
+  \[
+    \oc P_A = \{s\in M_{\oc A}^{*<\alpha}\suchthat s\vert_n\in P_A\textrm{ for all }n\in \omega\}
+    \]
+  We define $\zeta_{\oc A}\from \oc P_A\to \OP$ by
+  \[
+    \zeta_{\oc A}(s) = \bigwedge_{n\in \omega} \zeta_A(s\vert_n)
+    \]
+  (Here, if $(b_n)\in\OP^\omega$ then we have $\bigwedge_{n\in\omega} b_n = P$ if $b_n=P$ for all $n$ and $\bigwedge_{n\in\omega}=O$ otherwise.)
+
+  We define $P_{\oc A}$ to be the set of all sequences $s\in\oc P_A$ that are well formed with respect to $\zeta_{\oc A},\lambda_{\oc A}$ and are alternating with respect to $\zeta_{\oc A}$ and that satisfy the following property:
+  
+  \begin{itemize}
+    \item If the term $(a,n)$ occurs in $s$, and if $m<n$, then there is some term $(b,m)$ that occurs earlier in the sequence $s$ than $(a,n)$.  
+  \end{itemize}
+
+  Then $\oc A=(M_{\oc A},\lambda_{\oc A},\zeta_{\oc A},P_{\oc A})$.  
+\end{definition}
+
+So $\oc A$ is like an infinite tensor product of copies of $A$ with the restriction that the first move must take place in the first copy and that moves may not take place in a subsequent copy of $A$ until moves have been made in all earlier copies.  
+
+\begin{proposition}
+  $\oc A$ is a well formed game.
+  \begin{proof}
+    Exactly the same argument from Proposition \ref{TransTensorWellFormed}.
+  \end{proof}
+\end{proposition}
+
+Just like the tensor product, the exponential $\oc A$ has the property that only player $O$ may switch games:
+
+\begin{proposition}
+  Suppose that $s(a,m)(b,n)\in P_{\oc A}$, where $m\ne n$.  Then $\lambda_{\oc A}(b,n)=O$.  
+  \begin{proof}
+    $\begin{aligned}[t]
+      \lambda_{\oc A}(b,n) &= \zeta_{\oc A}(s(a,m)(b,n))\\
+      &= \bigwedge_{k\in\omega}\zeta_A(s(a,m)(b,n)\vert_k)
+    \end{aligned}$
+
+    Now by alternation we must have either $\zeta_A(s\vert_m(a,m))=O$ or $\zeta_A(s\vert_n(b,n))=O$.  So this last expression must be equal to $O$.
+  \end{proof}
+\end{proposition}
+
+We can also prove a version of Proposition \ref{NiceAcnGames} for the exponential connective using the same argument.
+
+The next Proposition goes some way towards showing why $\oc A$ is a suitable model for the exponential connective in linear logic:
+
+\begin{proposition}
+  $\oc A$ gives rise to a cofree commutative comonoid on $A$ in our monoidal category.
+  \begin{proof}[Sketch proof]
+    The comultiplication $\mu\from \oc A\to \oc A\tensor \oc A$ is the copycat strategy that opens a new copy of $A$ on the left hand side whenever a new copy of $A$ is opened on the right hand side.  (Here we see why the condition on the order in which games may be opened is important -- if we had no such restriction then there would be no canonical way to choose which copy of $A$ to open on the left hand side and the comultiplication would not be associative.)
+
+    The counit $\eta\from \oc A\to I$ is the unique empty strategy on $\oc A\implies I$.  
+
+    For associativity of comultiplication, we want to check that the following diagram commutes:
+    \[
+      \begin{tikzcd}
+        \oc A \arrow[r, "\mu"] \arrow[dd, "\mu"']
+          & \oc A \tensor \oc A \arrow[d, "\id_{\oc A}\tensor \mu"] \\
+        %
+          & \oc A \tensor (\oc A \tensor \oc A) \arrow[d, "\assoc_{A,A,A}\inv"] \\
+        \oc A \tensor \oc A \arrow[r, "\mu\tensor\id_{\oc A}"']
+          & (\oc A \tensor \oc A) \tensor \oc A
+      \end{tikzcd}
+      \]
+    For this, note that each path round the diagram is a copycat strategy $\oc A \to (\oc A\tensor \oc A)\tensor \oc A$.  Since we are forced to open copies of $\oc A$ in order, there is only one such copycat strategy, and so the two paths must be equal.  
+
+    Exactly the same argument tells us that comultiplication is commutative and that the counit is indeed a counit for this comultiplication.
+
+    We have a natural forgetful functor from the category of comonoids over $\G(\alpha)$ to $\G(\alpha)$ itself.  We first want to show that we have a functor in the opposite direction that sends a game $A$ to this comonoid over $\oc A$.  
+
+    Let $A,B$ be completely negative $\alpha$-games and let $\sigma$ be a strategy for $A\implies B$.  Then we have a natural strategy $\oc \sigma$ for $\oc A\implies\oc B$ given by
+    \[
+      \oc\sigma = \{s\in P_{\oc A}\suchthat s\vert_n\in\sigma\textrm{ for all $n\in\omega$}\}
+      \]
+    where we have written $s\vert_n$ for the subsequence of $s$ consisting of all terms that occur in the $n$-th copy of $A$ or the $n$-th copy of $B$.  
+
+    The proof that this is a strategy may be adapted from the discussion of the strategy $\sigma\tensor\tau$ above.  Similarly, we may show that if $A,B,C$ are completely negative $\alpha$-games and we have strategies $A\xrightarrow{\sigma}B\xrightarrow{\tau}C$ then
+    \[
+      \comp{\oc\tau}{\oc\sigma} = \oc(\comp\tau\sigma)
+      \]
+    using the same argument we used to show that taking the tensor product of two strategies preserves composition.
+
+    This gives us a functor $\cmap{\oc}{\G(\alpha)}{\G(\alpha)}$.  We want to show that it gives rise to a functor from $\G(\alpha)$ into the category of comonoids over $\G(\alpha)$ sending a game $A$ to the comonoid $\oc A\to \oc A\tensor \oc A$.  For this, we need to show that if $A,B$ are completely negative $\alpha$-games and $\sigma$ is a strategy for $A\implies B$ then the following diagram commutes:
+    \[
+      \begin{tikzcd}
+        \oc A \arrow[r, "\mu"] \arrow[d, "\oc \sigma"']
+          & \oc A \tensor \oc A \arrow[d, "\oc \sigma \tensor \oc \sigma"] \\
+        \oc B \arrow[r, "\mu"']
+          & \oc B \tensor \oc B
+      \end{tikzcd}
+      \]
+    Each branch of this diagram is a strategy for $\oc A\implies(\oc B\tensor\oc B)$ in which player $P$ plays according to $\sigma$, opening a new copy of $A$ on the left each time player $O$ opens a copy of $B$ on the right.  Since the order in which player $P$ may open copies of $A$ is pre-determined, there is a unique such strategy, and so this diagram must commute.  
+
+    Lastly, we need to show that this functor is adjoint to the forgetful functor from the category of commutative comonoids on $\G(\alpha)$ to the category $\G(\alpha)$ itself.  We start off by providing a natural transformation from the functor $A\mapsto \oc A$ on $\G(\alpha)$ to the identity functor on $\G(\alpha)$.  Given a completely negative $\alpha$-game $A$, we have a strategy $\der$ for $\oc A\implies A$ that is the copycat strategy where player $P$ forgets about the extra copies of $A$.  Then, if $A,B$ are completely negative $\alpha$-games and $\sigma$ is a strategy for $A\implies B$, we have the following commutative square:
+    \[
+      \begin{tikzcd}
+        \oc A \arrow[r, "\der"] \arrow[d, "\oc \sigma"']
+          & A \arrow[d, "\sigma"] \\
+        \oc B \arrow[r, "\der"']
+          & B
+      \end{tikzcd}
+      \]
+    (by inspecting the definition of $\oc \sigma$) and so $\der$ gives rise to a natural transformation from $A\mapsto \oc A$ to $\id_A$.  
+
+    To complete the proof of adjointness, we need to show that the reverse composition of these functors admits a natural transformation out of the identity functor on the category of commutative comonoids over $\G(\alpha)$.  Let $\map{\mu}{X}{X\tensor X}$ be a commmutative comonoid over $\G(\alpha)$.  
+  \end{proof}
+\end{proposition}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}
