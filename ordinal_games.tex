@@ -1955,6 +1955,7 @@ Therefore, the categories $\G(\alpha)$ and $\tilde{\G}(\alpha)$ are equivalent. 
 However, there is still quite a lot of work to show that this does indeed give a symmetric monoidal closed structure on $\tilde{\G}(\alpha)$, and it will be easier to construct the closed structure on $\G(\alpha)$ directly.
 
 \subsubsection{The completely negative linear implication $A\impliescn B$}
+\label{ImpliesCnSex}
 
 Let $A,B$ be completely negative $\alpha$-games.  We have a completely negative $\alpha$-game $A\impliescn B\coloneqq (A\implies B)^{\cn}$.  We shall construct a monoidal closed structure on $\G(\alpha)$ where the linear implication between $A$ and $B$ is $A\impliescn B$.  
 
@@ -2347,6 +2348,118 @@ making the following diagram commute:
       \alpha \from \oc A \xrightarrow{\mu} \oc A \tensor \oc A \xrightarrow{\der\tensor\id_{\oc A}} A\tensor\oc A\xrightarrow{\wk} A\sequoid\oc A
       \]
     In other words, it is the copycat strategy where moves from the extra copy of $A$ on the right are copied into the first copy of $A$ on the left, moves from the first copy of $A$ in the exponential $\oc A$ on the right are copied into the second copy of $A$ on the left and so on.  
+
+    Now let $B$ be a game and let $\sigma$ be a strategy for $B\implies A\sequoid B$.  We define a strategy $\fcoal{\sigma}$ for $B\implies \oc A$ as follows: we first define
+    \[
+      \|\sigma\| = \{\s\in(M_B\times\omega\cprd M_A\times\omega)^{*<\alpha}\suchthat\forall i\ge 0, \s\vert_{B_i,A_i,B_{i+1}}\in\sigma\}
+      \]
+    Then we set
+    \[
+      \fcoal\sigma = \{\s\vert_{B_0,\oc A}\suchthat\s\in\|\sigma\|\}
+      \]
+    where we write $\s\vert_{B_0, \oc A}$ for $\s\vert_{B_0,A_0,A_1,\dots}$.  
+
+    We shall postpone the proof that $\fcoal\sigma$ is a strategy.  We claim that the final coalgebra diagram commutes:
+    \[
+      \begin{tikzcd}
+        B \arrow[r, "\sigma"] \arrow[d, "\fcoal{\sigma}"']
+          & A\sequoid B \arrow[d, "\id_A\sequoid\fcoal{\sigma}"] \\
+        \oc A \arrow[r, "\alpha"']
+          & A\sequoid\oc A
+      \end{tikzcd}
+      \]
+    First, we have:
+    \[
+      \fcoal{\sigma} = \left\{\s\vert_{B_0,A_0,A_1,\dots}\;\middle|\;\mbox{\pbox{\textwidth}{
+        $\s\in(M_B\times\omega\sqcup M_A\times\omega)^{*<\alpha}$\\
+        $\forall i\ge0,\;\s\vert_{B_i,A_i,B_{i+1}}\in\sigma$
+      }}\right\}
+      \]
+    We claim that:
+    \begin{align*}
+      \id_A\sequoid\fcoal\sigma &= P_{(A\sequoid B)\implies(A\sequoid\oc A)}\;\cap\\
+      &\left\{\s\vert_{A_{-2},B_0,A_{-1},A_0,A_1,\dots}\;\middle|\;\mbox{\pbox{\textwidth}{
+        $\s\in (M_{A_{-2}}\cprd M_{A_{-1}} \cprd M_B\times\omega\cprd M_A\times\omega)^{*<\alpha}$\\
+        $\s\vert_{A_{-2},A_{-1}}\in\id_A$\\
+        $\forall i\ge 0$, $\s\vert_{B_i,A_i,B_{i+1}}\in\sigma$
+      }}\right\}
+    \end{align*}
+    Using the definition 
+    \[
+      \id\sequoid\fcoal{\sigma} = \{s\in P_{(A_{-2}\sequoid B_0)\implies(A_{-1}\sequoid\oc A)}\suchthat
+      s\vert_{A_{-2},A_{-1}}\in\id_A,\;s\vert_{B_0,\oc A}\in\fcoal\sigma\}
+      \]
+    it is clear that the RHS above is a subset of the LHS.  To show the reverse inclusion, suppose we have some sequence $s\in\id\sequoid\fcoal\sigma$.  Since $s\vert_{B_0,\oc A}\in\fcoal\sigma$, there is some sequence $\s\in\|\sigma\|$ with $\s\vert_{B_0,A_0,A_1,\dots}=s$.  Then it is possible to interleave this sequence with the sequence $s\vert_{A_{-2},A_{-1}}$ exactly as we did towards the end of Section \ref{ImpliesCnSex}: we insert \emph{before} each $P$-move in $A_{-1}$ the corresponding move in $A_{-2}$ and insert \emph{after} each $O$-move in $A_{-1}$ the corresponding move in $A_{-2}$.  This interleaved sequence -- call it $\t$ -- satisfies $\t\vert_{A_{-2},A_{-1}}\in\id_A$ and $\t\vert_{B_i,A_i,B_{i+1}}\in\sigma$ for all $i\ge0$, so it gives rise to an element of the RHS.  Moreover, we have $t\vert_{A_{-2},B_0,A_{-1},A_0,A_1,\dots}=s$, and therefore $s$ is contained in the RHS.
+
+    We now have $\comp{(\id_A\sequoid\fcoal\sigma)}{\sigma} =$
+    \[
+      \left\{\s\vert_{B_{-1},A_{-1},A_0,A_1,\dots}\;\middle|\;\mbox{\pbox{\textwidth}{
+        $\s\in(M_{B_{-1}}\cprd M_{A_{-2}}\cprd M_{A_{-1}}\cprd M_B\times\omega \cprd M_A\times\omega)^{*<\alpha}$\\
+        $\s\vert_{B_{-1},A_{-2},B_0}\in\sigma$\\
+        $\s\vert_{A_{-2},A_{-1}}\in\id_A$\\
+        $\forall i\ge 0$, $\s\vert_{B_i,A_i,B_{i+1}}\in\sigma$
+      }}\right\}
+      \]
+    We claim that this is equal to the following strategy:
+    \[
+      S =
+      \left\{\s\vert_{B_{-1},A_{-1},A_0,A_1,\dots}\;\middle|\;\mbox{\pbox{\textwidth}{
+        $\s\in (M_{B_{-1}}\cprd M_{A_{-1}} \cprd M_B\times\omega \cprd M_A\times\omega)^{*<\alpha}$\\
+        $\forall i\ge -1$, $\s\vert_{B_i,A_i,B_{i+1}}\in\sigma$
+      }}\right\}
+      \]
+    $S$ is a strategy since it is nothing more than a relabelling of the indices of $\fcoal\sigma$.  To show that these two strategies are the same, it suffices to show that they contain the same $P$-positions.
+
+    Suppose we have some $P$-position $s\in\comp{(\id_A\sequoid\fcoal\sigma)}{\sigma}$ and write $s=\s\vert_{B_{-1},A_{-1},A_0,A_1,\dots}$.  By the argument above, we may assume that all moves from $A_{-2}$ are adjacent to a move from $A_{-1}$; since $s$ is a $P$-position, it cannot end with an $O$-move in $A_{-1}$, and therefore $\s\vert_{A_{-2},A_{-1}}$ must have even length.  Therefore 
+    \[
+      \s\vert_{A_{-2}}=\s\vert_{A_{-1}}
+      \]
+    by the definition of $\id_A$.  
+
+    It follows (after hiding $M_{A_{-2}}$) that $\comp{(\id_A\sequoid\fcoal\sigma)}{\sigma} \subset S$.  Conversely, given an element $s=\s\vert_{B_{-1},A_{-1},A_0,A_1,\dots}\in S$, we may interleave in a play in $A_{-2}$ that is identical to the play in $\s\vert_{A_{-1}}$ as above, showing that $s\in\comp{(\id_A\sequoid\fcoal\sigma)}{\sigma}$.  
+
+    It remains only to observe that $S$ is precisely the strategy $\comp{\alpha}{\fcoal\sigma}$, and so the square above does indeed commute.  
+
+    Now we show uniqueness.  Suppose that $\tau$ is some strategy for $B\implies\oc A$ such that the diagram commutes:
+    \[
+      \begin{tikzcd}
+        B \arrow[r, "\sigma"] \arrow[d, "\tau"']
+          & A\sequoid B \arrow[d, "\id_A\sequoid\tau"] \\
+        \oc A \arrow[r, "\alpha"']
+          & A\sequoid\oc A
+      \end{tikzcd}
+      \]
+    We claim that $\tau=\fcoal\sigma$.  The argument above tells us that
+    \[
+      \comp{(\id_A\sequoid\tau)}{\sigma} =
+      \left\{\s\vert_{B_{-1},A_{-1},A_0,A_1,\dots}\;\middle|\;\mbox{\pbox{\textwidth}{
+        $\s\in(M_{B_{-1}}\cprd M_{A_{-1}}\cprd M_{B_0}\cprd M_A\times\omega)^{*<\alpha}$\\
+        $\s\vert_{B_{-1},A_{-1},B_0}\in\sigma$\\
+        $\s\vert_{B_0,A_0,A_1,\dots}\in\tau$
+      }}\right\}
+      \]
+    Meanwhile, we have
+    \[
+      \comp{\alpha}{\tau} = \{t^\dagger\suchthat t\in\tau\}
+      \]
+    where $t^\dagger\in(M_{B_{-1}}\cprd M_{A_{-1}}\cprd M_A\times\omega)^{*<\alpha}$ is formed by reducing the indices on the copies of $A$ and $B$ in $t\in(M_{B_0}\cprd M_A\times\omega)^{*<\alpha}$.  
+
+    We have $\comp{(\id\sequoid\tau)}{\sigma}=\comp\alpha\tau$, so, after promoting all indices by $1$, we may write:
+    \[
+      \tau = 
+      \left\{\s\vert_{B_{0},A_0,A_1,\dots}\;\middle|\;\mbox{\pbox{\textwidth}{
+        $\s\in(M_{B_0}\cprd M_{B_1}\cprd M_A\times\omega)^{*<\alpha}$\\
+        $\s\vert_{B_0,A_0,B_1}\in\sigma$\\
+        ($\s\vert_{B_1,A_1,A_2 \dots})^\dagger\in\tau$
+      }}\right\}
+      \]
+    Let $t\in\tau$.  Then we have just shown that we may interleave $t$ with a sequence $r\in M_{B_1}$ such that the interleaved sequence $\t\in(M_{B_0}\cprd M_{B_1}\cprd M_{A}\times\omega)^{*<\alpha}$ satisfies
+    \begin{gather*}
+      \t\vert_{B_0,\oc A}=t\quad\t\vert_{B_1}=r\\
+      \t\vert_{B_0,A_0,B_1}\in\sigma\\
+      (\t\vert_{B_1,A_1,A_2,\dots})^\dagger\in\tau
+    \end{gather*}
+    Let $t_1=(\t\vert_{B_1,A_1,A_2,\dots})^\dagger$.  Applying the result repeatedly allows us to build up a sequence $t=t_0,t_1,t_2,\dots$
   \end{proof}
 \end{theorem}
 

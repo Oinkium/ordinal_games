@@ -20,4 +20,4 @@
 \contentsline {section}{\numberline {4}Exponentials}{63}
 \contentsline {subsection}{\numberline {4.1}Products in $\mathcal G(\alpha )$}{67}
 \contentsline {subsection}{\numberline {4.2}The exponential as a final coalgebra}{68}
-\contentsline {section}{References}{71}
+\contentsline {section}{References}{74}
