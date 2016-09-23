@@ -28,6 +28,7 @@
 \usepackage{amssymb}
 \usepackage{cmll} % Linear logic symbols!
 \usepackage{bm} % for bold Greek letters
+\usepackage{wasysym} % For left and rigth moons
 
 %% Get the sqsubsetneqq character from the mathabx package
 \DeclareFontFamily{U}{mathb}{\hyphenchar\font45}
@@ -196,6 +197,7 @@
 \renewcommand{\implies}{\multimap}
 \newcommand{\comp}[2]{#1 \circ #2}
 \newcommand{\cprd}{\sqcup}
+\newcommand{\bigcprd}{\bigsqcup}
 \newcommand{\G}{\mathcal G}
 \newcommand{\suchthat}{\;\colon\;}
 \newcommand{\varsuchthat}{\;\mid\;}
@@ -225,13 +227,21 @@
 \DeclareMathOperator{\assoc}{assoc}
 \DeclareMathOperator{\lunit}{lunit}
 \DeclareMathOperator{\runit}{runit}
-\DeclareMathOperator{\braid}{braid}
+\DeclareMathOperator{\braid}{sym}
 \newcommand{\blank}{\;\underline{\hspace{1.5ex}}\;}
 \DeclareMathOperator{\cn}{cn}
 \newcommand{\impliescn}{\protect\overset{\cn}{\implies}}
 \newcommand{\C}{{\mathcal{C}}}
 \DeclareMathOperator{\ev}{ev}
 \newcommand{\der}{{\texttt{der}}}
+\DeclareMathOperator{\eq}{eq}
+\DeclareMathOperator{\wk}{wk}
+\newcommand{\toisom}{{\xrightarrow{\cong}}}
+\newcommand{\passoc}{{\texttt{passoc}}}
+\newcommand{\pcomm}{{\texttt{pcomm}}}
+\newcommand{\run}{{\texttt{r}}}
+\newcommand{\lun}{{\texttt{l}}}
+\newcommand{\fcoal}[1]{{\leftmoon #1 \rightmoon}}
 
 \let\oldemptyset\emptyset
 \let\emptyset\varnothing
@@ -2189,6 +2199,156 @@ The next Proposition goes some way towards showing why $\oc A$ is a suitable mod
     To complete the proof of adjointness, we need to show that the reverse composition of these functors admits a natural transformation out of the identity functor on the category of commutative comonoids over $\G(\alpha)$.  Let $\map{\mu}{X}{X\tensor X}$ be a commmutative comonoid over $\G(\alpha)$.  
   \end{proof}
 \end{proposition}
+
+TODO: complete this section.
+
+\subsection{Products in $\G(\alpha)$}
+
+Let $(A_i\suchthat i\in I)$ be a collection of obects of $\G(\alpha)$.  We define the product
+\[
+  \prod_i A_i
+  \]
+to be the game given by
+\begin{itemize}
+  \item $M_{\prod_i A_i}=\bigcprd_i M_{A_i}$
+  \item $\lambda_{\prod_i A_i}=\bigcprd_i \lambda_{A_i}$
+  \item $P_{\prod_i A_i} = \bigcprd_i P_{A_i}$
+  \item $\zeta_{\prod_i A_i} = \bigcprd_i \zeta_{A_i}$
+\end{itemize}
+This is the game where Player $O$ may decide which of the $A_i$ to play his first move in; play then continues in that game and the other games are never used.  
+
+We claim that $\prod_i A_i$ is the categorical product of the $A_i$ in $\G(\alpha)$.  First note that we have natural projection strategies $\pr_j$ for $\prod_i A_i\to A_j$ for each $j\in I$, in which player $P$ plays copycat in game $A_j$ on the left.  Now if $B$ is an object of $\G(\alpha)$ and $\sigma_i$ are strategies for $B\implies A_i$ for each $i\in I$, then we have a strategy $\sigma$ for $B\implies\prod_i A_i$ in which player $P$ uses strategy $j$ when player $O$'s initial move takes place in $A_j$:
+\[
+  \sigma = \bigcprd_i \sigma_i
+  \]
+
+We can see that $\comp{\pr_j}{\sigma}=\sigma_j$ for each $j$: indeed, $\grel{\pr_j}$ is the graph of the inclusion $P_{A_j}\hookrightarrow P_{\prod_i A_i}$, while $\grel\sigma$ is the union of the relations $\grel{\sigma_i}$, so this equation holds in the relational presentation:
+\[
+  \comp{\grel{\pr_j}}{\grel{\sigma}}=\grel{\sigma_j}
+  \]
+Moreover, it is easy to see that $\grel\sigma$ is the unique relation between $P_B$ and $P_{\prod_i A_i}$ such that this equation holds for all $j$, and therefore $sigma$ is the unique strategy for $B\implies\prod_i A_i$ such that $\comp{\pr_j}{\sigma}=\sigma_j$ for each $j\in I$.  Therefore, $\G(\alpha)$ has all small products.  
+
+Given games $A,B$, we shall write $A\times B$ for the product of $A$ and $B$.
+
+\subsection{The exponential as a final coalgebra}
+
+Our definition of the exponential connective $\oc$ was different from the definitions of the other connectives in that it involved an explicit restriction on the order in which new games could be opened.  We saw that this restriction was necessary in order to guarantee associativity of the comultiplication in our comonoid, but it means that it is hard to study the exponential $\oc A$ using the connectives $\tensor$ and $\implies$.  
+
+Let $A,B$ be objects of some category $\G(\alpha)$ of transfinite games.  Following \cite{laird02}, we define the \emph{sequoid} $A\sequoid B$ by:
+
+\begin{itemize}
+  \item $M_{A\sequoid B} = M_{A\tensor B}$
+  \item $\lambda_{A\sequoid B}=\lambda_{A\tensor B}$
+  \item $P_{A\sequoid B} = \{s\in P_{A\tensor B}\suchthat\textrm{$s=\emptyplay$ or the first move of $s$ takes place in $A$}\}$
+  \item $\zeta_{A\sequoid B} = \zeta_{A\tensor B}\vert_{P_{A\sequoid B}}$
+\end{itemize}
+
+It is clear that $A\sequoid B$ is a well-formed game - namely, it is the weakening of the tensor product $A\tensor A$ such that player $O$ is forced to start play in the game $A$.  We have a natural copycat strategy $\wk\from A\tensor B\to A\sequoid B$ and the morphism
+\[
+  A\tensor B\to (A\sequoid B)\times(B\sequoid A)
+  \]
+induced by the morphisms
+\[
+  A\tensor B\xrightarrow{\wk}A\sequoid B\quad A\tensor B\xrightarrow{\braid}B\tensor A\xrightarrow{\wk}B\sequoid A
+  \]
+is an isomorphism.
+
+Other natural copycat isomorphisms may be verified by inspection:
+\begin{gather*}
+  \passoc_{A,B,C} \from (A\sequoid B) \sequoid C \toisom A\sequoid (B\tensor C) \\
+  \pcomm_{A,B,C} = \comp{\passoc_{A,B,C}\inv}{\comp{(\id_A\tensor\braid)}{\passoc_{A,B,C}}} \from (A\sequoid B)\sequoid C \toisom (A\sequoid C)\sequoid B\\
+  \lun_A \from I\sequoid A \toisom I\\
+  \run_A \from A\sequoid I \toisom A
+\end{gather*}
+
+One important point is that the sequoid does not give rise to a functor $\G(\alpha)\times\G(\alpha)\to\G(\alpha)$ in the way that the tensor product does.  To see why, let $A,B,C,D$ be games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $C\implies D$.  We would like to construct a strategy $\sigma\sequoid\tau$ for
+\[
+  (A\sequoid C)\implies (B\sequoid D)
+  \]
+in which player $P$ plays according to $\sigma$ in $A$ and $B$ and according to $\tau$ in $B$ and $D$, exactly as in the strategy $\sigma\tensor\tau$.  The problem is that $\sigma\tensor\tau$ is not necessarily a valid strategy for $(A\sequoid C)\implies (B\sequoid D)$, even if $\sigma$ is a valid strategy for $A\implies B$ and $\tau$ is a valid strategy for $C\implies D$.  
+
+Indeed, suppose that player $P$'s reply in $\sigma$ to a particular opening move in $B$ is also a move in $B$, and suppose further that player $P$'s reply in $\tau$ to a particular opening move in $D$ is a move in $C$ (for example, if $\tau$ is a copycat strategy).  Now consider the following narrative for the game $(A\sequoid C)\implies (B\sequoid D)$:
+\begin{enumerate}
+  \item Player $O$ plays the opening move in $B$, as he must.
+  \item Player $P$ replies in $B$, according to $\sigma$.  
+  \item Player $O$ decides to switch and start the game $D$.
+  \item According to $\tau$, player $P$ should reply with a move in $C$.  But she cannot play in $C$, since no moves have been played in $A$ yet.
+\end{enumerate}
+
+In order to fix this situation, we place a restriction on the strategy $\sigma$.
+
+\begin{definition}
+  Let $A,B$ be objects of $\G(\alpha)$.  A strategy $\sigma$ for $A\implies B$ is called \emph{strict} if player $P$'s reply to each opening $O$-move in $B$ is a move in $A$ - so if $bx\in\sigma$ then $x\in M_A$.
+
+  It is easy to see that the composition of strict strategies $\sigma$ for $A\implies B$ and $\tau$ for $B\implies C$ is a strict strategy for $A\implies C$ and that the identity strategy is strict.  Therefore, we have a full-on-objects subcategory $\G_s(\alpha)$ of $\G(\alpha)$ of games and strict strategies.
+\end{definition}
+
+\begin{proposition}
+  Let $A,B,C,D$ be objects of $\G(\alpha)$, let $\sigma$ be a strict strategy for $A\implies B$ and let $\tau$ be a strict strategy for $C\implies D$.  Then $\sigma\sequoid\tau=\sigma\tensor\tau\cap P_{(A\sequoid C)\implies (B\sequoid D)}$ is a strict strategy for $(A\sequoid C)\implies (B\sequoid D)$ and the following diagram commutes (so $\wk$ is a natural transformation between $\blank\tensor\blank$ and $\blank\sequoid\blank$):
+  \[
+    \begin{tikzcd}
+      A\tensor C \arrow[r, "\sigma\tensor\tau"] \arrow[d, "\wk"]
+        & B\tensor D \arrow[d, "\wk"] \\
+      A\sequoid C \arrow[r, "\sigma\sequoid\tau"]
+        & B\sequoid D
+    \end{tikzcd}
+    \]
+
+  \begin{proof}
+    We know that $\sigma\tensor\tau$ is a valid strategy for $(A\tensor C)\implies (B\tensor D)$, so we just need to check that no moves in $B$ take place before moves in $D$ and that no moves in $A$ take place before moves in $C$.  Indeed, player $O$'s opening move must take place in $B$; then, since $\sigma$ is strict, player $P$'s reply will take place in $A$.  So $\sigma\sequoid\tau$ is a valid strategy for $(A\sequoid C)\implies(B\sequoid D)$; moreover, it is itself a strict strategy.
+  \end{proof}
+\end{proposition}
+
+What this means is that $\blank\sequoid\blank$ gives us a functor, not from $\G(\alpha)\times\G(\alpha)$ to $\G(\alpha)$, but from $\G_s(\alpha)\times\G(\alpha)$ to $\G_s(\alpha)$.  In fact, the isomorphism $\passoc\from (A\sequoid B)\sequoid C\cong A\sequoid(B\tensor C)$ tells us that $\blank\sequoid\blank$ is a \emph{right action} of the monoidal category $\G(\alpha)$ upon the category $\G_s(\alpha)$.  
+
+The closed monoidal category $\G(\alpha)$, the subcategory $\G_s(\alpha)$, the morphisms $\passoc$ and $\run$, and the natural transformation $\wk$ in fact give rise to a structure known as a \emph{sequoidal category} (This definition was first introduced in \cite{laird02}, but with the direction of the sequoid operator reversed; see, for example, \cite{martinsthesis} for the definition where the orientation of the sequoid agrees with ours).  
+
+Moreover, the isomorphism $A\tensor B\cong (A\sequoid B)\times(B\sequoid A)$ means that our sequoidal category is \emph{decomposable}.  
+
+\cite{laird02} gives examples of what we can prove in general sequoidal categories, particularly in the cpo-enriched setting.  They are used in \cite{martinsthesis} to study the logic modelled by games and history-sensitive strategies.  The most useful property of the sequoid from the point of view of our study of the exponential is that it allows us to express our exponential as a final coalgebra.
+
+Let $\C$ be a category and let $\F\from \C\to\C$ be an endofunctor.  A \emph{coalgebra} for $\F$ is an object $A$ of $\C$ together with a morphism $\map{f}{A}{\F(A)}$.  Given two coalgebras
+\begin{gather*}
+  \map{f}{A}{\F(A)}\\
+  \map{g}{B}{\F(B)}
+\end{gather*}
+a \emph{coalgebra homomorphism} from $\map{f}{A}{\F(A)}$ to $\map{g}{B}{\F(A)}$ is a morphism $\cmap{h}{A}{B}$ that makes the following square commute:
+\[
+  \begin{tikzcd}
+    A \arrow[r, "f"] \arrow[d, "h"']
+      & \F(A) \arrow[d, "\F(h)"] \\
+    B \arrow[r, "g"']
+      & \F(B)
+  \end{tikzcd}
+  \]
+
+A \emph{final coalgebra} for $\F$ is a terminal object for the category of coalgebras and coalgebra homomorphisms.  Namely, it is an object $Z$ of $\C$ together with a morphism $\map{\alpha}{Z}{\F(Z)}$ such that for each coalgebra $\map{f}{A}{\F(A)}$ there is a unique morphism
+\[
+  \fcoal{f}\from A \to Z
+  \]
+making the following diagram commute:
+\[
+  \begin{tikzcd}
+    A \arrow[r, "f"] \arrow[d, "\fcoal{f}"']
+      & \F(A) \arrow[d, "\F\left(\fcoal{f}\right)"] \\
+    Z \arrow[r, "\alpha"']
+      & \F(Z)
+  \end{tikzcd}
+  \]
+
+\begin{theorem}
+  Let $A$ be an object of a category $\G(\alpha)$ of games.  Then $\oc A$ may be given the structure of a final coalgebra for the functor
+  \[
+    A\sequoid\blank\from \G(\alpha)\to\G(\alpha)
+    \]
+  \begin{proof}
+    The coalgebra morphism $\alpha\from \oc A\to A\sequoid\oc A$ is given by
+    \[
+      \alpha \from \oc A \xrightarrow{\mu} \oc A \tensor \oc A \xrightarrow{\der\tensor\id_{\oc A}} A\tensor\oc A\xrightarrow{\wk} A\sequoid\oc A
+      \]
+    In other words, it is the copycat strategy where moves from the extra copy of $A$ on the right are copied into the first copy of $A$ on the left, moves from the first copy of $A$ in the exponential $\oc A$ on the right are copied into the second copy of $A$ on the left and so on.  
+  \end{proof}
+\end{theorem}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}

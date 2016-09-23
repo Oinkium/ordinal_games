@@ -18,4 +18,6 @@
 \contentsline {subsubsection}{\numberline {3.3.6}The completely negative linear implication $A\overset {\cn }{\multimap }B$}{60}
 \contentsline {subsubsection}{\numberline {3.3.7}Win-games and winning strategies}{63}
 \contentsline {section}{\numberline {4}Exponentials}{63}
-\contentsline {section}{References}{66}
+\contentsline {subsection}{\numberline {4.1}Products in $\mathcal G(\alpha )$}{67}
+\contentsline {subsection}{\numberline {4.2}The exponential as a final coalgebra}{68}
+\contentsline {section}{References}{71}
