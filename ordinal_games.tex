@@ -17,6 +17,7 @@
 \usepackage{IEEEtrantools} % for \IEEEeqnarray
 \usepackage{pbox} % for \pbox
 \usepackage{multirow,bigdelim} % for \multirow
+\usepackage{lettrine} % For the drop cap
 
 %%% ToC (table of contents) APPEARANCE
 \usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
@@ -242,6 +243,7 @@
 \newcommand{\run}{{\texttt{r}}}
 \newcommand{\lun}{{\texttt{l}}}
 \newcommand{\fcoal}[1]{{\leftmoon #1 \rightmoon}}
+\DeclareMathSymbol{\co}{\mathord}{operators}{"3C}
 
 \let\oldemptyset\emptyset
 \let\emptyset\varnothing
@@ -260,6 +262,83 @@
 \setcounter{tocdepth}{2}
 
 \section{Introduction}
+
+\lettrine[image=true, lines=6, findent=3pt, nindent=0pt]{cleos-g.png}{ame Semantics}, or the use of games and strategies to model logical systems and programming languages, has its origins in a model of intuitionistic logic by Lorenzen \cite{lorenzengames} using games.  Towards the end of the twentieth century, several authors, starting with Blass \cite{blassgames}, realized that certain natural operations on games could be used to model the connectives in Girard's linear logic.  Major results from this enterprise include:
+\begin{itemize}
+  \item A fully complete categorical semantics for the multiplicative fragment of linear logic, together with the MIX rule, by Abramsky and Jagadeesan \cite{abramskyjagadeesangames}
+  \item A fully complete categorical semantics for the multiplicative fragment of linear logic without the MIX rule, by Hyland and Ong \cite{HylandOngGames}
+  \item A modification of Abramsky and Jagadeesan's construction, giving a fully complete model of the multiplicative-exponential fragment of linear logic, by Baillot, Danos, Ehrhard and Regnier \cite{bion}
+  \item Fully complete models of the negative fragment of linear logic by others, starting with independent work by Curien \cite{curiengames} and Lamarche \cite{lamarchegames}.  
+\end{itemize}
+
+Another major early result was the use of game semantics to give a fully abstract model of the programming language PCF (This result was obtained independently, using different techniques, by Abramsky, Jagadeesan and Malacaria \cite{ajmPcf}, by Hyland and Ong \cite{hoPcf}, and by Nickau \cite{nickauPcf}).
+
+Central to much of the current work on game semantics for linear logic is the treatement of the exponential connective $\oc$.  Several approaches have been made to model this connective in a game-theoretic way (see Section 3 of \cite{martinsthesis} for a brief survey).  We shall use the construction from \cite{ajmPcf} and \cite{hyland1997games}: if $A$ is a game, then $\oc A$ is the game formed by playing a countably infinite number of copies of $A$ --- $A_0,A_1,A_2,\dots$ --- in parallel, where only the opponent $O$ may switch games and where neither player may play in game $A_{n+1}$ until a move has been made in game $A_n$.  
+
+This definition, and in particular the restriction on the order in which games may be started, allows us to give the game $\oc A$ the structure of the \emph{cofree commutative comonoid} over $A$ \cite{LairdCofCommCom} and gives rise to a \emph{linear exponential comonad} on our category of games.  The linear exponential comonad \cite{SchalkWhatIs} and the cofree commutative comonoid functor \cite{LafontCofCommCom,MelliesCofCommCom} are both sufficient to model the exponential connective from linear logic.  
+
+The restriction that says that the copies of $A$ in $\oc A$ must be opened in order, motivates the following definition \cite{laird02}: if $A,B$ are games, then the \emph{sequoid} $A\sequoid B$ of $A$ and $B$ is the game in which $A$ and $B$ are played in parallel, only the opponent $O$ may switch games, and play must start in $A$.  It turns out that if $A$ is a game, then the operation $A\sequoid\blank$ gives rise to an endofunctor on the category $\G$ of games, and that the exponential $\oc A$ is the final coalgebra for this endofunctor.  That is to say, we have a morphism $\cmap{\alpha}{\oc A}{A\sequoid\oc A}$ such that whenever $\cmap{\sigma}{B}{A\sequoid B}$ is a morphism, there is a unique morphism $\cmap{\fcoal{\sigma}}{B}{\oc A}$ such that the following diagram commutes:
+\[
+  \begin{tikzcd}
+    B \arrow[r, "\sigma"] \arrow[d, "\fcoal\sigma"']
+      & A\sequoid B \arrow[d, "A\sequoid\fcoal\sigma"] \\
+    \oc A \arrow[r, "\alpha"']
+      & A\sequoid\oc A
+  \end{tikzcd}
+  \]
+Existing proofs of this fact in a finitary games setting (e.g., in \cite{martinsthesis}) make implicit use of the fact that $\oc A$ is the limit of the sequence
+\[
+  I \leftarrow A \leftarrow A\sequoid A \leftarrow A\sequoid(A\sequoid A) \leftarrow \dots
+  \]
+Indeed, any finite-length play in $\oc A$ must involve only finitely many copies of $A$, so exists as a play in $(A\sequoid\blank)^n I$ for some $n$.  
+
+On the other hand, when we start imposing winning conditions upon infinite plays, $\oc A$ is no longer the limit of the sequence above.  Indeed, define a game $\co A$ which is exactly like $\oc A$ except that all infinite plays that contain moves from infinitely many copies of $A$ are wins for the player $P$, regardless of who has won the individual games.  This game still admits a cone over the sequence above, since any play occurring in $(A\sequoid\blank)^nI$ for some $n$ must involve only finitely many copies of $A$.  Moreover, it does not admit a morphism of cones to $\oc A$.  In fact, in the infinitary setting, $\co A$, and not $\oc A$, is the limit of the above sequence.  
+
+\[
+  \begin{tikzcd}
+    \co A \arrow[d] \arrow[dr] \arrow[drr] \arrow[drrr] \arrow[drrrr, phantom, yshift=0.5em, "\cdots"]
+      &
+        &
+          &
+            & \\
+    I
+      & A \arrow[l]
+        & A\sequoid A \arrow[l]
+          & A\sequoid(A\sequoid A) \arrow[l]
+            & \cdots \arrow[l]
+  \end{tikzcd}
+  \]
+Applying the functor $A\sequoid\blank$ to the cone from $\co A$ gives rise to another cone over the sequence:
+\[
+  \begin{tikzcd}
+    %
+    & A\sequoid\co A \arrow[dl] \arrow[d] \arrow[dr] \arrow[drr] \arrow[drrr, phantom, yshift=0.5em, "\cdots"]
+        &
+          &
+            & \\
+    I
+      & A \arrow[l]
+        & A\sequoid A \arrow[l]
+          & A\sequoid(A\sequoid A) \arrow[l]
+            & \cdots \arrow[l]
+  \end{tikzcd}
+  \]
+and therefore a morphism $A\sequoid\co A\to \co A$.  We can then continue to apply the functor $A\sequoid\blank$ to build up a second layer of the sequence:
+\[
+  \begin{tikzcd}
+    \co A \arrow[d] \arrow[dr] \arrow[drr] \arrow[drrr] \arrow[drrrr, phantom, xshift=1em, "\cdots"]
+      & A\sequoid\co A \arrow[l]
+        & A\sequoid(A\sequoid \co A) \arrow[l]
+          & A \sequoid(A\sequoid(A\sequoid\co A)) \arrow[l]
+            & \cdots \arrow[l] \\
+    I
+      & A \arrow[l]
+        & A\sequoid A \arrow[l]
+          & A\sequoid(A\sequoid A) \arrow[l]
+            & \cdots \arrow[l]
+  \end{tikzcd}
+  \]
+What is the limit of this entire diagram?  
 
 These are games with ordinal sequences of moves.
 

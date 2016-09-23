@@ -3,44 +3,47 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: ordinal_games.aux
 The style file: alpha.bst
 Database file #1: ordinal_games.bib
-You've used 11 entries,
+Warning--empty year in LairdCofCommCom
+Warning--can't use both author and editor fields in MelliesCofCommCom
+You've used 22 entries,
             2543 wiz_defined-function locations,
-            630 strings with 5961 characters,
-and the built_in function-call counts, 3767 in all, are:
-= -- 377
-> -- 138
-< -- 10
-+ -- 43
-- -- 41
-* -- 241
-:= -- 624
-add.period$ -- 35
-call.type$ -- 11
-change.case$ -- 59
-chr.to.int$ -- 11
-cite$ -- 11
-duplicate$ -- 167
-empty$ -- 299
-format.name$ -- 59
-if$ -- 778
+            702 strings with 7779 characters,
+and the built_in function-call counts, 8197 in all, are:
+= -- 836
+> -- 305
+< -- 20
++ -- 98
+- -- 95
+* -- 522
+:= -- 1300
+add.period$ -- 68
+call.type$ -- 22
+change.case$ -- 121
+chr.to.int$ -- 22
+cite$ -- 24
+duplicate$ -- 365
+empty$ -- 639
+format.name$ -- 130
+if$ -- 1730
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 10
-newline$ -- 58
-num.names$ -- 33
-pop$ -- 59
+missing$ -- 18
+newline$ -- 111
+num.names$ -- 66
+pop$ -- 137
 preamble$ -- 1
-purify$ -- 71
+purify$ -- 146
 quote$ -- 0
-skip$ -- 138
+skip$ -- 320
 stack$ -- 0
-substring$ -- 172
-swap$ -- 25
-text.length$ -- 10
-text.prefix$ -- 7
+substring$ -- 429
+swap$ -- 82
+text.length$ -- 20
+text.prefix$ -- 13
 top$ -- 0
-type$ -- 84
-warning$ -- 0
-while$ -- 33
-width$ -- 15
-write$ -- 146
+type$ -- 168
+warning$ -- 2
+while$ -- 74
+width$ -- 26
+write$ -- 286
+(There were 2 warnings)
