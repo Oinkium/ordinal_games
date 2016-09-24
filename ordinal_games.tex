@@ -273,7 +273,7 @@
 
 Another major early result was the use of game semantics to give a fully abstract model of the programming language PCF (This result was obtained independently, using different techniques, by Abramsky, Jagadeesan and Malacaria \cite{ajmPcf}, by Hyland and Ong \cite{hoPcf}, and by Nickau \cite{nickauPcf}).
 
-Central to much of the current work on game semantics for linear logic is the treatement of the exponential connective $\oc$.  Several approaches have been made to model this connective in a game-theoretic way (see Section 3 of \cite{martinsthesis} for a brief survey).  We shall use the construction from \cite{ajmPcf} and \cite{hyland1997games}: if $A$ is a game, then $\oc A$ is the game formed by playing a countably infinite number of copies of $A$ --- $A_0,A_1,A_2,\dots$ --- in parallel, where only the opponent $O$ may switch games and where neither player may play in game $A_{n+1}$ until a move has been made in game $A_n$.  
+Central to much of the current work on game semantics for linear logic is the treatment of the exponential connective $\oc$.  Several approaches have been made to model this connective in a game-theoretic way (see Section 3 of \cite{martinsthesis} for a brief survey).  We shall use the construction from \cite{ajmPcf} and \cite{hyland1997games}: if $A$ is a game, then $\oc A$ is the game formed by playing a countably infinite number of copies of $A$ --- $A_0,A_1,A_2,\dots$ --- in parallel, where only the opponent $O$ may switch games and where neither player may play in game $A_{n+1}$ until a move has been made in game $A_n$.  
 
 This definition, and in particular the restriction on the order in which games may be started, allows us to give the game $\oc A$ the structure of the \emph{cofree commutative comonoid} over $A$ \cite{LairdCofCommCom} and gives rise to a \emph{linear exponential comonad} on our category of games.  The linear exponential comonad \cite{SchalkWhatIs} and the cofree commutative comonoid functor \cite{LafontCofCommCom,MelliesCofCommCom} are both sufficient to model the exponential connective from linear logic.  
 
@@ -354,14 +354,14 @@ We shall use the notation introduced in \cite{abramskyjagadeesangames} to descri
 \begin{itemize}
   \item A set $M_A$ of possible moves
   \item A function $\cmap{\lambda_A}{M_A}{\OP}$ assigning to each move the player who is allowed to make that move
-  \item A prefix-closed set $P_A\subset M_A^*$ of finite sequences of moves.
+  \item A prefix-closed set $P_A\subseteq M_A^*$ of finite sequences of moves.
 \end{itemize}
 We shall normally insist on an \emph{alternating condition} on $P_A$:
 \begin{description}
   \item[Alternating condition] If $a,b\in M_A$ are moves and $s\in M_A^*$ is a sequence of moves such that $sa, sab\in P_A$, then $\lambda_A(a)=\neg\lambda_A(b)$.
 \end{description}
 
-As in \cite{abramskyjagadeesangames}, we identify a \emph{strategy} for a game $A$ with the set of sequences of moves that can occur when player $P$ is playing according to that strategy so that a typical definition of a (partial) strategy might be a set $\sigma\subset P_A$ such that (for all $s\in M_A^*, a,b\in M_A$):
+As in \cite{abramskyjagadeesangames}, we identify a \emph{strategy} for a game $A$ with the set of sequences of moves that can occur when player $P$ is playing according to that strategy so that a typical definition of a (partial) strategy might be a set $\sigma\subseteq P_A$ such that (for all $s\in M_A^*, a,b\in M_A$):
 \begin{itemize}
   \item $\emptyplay\in\sigma$ (ensures that $\sigma$ is non-empty)
   \item If $sa\in\sigma$, $\lambda_A(a)=P$ and $sab\in P_A$ then $sab\in\sigma$ ($\sigma$ contains all legal replies by player $O$)
@@ -372,10 +372,10 @@ We can impose additional constraints on $\sigma$ that will ensure that $\sigma$ 
 
 This behaviour is made implicit in Abramsky and Jagadeesan's definitions, which do not impose any conditions upon the set $P_A$ beyond the basic alternation condition given above, but which mandate that any play occurring \emph{in a strategy} must begin with an $O$-move.  For the sake of clarity, we adopt a different, but completely equivalent, approach.  For a game $A$, we define a set $L_A$, regarded as the set of \emph{legal plays} occurring in $P_A$.  In some games models, such as that found in \cite{blassgames}, $L_A$ may be defined to be the whole of $P_A$, while in \cite{abramskyjagadeesangames} it is defined to be that subset of $P_A$ consisting of plays that begin with an $O$-move.
 
-The point of specifying $L_A$ separately is that it allows us to unify the definitionn of a \emph{strategy}, while making clearer the behaviour observed above, whereby certain plays in $P_A$ may not occur `in normal play'; this behaviour was previously only implicit in the definition of a strategy.  Our unified definition then becomes:
+The point of specifying $L_A$ separately is that it allows us to unify the definition of a \emph{strategy}, while making clearer the behaviour observed above, whereby certain plays in $P_A$ may not occur `in normal play'; this behaviour was previously only implicit in the definition of a strategy.  Our unified definition then becomes:
 
 \begin{definition}
-  If $A=(M_A,\lambda_A,P_A)$ is a game and $L_A$ is its associated set of legal plays (in a particular games model) then a (partial) \emph{strategy} for $A$ is a subset $\sigma\subset L_A$ such that for all $s\in L_A$ and all $a, b\in M_A$:
+  If $A=(M_A,\lambda_A,P_A)$ is a game and $L_A$ is its associated set of legal plays (in a particular games model) then a (partial) \emph{strategy} for $A$ is a subset $\sigma\subseteq L_A$ such that for all $s\in L_A$ and all $a, b\in M_A$:
   \begin{itemize}
     \item $\emptyplay\in\sigma$
     \item If $s\in\sigma$ and $a$ is an $O$-move, and if $sa\in L_A$, then $sa\in\sigma$
@@ -394,7 +394,7 @@ Abramsky-Jagadeesan games, as described in \cite{abramskyjagadeesangames}, may a
 
 So the Curien model found in \cite{curiengames} admits only negative games, the Blass model in \cite{blassgames} admits positive and negative games, while the Abramsky-Jagadeesan model found in \cite{abramskyjagadeesangames} admits not only positive and negative games, but also games that are neither negative nor positive.  We shall now examine the reasons for and drawbacks of each of these choices.
 
-The earliest games model, found in \cite{conwaygames}, did not include a definition of which player is to move at a given position; rather, games are defined recursively as pairs of games $\{L|R\}$, where $L$ represents the positions that the left player may move into, while $R$ represents the positions that the rigth player may move into.  Blass's definition departs completely from this tradition; now, at every position $s$ only one of the two players is allowed to move; extending this logic on to the empty position $\emptyplay$, it follows that all games are either positive or negative.  This property means that we may freely define $L_A=P_A$, since there is never any question about whose turn it is to play.  By contrast, if we were to define $L_A=P_A$ for Abramsky-Jagadeesan games, then a strategy might end up containing two branches, one of plays beginning with an $O$-move and one of plays beginning with a $P$-move, which is undesirable.  The alternative definition of $L_A$ avoids this problem.
+The earliest games model, found in \cite{conwaygames}, did not include a definition of which player is to move at a given position; rather, games are defined recursively as pairs of games $\{L|R\}$, where $L$ represents the positions that the left player may move into, while $R$ represents the positions that the right player may move into.  Blass's definition departs completely from this tradition; now, at every position $s$ only one of the two players is allowed to move; extending this logic on to the empty position $\emptyplay$, it follows that all games are either positive or negative.  This property means that we may freely define $L_A=P_A$, since there is never any question about whose turn it is to play.  By contrast, if we were to define $L_A=P_A$ for Abramsky-Jagadeesan games, then a strategy might end up containing two branches, one of plays beginning with an $O$-move and one of plays beginning with a $P$-move, which is undesirable.  The alternative definition of $L_A$ avoids this problem.
 
 In the case of a Blass game $A$, we may define a function $\zeta_A\colon P_A\to\OP$ that says which player owns each play; the idea is that if we are in position $s$, then the next player to move is given by $\neg\zeta_A(s)$; i.e., the opposing player to the player who has just made the move.  One might want to define $\zeta_A$ by setting $\zeta_A(sa)=\lambda_A(a)$, so that ownership of a play is decided by who has made the last move in the play, but this definition does not extend in an obvious way to the empty position $\emptyplay$ (and, as we shall see in the next chapter, it does not extend to plays over limit ordinals).  In this case, $\zeta_A(\emptyplay)$ is part of the game's data, and it determines whether the game is positive or negative: if $\zeta_A(\emptyplay) = P$ then all plays must start with an $O$-move, and the game is negative -- and vice versa.
 
@@ -470,7 +470,7 @@ We shall adopt elements of both the Blass and the Abramsky-Jagadeesan games mode
   \begin{itemize}
     \item $M_A$ is a set of moves,
     \item $\cmap{\lambda_A}{M_A}{\OP}$ is a function that assigns a player to each move,
-    \item $P_A\subset M_A^*$ is a non-empty prefix-closed set of plays that can occur in the game and
+    \item $P_A\subseteq M_A^*$ is a non-empty prefix-closed set of plays that can occur in the game and
     \item $\cmap{\zeta_A}{P_A}{\OP}$ is a function that assigns a player to each position
   \end{itemize}
   such that
@@ -483,7 +483,7 @@ We shall adopt elements of both the Blass and the Abramsky-Jagadeesan games mode
 \begin{remark}[Notes on the definition]
   Given a game $A=(M_A,\lambda_A,\zeta_A,P_A)$, define $b_A=\neg\zeta_A(\emptyplay)$.  Then every play in $P_A$ must start with a $b_A$-move, so $A$ is either positive or negative.
 
-  Note that $\zeta_A$ is now completely specified by $\lambda_A$ and $b_A$, so we could have specified our games mor efficiently by replacing $\zeta_A$ with $b_A$ in our definition, as done in \cite{martinsthesis}.  The slightly more unwieldy $\zeta_A$ will be useful when we come to extend our games over the ordinals, though, so we retain it.
+  Note that $\zeta_A$ is now completely specified by $\lambda_A$ and $b_A$, so we could have specified our games more efficiently by replacing $\zeta_A$ with $b_A$ in our definition, as done in \cite{martinsthesis}.  The slightly more unwieldy $\zeta_A$ will be useful when we come to extend our games over the ordinals, though, so we retain it.
 
   If $a\in M_A$ then we may recover $\lambda_A(a)$ from $\zeta_A$ so long as $a$ occurs in some play in $P_A$.  Since moves that can never be played do not affect the game at all, we do not really need $\lambda_A$ in our definition, but we keep it to make the connection to earlier work clearer.
 
@@ -494,7 +494,7 @@ We shall adopt elements of both the Blass and the Abramsky-Jagadeesan games mode
 We give the usual definition of a strategy as an appropriate subset of $P_A$, where we have identified the strategy with the set of all plays that can arise when player $P$ plays according to that strategy:
 
 \begin{definition}
-  Let $A=(M_A,\lambda_A,\zeta_A,P_A)$ be a game.  A \emph{strategy} for $A$ is a non-empty prefix-closed subset $\sigma\subset P_A$ such that:
+  Let $A=(M_A,\lambda_A,\zeta_A,P_A)$ be a game.  A \emph{strategy} for $A$ is a non-empty prefix-closed subset $\sigma\subseteq P_A$ such that:
   \begin{itemize}
     \item If $a\in P_A$ is an $O$-move and $s\in\sigma$ is a $P$-position such that $sa\in P_A$, then $sa\in\sigma$.
     \item If $s\in\sigma$ is an $O$-position and $a,b\in M_A$ are $P$-moves such that $sa,sb\in\sigma$, then $a=b$.
@@ -535,7 +535,7 @@ We now define the tensor product $A\tensor B$, the par $A\parr B$ and the linear
   M_{A\tensor B} = M_{A\parr B} = M_{A\implies B} = M_A \cprd M_B
   \]
 
-Ownership of moves is decided via the obvious copairing functions:
+Ownership of moves is decided via the obvious co-pairing functions:
 \begin{IEEEeqnarray*}{c}
   \lambda_{A\tensor B} = \lambda_{A\parr B} = \lambda_A \cprd \lambda_B\\
   \lambda_{A\implies B} = (\neg\circ\lambda_A) \cprd \lambda_B
@@ -564,7 +564,7 @@ but $\lambda_{Q\tensor R}(q) = P$.
 Our solution is to throw away some plays from $P_A\| P_B$ so that what remains satisfies the alternating condition and the condition on the $\lambda$ and $\zeta$ functions.
 
 \begin{definition}
-  Let $M$ be a set, let $P\subset M^*$ be prefix closed and let $\cmap{\lambda}{M}{\OP},\cmap{\zeta}{P}{\OP}$ be functions.  If $s\in P$, we say that $s$ is \emph{alternating with respect to $\zeta$} if the set of prefixes of $s$ satisfies the alternating condition: if $t,ta\prefix s$, then $\zeta(t) = \neg\zeta(ta)$.
+  Let $M$ be a set, let $P\subseteq M^*$ be prefix closed and let $\cmap{\lambda}{M}{\OP},\cmap{\zeta}{P}{\OP}$ be functions.  If $s\in P$, we say that $s$ is \emph{alternating with respect to $\zeta$} if the set of prefixes of $s$ satisfies the alternating condition: if $t,ta\prefix s$, then $\zeta(t) = \neg\zeta(ta)$.
 
   We say that $s$ is \emph{well formed with respect to $\lambda,\zeta$} if whenever $ta\prefix s$, for some $a\in M$, we have $\zeta(ta)=\lambda(a)$.
 
@@ -586,13 +586,13 @@ Our solution is to throw away some plays from $P_A\| P_B$ so that what remains s
 \end{definition}
 
 \begin{proposition}
-  $A\tensor B$,$A\parr B$,$A\implies B$ are well formed games.  Moreover, $P_{A\tensor B}$ is the largest subset $X\subset P_A\|P_B$ such that $(M_{A\tensor B}, \lambda_{A\tensor B}, \zeta_{A\tensor B}, X)$ is a well formed game and similarly for the connectives $\parr$ and $\implies$.  
+  $A\tensor B$,$A\parr B$,$A\implies B$ are well formed games.  Moreover, $P_{A\tensor B}$ is the largest subset $X\subseteq P_A\|P_B$ such that $(M_{A\tensor B}, \lambda_{A\tensor B}, \zeta_{A\tensor B}, X)$ is a well formed game and similarly for the connectives $\parr$ and $\implies$.  
   \begin{proof}
     We will prove the proposition for $A\tensor B$; the other two cases are entirely similar.  Alternatively, observe that $A\parr B=\neggame{(\neggame A \tensor \neggame B)}$ and $A\implies B = \neggame A \parr B$.
 
     For $A\tensor B$, it suffices to show that $P_{A\tensor B}$ is alternating with respect to $\zeta_{A\tensor B}$, since every $s\in P_{A\tensor B}$ is well-formed by definition.  Suppose $s,sa\in P_{A\tensor B}$; then $s,sa\prefix sa$; since $sa$ is alternating with respect to $\zeta_{A\tensor B}$, it follows that $\zeta_{A\tensor B}(s) = \neg\zeta_{A\tensor B}(sa)$.
 
-    For the second part of the proposition, suppose that $V\subset P_A\|P_B$ is prefix-closed and satisfies the alternating condition with respect to $\zeta_{A\tensor B}$ and that every $s\in V$ is well-formed with respect to $\lambda_{A\tensor B},\zeta_{A\tensor B}$.  We need to show that $V\subset P_{A\tensor B}$, for which it will suffice to show that every $s\in V$ is alternating.  This is easy to see: since $V$ is prefix closed, the set of all prefixes of $s$ is a subset of $V$, and so it satisfies the alternating condition with respect to $\zeta_{A\tensor B}$.  
+    For the second part of the proposition, suppose that $V\subseteq P_A\|P_B$ is prefix-closed and satisfies the alternating condition with respect to $\zeta_{A\tensor B}$ and that every $s\in V$ is well-formed with respect to $\lambda_{A\tensor B},\zeta_{A\tensor B}$.  We need to show that $V\subseteq P_{A\tensor B}$, for which it will suffice to show that every $s\in V$ is alternating.  This is easy to see: since $V$ is prefix closed, the set of all prefixes of $s$ is a subset of $V$, and so it satisfies the alternating condition with respect to $\zeta_{A\tensor B}$.  
   \end{proof}
 \end{proposition}
 
@@ -627,7 +627,7 @@ A design feature of the connectives $\tensor,\parr,\implies$ is that only player
 \subsection{A category of games and partial strategies}
 \label{CategoricalSemantics}
 
-Following \cite{joyalgames} and \cite{abramskyjagadeesangames}, we define a category $\G$ whose objects are games where the morphisms from a game $A$ to a game $B$ are strategies for $A\implies B$.  For the sake of simplicity, and to avoid varioius technical issues, we shall require that the games in our category be \emph{negative} - namely, they should start with an opponent move.  In our language, we call a game $A$ \emph{negative} if $\zeta_A(\emptyplay)=P$ (and we call it positive if $\zeta_A(\emptyplay)=O$).  The equations
+Following \cite{joyalgames} and \cite{abramskyjagadeesangames}, we define a category $\G$ whose objects are games where the morphisms from a game $A$ to a game $B$ are strategies for $A\implies B$.  For the sake of simplicity, and to avoid various technical issues, we shall require that the games in our category be \emph{negative} - namely, they should start with an opponent move.  In our language, we call a game $A$ \emph{negative} if $\zeta_A(\emptyplay)=P$ (and we call it positive if $\zeta_A(\emptyplay)=O$).  The equations
 \begin{gather*}
   P \wedge P = P \\
   P \Rightarrow P = P
@@ -736,9 +736,9 @@ Thus we see that the plays according to some given strategy $\sigma$ for $A\impl
 
 Given games $A,B$ and a strategy $\sigma$ for $A\implies B$, the set
 \[
-  \{(s\vert_A,s\vert_B)\suchthat \textrm{$s\in\sigma$ is a $P$-position}\}\subset P_A\times P_B
+  \{(s\vert_A,s\vert_B)\suchthat \textrm{$s\in\sigma$ is a $P$-position}\}\subseteq P_A\times P_B
   \]
-is a \emph{relation} between $P_A$ and $P_B$.  Writing $\grel\sigma\subset P_A\times P_B$, we will show that if $A,B,C$ are games and $A\xrightarrow{\sigma}\map{\tau}{B}{C}$ are morphisms, then:
+is a \emph{relation} between $P_A$ and $P_B$.  Writing $\grel\sigma\subseteq P_A\times P_B$, we will show that if $A,B,C$ are games and $A\xrightarrow{\sigma}\map{\tau}{B}{C}$ are morphisms, then:
 \[
   \grel{\comp\tau\sigma}=\comp{\grel\tau}{\grel\sigma}
   \]
@@ -748,7 +748,7 @@ under the usual composition of relations:
   \]
 Thus we will get a functor $\cmap{\F}{\G}{\Rel}$, where $\G$ is our category of negative games and $\Rel$ is the category of sets and relations.  Proposition \ref{HylandSchalkFaithful} then tells us that this functor is faithful.  
 
-It is clear from the definition of $\comp\tau\sigma$ that $\grel{\comp\tau\sigma}\subset\comp{\grel\tau}{\grel\sigma}$; indeed if $\s\in\sigma\|\tau$, then $(\s\vert_A,\s\vert_B)\in\grel\sigma$ and $(\s\vert_B,\s\vert_C)\in\grel\tau$, so $(\s\vert_A,\s\vert_C)\in\comp{\grel\tau}{\grel\sigma}$.  To show the reverse inclusion, we need to show the following: if $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$, then there is some $\s\in (M_A\cprd M_B\cprd M_C)^*$ such that $\s\vert_{A,B}=s$ and $\s\vert_{B,C}=t$.  
+It is clear from the definition of $\comp\tau\sigma$ that $\grel{\comp\tau\sigma}\subseteq\comp{\grel\tau}{\grel\sigma}$; indeed if $\s\in\sigma\|\tau$, then $(\s\vert_A,\s\vert_B)\in\grel\sigma$ and $(\s\vert_B,\s\vert_C)\in\grel\tau$, so $(\s\vert_A,\s\vert_C)\in\comp{\grel\tau}{\grel\sigma}$.  To show the reverse inclusion, we need to show the following: if $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$, then there is some $\s\in (M_A\cprd M_B\cprd M_C)^*$ such that $\s\vert_{A,B}=s$ and $\s\vert_{B,C}=t$.  
 
 This can be shown in an easy way.  Roughly speaking, we write out the sequence $s$, and then insert immediately after each $B$-move the $C$-moves from $t$ that occur after that $B$-move.  This technique works for arbitrary sequences and is sufficient to prove that $\grel{\comp\tau\sigma}=\comp{\grel\tau}{\grel\sigma}$.  However, it turns out that if $s$ and $t$ are alternating plays in $A\implies B$ and $B\implies C$ then this interleaving is unique - and even more is true:
 
@@ -853,10 +853,10 @@ We can now state our first main result.
   \label{IsCategory}
   The collection of negative games, with morphisms from $A$ to $B$ given by strategies on $A\implies B$ with the notions of composition and identity given above, forms a category $\G$.  Moreover, there is a faithful functor $\F\from\G\to\Rel$, where $\Rel$ is the category of sets and relations, given by sending a game $A$ to the set of plays $P_A$ and sending a strategy $\sigma\from A\implies B$ to the set
   \[
-    \grel{\sigma}=\{(s\vert_A,s\vert_B)\suchthat \textrm{$s\in\sigma$ is a $P$-position}\}\subset P_A\times P_B
+    \grel{\sigma}=\{(s\vert_A,s\vert_B)\suchthat \textrm{$s\in\sigma$ is a $P$-position}\}\subseteq P_A\times P_B
     \]
   \begin{proof}
-    We shall make much use of the relational content of a strategy.  We first need to show that the identity is indeed an identity and that composition is associative.  For the identity, note that $\grel{\id_A}=\Delta_{P_A}\subset P_A\times P_A$, the identity relation in $\Rel$.  If $B,C$ are negative games and $\sigma\colon B\implies A,\tau\colon A\implies C$ are strategies, then from our earlier discussion we have
+    We shall make much use of the relational content of a strategy.  We first need to show that the identity is indeed an identity and that composition is associative.  For the identity, note that $\grel{\id_A}=\Delta_{P_A}\subseteq P_A\times P_A$, the identity relation in $\Rel$.  If $B,C$ are negative games and $\sigma\colon B\implies A,\tau\colon A\implies C$ are strategies, then from our earlier discussion we have
     \[
       \grel{\comp{\id_A}{\sigma}}=\comp{\grel{\id_A}}{\grel\sigma}=\comp{\Delta_{P_A}}{\grel\sigma}=\grel\sigma
       \]
@@ -934,7 +934,7 @@ Clearly it is the infinite play in the game $\st$ that is causing the problem.  
 
 The result of this proposition means that we could create a category of games and total strategies by requiring that all our games have no infinite plays.  However, the resulting category is too weak for our requirements; in particular, it makes it very difficult to model the exponential from linear logic.  Moreover, it seems a bit wasteful to require that none of the games $A,BC$ have winning plays when it is only winning plays in game $B$ that are causing problems.  
 
-Fortunately, there is a cleverer way of getting around the problem.  Recall that we defined a game to be given by a tuple $(M_A,\lambda_A,\zeta_A,P_A)$.  Given such a game, and given some subset $X\subset P_A$, define $X^\omega$ to be the set of all infinite plays in the game -- i.e., the set of all infinite sequences $s\in M_A^\omega$ all of whose prefixes lie in $X$.  
+Fortunately, there is a cleverer way of getting around the problem.  Recall that we defined a game to be given by a tuple $(M_A,\lambda_A,\zeta_A,P_A)$.  Given such a game, and given some subset $X\subseteq P_A$, define $X^\omega$ to be the set of all infinite plays in the game -- i.e., the set of all infinite sequences $s\in M_A^\omega$ all of whose prefixes lie in $X$.  
 
 \begin{definition}
   A \emph{win-game} is a tuple $A=(M_A,\lambda_A,\zeta_A,P_A,W_A)$ where $(M_A,\lambda_A,\zeta_A,P_A)$ is a game as defined before and $\cmap{W_A}{P_A^\omega}{\OP}$ is a function telling us whether each infinite play is a win for player $P$ or for player $O$.  
@@ -973,7 +973,7 @@ It is worth examining the definitions of the $W$-functions for tensor and implic
 
 Similarly, player $P$ wins an infinite play $s$ in $A\implies B$ if and only if $s\vert_A$ is infinite and $O$-winning or if $\s\vert_B$ is either finite or is infinite and $P$-winning.  Since it is player $P$ who switches games in $A\implies B$, if $s\vert_A$ is finite then it will end with an $O$-move, so will count as an $O$-winning play.  
 
-The point now is that if $A,B,C$ are negative win-games and $\sigma$ and $\tau$ are strategies for $A\implies B$ and $B\implies C$, we will never end up in the situation we were in in Example \ref{TotalCompositionExample} where we have an infintie play in $B$ that stops us from replying in the composition $\comp\tau\sigma$.  In that example, the unique infinite play in $\st$ would have to be either $O$-winning or $P$-winning, so either $\sigma$ or $\tau$ would not be a valid winning strategy.  
+The point now is that if $A,B,C$ are negative win-games and $\sigma$ and $\tau$ are strategies for $A\implies B$ and $B\implies C$, we will never end up in the situation we were in in Example \ref{TotalCompositionExample} where we have an infinite play in $B$ that stops us from replying in the composition $\comp\tau\sigma$.  In that example, the unique infinite play in $\st$ would have to be either $O$-winning or $P$-winning, so either $\sigma$ or $\tau$ would not be a valid winning strategy.  
 
 \begin{proposition}
   Let $A,B,C$ be negative win-games, let $\sigma$ be a winning strategy for $A\implies B$ and let $\tau$ be a winning strategy for $B\implies C$.  Then $\comp\tau\sigma$ is a winning strategy for $A\implies C$.  
@@ -1009,7 +1009,7 @@ We get another result:
   In this section, we assume familiarity with ordinals, ordinal arithmetic and transfinite induction/recursion.  We shall frequently identify an ordinal $\alpha$ with the set $\{\beta\suchthat\beta<\alpha\}$ of all ordinals less than $\alpha$ without comment.
 \end{note}
 
-In the last section, we came across win-games, where in addition to the usual function $\cmap{\zeta_A}{P_A}{\OP}$ we have a function $\cmap{W_A}{P_A^\omega}{\OP}$, where $P_A^\omega$ is the set of infinite limits of plays in $P_A$.  We saw that it is usefult to combine these two functions into one:
+In the last section, we came across win-games, where in addition to the usual function $\cmap{\zeta_A}{P_A}{\OP}$ we have a function $\cmap{W_A}{P_A^\omega}{\OP}$, where $P_A^\omega$ is the set of infinite limits of plays in $P_A$.  We saw that it is useful to combine these two functions into one:
 \[
   W_A^* = \zeta_A\cprd W_A\from P_A\cprd P_A^*\to\OP
   \]
@@ -1054,7 +1054,7 @@ We fix some ordinal $\alpha$ throughout.  Given a set $M$, we write $M^{*<\alpha
 We define strategies for these games in much the same way that we defined them before:
 
 \begin{definition}
-  Let $A$ be an $\alpha$-game.  A (partial) \emph{strategy} for $A$ is a subset $\sigma\subset P_A$ satisfying three conditions:
+  Let $A$ be an $\alpha$-game.  A (partial) \emph{strategy} for $A$ is a subset $\sigma\subseteq P_A$ satisfying three conditions:
   \begin{description}
     \item[$\sigma$ contains all $O$-replies] If $s\in\sigma$ is a $P$-play and $sa\in P_A$ is an $O$-response, then $sa\in\sigma$.
     \item[$P$-replies are unique] If $s\in\sigma$ is an $O$-play and $sa,sb\in\sigma$ are $P$-responses, then $a=b$.
@@ -1068,7 +1068,7 @@ We define strategies for these games in much the same way that we defined them b
   \end{description}
 \end{definition}
 
-The only new part of this is the limit condition.  Let us examine what it means in the $\omega+1$ case.  Play according to a total strategy $\sigma$ gives rise to a sequence of plays $\emptyplay \prefix s_1\prefix s_2\prefix\dots$ (were $s_i$ has length $i$).  The limit condition then tells us that the limit $s_\omega$ of these plays must be contained in $\sigma$.  If $\zeta_A(s_\omega)=O$ then $P$ has no response to $s_\omega$ (since there are no plays of length $\omega+2$), contradicting totality of $\sigma$.  So for $\sigma$ to be a total strategy, we must have $\zeta_A(s_\omega)=P$ for every $s_\omega$ arising as the limit of finit plays according to $\sigma$.  So total strategies for $\omega+1$-games are exactly the same thing as the winning strategies for win-games that we defined earlier.  
+The only new part of this is the limit condition.  Let us examine what it means in the $\omega+1$ case.  Play according to a total strategy $\sigma$ gives rise to a sequence of plays $\emptyplay \prefix s_1\prefix s_2\prefix\dots$ (were $s_i$ has length $i$).  The limit condition then tells us that the limit $s_\omega$ of these plays must be contained in $\sigma$.  If $\zeta_A(s_\omega)=O$ then $P$ has no response to $s_\omega$ (since there are no plays of length $\omega+2$), contradicting totality of $\sigma$.  So for $\sigma$ to be a total strategy, we must have $\zeta_A(s_\omega)=P$ for every $s_\omega$ arising as the limit of finite plays according to $\sigma$.  So total strategies for $\omega+1$-games are exactly the same thing as the winning strategies for win-games that we defined earlier.  
 
 If $s\in P_A$ and $\length(s)$ is a successor ordinal, we will call $s$ a \emph{successor play} or \emph{successor position}.  If $\length(s)$ is a limit ordinal, we will call $s$ a \emph{limiting play} or \emph{limiting position}.
 
@@ -1122,7 +1122,7 @@ Our definitions of the functions $\lambda_{A\tensor B},\lambda_{A\parr B},\lambd
   \lambda_{A\implies B} = (\neg\circ\lambda_A)\cprd \lambda_B
 \end{gather*}
 
-Given a set $M$, a prefix-closed set $P\subset M^{*<\alpha}$ and functions $\cmap{\lambda}{M}{\OP},\cmap{\zeta}{P}{\OP}$, we say that a play $s\in P$ is \emph{well-formed with respect to $\lambda,\zeta$} if whenever $ta\prefix s$ (with $a\in M$) we have $\zeta(ta)=\lambda(a)$.  We say that $s$ is \emph{alternating with respect to $\zeta$} if whenever $t,ta$ are prefixes of $s$ (where $a\in M$), we have $\zeta(t)=\neg\zeta(ta)$.
+Given a set $M$, a prefix-closed set $P\subseteq M^{*<\alpha}$ and functions $\cmap{\lambda}{M}{\OP},\cmap{\zeta}{P}{\OP}$, we say that a play $s\in P$ is \emph{well-formed with respect to $\lambda,\zeta$} if whenever $ta\prefix s$ (with $a\in M$) we have $\zeta(ta)=\lambda(a)$.  We say that $s$ is \emph{alternating with respect to $\zeta$} if whenever $t,ta$ are prefixes of $s$ (where $a\in M$), we have $\zeta(t)=\neg\zeta(ta)$.
 
 As before, we now define:
 
@@ -1141,7 +1141,7 @@ Setting $M_{A\tensor B}=M_{A\parr B}=M_{A\implies B} = M_A\cprd M_B$, and restri
 
 \begin{proposition}
   \label{TransTensorWellFormed}
-  $A\tensor B$, $A\parr B$ and $A\implies B$ are well formed games.  Moreover, $P_{A\tensor B}$ is the largest subset $X\subset P_A\|P_B$ such that $(M_{A\tensor B}, \lambda_{A\tensor B}, \zeta_{A\tensor B}, X)$ is a well formed game and similarly for the connectives $\parr$ and $\implies$.
+  $A\tensor B$, $A\parr B$ and $A\implies B$ are well formed games.  Moreover, $P_{A\tensor B}$ is the largest subset $X\subseteq P_A\|P_B$ such that $(M_{A\tensor B}, \lambda_{A\tensor B}, \zeta_{A\tensor B}, X)$ is a well formed game and similarly for the connectives $\parr$ and $\implies$.
   \begin{proof}
     As before, we prove this proposition for $A\tensor B$ and the other two cases are entirely similar.  Alternatively, observe that $A\parr B=\neggame{(\neggame A \tensor \neggame B)}$ and that $A\implies B = \neggame A \parr B$.  
 
@@ -1155,7 +1155,7 @@ Setting $M_{A\tensor B}=M_{A\parr B}=M_{A\implies B} = M_A\cprd M_B$, and restri
 
     Lastly, we show that $s$ is well formed with respect to $\lambda_{A\tensor B},\zeta_{A\tensor B}$.  Suppose $ta\prefix s$.  Once again, $ta$ must be a \emph{proper} prefix of $s$, since it clearly has a different length.  Therefore, $ta$ is well formed and we have $\zeta_{A\tensor B}(ta)=\lambda_{A\tensor B}(a)$.  Therefore, $s\in P_{A\tensor B}$.  
 
-    For the second part of the proposition, suppose that $V\subset P_A\|P_B$ is prefix closed and satisfies the alternating condition with respect to $\zeta_{A\tensor B}$ and that if $sa\in V$ then $\zeta_{A\tensor B}(sa)=\lambda_{A\tensor B}(a)$.  We want to show that $V\subset P_{A\tensor B}$.  Indeed, if $s\in V$ and $ta\prefix s$, then $ta\in V$ (since $V$ is prefix closed) and therefore $\zeta_{A\tensor B}(ta)=\lambda_{A\tensor B}(a)=\neg\zeta_{A\tensor B}(s)$.  
+    For the second part of the proposition, suppose that $V\subseteq P_A\|P_B$ is prefix closed and satisfies the alternating condition with respect to $\zeta_{A\tensor B}$ and that if $sa\in V$ then $\zeta_{A\tensor B}(sa)=\lambda_{A\tensor B}(a)$.  We want to show that $V\subseteq P_{A\tensor B}$.  Indeed, if $s\in V$ and $ta\prefix s$, then $ta\in V$ (since $V$ is prefix closed) and therefore $\zeta_{A\tensor B}(ta)=\lambda_{A\tensor B}(a)=\neg\zeta_{A\tensor B}(s)$.  
   \end{proof}
 \end{proposition}
 
@@ -1252,10 +1252,10 @@ Before moving on to the discussion of composition of strategies, we shall want a
     \item $s$ is well formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$ (so $s\in P_{A\tensor B}$).
   \end{enumerate}
 
-  b) Let $A$ be an acn $\alpha$-game, let $B$ be an arbitrary $\alpha$-game and suppose that $s\in P_A\|P_B$ is alternating with respect to $\zeta_{A\implies B}$.  Then:
+  b) Let $A$ be an acn $\alpha$-game, {\bf let $B$ be an arbitrary $\alpha$-game} and suppose that $s\in P_A\|P_B$ is alternating with respect to $\zeta_{A\implies B}$.  Then:
   \begin{enumerate}[i)]
     \item If $s$ is not a length maximal limiting play, then either $\zeta_A(s\vert_A)=P$ or $\zeta_B(s\vert_B)=O$.
-    \item $s$ is well formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$ (so $s\in P_{A\tensor B}$).
+    \item $s$ is well formed with respect to $\zeta_{A\implies B},\lambda_{A\implies B}$ (so $s\in P_{A\implies B}$).
   \end{enumerate}
 \end{proposition}
 
@@ -1285,7 +1285,7 @@ We now set out to extend to the transfinite case some of the results that we pro
   \end{proof}
 \end{lemma}
 
-Given acn $\alpha$-games $A$ and $B$ and a strategy $\sigma$ for $A\implies B$, we may define a relation $\grel\sigma\subset P_A\times P_B$ by
+Given acn $\alpha$-games $A$ and $B$ and a strategy $\sigma$ for $A\implies B$, we may define a relation $\grel\sigma\subseteq P_A\times P_B$ by
 \[
   \grel\sigma = \{(s\vert_A,s\vert_B)\suchthat\textrm{$s\in\sigma$ is a $P$-position}\}
   \]
@@ -1484,7 +1484,7 @@ Now we have made this restriction on $\alpha$, the fact that composition is well
     \end{gather*}
     that make the underlying set of $\length(\s)$ into the disjoint union $\gamma\sqcup\delta$.  Then the induced orderings on $\gamma,\delta$ are the same as their original orderings, so we must have $\length(\s)\le\gamma\#\delta$.  Since $\alpha$ is closed under natural addition $\#$, this means that $\length(\s)<\alpha$.  
 
-    Now we see that $\comp\tau\sigma\subset P_A\|P_C$: if $\s\in\sigma\|\tau$, then $\s\vert_{A,C}\vert_A=\s\vert_{A,B}\vert_A\in P_A$ and similarly $\s\vert_{A,C}\vert_C=\s\vert_{B,C}\vert_C\in P_C$.  To show that $\comp\tau\sigma\subset P_{A\implies C}$, it suffices by Proposition \ref{NiceAcnGames}(ii) to show that $\comp\tau\sigma$ is alternating with respect to $\zeta_{A\implies C}$.
+    Now we see that $\comp\tau\sigma\subseteq P_A\|P_C$: if $\s\in\sigma\|\tau$, then $\s\vert_{A,C}\vert_A=\s\vert_{A,B}\vert_A\in P_A$ and similarly $\s\vert_{A,C}\vert_C=\s\vert_{B,C}\vert_C\in P_C$.  To show that $\comp\tau\sigma\subseteq P_{A\implies C}$, it suffices by Proposition \ref{NiceAcnGames}(ii) to show that $\comp\tau\sigma$ is alternating with respect to $\zeta_{A\implies C}$.
 
     Suppose $\s a\in\sigma\|\tau$ for some move $a\in M_A$.  By the proof of Lemma \ref{TransLiftingLemma}, we must be in \textbf{Case C or D} (there are no length maximal plays, so \textbf{Cases G and H} never occur).  The following table shows that we must have $\zeta_{A\implies B}(\s\vert_{A,B})=\zeta_{A\implies C}(\s\vert_{A,C})$:
     \[
@@ -1499,7 +1499,7 @@ Now we have made this restriction on $\alpha$, the fact that composition is well
     \[
       \lambda_{A\implies C}(a) = \lambda_{A\implies B}(a) = \neg\zeta_{A\implies B}(\s) = \neg\zeta_{A\implies C}(\s)
       \]
-    as desired.  The case when we have $\s c\in\tau\|\sigma$ for some $c\in M_C$ is entirely symmetrical, working in \textbf{Cases A and B} this time.  Therefore, $\comp\tau\sigma\subset P_{A\implies C}$.  
+    as desired.  The case when we have $\s c\in\tau\|\sigma$ for some $c\in M_C$ is entirely symmetrical, working in \textbf{Cases A and B} this time.  Therefore, $\comp\tau\sigma\subseteq P_{A\implies C}$.  
 
     We now need to show that the two strategy conditions are satisfied.  Let $\s\in\sigma\|\tau$ and suppose that $\s\vert_{A,C}$ is a $P$-position and that $a\in M_A$ is an $O$-move in $A$ such that $\s\vert_{A,C}a \in P_{A\implies C}$.  We want to show that $\s\vert_{A,C}a\in \comp\tau\sigma$.  Since $\s\vert_{A,C}$ is a $P$-position, we must be in \textbf{Case A or Case D}.  In that case, $\s\vert_{A,B}$ is a $P$-position and we know that $\s\vert_Aa\in P_A$, so $\s\vert_{A,B}a\in P_{A\implies B}$.  Since $\sigma$ is a strategy, that implies that $\s\vert_{A,B}a\in\sigma$ and therefore $\s a\in\sigma\|\tau$.  So we have $\s\vert_{A,C}a=\s a\vert_{A,C}\in\comp\tau\sigma$.
 
@@ -1569,7 +1569,7 @@ We claim that $s\vert_{A',A}$ and $s\vert_{B',B}$ are $P$-positions in $A'\impli
 
 If $s\vert_{A',A}$ is an $O$-position, then $s\vert_{A'}$ is a $P$-position in $A'$ and $s\vert_A$ is an $O$-position in $A$.  Now, $s\vert_{A,B}$ is a play in $A\tensor B$, so Proposition \ref{NiceAcnGames}(i) tells us that $s\vert_B$ must be a $P$-position in $B$.  
 
-Now $s\vert_{B',B}$ is a play in $\tau\subset P_{B'\implies B}$, so Proposition \ref{NiceAcnGames}(i) now tells us that $s\vert_{B'}$ is a $P$-position in $B'$.  It follows that $s\vert_{A',B'}$ is a $P$-position in $A'\tensor B'$ and that $s\vert_{A,B}$ is an $O$-position in $A\tensor B$, so $s$ is an $O$-position in $(A'\tensor B')\implies (A\tensor B)$, which is the desired contradiction.
+Now $s\vert_{B',B}$ is a play in $\tau\subseteq P_{B'\implies B}$, so Proposition \ref{NiceAcnGames}(i) now tells us that $s\vert_{B'}$ is a $P$-position in $B'$.  It follows that $s\vert_{A',B'}$ is a $P$-position in $A'\tensor B'$ and that $s\vert_{A,B}$ is an $O$-position in $A\tensor B$, so $s$ is an $O$-position in $(A'\tensor B')\implies (A\tensor B)$, which is the desired contradiction.
 
 Without loss of generality, suppose that the move $x$ occurs in $A'$ or $A$.  Since $s\vert_{A', A}$ is a $P$-position, we must have $sx\vert_{A',A}\in\sigma$, by the definition of a strategy, and then $s x\vert_{B',B}=s\vert_{B',B}\in\tau$.  So $sx\in\sigma\tensor\tau$.
 
@@ -1658,7 +1658,7 @@ and so $x=y$, and if they are moves in $A'$, we have
   \]
 and so $x=y$ again.
 
-We call a strategy $\sigma_f$ arising from a tree isomorphism $f$ a \emph{copycat strategy}.  The relational presentation $\grel{\sigma_f}$ of such a strategy $\sigma_f$ is the graph of the function $\cmap{f}{P_{A'}}{P_A}$, and therefore the function $f$ is determined uniquely by the strategy $f$.  Moreover, if we have competely negative $\alpha$-games $A'', A', A$ and tree isomorphisms $A''\xrightarrow{f'}A'\xrightarrow{f}A$, then we must have
+We call a strategy $\sigma_f$ arising from a tree isomorphism $f$ a \emph{copycat strategy}.  The relational presentation $\grel{\sigma_f}$ of such a strategy $\sigma_f$ is the graph of the function $\cmap{f}{P_{A'}}{P_A}$, and therefore the function $f$ is determined uniquely by the strategy $f$.  Moreover, if we have completely negative $\alpha$-games $A'', A', A$ and tree isomorphisms $A''\xrightarrow{f'}A'\xrightarrow{f}A$, then we must have
 \[
   \comp{\sigma_f}{\sigma_{f'}} = \sigma_{\comp{f}{f'}}
   \]
@@ -1707,7 +1707,7 @@ inducing a map
 \[
   \overline{\braid_{M_A,M_B}}\from P_{A\tensor B}\to P_{B\tensor A}
   \]
-It is clear that these maps on sets of plays are all tree isomorphisms, so they give rise to ismorphisms in $\G(\alpha)$:
+It is clear that these maps on sets of plays are all tree isomorphisms, so they give rise to isomorphisms in $\G(\alpha)$:
 \begin{gather*}
   \assoc_{A,B,C}\from (A\tensor B)\tensor C\to A\tensor (B\tensor B)\\
   \lunit_A\from I\tensor A\to A\\
@@ -1781,7 +1781,7 @@ It is easy to check that this diagram commutes by applying the functor $\F\colon
 \[
   \overline{\assoc_{M_A,M_B,M_C}}\from P_{(A\tensor B)\tensor C}\to P_{A\tensor(B\tensor C)}
   \]
-and its action by left composition on $\grel{(\sigma\tensor\tau)\tensor\upsilon}\subset P_{(A'\tensor B')\tensor C'}\times P_{(A\tensor B)\tensor C}$ is pointwise application of this function.  We find that
+and its action by left composition on $\grel{(\sigma\tensor\tau)\tensor\upsilon}\subseteq P_{(A'\tensor B')\tensor C'}\times P_{(A\tensor B)\tensor C}$ is pointwise application of this function.  We find that
 \begin{align*}
   \grel{\comp{\assoc_{A,B,C}}{(\sigma\tensor\tau)\tensor\upsilon}}
   &=\comp{\grel{\assoc_{A,B,C}}}{\grel{(\sigma\tensor\tau)\tensor\upsilon}}\\
@@ -2022,7 +2022,7 @@ This definition is useful because we have a natural embedding (the $2$-Yoneda em
 It is well known that this is a fully faithful embedding.  I claim that it is also essentially surjective, so it is in fact an equivalence of categories.  Indeed, this follows from what we have just shown:
 
 \begin{proposition}
-  Let $A$ be an arbitrary $\alpha$ game.  Then the categories $\G(\alpha)/A$ and $\G(\alpha)/A^{\cn}$ are isomorphic as categories, via an isomorphism that commutes with the proection functors.
+  Let $A$ be an arbitrary $\alpha$ game.  Then the categories $\G(\alpha)/A$ and $\G(\alpha)/A^{\cn}$ are isomorphic as categories, via an isomorphism that commutes with the projection functors.
 
   \begin{proof}
     We have a natural functor from $\G(\alpha)/A^{\cn}$ to $\G(\alpha)/A$ given by post-composition with $\cn_A$, where functoriality follows from associativity of composition.  This functor certainly commutes with the projection functors.  Then Proposition \ref{CnUniversalProperty} tells us that it is fully faithful and a bijection on objects, so it is a categorical isomorphism.
@@ -2095,7 +2095,7 @@ where we have again labelled the different copies of $A$ and $B$ to avoid confus
 
 The strategy $\tilde{\sigma}$ gives rise to a strategy ${\tilde{\sigma}}^{\cn}$ for $X\implies(A\impliescn B)$.  We claim that this ${\tilde{\sigma}}^{\cn}$ satisfies the property above.  
 
-First, we show that $\comp{\ev_{A,B}}{({\tilde{\sigma}}^{\cn}\tensor\id_A)}=\sigma$.  By the definition of ${\tilde{\sigma}}^{\cn}$, we know that it mkes the following diagram commute:
+First, we show that $\comp{\ev_{A,B}}{({\tilde{\sigma}}^{\cn}\tensor\id_A)}=\sigma$.  By the definition of ${\tilde{\sigma}}^{\cn}$, we know that it makes the following diagram commute:
 \[
   \begin{tikzcd}
     X \arrow[r, "{\tilde{\sigma}}^{\cn}"] \arrow[dr, "\tilde\sigma"']
@@ -2276,7 +2276,7 @@ The next Proposition goes some way towards showing why $\oc A$ is a suitable mod
       \]
     (by inspecting the definition of $\oc \sigma$) and so $\der$ gives rise to a natural transformation from $A\mapsto \oc A$ to $\id_A$.  
 
-    To complete the proof of adjointness, we need to show that the reverse composition of these functors admits a natural transformation out of the identity functor on the category of commutative comonoids over $\G(\alpha)$.  Let $\map{\mu}{X}{X\tensor X}$ be a commmutative comonoid over $\G(\alpha)$.  
+    To complete the proof of adjointness, we need to show that the reverse composition of these functors admits a natural transformation out of the identity functor on the category of commutative comonoids over $\G(\alpha)$.  Let $\map{\mu}{X}{X\tensor X}$ be a commutative comonoid over $\G(\alpha)$.  
   \end{proof}
 \end{proposition}
 
@@ -2284,7 +2284,7 @@ TODO: complete this section.
 
 \subsection{Products in $\G(\alpha)$}
 
-Let $(A_i\suchthat i\in I)$ be a collection of obects of $\G(\alpha)$.  We define the product
+Let $(A_i\suchthat i\in I)$ be a collection of objects of $\G(\alpha)$.  We define the product
 \[
   \prod_i A_i
   \]
@@ -2495,7 +2495,7 @@ making the following diagram commute:
       \]
     by the definition of $\id_A$.  
 
-    It follows (after hiding $M_{A_{-2}}$) that $\comp{(\id_A\sequoid\fcoal\sigma)}{\sigma} \subset S$.  Conversely, given an element $s=\s\vert_{B_{-1},A_{-1},A_0,A_1,\dots}\in S$, we may interleave in a play in $A_{-2}$ that is identical to the play in $\s\vert_{A_{-1}}$ as above, showing that $s\in\comp{(\id_A\sequoid\fcoal\sigma)}{\sigma}$.  
+    It follows (after hiding $M_{A_{-2}}$) that $\comp{(\id_A\sequoid\fcoal\sigma)}{\sigma} \subseteq S$.  Conversely, given an element $s=\s\vert_{B_{-1},A_{-1},A_0,A_1,\dots}\in S$, we may interleave in a play in $A_{-2}$ that is identical to the play in $\s\vert_{A_{-1}}$ as above, showing that $s\in\comp{(\id_A\sequoid\fcoal\sigma)}{\sigma}$.  
 
     It remains only to observe that $S$ is precisely the strategy $\comp{\alpha}{\fcoal\sigma}$, and so the square above does indeed commute.  
 
