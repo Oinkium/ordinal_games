@@ -3,47 +3,53 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: ordinal_games.aux
 The style file: alpha.bst
 Database file #1: ordinal_games.bib
+Name 1 in "Neeman, Itay, and ebrary, Inc." has a comma at the end for entry longgamesbook
+while executing---line 1185 of file alpha.bst
+Name 1 in "Neeman, Itay, and ebrary, Inc." has a comma at the end for entry longgamesbook
+while executing---line 1185 of file alpha.bst
 Warning--empty year in LairdCofCommCom
 Warning--can't use both author and editor fields in MelliesCofCommCom
-You've used 22 entries,
+Name 1 in "Neeman, Itay, and ebrary, Inc." has a comma at the end for entry longgamesbook
+while executing---line 1250 of file alpha.bst
+You've used 24 entries,
             2543 wiz_defined-function locations,
-            702 strings with 7779 characters,
-and the built_in function-call counts, 8197 in all, are:
-= -- 836
-> -- 305
+            715 strings with 8029 characters,
+and the built_in function-call counts, 8707 in all, are:
+= -- 881
+> -- 332
 < -- 20
-+ -- 98
-- -- 95
-* -- 522
-:= -- 1300
-add.period$ -- 68
-call.type$ -- 22
-change.case$ -- 121
-chr.to.int$ -- 22
-cite$ -- 24
-duplicate$ -- 365
-empty$ -- 639
-format.name$ -- 130
-if$ -- 1730
++ -- 107
+- -- 103
+* -- 568
+:= -- 1406
+add.period$ -- 76
+call.type$ -- 24
+change.case$ -- 131
+chr.to.int$ -- 24
+cite$ -- 26
+duplicate$ -- 375
+empty$ -- 684
+format.name$ -- 141
+if$ -- 1817
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 18
-newline$ -- 111
-num.names$ -- 66
-pop$ -- 137
+missing$ -- 21
+newline$ -- 122
+num.names$ -- 72
+pop$ -- 144
 preamble$ -- 1
-purify$ -- 146
+purify$ -- 159
 quote$ -- 0
-skip$ -- 320
+skip$ -- 318
 stack$ -- 0
-substring$ -- 429
-swap$ -- 82
+substring$ -- 453
+swap$ -- 65
 text.length$ -- 20
-text.prefix$ -- 13
+text.prefix$ -- 14
 top$ -- 0
-type$ -- 168
+type$ -- 180
 warning$ -- 2
-while$ -- 74
-width$ -- 26
-write$ -- 286
-(There were 2 warnings)
+while$ -- 79
+width$ -- 27
+write$ -- 314
+(There were 3 error messages)

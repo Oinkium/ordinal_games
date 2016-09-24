@@ -7,12 +7,12 @@ Samson Abramsky and Radha Jagadeesan.
 
 \bibitem[AJM00]{ajmPcf}
 Samson Abramsky, Radha Jagadeesan, and Pasquale Malacaria.
-\newblock Full abstraction for pcf.
+\newblock Full abstraction for {PCF}.
 \newblock {\em Information and Computation}, 163(2):409 -- 470, 2000.
 
 \bibitem[BDER97]{bion}
 P.~Baillot, V.~Danos, T.~Ehrhard, and L.~Regnier.
-\newblock Believe it or not, ajm's games model is a model of classical linear
+\newblock Believe it or not, {AJM}'s games model is a model of classical linear
   logic.
 \newblock In {\em Proceedings of the 12th Annual IEEE Symposium on Logic in
   Computer Science}, LICS '97, pages 68--, Washington, DC, USA, 1997. IEEE
@@ -45,14 +45,14 @@ Pierre-Louis Curien.
 \newblock Concrete data structures, sequential algorithms and linear logic.
 \newblock Email communication on types mailing list, 1992.
 
-\bibitem[HhLO93]{HylandOngGames}
-J.M.E. Hyland and C.~h.~L.~Ong.
+\bibitem[HO93]{HylandOngGames}
+J.M.E. Hyland and C.-H.~L. Ong.
 \newblock Fair games and full completeness for multiplicative linear logic
-  without the mix-rule, 1993.
+  without the {MIX}-rule, 1993.
 
 \bibitem[HO00]{hoPcf}
 J.M.E. Hyland and C.-H.L. Ong.
-\newblock On full abstraction for pcf: I, ii, and iii.
+\newblock On full abstraction for {PCF}: {I}, {II}, and {III}.
 \newblock {\em Information and Computation}, 163(2):285 -- 408, 2000.
 
 \bibitem[HS02]{hylandschalkgames}
@@ -80,7 +80,8 @@ Yves Lafont.
 \bibitem[Lai]{LairdCofCommCom}
 James Laird.
 \newblock Functional programs as coroutines: A semantic analysis.
-\newblock {\em Logical methods in computer science}, page To appear.
+\newblock {\em Logical methods in computer science}.
+\newblock To appear.
 
 \bibitem[Lai02]{laird02}
 J.~Laird.
@@ -103,6 +104,12 @@ Paul-Andr{\'e} Melli{\`e}s, Nicolas Tabareau, and Christine Tasson.
   Logic}, pages 247--260.
 \newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2009.
 
+\bibitem[Ne04]{longgamesbook}
+Itay Neeman and Inc. ebrary.
+\newblock {\em The determinacy of long games}.
+\newblock De Gruyter series in logic and its applications ;. Walter de
+  Gruyter,, Berlin ;, c2004.
+
 \bibitem[Nic94]{nickauPcf}
 Hanno Nickau.
 \newblock Hereditarily sequential functionals.
@@ -117,5 +124,10 @@ Andrea Schalk.
 \bibitem[Sch04]{SchalkWhatIs}
 Andrea Schalk.
 \newblock What is a cateegorical model for linear logic?, October 2004.
+
+\bibitem[Wor05]{finalseq}
+James Worrell.
+\newblock On the final sequence of a finitary set functor.
+\newblock {\em Theoretical Computer Science}, 338(1):184 -- 199, 2005.
 
 \end{thebibliography}
