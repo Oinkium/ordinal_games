@@ -247,6 +247,9 @@
 \DeclareMathSymbol{\co}{\mathord}{operators}{"3C}
 \newcommand{\T}{\mathfrak{T}}
 \renewcommand{\subset}{\subseteq}
+\newcommand{\Ord}{\catname{Ord}}
+\newcommand{\FS}{\mathcal{FS}}
+\DeclareMathOperator{\rank}{rank}
 
 \let\oldemptyset\emptyset
 \let\emptyset\varnothing
@@ -2242,6 +2245,7 @@ So $\oc A$ is like an infinite tensor product of copies of $A$ with the restrict
 Just like the tensor product, the exponential $\oc A$ has the property that only player $O$ may switch games:
 
 \begin{proposition}
+  \label{ExponentialWhoSwitchesGames}
   Suppose that $s(a,m)(b,n)\in P_{\oc A}$, where $m\ne n$.  Then $\lambda_{\oc A}(b,n)=O$.  
   \begin{proof}
     $\begin{aligned}[t]
@@ -2406,9 +2410,9 @@ In order to fix this situation, we place a restriction on the strategy $\sigma$.
   Let $A,B,C,D$ be objects of $\G(\alpha)$, let $\sigma$ be a strict strategy for $A\implies B$ and let $\tau$ be a strict strategy for $C\implies D$.  Then $\sigma\sequoid\tau=\sigma\tensor\tau\cap P_{(A\sequoid C)\implies (B\sequoid D)}$ is a strict strategy for $(A\sequoid C)\implies (B\sequoid D)$ and the following diagram commutes (so $\wk$ is a natural transformation between $\blank\tensor\blank$ and $\blank\sequoid\blank$):
   \[
     \begin{tikzcd}
-      A\tensor C \arrow[r, "\sigma\tensor\tau"] \arrow[d, "\wk"]
+      A\tensor C \arrow[r, "\sigma\tensor\tau"] \arrow[d, "\wk"']
         & B\tensor D \arrow[d, "\wk"] \\
-      A\sequoid C \arrow[r, "\sigma\sequoid\tau"]
+      A\sequoid C \arrow[r, "\sigma\sequoid\tau"']
         & B\sequoid D
     \end{tikzcd}
     \]
@@ -2473,7 +2477,7 @@ making the following diagram commute:
       \]
     Then we set
     \[
-      \fcoal\sigma = \{\s\vert_{B_0,\oc A}\suchthat\s\in\|\sigma\|\}
+      \fcoal\sigma = P_{B\implies\oc A} \cap \{\s\vert_{B_0,\oc A}\suchthat\s\in\|\sigma\|\}
       \]
     where we write $\s\vert_{B_0, \oc A}$ for $\s\vert_{B_0,A_0,A_1,\dots}$.  
 
@@ -2488,7 +2492,7 @@ making the following diagram commute:
       \]
     First, we have:
     \[
-      \fcoal{\sigma} = \left\{\s\vert_{B_0,A_0,A_1,\dots}\;\middle|\;\mbox{\pbox{\textwidth}{
+      \fcoal{\sigma} = P_{B\implies \oc A} \cap \left\{\s\vert_{B_0,A_0,A_1,\dots}\;\middle|\;\mbox{\pbox{\textwidth}{
         $\s\in(M_B\times\omega\sqcup M_A\times\omega)^{*<\alpha}$\\
         $\forall i\ge0,\;\s\vert_{B_i,A_i,B_{i+1}}\in\sigma$
       }}\right\}
@@ -2502,7 +2506,7 @@ making the following diagram commute:
         $\forall i\ge 0$, $\s\vert_{B_i,A_i,B_{i+1}}\in\sigma$
       }}\right\}
     \end{align*}
-    Using the definition 
+    Using the definition:
     \[
       \id\sequoid\fcoal{\sigma} = \{s\in P_{(A_{-2}\sequoid B_0)\implies(A_{-1}\sequoid\oc A)}\suchthat
       s\vert_{A_{-2},A_{-1}}\in\id_A,\;s\vert_{B_0,\oc A}\in\fcoal\sigma\}
@@ -2511,7 +2515,7 @@ making the following diagram commute:
 
     We now have $\comp{(\id_A\sequoid\fcoal\sigma)}{\sigma} =$
     \[
-      \left\{\s\vert_{B_{-1},A_{-1},A_0,A_1,\dots}\;\middle|\;\mbox{\pbox{\textwidth}{
+      P_{B\implies A\sequoid\oc A} \cap \left\{\s\vert_{B_{-1},A_{-1},A_0,A_1,\dots}\;\middle|\;\mbox{\pbox{\textwidth}{
         $\s\in(M_{B_{-1}}\cprd M_{A_{-2}}\cprd M_{A_{-1}}\cprd M_B\times\omega \cprd M_A\times\omega)^{*<\alpha}$\\
         $\s\vert_{B_{-1},A_{-2},B_0}\in\sigma$\\
         $\s\vert_{A_{-2},A_{-1}}\in\id_A$\\
@@ -2521,7 +2525,7 @@ making the following diagram commute:
     We claim that this is equal to the following strategy:
     \[
       S =
-      \left\{\s\vert_{B_{-1},A_{-1},A_0,A_1,\dots}\;\middle|\;\mbox{\pbox{\textwidth}{
+      P_{B\implies A\sequoid\oc A}\cap\left\{\s\vert_{B_{-1},A_{-1},A_0,A_1,\dots}\;\middle|\;\mbox{\pbox{\textwidth}{
         $\s\in (M_{B_{-1}}\cprd M_{A_{-1}} \cprd M_B\times\omega \cprd M_A\times\omega)^{*<\alpha}$\\
         $\forall i\ge -1$, $\s\vert_{B_i,A_i,B_{i+1}}\in\sigma$
       }}\right\}
@@ -2615,7 +2619,224 @@ making the following diagram commute:
   \end{proof}
 \end{theorem}
 
-We still need to show that $\fcoal\sigma$ is indeed a strategy.  
+We still need to show that $\fcoal\sigma$ is indeed a strategy.  We shall start with a lemma that will take the role of Lemma \ref{TransLiftingLemma}.  
+
+\begin{lemma}
+  \label{ExponentialLiftingLemma}
+  Let $s\in\fcoal\sigma$.  Then there exists a unique shortest sequence $\s\in\|\sigma\|$ such that $\s\vert_{B,\oc A}=s$.  
+
+  \begin{proof}
+    The definition of $\fcoal\sigma$ tells us that there exists some $\s\in\|\sigma\|$ with $\s\vert_{B,\oc A}=s$.  We may assume that $\s$ is minimal with this property by removing moves from the end.  
+    
+    Let $\beta$ be the length of $\s$  We shall prove that if $\t$ has length $\beta$ and $\t\vert_{B,\oc A}=s$ then $\t=\s$.  
+    
+    Write $\s^\delta$ for the initial prefix of $\s$ of length $\delta$.  We shall prove by induction on $\delta$ that $\s^\delta$ is the unique sequence $\t^\delta$ of length $\delta$ such that $\t^\delta\vert_{B,\oc A}\prefix s$.  
+
+    Suppose we have some sequence $\t^{\delta+1}$ of length $\delta+1$ such that $\t^{\delta+1}\vert_{B,\oc A}\prefix s$.  Then, by the induction hypothesis, we must have $\t^{\delta+1}=\s^\delta x$ for some $x$.  We now split into cases:
+
+    \begin{description}
+      \item[Case 1: ]$\s^\delta$ is a limiting play or $\s^\delta$ ends with a $P$-move in a copy of $A$.  In this case, the condition on $\|\sigma\|$ tells us that $x$ must be a move in a copy of $A$, and so 
+    \end{description}
+  \end{proof}
+\end{lemma}
+
+\section{The final sequence}
+
+Familiarity with the final sequence is assumed; see \cite{finalseq} for a less terse presentation of the following material.
+
+Let $\C$ be a category and let $\F\from \C\to \C$ be an endofunctor.  Suppose that $\C$ has a terminal object $1$.  We shall further assume that we are able to construct all the limits we want in $\C$.  Let $\Ord$ denote the ordered class of ordinals, considered as a category.  We shall inductively construct a functor $\FS_\F\from\oppcat\Ord\to\C$ (known as the \emph{final sequence of $\F$}) as follows:
+
+\begin{itemize}
+  \item $\FS_\F(0)=1$
+  \item $\FS_\F(\beta+1) =\F\left(\FS_F(\beta)\right)$
+  \item On the level of morphisms, $\FS_\F(0\le\beta)$ is the unique morphism $\FS_\F(\beta)\to 1$
+  \item $\FS_\F(\beta+1\le\beta+2)=\F(\FS_\F(\beta\le\beta+1))$
+  \item If $\mu$ is a limit ordinal, then $\FS_\F(\mu)$ is the limit of the diagram
+    \[
+      \mu\hookrightarrow\Ord\xrightarrow{\FS_\F}\C
+      \]
+    and $\FS_\F(\beta\le\mu)$ is the arrow in the limiting cone
+  \item Applying the functor $\F$ to the cone $\FS_\F(\mu)$ gives rise to a new cone over the above diagram, inducing a unique arrow $\FS_\F(\mu+1)\to\FS_\F(\mu)$.  We set $\FS_\F(\mu\le\mu+1)$ to be equal to this arrow.
+\end{itemize}
+
+Our goal is to characterize the final sequence for functors of the form $A\sequoid\blank$ in categories $\G(\alpha)$ of games, in the hope that this will allow us to study the exponential $\oc A$ in more depth.
+
+\subsection{The rank of a transfinite sequence of natural numbers}
+
+We fix a (large) ordinal $\alpha$.  The goal of this section is to give an ordinal \emph{rank} to a sequence $\beta\to\omega$ of natural numbers (for $\beta<\alpha$).  This rank will turn out to be the key to characterizing the final sequence of the $A\sequoid\blank$ functor.  This rank will not depend on $\alpha$, and we could do without mentioning $\alpha$ at all (although mentioning $\alpha$ allows us to avoid size issues).  
+
+To define our rank, we will give a chain of subsets 
+\[
+  R_0\subset R_1\subset R_2\subset\dots \subset R_\delta \subset\dots \subset \omega^{*\alpha}
+  \]
+where $\delta$ will run over all the ordinals.  We think of $R_\delta$ as being the set of all sequences \emph{with rank at most $\delta$}; accordingly, we shall define the \emph{rank} of a sequence $s$ to be the smallest ordinal $\delta$ such that $s\in R_\delta$.  
+
+\begin{definition}
+  Let $(s\from\beta\to\omega)\in\omega^{*<\alpha}$.  We define the \emph{derivative} of $s$ to be the sequence $\Delta s$ given by:
+  \[
+    s\inv\left(\omega\setminus\{0\}\right) \xrightarrow{s} \omega\setminus\{0\} \xrightarrow{n\mapsto n-1} \omega
+    \]
+  In other words, we remove all occurences of $0$ from the sequence $s$ and then subtract $1$ from each term.  
+\end{definition}
+
+We shall now define the sets $R_\delta$:
+\begin{definition}
+  \begin{itemize}
+    \item $R_0=\{\emptyplay\}$
+    \item $R_{\delta+1}=\left\{s\in\omega^{*<\alpha}\suchthat \Delta s\in R_\delta\right\}$
+    \item If $\mu$ is a limit ordinal then $R_\mu$ is the limit closure of the union of the $R_\delta$ for $\delta<\mu$.  In other words, a sequence $s$ is contained in $R_\mu$ if \textbf{either}
+      \begin{itemize}
+        \item $\length(s)$ is a successor ordinal and $s\in R_\delta$ for some $\delta<\mu$ \textbf{or}
+        \item $\length(s)$ is a limit ordinal and for all proper prefixes $t\pprefix s$, $t\in R_\delta$ for some $\delta<\mu$
+      \end{itemize}
+  \end{itemize}
+
+  If $s\in\omega^{*<\alpha}$, we define $\rank(s) = \min\{\delta\suchthat s\in R_\delta\}$.
+\end{definition}
+
+One consequence of the above definition is that if $\mu$ is a limit ordinal then all the sequences of rank $\mu$ have limiting length.
+
+We need to prove some results so we can be sure that the rank of a sequence is well defined.  
+
+\begin{proposition}
+  \label{RankProposition}
+  \begin{enumerate}[i)]
+    \item If $s\in R_\delta$ and $t$ is any subsequence of $s$ (not necessarily an initial prefix), then $t\in R_\delta$
+    \item If $s\in R_\delta$, then $\Delta s\in R_\delta$.
+    \item If $\gamma\le\delta$, then $R_\gamma\subset R_\delta$
+    \item If $s\in\omega^{*<\alpha}$, then $s\in R_\delta$ for some $\delta$.
+  \end{enumerate}
+
+  \begin{proof}
+    \begin{enumerate}[(i): ]
+      \item We prove this by induction on $\delta$.  Suppose $s\in R_{\delta+1}$ and $t$ is a subsequence of $s$.  Then $\Delta s\in R_\delta$.  Now $\Delta t$ is a subsequence of $\Delta s$, so $\Delta t\in R_\delta$ by the induction hypothesis and therefore $\Delta t\in R_{\delta +1}$.  
+
+        Let $\mu$ be a limit ordinal and suppose that $s\in R_\mu$.  If $s$ has successor length, then $s\in R_\delta$ for some $\delta<\mu$.  Then $t\in R_\delta$ by the induction hypothesis.  If $t$ has successor length, this automatically means that $t\in R_\mu$, while if $t$ has limiting length, then every subsequence of $t$ is contained in $R_\delta$ by induction, so $t\in R_\mu$.  
+
+        Suppose instead that $s$ has limiting length.  Then for all proper prefixes $u\pprefix s$, we have $u\in R_\delta$ for some $\delta<\mu$.  If $t$ has successor length, then $t$ cannot be cofinal in $s$, so it is a subsequence of some proper prefix $u$ of $s$.  Therefore, $t\in R_\delta$ by the induction hypothesis, and so $t\in R_\mu$ as before.  
+
+        If instead $t$ has limiting length, then every proper prefix $v\pprefix t$ is a subsequence of some proper prefix $u\pprefix s$.  Therefore, by induction, for every proper prefix $v\pprefix t$, we have $v\in R_\delta$ for some $\delta<\mu$ and therefore $t\in\mu$.  
+
+      \item Induction on $\delta$.  If $sin R_{\delta+1}$ then $\Delta s\in R_\delta$; by the induction hypothesis, this means that $\Delta\Delta s\in R_\delta$ and therefore that $\Delta s\in R_{\delta+1}$.  
+
+        Now let $\mu$ be a limit ordinal.  Suppose $s\in R_\mu$.  If $s$ has successor length, it means that $s\in R_\delta$ for some $\delta<\mu$, so $\Delta s\in R_\delta$ by induction.  By (i), all the prefixes of $\Delta s$ are in $R_\delta$ as well, so $\Delta s\in R_\mu$.  
+
+        Suppose instead that $s$ has limiting length.  Then for all proper prefixes $t\pprefix s$, we have $t\in R_\delta$ for some $\delta<\mu$.  If $\Delta s$ has successor length, then we may choose some proper prefix $t\pprefix s$ such that $\Delta s = \Delta t$ and therefore $\Delta s\in R_\delta$, so it is in $R_\mu$.  If instead $\Delta s$ has limiting length, then for all proper prefixes $v\pprefix\Delta s$, we may choose some $u\pprefix s$ with $v=\Delta u$.  Then we have $u\in R_\delta$ for some $\delta<\mu$, so $v\in R_\delta$ by the induction hypothesis.  Therefore, $t\in R_\mu$.  
+
+      \item It is clear that $R_\delta\subset R_\mu$ if $\delta<\mu$ and $\mu$ is a limit ordinal.  Therefore, by induction it will suffice to show that $R_\delta\subset R_{\delta+1}$ for all $\delta$.  
+
+        Suppose $s\in R_\delta$.  Then $\Delta s\in R_\delta$ by (ii) and therefore $s\in R_{\delta+1}$.  
+
+      \item We show this by induction on the length $\beta$ of $s$.  If $\beta=0$ then $s\in R_0$.  Suppose that $s=s'n$.  If we apply $\Delta$ $n$ times to $s$ then we end up with the sequence $\Delta^ns .0$.  Applying $\Delta$ never lengthens the sequence, by Lemma \ref{TechnicalOrdinalLemma}.  Now if we apply $\Delta$ one more time, we end up with a strictly shorter sequence, so by induction it is contained in some $R_\delta$.  Then $s$ is contained in $R_{\delta+n+1}$.  
+
+        Now suppose that $s$ has limiting length.  Then, by induction, for all proper prefixes $t\pprefix s$ there exists $\delta_t$ such that $t\in R_{\delta_t}$.  If we let $\mu$ be some limit ordinal that is greater than all the $\delta_t$, then $s\in R_\mu$.  \qedhere
+    \end{enumerate}
+  \end{proof}
+\end{proposition}
+
+\begin{example}
+  Any sequence with only finitely many distinct terms has finite rank: indeed, suppose $s\from\beta\to n$ is such a sequence.  Then, after applying the derivative $n$ times, we end up with the empty sequence.  
+
+  The `identity' sequence $\omega\to\omega$ has rank $\omega$: indeed, every proper prefix has finite rank, but applying the derivative operator has no effect.  
+
+  More generally, the division algorithm for ordinal arithmetic tells us that if $\gamma$ is an ordinal, then there is a unique ordinal $\gamma'$ and a unique natural number $n$ such that $\gamma=\omega\gamma' + n$.  If $\beta$ is an ordinal, we may define a sequence $c_\beta\from \beta\to\omega$ by setting:
+  \[
+    c_\beta(\omega\gamma'+n) = n
+    \]
+  We show by induction on $\beta$ that the sequence $c_\beta$ has rank $\beta$.  First, we claim that
+  \[
+    c_\beta = \Delta c_{\beta+1}
+    \]
+  The first thing to show is that the order type of $c_{\beta+1}\inv(\omega\setminus\{0\})$ is $\beta$.  Indeed, $c_{\beta+1}\inv(\omega\setminus\{0\})$ is precisely the set of successor ordinals that are less than $\beta+1$.  We therefore have an order preserving bijection
+  \begin{IEEEeqnarray*}{rCl}
+    \beta & \to & c_{\beta+1}\inv(\omega\setminus\{0\}) \\
+    \gamma & \mapsto & \gamma+1
+  \end{IEEEeqnarray*}
+
+  This map sends $\omega\gamma'+n$ to $\omega\gamma'+(n+1)$.  The map $\Delta c_{\beta+1}$ is therefore given by:
+  \begin{IEEEeqnarray*}{CCCCCCC}
+    \beta & \xrightarrow{\sim} & c_{\beta+1}\inv(\omega\setminus\{0\}) & \rightarrow & \omega \setminus \{0\} & \rightarrow & \omega \\
+    \omega\gamma' + n & \mapsto & \omega\gamma' + (n+1) & \mapsto & n+1 & \mapsto & n
+  \end{IEEEeqnarray*}
+  In other words, it is the same as $c_\beta$.  This deals with the successor step of the induction.  
+
+  Now let $\mu$ be a limit ordinal.  A proper prefix of $c_\mu$ is a sequence of the form $c_\delta$ for $\delta<\mu$.  By the induction hypothesis, $c_\delta\in R_\delta$ for all $\delta<\mu$ and therefore $c_\mu\in R_\mu$.  
+
+  Now suppose for a contradiction that $c_\mu\in R_\delta$ for some $\delta<\mu$.  Then $c_{\delta+1}\prefix c_\mu$ so, by Proposition \ref{RankProposition}(i), $c_{\delta+1}\in R_\delta$, which contradicts our induction hypothesis.  
+
+  Therefore, $\rank(c_\mu)=\mu$.  
+\end{example}
+
+We call $c_\delta$ the \emph{canonical sequence of length $\delta$}.  We want to use it to obtain a neater characterization of the sets $R_\delta$.  What we would like to say is that $\rank(s)\ge\delta$ if and only if $c_\delta$ is a subsequence of $s$.  However, this is not quite true.  For example, the sequence
+\[
+  23456\dots
+  \]
+over $\omega$ has rank $\omega$, but does not contain the sequence $c_\omega=01234\dots$ as a subsequence.  We will have to modify the condition a little bit; the cost will be that our characterization only works for limit ordinals, but this is not a big problem.  
+
+\begin{definition}
+  Let $s\from\beta\to\omega$ be a sequence.  We say that $s$ is \emph{weakly increasing} if $s(\delta)<s(\delta+1)$ for all $\delta<\beta$.
+\end{definition}
+
+\begin{example}
+  $c_\beta$ is weakly increasing for any $\beta$.  If we take, for example, the sequence $c_{\omega+\omega}$:
+  \[
+    01234\dots\;01234\dots
+    \]
+  then we see where the `weakly' comes from: we have $c_{\omega+\omega}(2)>c_{\omega+\omega}(\omega)$, even though $2<\omega$.  \emph{Weakly increasing} means `increasing on every $\omega$-segment, but unconstrained at limits'.  
+
+  There are plenty of other weakly increasing sequences.  For example:
+  \begin{gather*}
+    2468\dots \\
+    12358\dots\;2357\dots \\
+    01234\dots\;12345\dots\;23456\dots\;34567\dots\;45678\dots\;\dots\dots
+  \end{gather*}
+\end{example}
+
+\begin{lemma}
+  \label{WeaklyIncreasingLemma}
+  \begin{enumerate}[i)]
+    \item Let $s\in\omega^{*<\alpha}$ be weakly increasing.  Then $\Delta s$ is weakly increasing.
+    \item Suppose $\mu$ is a limit ordinal and that $s\in \omega^{*<\alpha}$ is such that $\rank(s)=\mu$.  Then $\rank(\Delta s)=\mu$.
+    \item Let $\mu$ be a limit ordinal and let $s\from\mu\to\omega$ be a weakly increasing sequence of length $\mu$.  Then $\rank(s)=\mu$.  
+  \end{enumerate}
+
+  \begin{proof}
+    \begin{enumerate}[(i): ]
+      \item Let $m,n$ be adjacent terms in $\Delta s$.  That means that $(m+1).p$ occurs somewhere in the sequence $s$, so $p>m+1$, since $s$ is weakly increasing.  In particular, $p\ne 0$, so it is not removed from the sequence.  It follows that $n=p-1$ and therefore that $m<n$.  
+
+      \item We have $s\in R_\mu$, so $\Delta s\in R_\mu$; i.e., $\rank(\Delta s)\le\mu$.  Suppose that $\Delta s\in R_\delta$ for $\delta<\mu$.  Then $s\in R_{\delta+1}$, which is a contradiction.
+
+      \item We prove the following statement by induction on $\beta$: if $s\from\beta\to\omega$ is a weakly increasing sequence of length $\beta$, then
+        \begin{itemize}
+          \item If $\beta=\omega\beta'+m$ is a successor ordinal, and $s=s'n_0\dots n_{m-1}$, then $\rank(s) = \omega\beta'+n_{m-1}+1$
+          \item If $\beta=\omega\beta'$ is a limit ordinal then $\rank(s)=\beta$
+        \end{itemize}
+        Suppose that $s$ has length $\omega\beta'+m$ and write $s$ as $s'n_0\dots n_{m-1}$, where $s'$ is a limiting play.  Write $n=n_{m-1}$ -- so $n_i<n$ for $i<m-1$.  By the induction hypothesis, $s'$ has rank $\omega\beta'$.  
+
+        If we apply the derivative $n$ times to $s$ then we end up with the sequence $\Delta^n s'.0$.  By part (ii), $\Delta^n s'$ has rank $\omega\beta'$, and so $\Delta^n s'.0$ has rank at least $\omega\beta'$.  Moreover, since it is a successor play, it cannot have limiting rank, and therefore its rank is at least $\omega\beta+1'$.  If we take the derivative one more time, then we end up with the sequence $\Delta^{n+1}s'$, which has rank $\omega\beta'$, and it follows that $\Delta^n s'.0$ has rank $\omega\beta'+1$.  Therefore, $s$ has rank $\omega\beta'+n+1$.  
+
+        Now suppose that $\mu$ is a limit ordinal and that $s$ has length $\mu$.  If we take some proper prefix $t\pprefix s$ of length $\delta<\mu$, then $t$ is weakly increasing, so by the induction hypothesis it has rank at most $\delta+m$ for some $m$.  $\delta+m<\mu$ and $t$ was arbitrary, so it follows that $s\in R_\mu$; i.e., that $\rank(s)\le\mu$.  
+
+        We claim that $\rank(s)=\mu$.  Indeed, suppose that $s\in R_\delta$ for some $\delta<\mu$.  Let $u$ be the prefix of $s$ of length $\delta+1$.  By the induction hypothesis, $\rank(u)\ge\delta+1>\rank(s)$, which is a contradiction, since $u\prefix s$.  \qedhere
+    \end{enumerate}
+  \end{proof}
+\end{lemma}
+
+We can now give our classification result:
+
+\begin{theorem}
+  Let $s\in\omega^{*<\alpha}$ and let $\mu<\alpha$ be a limit ordinal.  Then $\rank(s)\ge\mu$ if and only if $s$ has a weakly increasing subsequence of length $\mu$.  
+
+  For $n\ge 1$, $\rank(s)\ge\mu+n$ if and only if $s$ has a weakly increasing subsequence $t$ of length $\mu$ and a term of magnitude at least $n-1$ that occurs later in the sequence than all the terms of $t$.  
+
+  \begin{proof}
+    \emph{If: } Suppose $t$ is a weakly increasing subsequence of length $\mu$.  By Lemma \ref{WeaklyIncreasingLemma}, $t$ has rank $\mu$, so by Proposition \ref{RankProposition}, $s$ has rank at least $\mu$.  
+
+    Write $s=s'u$, where $t$ is a subsequence of $s'$ and $u$ contains some term $m\ge n-1$.  Then $s'$ has rank at least $\mu$.  Then $\Delta^{n-1} s'$ has rank at least $\mu$ and $\Delta^{n-1}u\ne\emptyplay$, since $u$ contains the term $m$.  Let $x$ be the first term of $\Delta^{n-1}u$.  Then $\Delta^{n-1}s'.x$ is a subsequence of $\Delta^{n-1}s$, and it must have rank at least $\mu+1$ (since it is a successor play and contains $\Delta^{n-1}s'$ as a subsequence.  Therefore, $\Delta^{n-1}s$ has rank at least $\mu+1$ and so $s$ has rank at least $\mu+1+(n-1)=\mu+n$.  
+
+    \emph{Only if: } Let $\delta=\mu+n$ be an ordinal
+  \end{proof}
+\end{theorem}
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}

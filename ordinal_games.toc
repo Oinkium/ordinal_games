@@ -21,4 +21,6 @@
 \contentsline {section}{\numberline {4}Exponentials}{68}
 \contentsline {subsection}{\numberline {4.1}Products in $\mathcal G(\alpha )$}{72}
 \contentsline {subsection}{\numberline {4.2}The exponential as a final coalgebra}{73}
-\contentsline {section}{References}{80}
+\contentsline {section}{\numberline {5}The final sequence}{80}
+\contentsline {subsection}{\numberline {5.1}The rank of a transfinite sequence of natural numbers}{81}
+\contentsline {section}{References}{87}
