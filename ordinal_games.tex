@@ -270,9 +270,29 @@
 \date{}
 
 \begin{document}
-\maketitle
 
+\begin{titlepage} % Shamelessly stolen from the online LaTeX book.
+	\centering
+	{\scshape\LARGE University of Bath \par}
+	\vspace{1cm}
+	{\scshape\Large PhD Confirmation Report \par}
+	\vspace{1.5cm}
+	{\huge\bfseries Games with ordinal sequences of moves \par}
+	\vspace{2cm}
+	{\Large\itshape John Gowers \par}
+	\vfill
+	supervised by\par
+	Dr.~James \textsc{Laird}
+
+	\vfill
+
+% Bottom of the page
+	{\large \today\par}
+\end{titlepage}
+
+\addtocontents{toc}{\protect\enlargethispage{35mm}}
 \tableofcontents
+\thispagestyle{empty}
 
 \setcounter{tocdepth}{2}
 
@@ -411,7 +431,7 @@ I am indebted to all the authors listed in the Bibliography, but I single out th
 
 I would also like to extend my thanks to Paul Blain Levy for his work organizing the GaLoP 2016 conference and the Midlands Graduate School 2016, both of which I attended this year.  I presented some of this material at GaLoP and the questions and comment I received there have shaped the course of this work.  Thanks also to Alexander Kurz for his lectures on coalgebra at the Midlands Graduate School.  
 
-Thanks go to all my friends and family members who have patiently supported me while I embarked on this research.  Thank you to CN for designing the letter `G' (complete with $\sequoid$ symbols!) that features at the beginning of this introduction.  
+Thanks go to all my friends and family members who have patiently supported me while I embarked on this research.  Thank you to CN for designing the splendid letter `G' (complete with $\sequoid$ symbols!) that features at the beginning of this introduction.  
 
 \section{Our starting category of games}
 
@@ -2606,6 +2626,8 @@ making the following diagram commute:
   As we shall see in the next section, we do not have this identification in the transfinite setting.  However, we will give an alternative proof that $\oc A$ is the final coalgebra for $A\sequoid\blank$ in the next section that will be more along the lines of the proof in \cite{martinsthesis}.  
 \end{note}
 
+\pagebreak
+
 \subsection{The sequoidal exponential gives a cofree commutative comonoid}
 \label{SeqExpIsCofCommCom}
 
@@ -2753,6 +2775,8 @@ We check that each cell commutes in turn.
   \item commutes because $\passoc$ is a natural transformation.  
 \end{enumerate}
 
+\pagebreak
+
 Furthermore, note that the morphism along the bottom is one of the two morphisms $\oc A\tensor\oc A \to A\sequoid(\oc A \tensor \oc A)$ that we gave before.  To get the other one, note that since the comultiplication in $B$ is commutative, we have a commutative diagram:
 \[
   \begin{tikzcd}
@@ -2879,7 +2903,7 @@ Our goal is to characterize the final sequence for functors of the form $A\sequo
 
 \subsection{The rank of a transfinite sequence of natural numbers}
 
-We fix a (large) ordinal $\alpha$.  The goal of this section is to give an ordinal \emph{rank} to a sequence $\beta\to\omega$ of natural numbers (for $\beta<\alpha$).  This rank will turn out to be the key to characterizing the final sequence of the $A\sequoid\blank$ functor.  This rank will not depend on $\alpha$, and we could do without mentioning $\alpha$ at all (although mentioning $\alpha$ allows us to avoid size issues).  
+We fix a (large) ordinal $\alpha$.  The goal of this section is to assign an ordinal \emph{rank} to a sequence $\beta\to\omega$ of natural numbers (for $\beta<\alpha$).  This rank will turn out to be the key to characterizing the final sequence of the $A\sequoid\blank$ functor.  This rank will not depend on $\alpha$, and we could do without mentioning $\alpha$ at all (although mentioning $\alpha$ allows us to avoid size issues).  
 
 To define our rank, we will give a chain of subsets 
 \[
@@ -3007,6 +3031,8 @@ over $\omega$ has rank $\omega$, but does not contain the sequence $c_\omega=012
     01234\dots\;12345\dots\;23456\dots\;34567\dots\;45678\dots\;\dots\dots
   \end{gather*}
 \end{example}
+
+\pagebreak
 
 \begin{lemma}
   \label{WeaklyIncreasingLemma}
@@ -3204,6 +3230,7 @@ Another thing that is worth looking into is the effect that removing the limitin
 Lastly, there is further technical research to be done into sequoidal categories, such as finding appropriate conditions under which the sequoidal exponential gives rise to a linear exponential comonad or cofree commutative comonoid.  
 
 \appendix
+\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
 
 \section{Proofs}
 
