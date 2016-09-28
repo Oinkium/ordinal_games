@@ -373,7 +373,7 @@ and in the infinitary case, we have
 \[
   \oc A\cong(A\sequoid\blank)^{\omega2}(I)
   \]
-The eventual goal of this research is to study the behaviour of the final sequence of the functor $A\sequoid\blank$ in categories of games.  Since the sequence stablizes so early on for existing categories of games, this question is not very interesting in that setting.  We want to modify our definitions of games in such a way that this final sequence will take much longer to stabilize, and it turns out that one way to do that is to allow plays of transfinite length.  
+The eventual goal of this research is to study the behaviour of the final sequence of the functor $A\sequoid\blank$ in categories of games.  Since the sequence stabilizes so early on for existing categories of games, this question is not very interesting in that setting.  We want to modify our definitions of games in such a way that this final sequence will take much longer to stabilize, and it turns out that one way to do that is to allow plays of transfinite length.  
 
 Games with ordinal sequences of moves are not a new idea.  They have, for example, been studied in \cite{longgamesbook} from the point of view of determinacy.  Even in game semantics, as we shall see, we may identify games in which we impose a winning condition on the infinite plays with games in which the players are allowed to make plays of length $\omega$ -- we shall call these $(\omega+1)$-games, in contrast to the finitary games, which we shall call $\omega$-games.  Allowing plays whose lengths are longer transfinite ordinals will give rise to a richer variety of plays, which will be reflected in the final sequence.  
 
@@ -405,9 +405,9 @@ Following the $\forall$belard/$\exists$loise convention that is sometimes used f
 
 \subsection{Acknowledgements}
 
-It goes without saying that I owe my biggest debt of gratitude for the material in this report to my supervisor, Jim Laird.  Dr Laird introduced me to Game Semantics a year ago and suggested my initial direction of research in the subject, and his insights and instinct for the subject have been invaluable in the development of the material contained in this report, and in the preparation of the report itself -- particularly when things were going wrong.  
+It goes without saying that I owe my biggest debt of gratitude for the material in this report to my supervisor, Jim Laird.  Dr Laird introduced me to Game Semantics a year ago and suggested my initial direction of research in the subject, and his insights and instinct for the subject have been invaluable in the development of the material contained in this report, and in the preparation of the report itself -- particularly when things were going wrong.  Dr Laird gave me some extremely useful feedback on an earlier draft of this report and supplied some of the details for the material in section \ref{SeqExpIsCofCommCom}.
 
-I am indebted to all the authors listed in the Bibliography, but I single out the seminal papers of Blass \cite{blassgames} and Abramsky-Jagdeesan \cite{abramskyjagadeesangames} for their development of the subject and their clear presentation of their full completeness results, the set of notes on Game Semantics by Martin Hyland \cite{hyland1997games} and the excellent online notes by Andrea Schalk \cite{Schalk2001GsNotes,SchalkWhatIs}.  I also single out the PhD thesis of Martin Churchill \cite{martinsthesis}, prepared under Dr Laird's supervision.  The work in this report can be seen as a partial sequel to some of Dr Churchill's work, and the clear presentation in his thesis has greatly helped in this task.  
+I am indebted to all the authors listed in the Bibliography, but I single out the seminal papers of Blass \cite{blassgames} and Abramsky-Jagadeesan \cite{abramskyjagadeesangames} for their development of the subject and their clear presentation of their full completeness results, the set of notes on Game Semantics by Martin Hyland \cite{hyland1997games} and the excellent online notes by Andrea Schalk \cite{Schalk2001GsNotes,SchalkWhatIs}.  I also single out the PhD thesis of Martin Churchill \cite{martinsthesis}, prepared under Dr Laird's supervision.  The work in this report can be seen as a partial sequel to some of Dr Churchill's work, and the clear presentation in his thesis has greatly helped in this task.  
 
 I would also like to extend my thanks to Paul Blain Levy for his work organizing the GaLoP 2016 conference and the Midlands Graduate School 2016, both of which I attended this year.  I presented some of this material at GaLoP and the questions and comment I received there have shaped the course of this work.  Thanks also to Alexander Kurz for his lectures on coalgebra at the Midlands Graduate School.  
 
@@ -508,8 +508,8 @@ where $\cmap{\wedge}{\OP\times \OP}{\OP}$ is as in Figure \ref{truthtables}.
 
 Similarly, we may extend $\zeta$ to the implication $A\implies B$ and the par $A\parr B$ by setting
 \begin{align*}
-  \zeta_{A\implies B}(s)=(s\vert_A\Rightarrow s\vert_B)\\
-  \zeta_{A\parr B}(s) = (s\vert_A \vee s\vert_B)
+  \zeta_{A\implies B}(s)=(\zeta_A(s\vert_A)\Rightarrow \zeta_B(s\vert_B))\\
+  \zeta_{A\parr B}(s) = (\zeta_A(s\vert_A) \vee \zeta_B(s\vert_B))
 \end{align*}
 
 Note that if we use these definitions then the owner $\zeta_C(sa)$ of a play $sa$ might not correspond to the player $\lambda_C(a)$ who played the last move $a$.  For example, let $A,B$ be two positive games and form their tensor product $A\tensor B$.  Then we have
@@ -530,7 +530,7 @@ In the Abramsky-Jagadeesan model, a positive game is an immediate win to player 
 
 Curien's game model (\cite{curiengames}) is similar to Abramsky's and Jagadeesan's, but involves only negative games.  The only slight problem is that negative Abramsky-Jagadeesan games are not closed under implication: if $N,L$ are negative games then $N\implies L$ may be neither negative nor positive.  We may fix this by modifying the definition of $N\implies L$ so that we delete from $P_{N\implies L}$ all plays that start with a $P$-move - or, equivalently, by requiring that all plays start in $L$.  This is the approach taken in \cite{martinsthesis}, where it fits well with the paper's treatment of the \emph{sequoid} operator $\sequoid$, which is a version of the tensor product that has been modified so that play is required to start in the left-hand game.
 
-We shall adopt elements of both the Blass and the Abramsky-Jagadeesan games models; specifically, we shall use Blass's games and Abramsky-Jagadeesan's strategies.  This means that our games model will be more restrictive than either the Blass or the Abramsky-Jagadeesan models, but this lack of flexibility will be just what we need in order to extend these games over the transfinite ordinals.  We will later consider ways we can relax our model to recover Abramsky and Jagadeesan's games model.
+Our approach will be similar to that of Curien's in that we will admit only negative games as objects of our category, but we will also incorporate elements of Blass's model: each position $s$ in our game will be designated either an $O$-position or a $P$-position via a function $\zeta$ and we will extend $\zeta$ to the connectives using the truth tables in Figure \ref{truthtables}.  We shall start by developing the theory of finitary games in order to illustrate our approach, but it will not be until we start considering transfinite games that we see the value of this aspect of Blass's semantics: transfinite games may contain many non-empty plays that have no last move and we will want to designate them as $P$-positions or $O$-positions so that we know which player moves next.  
 
 \subsection{Our definition of games and strategies}
 
@@ -557,7 +557,6 @@ We shall adopt elements of both the Blass and the Abramsky-Jagadeesan games mode
   If $a\in M_A$ then we may recover $\lambda_A(a)$ from $\zeta_A$ so long as $a$ occurs in some play in $P_A$.  Since moves that can never be played do not affect the game at all, we do not really need $\lambda_A$ in our definition, but we keep it to make the connection to earlier work clearer.
 
   If $a\in M_A$ and $\lambda_A(a)=O$, we call $a$ an \emph{$O$-move}.  If $\lambda_A(a)=P$, we call $a$ a \emph{$P$-move}.  If $s\in P_A$ and $\zeta_A(s)=O$, we call $s$ an \emph{$O$-play} or \emph{$O$-position}.  If $\zeta_A(s)=P$, we call $s$ a \emph{$P$-play} or \emph{$P$-position}.
-
 \end{remark}
 
 We give the usual definition of a strategy as an appropriate subset of $P_A$, where we have identified the strategy with the set of all plays that can arise when player $P$ plays according to that strategy:
@@ -758,7 +757,7 @@ Now we can move on to the main work.  We start with a surprising lemma about str
   \label{PlayInStrategyDeterminedByComponents}
   Let $A,B$ be games and let $\sigma$ be a strategy for $A\implies B$.  Suppose that $s,t\in\sigma$ are such that $s\vert_A=t\vert_A$ and $s\vert_B=t\vert_B$.  Then $s=t$.
   \begin{proof}
-    Suppose that $s\ne t$.  Let $r\prefix s,t$ be the longest common subsequence of $s$ and $t$ - so we have $rx\prefix s, ry\prefix t$ for some moves $x,y\in M_{A\implies B}$ with $x\ne y$.  Since $rx,ry$ are both substrings of the strategy $\sigma$, $r$ must be a $P$-position and therefore the moves $x,y$ must take place in the same game.  Without loss of generality, suppose that $x,y\in M_A$.  Then we have $r\vert_Ax\prefix s\vert_A,r\vert_Ay\prefix t\vert_A$ and so $s\vert_A\ne t\vert_A$.
+    Suppose that $s\ne t$.  Let $r\prefix s,t$ be the longest common subsequence of $s$ and $t$ - so we have $rx\prefix s, ry\prefix t$ for some moves $x,y\in M_{A\implies B}$ with $x\ne y$.  Since $rx,ry$ are both substrings of the strategy $\sigma$, $r$ must be a $P$-position and therefore the moves $x,y$ must take place in the same game.  Without loss of generality, suppose that $x,y\in M_A$.  Then we have $r\vert_A x\prefix s\vert_A,r\vert_Ay\prefix t\vert_A$ and so $s\vert_A\ne t\vert_A$.
   \end{proof}
 \end{lemma}
 
@@ -1522,7 +1521,7 @@ Now we have made this restriction on $\alpha$, the fact that composition is well
       \]
     and so $\r$ must be entirely composed of moves from $B$.  Let $b$ be the first move in $\r$.  Then $\s'x$ and $\s'b$ have the same length and we have $\s'b\vert_A\prefix\s'x\vert_A$ and $\s'b\vert_C\prefix\s'x\vert_C$, so $b=a$, which is impossible.  
 
-    Therefore, we must have $\s'x, \s'y\in\sigma\|\tau$.  Since $x,y$ are $P$-moves in $A\implies C$, each must be either an $O$-move in $A$ or a $P$-move in $C$.  It follows that either $\s'$ is in \textbf{Case B} and $x$ and $y$ are both moves in $C$ or that $\s'$ is in \textbf{Case C} and $x$ and $y$ areboth moves in $A$.  Suppose $\s'$ is in \textbf{Case B} and $x$ and $y$ are moves in $C$.  Then $\s'\vert_{B,C}x,\s'\vert_{B,C}\in\tau$ and so $x=y$, since they are $P$-moves and $\tau$ is a strategy.  Similarly, if $\s'$ is in \textbf{Case C} and $x$ and $y$ are moves in $A$, we have $\s'\vert_{A,B}x,\s'\vert_{A,B}y\in\sigma$ and so $x=y$ since $\sigma$ is a strategy.
+    Therefore, we must have $\s'x, \s'y\in\sigma\|\tau$.  Since $x,y$ are $P$-moves in $A\implies C$, each must be either an $O$-move in $A$ or a $P$-move in $C$.  It follows that either $\s'$ is in \textbf{Case B} and $x$ and $y$ are both moves in $C$ or that $\s'$ is in \textbf{Case C} and $x$ and $y$ are both moves in $A$.  Suppose $\s'$ is in \textbf{Case B} and $x$ and $y$ are moves in $C$.  Then $\s'\vert_{B,C}x,\s'\vert_{B,C}\in\tau$ and so $x=y$, since they are $P$-moves and $\tau$ is a strategy.  Similarly, if $\s'$ is in \textbf{Case C} and $x$ and $y$ are moves in $A$, we have $\s'\vert_{A,B}x,\s'\vert_{A,B}y\in\sigma$ and so $x=y$ since $\sigma$ is a strategy.
   \end{proof}
 \end{corollary}
 
@@ -1653,7 +1652,7 @@ We check that $\sigma_f$ is indeed a strategy.  It is clearly prefix-closed and 
 \end{gather*}
 But this is impossible, since $f$ preserves lengths.  Therefore, $x$ and $y$ take place in the same game.  If they are moves in $A$, we have
 \[
-  s\vert_Ax = f\bracketed{s\vert_{A'}} = s\vert_Ay
+  s\vert_A x = f\bracketed{s\vert_{A'}} = s\vert_Ay
   \]
 and so $x=y$, and if they are moves in $A'$, we have
 \[
@@ -1874,9 +1873,13 @@ We will write this terminal object as $A^{\cn}\xrightarrow{\cn}A$.  $A^{\cn}$ sh
   If $A,B$ are completely negative $\alpha$-games, we define $A\impliescn B$ to stand for $(A\implies B)^{\cn}$.  Then we do have $\bneggame{A}^{\cn}\cong A\impliescn \bot$.  The object $A\impliescn B$ will be the linear implication in our category.
 \end{example}
 
+\begin{notation}
+  Given a sequence $s\in P_{A^{\cn}}$, we may restrict $s$ to a play $s\vert_A\in P_A$ by removing all the $*$-moves.  
+\end{notation}
+
 Given an $\alpha$-game $A$, there is a natural strategy $\cn_A$ for $A^{\cn}\implies A$ given by
 \[
-  \cn_A = \left\{s\in P_{A^{\cn}\implies A}\suchthat\textrm{for all $P$-positions $t\prefix s$, $t\vert_{A^{\cn}}\vert_{M_A}=t\vert_A$}\right\}
+  \cn_A = \left\{s\in P_{A^{\cn}\implies A}\suchthat\textrm{for all $P$-positions $t\prefix s$, $t\vert_{A^{\cn}}\vert_A=t\vert_A$}\right\}
   \]
 Concretely, this strategy is the copycat strategy for $A$, with the difference that whenever we reach a limiting $O$-play $u$ in $A$, player $P$ plays the extra move $*_u$ in $A^{\cn}$ before continuing.
 
@@ -1900,41 +1903,41 @@ We claim that $\map{\cn_A}{A^{\cn}}{A}$ is the terminal object in the category $
 
   Suppose that $sx, sy\in \cn_A$ are $P$-positions.  Suppose first that neither $x$ nor $y$ is a move of the form $*_t$.  We claim that $sx,sy$ take place in the same game.  Indeed, suppose instead that $x$ is a move in $A^{\cn}$ and $y$ is a move in $A$.  Then we have:
   \begin{gather*}
-    s\vert_{A^{\cn}}\vert_{M_A}x = sx\vert_{A^{\cn}}\vert_{M_A} = sx\vert_A = s\vert_A\\
-    s\vert_{A^{\cn}}\vert_{M_A} = sy\vert_{A^{\cn}}\vert_{M_A} = sy\vert_A = s\vert_Ay
+    s\vert_{A^{\cn}}\vert_A x = sx\vert_{A^{\cn}}\vert_A = sx\vert_A = s\vert_A\\
+    s\vert_{A^{\cn}}\vert_A = sy\vert_{A^{\cn}}\vert_A = sy\vert_A = s\vert_Ay
   \end{gather*}
-  which is a contradiction since it implies that $s\vert_{A^{\cn}}\vert_{M_A}$ is simultaneously a shorter sequence than $s\vert_A$ and a longer sequence than $s\vert_A$.
+  which is a contradiction since it implies that $s\vert_{A^{\cn}}\vert_A$ is simultaneously a shorter sequence than $s\vert_A$ and a longer sequence than $s\vert_A$.
 
   If $x,y$ are both moves in $A^{\cn}$ then we have
   \begin{align*}
-    s\vert_{A^{\cn}}\vert_{M_A}x &= sx\vert_{A^{\cn}}\vert_{M_A} \\
+    s\vert_{A^{\cn}}\vert_A x &= sx\vert_{A^{\cn}}\vert_A \\
     & = sx\vert_A\\
     & = s\vert_A
   \end{align*}
-  and $s\vert_{A^{\cn}}\vert_{M_A}y=s\vert_A$ by an identical argument, and so $x=y$.  Similarly, if $x,y$ are both moves in $A$, then we have:
+  and $s\vert_{A^{\cn}}\vert_Ay=s\vert_A$ by an identical argument, and so $x=y$.  Similarly, if $x,y$ are both moves in $A$, then we have:
   \begin{align*}
-    s\vert_Ax &= sx\vert_A \\
-    &= sx\vert_{A^{\cn}}\vert_{M_A}\\
-    &= s\vert_{A^{\cn}}\vert_{M_A}
+    s\vert_A x &= sx\vert_A \\
+    &= sx\vert_{A^{\cn}}\vert_A\\
+    &= s\vert_{A^{\cn}}\vert_A
   \end{align*}
   and similarly for $y$, so $x=y$.
 
-  Now, without loss of generality assume that $x=*_t$ for some $t$.  Then $s\vert_{A^{\cn}}\vert_{M_A}$ is a limiting play.  Suppose for a contradiction that $y$ is a move in $A$.  Then we have:
+  Now, without loss of generality assume that $x=*_t$ for some $t$.  Then $s\vert_{A^{\cn}}\vert_A$ is a limiting play.  Suppose for a contradiction that $y$ is a move in $A$.  Then we have:
   \[
-    s\vert_{A^{\cn}}\vert_{M_A} = sy\vert_{A^{\cn}}\vert_{M_A}=sy\vert_A = s\vert_Ay
+    s\vert_{A^{\cn}}\vert_A = sy\vert_{A^{\cn}}\vert_A=sy\vert_A = s\vert_Ay
     \]
   which is a contradiction, since $s\vert_Ay$ is a successor play.  Therefore, $y$ is a move in $A^{\cn}$.  We have:
   \begin{align*}
-    t &= s\vert_{A^{\cn}}\vert_{M_A}\\
-    &= s*_t\vert_{A^{\cn}}\vert_{M_A}\\
-    &= s*_t\vert_{A^{\cn}}\vert_{M_A}\\
-    &= s\vert_{A^{\cn}}\vert_{M_A}
+    t &= s\vert_{A^{\cn}}\vert_A\\
+    &= s*_t\vert_{A^{\cn}}\vert_A\\
+    &= s*_t\vert_{A^{\cn}}\vert_A\\
+    &= s\vert_{A^{\cn}}\vert_A
   \end{align*}
-  Therefore, $s\vert_{A^{\cn}}\vert_{M_A}$ is a limiting $O$-play in $A$ and therefore we have $x=y=*_t$ by the definition of $A^{\cn}$.  
+  Therefore, $s\vert_{A^{\cn}}\vert_A$ is a limiting $O$-play in $A$ and therefore we have $x=y=*_t$ by the definition of $A^{\cn}$.  
 
-  Now we show that $\cn_A$ is total.  Suppose that $s\in\cn_A$ is an $O$-position.  Then $s\vert_{A^{\cn}}$ is a $P$-position and $s\vert_A$ is an $O$-position.  Suppose that $s=ty$ is a successor play.  Note that $y$ cannot be a $*$-move, since these are all $O$-moves occurring in $A^{\cn}$.  If $y$ takes place in $A^{\cn}$ then we have $t\vert_{A^{\cn}}\vert_{M_A}=t\vert_A$ and therefore player $P$ can play $y$ in $A$ and still be playing according to $\cn$.  Similarly, if $y$ takes place in $A$, then player $P$ can play $y$ in $A^{\cn}$ and be in accordance with $\cn_A$.  
+  Now we show that $\cn_A$ is total.  Suppose that $s\in\cn_A$ is an $O$-position.  Then $s\vert_{A^{\cn}}$ is a $P$-position and $s\vert_A$ is an $O$-position.  Suppose that $s=ty$ is a successor play.  Note that $y$ cannot be a $*$-move, since these are all $O$-moves occurring in $A^{\cn}$.  If $y$ takes place in $A^{\cn}$ then we have $t\vert_{A^{\cn}}\vert_A=t\vert_A$ and therefore player $P$ can play $y$ in $A$ and still be playing according to $\cn$.  Similarly, if $y$ takes place in $A$, then player $P$ can play $y$ in $A^{\cn}$ and be in accordance with $\cn_A$.  
 
-  Suppose instead that $s$ is a limiting play.  It is clear from the definition that $s\vert_{A^{\cn}}\vert_A$ and $s\vert_A$ are both cofinal in $s$, so they are both limiting plays.  Therefore, $s\vert_A$ is a limiting $O$-play in $A$ and $s\vert_{A^{\cn}}\vert_{M_A}$ must be the corresponding $P$-play in $A^{\cn}$.  Therefore, player $P$ may play $*_t$ (where $t=s\vert_A$) in $A^{\cn}$ and still be in accordance with $A^{\cn}$.  So $\cn_A$ is total.
+  Suppose instead that $s$ is a limiting play.  It is clear from the definition that $s\vert_{A^{\cn}}\vert_A$ and $s\vert_A$ are both cofinal in $s$, so they are both limiting plays.  Therefore, $s\vert_A$ is a limiting $O$-play in $A$ and $s\vert_{A^{\cn}}\vert_A$ must be the corresponding $P$-play in $A^{\cn}$.  Therefore, player $P$ may play $*_t$ (where $t=s\vert_A$) in $A^{\cn}$ and still be in accordance with $A^{\cn}$.  So $\cn_A$ is total.
 
   Let $q\in P_A$.  We claim that there is some $s\in\cn_A$ such that $s\vert_A=q$.  Indeed, since Player $P$ makes all $*$-moves in $A^{\cn}\implies A$, player $O$ has a strategy for $A^{\cn}\implies A$ in which he plays the moves of the sequence $q$ in order.  Since the strategy $\cn_A$ is total, player $P$ always has a reply to Player $O$'s moves and the resulting sequence $s$ satisfies $s\vert_A=q$.  
 
@@ -1952,15 +1955,15 @@ We claim that $\map{\cn_A}{A^{\cn}}{A}$ is the terminal object in the category $
 
   If $s\vert_{B,M_A}$ is a $P$-position in $B\implies A$ then $s\vert_{B,M_A}x\in\sigma$ and therefore $sx\in\sigma^{\cn}$.  So suppose instead that $s\vert_{B,M_A}$ is an $O$-position.  If $s=ty$ is a successor position then $y$ is a $P$-move in $B\implies A^{\cn}$, so in particular $y$ is not a $*$-move and therefore $s\vert_{B,M_A}=t\vert_{B,M_A}y$ is a $P$-position.  Therefore, $s$ must be a limiting play.  
 
-  Since $s$ is a $P$-position, $s\vert_B$ must be a $P$-position, $s\vert_{A^{\cn}}\vert_{M_A}$ must be an $O$-position in $A$ and $s\vert_{A^{\cn}}$ must be a $P$-position in $A^{\cn}$.  It follows that $u\coloneqq s\vert_{A^{\cn}}\vert_{M_A}$ is a limiting $O$-play.  It follows that $x$ is a move in $A^{\cn}$, and therefore that $x=*_u$, which is a case we have already dealt with.
+  Since $s$ is a $P$-position, $s\vert_B$ must be a $P$-position, $s\vert_{A^{\cn}}\vert_A$ must be an $O$-position in $A$ and $s\vert_{A^{\cn}}$ must be a $P$-position in $A^{\cn}$.  It follows that $u\coloneqq s\vert_{A^{\cn}}\vert_A$ is a limiting $O$-play.  It follows that $x$ is a move in $A^{\cn}$, and therefore that $x=*_u$, which is a case we have already dealt with.
 
   Next, suppose that $sx, sy\in\sigma^{\cn}$ are $P$-positions.  In particular, $x,y$ are not $*$-moves and we have $s\vert_{B,M_A}x,s\vert_{B,M_A}y\in\sigma$.  Therefore, $x=y$.  So $\sigma^{\cn}$ is a strategy.
 
-  Lastly, suppose that $\sigma$ is a total strategy.  Let $s\in\sigma^{\cn}$ be an $O$-position in $B\implies A^{\cn}$.  Then $s\vert_B$ is a $P$-position in $B$ and $s\vert_{A^{\cn}}$ is an $O$-position in $A^{\cn}$.  So $s\vert_{A^{\cn}}$ is a successor play in $A^{\cn}$, since $A^{\cn}$ is completely negative.  If the last move of $s\vert_{A^{\cn}}$ is not a $*$-move then $s\vert_{A^{\cn}}\vert_{M_A}$ has the same last move as $s\vert_{A^{\cn}}$ and is therefore an $O$-position as well.  Then $s\vert_{B,M_A}$ is an $O$-position and so there is some $x\in P_{B\implies A}$ such that $s\vert_{B,M_A}x\in\sigma$. Then $sx\in P_{B\implies A^{\cn}}$ and so $sx\in\sigma^{\cn}$.  
+  Lastly, suppose that $\sigma$ is a total strategy.  Let $s\in\sigma^{\cn}$ be an $O$-position in $B\implies A^{\cn}$.  Then $s\vert_B$ is a $P$-position in $B$ and $s\vert_{A^{\cn}}$ is an $O$-position in $A^{\cn}$.  So $s\vert_{A^{\cn}}$ is a successor play in $A^{\cn}$, since $A^{\cn}$ is completely negative.  If the last move of $s\vert_{A^{\cn}}$ is not a $*$-move then $s\vert_{A^{\cn}}\vert_A$ has the same last move as $s\vert_{A^{\cn}}$ and is therefore an $O$-position as well.  Then $s\vert_{B,M_A}$ is an $O$-position and so there is some $x\in P_{B\implies A}$ such that $s\vert_{B,M_A}x\in\sigma$. Then $sx\in P_{B\implies A^{\cn}}$ and so $sx\in\sigma^{\cn}$.  
 
-  Suppose instead that $s\vert_{A^{\cn}}=t*_u$, where $u=t\vert_{M_A}$.  Then $u$ is an $O$-position in $A$, so $s\vert_{B,M_A}$ is an $O$-position in $B\implies A$ and therefore there is some $x\in P_{B\implies A}$ such that $s\vert_{B,M_A}x\in\sigma$.  Then $sx\in\sigma^{\cn}$.  So $\sigma^{\cn}$ is a total strategy.
+  Suppose instead that $s\vert_{A^{\cn}}=t*_u$, where $u=t\vert_A$.  Then $u$ is an $O$-position in $A$, so $s\vert_{B,M_A}$ is an $O$-position in $B\implies A$ and therefore there is some $x\in P_{B\implies A}$ such that $s\vert_{B,M_A}x\in\sigma$.  Then $sx\in\sigma^{\cn}$.  So $\sigma^{\cn}$ is a total strategy.
 
-  We claim that $\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}=\grel\sigma$.  Then we will have $\comp{\cn_A}{\sigma^{\cn}}=\sigma$ by Lemma \ref{TransHylandSchalkFaithful} and Corollary \ref{TransHylandSchalkIsFunctor}.  Suppose $(s,t)\in\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}$.  Then there is some $u\in P_{A^{\cn}}$ such that $(s,u)\in\grel{\sigma^{\cn}}$ and $(u,t)\in\grel{\cn_A}$.  Therefore, $(s,u\vert_{M_A})\in\grel\sigma$ and $t=u\vert_{M_A}$.  It follows that $(s,t)\in\grel{\sigma}$, so $\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}\subset\grel\sigma$.  
+  We claim that $\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}=\grel\sigma$.  Then we will have $\comp{\cn_A}{\sigma^{\cn}}=\sigma$ by Lemma \ref{TransHylandSchalkFaithful} and Corollary \ref{TransHylandSchalkIsFunctor}.  Suppose $(s,t)\in\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}$.  Then there is some $u\in P_{A^{\cn}}$ such that $(s,u)\in\grel{\sigma^{\cn}}$ and $(u,t)\in\grel{\cn_A}$.  Therefore, $(s,u\vert_A)\in\grel\sigma$ and $t=u\vert_A$.  It follows that $(s,t)\in\grel{\sigma}$, so $\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}\subset\grel\sigma$.  
 
   To show the reverse inclusion, we shall use the following lemma, which we shall prove later.  
 
@@ -1969,7 +1972,7 @@ We claim that $\map{\cn_A}{A^{\cn}}{A}$ is the terminal object in the category $
     Let $B$ be a completely negative $\alpha$-game, let $A$ be an arbitrary $\alpha$-game and let $\sigma$ be a strategy for $B\implies A$.  Let $s\in\sigma$ be a $P$-position.  Then there is a unique $P$-position $t\in B\implies A^{\cn}$ such that $t\vert_{B,M_A}=s$.
   \end{lemma}
 
-  We use Lemma \ref{CnLiftingLemma} to show the reverse inclusion as follows: let $s\in\sigma$ be a $P$-position -- so $(s\vert_B,s\vert_A)$ is an arbitrary element of $\grel\sigma$.  By Lemma \ref{CnLiftingLemma} there exists $t\in B\implies A^{\cn}$ such that $t\vert_{B,M_A}=s$.  In particular, $t\vert_{A^{\cn}}\vert_{M_A}=s\vert_A$ and $t\vert_B=s\vert_B$.  So we have $(s\vert_B,t\vert_{A^{\cn}})\in\grel{\sigma^{\cn}}$ and $(t\vert_{A^{\cn}},s\vert_A)\in\grel{\cn_A}$.  It follows that $(s\vert_B,s\vert_A)\in\grel{\sigma}$.  So $\grel\sigma\subset\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}$.  
+  We use Lemma \ref{CnLiftingLemma} to show the reverse inclusion as follows: let $s\in\sigma$ be a $P$-position -- so $(s\vert_B,s\vert_A)$ is an arbitrary element of $\grel\sigma$.  By Lemma \ref{CnLiftingLemma} there exists $t\in B\implies A^{\cn}$ such that $t\vert_{B,M_A}=s$.  In particular, $t\vert_{A^{\cn}}\vert_A=s\vert_A$ and $t\vert_B=s\vert_B$.  So we have $(s\vert_B,t\vert_{A^{\cn}})\in\grel{\sigma^{\cn}}$ and $(t\vert_{A^{\cn}},s\vert_A)\in\grel{\cn_A}$.  It follows that $(s\vert_B,s\vert_A)\in\grel{\sigma}$.  So $\grel\sigma\subset\comp{\grel{\cn_A}}{\grel{\sigma^{\cn}}}$.  
 
   Lastly, we need to show that the strategy $\sigma^{\cn}$ is unique.  Suppose that there were some other strategy $\tau$ for $B\implies A^{\cn}$ making the diagram commute:
   \[
@@ -1980,9 +1983,9 @@ We claim that $\map{\cn_A}{A^{\cn}}{A}$ is the terminal object in the category $
         & A
     \end{tikzcd}
     \]
-  We shall show that $\grel\tau=\grel{\sigma^{\cn}}$ -- so $\tau=\sigma^{\cn}$.  First suppose that $s\in\sigma^{\cn}$ is a $P$-position.  Since $\sigma = \comp{\cn_A}{\tau}$, there is some sequence $\s\in\tau\|\cn_A$ such that $\s\vert_{B,A}=s\vert_{B,M_A}$.  We have $\s\vert_{A^{\cn}}\vert_{M_A}=\s\vert_A$ and therefore $s\vert_{B,M_A}=\s\vert_{B,A^{\cn}}\vert_{B,M_A}$.  Therefore, $s=\s\vert_{B,A^{\cn}}\in\tau$, by uniqueness in Lemma \ref{CnLiftingLemma}.  So $\grel{\sigma^{\cn}}\subset\grel{\tau}$.  
+  We shall show that $\grel\tau=\grel{\sigma^{\cn}}$ -- so $\tau=\sigma^{\cn}$.  First suppose that $s\in\sigma^{\cn}$ is a $P$-position.  Since $\sigma = \comp{\cn_A}{\tau}$, there is some sequence $\s\in\tau\|\cn_A$ such that $\s\vert_{B,A}=s\vert_{B,M_A}$.  We have $\s\vert_{A^{\cn}}\vert_A=\s\vert_A$ and therefore $s\vert_{B,M_A}=\s\vert_{B,A^{\cn}}\vert_{B,M_A}$.  Therefore, $s=\s\vert_{B,A^{\cn}}\in\tau$, by uniqueness in Lemma \ref{CnLiftingLemma}.  So $\grel{\sigma^{\cn}}\subset\grel{\tau}$.  
 
-  Conversely, suppose that $s\in\tau$ is a $P$-position.  Then our argument above tells us that we have $(s\vert_{A^{\cn}},s\vert_{A^{\cn}}\vert_A)\in\grel{\cn_A}$.  So $(s\vert_B,s\vert_{A^{\cn}}\vert_{M_A})\in\grel\sigma$.  Therefore there is some $P$-position $u\in\sigma$ such that $u\vert_B=s\vert_B$ and $u\vert_A=s\vert_{A^{\cn}}\vert_{M_A}$.  By Lemma \ref{CnLiftingLemma}, there is a sequence $t\in\sigma^{\cn}$ with $t\vert_{B,M_A}=s$.  Then we have
+  Conversely, suppose that $s\in\tau$ is a $P$-position.  Then our argument above tells us that we have $(s\vert_{A^{\cn}},s\vert_{A^{\cn}}\vert_A)\in\grel{\cn_A}$.  So $(s\vert_B,s\vert_{A^{\cn}}\vert_A)\in\grel\sigma$.  Therefore there is some $P$-position $u\in\sigma$ such that $u\vert_B=s\vert_B$ and $u\vert_A=s\vert_{A^{\cn}}\vert_A$.  By Lemma \ref{CnLiftingLemma}, there is a sequence $t\in\sigma^{\cn}$ with $t\vert_{B,M_A}=s$.  Then we have
   \[
     (s\vert_B,s\vert_{A^{\cn}})=(t\vert_B,t\vert_{A^{\cn}})\in\grel{\sigma^{\cn}}
     \]
@@ -2006,7 +2009,7 @@ It remains to prove Lemma \ref{CnLiftingLemma}.
 
   Suppose that $t^\delta\vert_{B,M_A}$ is a $P$-position.  Then $x$ is an $O$-move, so $t^\delta x$ is alternating.  \textbf{Since $B$ is completely negative}, Proposition \ref{NiceAcnGames} tells us that $t^\delta x\in P_{B\implies A^{\cn}}$.  Therefore, $t^\delta x\in\sigma^{\cn}$, since $\sigma^{\cn}$ is a strategy.  We set $t^{\delta+1}=t^\delta x$.  Then we certainly have $t^{\delta+1}\vert_{B,M_A}\prefix s$.  For uniqueness, suppose that $u^{\delta+1}$ has length $\delta+1$ and that $u^{\delta+1}\vert_{B,M_A}\prefix s$.  Then $u^{\delta+1}=t^\delta y$ for some $y$ by uniqueness for sequences of length $\delta$.  Since $t^\delta\vert_{B,M_A}$ is a $P$-position, it is in particular not a limiting $O$-play, so $y$ cannot be a $*$-move.  Therefore, we have $u^{\delta}\vert_{B,M_A}y\prefix s$ and so $x=y$.  
 
-  Suppose instead that $t^\delta\vert_{B,M_A}$ is an $O$-position.  Then $v\coloneqq t^\delta\vert_{A^{\cn}}\vert_{M_A}$ must be a limiting $O$-play.  We set $t^{\delta+1}=t^\delta *_v$.  Since $*_v$ is the only move possible in position $t^\delta$, this must certainly be unique, and we have $t^\delta *_v\vert_{B,M_A}=t^\delta\vert_{B,M_A}\prefix s$.  
+  Suppose instead that $t^\delta\vert_{B,M_A}$ is an $O$-position.  Then $v\coloneqq t^\delta\vert_{A^{\cn}}\vert_A$ must be a limiting $O$-play.  We set $t^{\delta+1}=t^\delta *_v$.  Since $*_v$ is the only move possible in position $t^\delta$, this must certainly be unique, and we have $t^\delta *_v\vert_{B,M_A}=t^\delta\vert_{B,M_A}\prefix s$.  
 
   This completes the proof by induction.
 \end{proof}
@@ -2603,7 +2606,8 @@ making the following diagram commute:
   As we shall see in the next section, we do not have this identification in the transfinite setting.  However, we will give an alternative proof that $\oc A$ is the final coalgebra for $A\sequoid\blank$ in the next section that will be more along the lines of the proof in \cite{martinsthesis}.  
 \end{note}
 
-\subsubsection{The sequoidal exponential gives a cofree commutative comonoid}
+\subsection{The sequoidal exponential gives a cofree commutative comonoid}
+\label{SeqExpIsCofCommCom}
 
 As an application of this result, we shall prove that $\oc A\xrightarrow{\mu}\oc A\tensor \oc A$ is the cofree commutative comonoid on $A$.  We start with a small but useful lemma:
 
@@ -2667,7 +2671,7 @@ making the following diagram commute:
   \end{tikzcd}
   \]
 
-We claim that $\sigma^\dag$ gives us a homomorphism of comonoids; that is, that the following diagram commutes:
+We claim that $\sigma^\dag$ gives us a homomorphism of comonoids; that is, that the following square commutes:
 \[
   \begin{tikzcd}
   B \arrow[r, "\mu"] \arrow[d, "\sigma^\dag"']
@@ -2676,7 +2680,7 @@ We claim that $\sigma^\dag$ gives us a homomorphism of comonoids; that is, that 
     & \oc A \tensor \oc A
   \end{tikzcd}
   \]
-We will show this by proving that the two paths round this square are both anamorphisms for the morphism $B\to (A\times A)\sequoid B$ given above.  Since anamorphisms are unique by the definition of a final coalgebra, this means that the two branches are equal.  
+We will show this by proving that the two paths round the square are both anamorphisms for the morphism $B\to (A\times A)\sequoid B$ given above.  Since anamorphisms are unique by the definition of a final coalgebra, this will mean that the two branches are equal.  
 
 We start with the branch $B\to B\tensor B \to \oc A\tensor \oc A$.  We claim that the following diagram commutes:
 \begin{longdiagram}
@@ -2704,7 +2708,7 @@ We start with the branch $B\to B\tensor B \to \oc A\tensor \oc A$.  We claim tha
 
 The rectangle at the top left is one we have drawn before.  The square in the middle at the top commutes because $\Delta$ gives rise to a natural transformation between $\id_{\G(\alpha)}$ and $\blank\times\blank$.  The square at the top right commutes because $\dist$ is a natural transformation.  
 
-The rectangle at the bottom commutes because both brances are copycat strategies for $\oc A\implies (A\times A)\sequoid(\oc A\tensor\oc A)$, and there is a unique such strategy.  
+The rectangle at the bottom commutes because both branches are copycat strategies for $\oc A\implies (A\times A)\sequoid(\oc A\tensor\oc A)$, and there is a unique such strategy.  
 
 It follows that $\comp\mu{\sigma^\dagger}$ is an anamorphism for the morphism along the top and the functor $(A\times A)\sequoid\blank$.  
 
@@ -2812,7 +2816,7 @@ Indeed, we have a commutative diagram
           & A
   \end{tikzcd}
   \]
-and we observe that the morphism along the bottom is precisely $\der$, while the morphism along the bottom is precisely $\sigma$.  
+and we observe that the morphism along the bottom is precisely $\der$, while the morphism along the top is precisely $\sigma$.  
 
 Now we show uniqueness.  Suppose that $\tau\from B\to\oc A$ is a morphism making the following diagram commute:
 \[
@@ -2888,7 +2892,7 @@ where $\delta$ will run over all the ordinals.  We think of $R_\delta$ as being 
   \[
     s\inv\left(\omega\setminus\{0\}\right) \xrightarrow{s} \omega\setminus\{0\} \xrightarrow{n\mapsto n-1} \omega
     \]
-  In other words, we remove all occurences of $0$ from the sequence $s$ and then subtract $1$ from each term.  
+  In other words, we remove all occurrences of $0$ from the sequence $s$ and then subtract $1$ from each term.  
 \end{definition}
 
 We shall now define the sets $R_\delta$:
@@ -3175,7 +3179,7 @@ As a consequence of this classification, we have:
 
 \section{Further Directions}
 
-There are still a few areas in the current direction that need working out, such as the construction of transfinite win-games with winning strategies.  I also plan to examine the internal logic of these categories of transfinite games to characterize them logically, and to investigate the logical meaning of convergence of the final sequence.  
+There are still a few areas in the current direction that need working out, such as the construction of transfinite win-games with winning strategies.  I also plan to examine the internal logic of these categories of transfinite games to characterize them logically, and to investigate the logical meaning of convergence of the final sequence.  Another direction is to see what our classification of the final sequence tells us about the exponential $\oc A$, and whether it tells us anything about the $\omega$-games case.  
 
 The paper \cite{MelliesCofCommCom} gives category-theoretic conditions under which the final sequence for $A\sequoid\blank$ always terminates at $\omega$ (though it is not stated in quite that language).  I plan to examine this work to see which of these conditions fail for categories of transfinite games.  There are other category-theoretic questions to ask about the behaviour of the final sequence.  It is known, for example, that the final sequence for a finitary endofunctor on $\Set$ must always terminate by $\omega+\omega$ \cite{finalseq} and there are other results generalizing this.  Although our endofunctor is not a functor on $\Set$, it can be turned into a functor on $\Set$ if we restrict to copycat strategies.  It would be worthwhile to view the results of this research under that lens.  
 
@@ -3195,7 +3199,7 @@ A surprising direction of research is given by the material in Sections \ref{Tra
 
 In Section \ref{DigressionSex} we constructed a category $\tilde{\G}$ whose objects are arbitrary (not necessarily completely negative) games.  Even in the finitary setting, this poses an obvious question: is this category  $*$-autonomous and can we use it to model fragments of linear logic that we could not model in the completely negative case?  Of course, there are other obstacles to doing this besides the sign of the games in our category, and the fact that $\tilde{\G}$ is equivalent as a category to $\G$ casts some doubt on whether this is possible, but I would like to explore this direction further.  
 
-Another thing that is worth looking into is the effect that removing the limiting condition might have on these games.  The limiting condition played no great role in our construction of $\G(\alpha)$, though it was cruicial in our work on the final sequence.  Removing the limiting condition might allow certain forms of unbounded nondeterminism to be modelled.  The work done in \cite{LairdOrdinalGames} is connected to this, and it will be instructive to compare the research in this report with Laird's earlier work on transfinite game semantics.  
+Another thing that is worth looking into is the effect that removing the limiting condition might have on these games.  The limiting condition played no great role in our construction of $\G(\alpha)$, though it was crucial in our work on the final sequence.  Removing the limiting condition might allow certain forms of unbounded non-determinism to be modelled.  The work done in \cite{LairdOrdinalGames} is connected to this, and it will be instructive to compare the research in this report with Laird's earlier work on transfinite game semantics.  
 
 Lastly, there is further technical research to be done into sequoidal categories, such as finding appropriate conditions under which the sequoidal exponential gives rise to a linear exponential comonad or cofree commutative comonoid.  
 
@@ -3245,7 +3249,7 @@ Our proof is essentially that given in \cite{CalderonMcCusker}.  Suppose for a c
 
 Since $s\vert_A=s'\vert_A$ and $s\vert_B=s'\vert_B$, the moves $x$ and $y$ must take place in different games (otherwise we would be forced to have $x=y$).  They are therefore both $P$-moves.  Suppose without loss of generality that $x$ is an $A$-move and that $y$ is a $B$-move.  By hypothesis, there is some $P$-position $t\in\sigma$ such that $t\vert_A=ry\vert_A=r\vert_A$ and $t\vert_B=ry\vert_B=r\vert_By$.
 
-Now clearly $rx\ne t$ (since their restrictions to $A$ and $B$ are different).  Let $q\prefix rx, t$ be their largest common prefix; then we have $qu\prefix rx, qv\prefix t$ for some $u\ne v$.  But now since $qu, qv\in\sigma$, $u$ and $v$ must both be $O$-moves, so they must be contained in the same component.  But this is impossible: if they are both $A$-moves then we have $q\vert_Au\prefix r\vert_Ax$ and $q\vert_Av\prefix r\vert_A$, so $u=v$ and if they are both $B$-moves then we have $q\vert_Bu\prefix r\vert_B$ and $q\vert_Bv\prefix r\vert_By$, so $u=v$ again.  This is a contradiction.
+Now clearly $rx\ne t$ (since their restrictions to $A$ and $B$ are different).  Let $q\prefix rx, t$ be their largest common prefix; then we have $qu\prefix rx, qv\prefix t$ for some $u\ne v$.  But now since $qu, qv\in\sigma$, $u$ and $v$ must both be $O$-moves, so they must be contained in the same component.  But this is impossible: if they are both $A$-moves then we have $q\vert_Au\prefix r\vert_A x$ and $q\vert_Av\prefix r\vert_A$, so $u=v$ and if they are both $B$-moves then we have $q\vert_Bu\prefix r\vert_B$ and $q\vert_Bv\prefix r\vert_By$, so $u=v$ again.  This is a contradiction.
 
 \subsection{Proof of Lemma \ref{LiftingLemma}}
 \label{LiftingLemmaProof}
