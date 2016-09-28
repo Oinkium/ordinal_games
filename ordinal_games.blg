@@ -11,45 +11,45 @@ Warning--empty year in LairdCofCommCom
 Warning--can't use both author and editor fields in MelliesCofCommCom
 Name 1 in "Neeman, Itay, and ebrary, Inc." has a comma at the end for entry longgamesbook
 while executing---line 1250 of file alpha.bst
-You've used 24 entries,
+You've used 26 entries,
             2543 wiz_defined-function locations,
-            715 strings with 8029 characters,
-and the built_in function-call counts, 8707 in all, are:
-= -- 881
-> -- 332
-< -- 20
-+ -- 107
-- -- 103
-* -- 568
-:= -- 1406
-add.period$ -- 76
-call.type$ -- 24
-change.case$ -- 131
-chr.to.int$ -- 24
-cite$ -- 26
-duplicate$ -- 375
-empty$ -- 684
-format.name$ -- 141
-if$ -- 1817
+            730 strings with 8377 characters,
+and the built_in function-call counts, 9588 in all, are:
+= -- 978
+> -- 359
+< -- 22
++ -- 115
+- -- 111
+* -- 624
+:= -- 1539
+add.period$ -- 83
+call.type$ -- 26
+change.case$ -- 142
+chr.to.int$ -- 26
+cite$ -- 28
+duplicate$ -- 416
+empty$ -- 754
+format.name$ -- 152
+if$ -- 2012
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 21
-newline$ -- 122
-num.names$ -- 72
-pop$ -- 144
+missing$ -- 23
+newline$ -- 132
+num.names$ -- 78
+pop$ -- 152
 preamble$ -- 1
-purify$ -- 159
+purify$ -- 172
 quote$ -- 0
-skip$ -- 318
+skip$ -- 354
 stack$ -- 0
-substring$ -- 453
-swap$ -- 65
-text.length$ -- 20
-text.prefix$ -- 14
+substring$ -- 517
+swap$ -- 76
+text.length$ -- 22
+text.prefix$ -- 15
 top$ -- 0
-type$ -- 180
+type$ -- 196
 warning$ -- 2
-while$ -- 79
-width$ -- 27
-write$ -- 314
+while$ -- 88
+width$ -- 29
+write$ -- 343
 (There were 3 error messages)

@@ -189,6 +189,11 @@
    \kern-\scriptspace%
    #2}
 
+\newsavebox{\overlongequation}
+\newenvironment{longdiagram}
+ {\begin{displaymath}\begin{lrbox}{\overlongequation}$\displaystyle}
+ {$\end{lrbox}\makebox[0pt]{\usebox{\overlongequation}}\end{displaymath}}
+
 %% Our things %%
 
 \newcommand{\neggame}[1]{\presuper{\perp}{#1}}
@@ -250,9 +255,13 @@
 \newcommand{\Ord}{\catname{Ord}}
 \newcommand{\FS}{\mathcal{FS}}
 \DeclareMathOperator{\rank}{rank}
+\newcommand{\dist}{{\texttt{dist}}}
+\newcommand{\dec}{{\texttt{dec}}}
 
 \let\oldemptyset\emptyset
 \let\emptyset\varnothing
+
+%% Our
 
 %%% END Article customizations
 
@@ -378,13 +387,31 @@ This condition on the sign of games allows us to construct a well-behaved catego
 
 We want $A\implies B$ to be the internal hom in our closed monoidal category, so we need to find a way around this.  Our solution is to construct, for every game $A$, a `minimal extension' $A^{\cn}$ of $A$ that is completely negative.  We prove various results about the relationship $A^{\cn}$ and $A$ that make this precise and then use them to show that the game $A\impliescn B\coloneqq (A\implies B)^{\cn}$ does give rise to a closed monoidal structure in our category.  We also give a tentative way of constructing a category whose objects are \emph{all} games, not just the completely negative ones, and use our results to show that this category is in fact equivalent to our existing category of completely negative games.  
 
-Having constructed a symmetric monoidal closed category of games, we introduce the sequoid operator and the exponential, and study the final sequence.  This section will involve some material that is more ordinal-theoretic than game-theoretic TODO: write up this section and then write the introduction
+Having constructed a symmetric monoidal closed category of games, we introduce the sequoid operator and the exponential, and study the final sequence.  We shall characterize the exponential $\oc A$ as a final coalgebra for the functor $A\sequoid\blank$ and use this characterization to prove that $\oc A$ admits the structure of a cofree commutative comonoid on $A$.  Then we turn to the final sequence.  This section will involve some material that is more ordinal-theoretic than game-theoretic; we assign an ordinal \emph{rank} to a (transfinite) sequence of natural numbers and then show that this idea of rank can be used to characterize each term of the final sequence for a functor of the form $A\sequoid\blank$.  We will show that the reason that the final sequences converge so quickly for finitary games and win-games is that a sequence of length $\omega$ necessarily has low rank: once we allow longer plays, we can get sequences with higher ranks and the final sequence will carry on for longer.  
+
+\subsection{Original contribution}
+
+Games with ordinal sequences of enablings have been studied by Laird from a Game Semantics point of view \cite{LairdOrdinalGames}, but to my knowledge this is the first transfinite games category built in the tradition of Abramsky and Jagadeesan.  Passing to transfinite games causes problems when we try to show that our category is monoidal closed, and we have to come up with new techniques in order to get a monoidal closed category (see Sections \ref{TransSMCCSex} to \ref{ImpliesCnSex}).  
+
+The characterization of the final coalgebra for the functor $A\sequoid\blank$ in a transfinite games category is new, though the behaviour in finitary game categories and win-game categories is well known.  Our definition of the rank of a sequence of natural numbers is heavily motivated by the game semantics, so it is likely that this is new too (though similar constructions of ordinal ranks of objects are common in mathematics).  
+
+Otherwise, most of the material in this report is a straightforward translation of the existing game semantics of Abramsky, Jagadeesan, Hyland, Ong, Curien, Lamarche and so on into the transfinite setting.  
 
 \subsection{Conventions}
 
 I shall denote the composition of morphisms $A\xrightarrow{\sigma}B\xrightarrow{\tau}C$ by $\comp\tau\sigma$, the disjoint union of two sets $X,Y$ by $X\cprd Y$ and the corresponding copairing of two functions $\map{f}{X}{Z},\map{g}{Y}{Z}$ by $\cmap{f\cprd g}{X\cprd Y}{Z}$.  
 
 Following the $\forall$belard/$\exists$loise convention that is sometimes used for Opponent/Player, I shall refer to the opponent $O$ as `he' and the player $P$ as `she' throughout.  
+
+\subsection{Acknowledgements}
+
+It goes without saying that I owe my biggest debt of gratitude for the material in this report to my supervisor, Jim Laird.  Dr Laird introduced me to Game Semantics a year ago and suggested my initial direction of research in the subject, and his insights and instinct for the subject have been invaluable in the development of the material contained in this report, and in the preparation of the report itself -- particularly when things were going wrong.  
+
+I am indebted to all the authors listed in the Bibliography, but I single out the seminal papers of Blass \cite{blassgames} and Abramsky-Jagdeesan \cite{abramskyjagadeesangames} for their development of the subject and their clear presentation of their full completeness results, the set of notes on Game Semantics by Martin Hyland \cite{hyland1997games} and the excellent online notes by Andrea Schalk \cite{Schalk2001GsNotes,SchalkWhatIs}.  I also single out the PhD thesis of Martin Churchill \cite{martinsthesis}, prepared under Dr Laird's supervision.  The work in this report can be seen as a partial sequel to some of Dr Churchill's work, and the clear presentation in his thesis has greatly helped in this task.  
+
+I would also like to extend my thanks to Paul Blain Levy for his work organizing the GaLoP 2016 conference and the Midlands Graduate School 2016, both of which I attended this year.  I presented some of this material at GaLoP and the questions and comment I received there have shaped the course of this work.  Thanks also to Alexander Kurz for his lectures on coalgebra at the Midlands Graduate School.  
+
+Thanks go to all my friends and family members who have patiently supported me while I embarked on this research.  Thank you to CN for designing the letter `G' (complete with $\sequoid$ symbols!) that features at the beginning of this introduction.  
 
 \section{Our starting category of games}
 
@@ -695,29 +722,13 @@ The process of showing that this is indeed a strategy for $A\implies C$, and tha
     \item $s$ is well formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$.  
   \end{enumerate}
   Furthermore, (i) and (ii) hold if we replace $\tensor$ with $\implies$ throughout and if we replace (i) by the statement that either $\zeta_A(s\vert_A)=P$ or $\zeta_B(s\vert_B)=O$.
+  \begin{proof}
+    See Appendix \ref{nice-negative-games-proof}.
+  \end{proof}
   \label{nice-negative-games}
 \end{proposition}
 
 We gave an example earlier in which a play $sa$ in $P_A\|P_B$ was not well formed with respect to $\zeta_{A\tensor B},\lambda_{A\tensor B}$.  The crucial thing that made that example work was that we had $\zeta_A(s\vert_A)=\zeta_B(s\vert_B)=O$.  This then meant that $\zeta_{A\tensor B}(sa)=O$ even when $\lambda_{A\tensor B}=P$.  Part (i) of the proposition above tells us that this situation never occurs, and part (ii) tells us that this is enough to ensure that we never get any alternating sequences that are not well formed.
-
-\begin{proof}[Proof of Proposition \ref{nice-negative-games}]
-  We proceed by induction on the length $n$ of $s$.  If $n=0$ then $s=\emptyplay$ and so $\zeta_A(s\vert_A)=\zeta_A(\emptyplay)=P$ and similarly for $B$, since $A,B$ are negative games.  Now suppose that $n>0$ - so $s=tm$ for some $t\in P_{A\tensor B},m\in M_{A\tensor B}$.  By induction, either $t\vert_A=P$ or $t\vert_B=P$, so there are three cases:
-  \begin{description}
-    \item[Case 1:] $\zeta_A(t\vert_A)=P$ and $\zeta_B(t\vert_B)=P$. Then either $tm\vert_A=t\vert_A$ (if $m$ is a $B$-move) or $tm\vert_B=t\vert_B$ (if $m$ is an $A$-move).  This proves part (i).  For part (ii), note that in this case we have $\zeta_{A\tensor B}(t)=P$, so $\zeta_{A\tensor B}(tm)=O$, since $tm$ is alternating.  If $m$ is an $A$-move, it means that $\zeta_B(tm\vert_B)=\zeta_B(t\vert_B)=P$, so we must have $\zeta_A(tm\vert_A)=O$ by the definition of $\zeta_{A\tensor B}$.  Then
-      \[
-        \lambda_{A\tensor B}(m)=\lambda_A(m)=\zeta_A(t\vert_Am)=O=\zeta_{A\tensor B}(tm)
-        \]
-      If $m$ is a $B$-move, the argument is similar.
-    \item[Case 2:] $\zeta_A(t\vert_A)=P$ and $\zeta_B(t\vert_B)=O$.  For part (i), it will suffice to show that $m$ is a $B$-move - so $tm\vert_A=t\vert_A$.  Indeed, we have $\zeta_{A\tensor B}(t)=O$, so $\zeta_{A\tensor B}(tm)=P$, since $tm$ is alternating with respect to $\zeta_{A\tensor B}$.  In particular, $\zeta_B(tm\vert_B)=P$, so we must have $tm\vert_B\ne t\vert_B$ and therefore $m$ is a $B$-move.  For part (ii), we have:
-      \begin{gather*}
-        \lambda_{A\tensor B}(m)=\lambda_B(m)=\zeta_B(t\vert_Bm)=\neg\zeta_B(t\vert_B)=\neg O = P \\
-        \zeta_{A\tensor B}(tm)=\neg\zeta_{A\tensor B}(t)=t = \neg O = P = \lambda_{A\tensor B}
-      \end{gather*}
-    \item[Case 3:] $\zeta_A(t\vert_A)=O$ and $\zeta_B(t\vert_B)=P$.  Similar to Case 2.
-  \end{description}
-
-  Finally, note that the $\tensor$ result implies the $\implies$ result after writing $A\implies B=\neggame{A}\parr B = \neggame{(A\tensor \neggame{B})}$.
-\end{proof}
 
 A corollary of our result is that we have:
 \begin{align*}
@@ -737,15 +748,7 @@ This proposition allows us to prove the following useful fact:
     \s\vert_{B,C}\in P_{B\implies C}
   \end{gather*}
   \begin{proof}
-    By symmetry, it will suffice to prove that if $\s\vert_{A,B}\in P_{A\implies B}$ and $\s\vert_{B,C}\in P_{B\implies C}$ then $\s\vert_{A,C}\in P_{A\implies C}$.  If $X,Y$ are negative games, then sequences $t\in P_{X\implies Y}$ are specified by the following properties - $t\vert_X\in P_X$, $t\vert_Y\in P_Y$, if $t$ has even length, then $\zeta_{X\implies Y}(t)=P$ and if $t$ has odd length then $\zeta_{X\implies Y}(t)=O$.  We need to show that these properties holds if $X=A$, $Y=C$ and $t=\s\vert_{A,C}$.  
-
-    Certainly, $\s\vert_{A,C}\vert_A=\s\vert_A=\s\vert_{A,B}\vert_A\in P_A$ and similarly $\s\vert_{A,C}\vert_C\in P_C$.  
-
-    If $\s\vert_{A,C}$ has even length, it means that the lengths of $\s\vert_A$ and $\s\vert_C$ have the same parity, and therefore that the lengths of $\s\vert_{A,B}$ and $\s\vert_{B,C}$ have the same parity.  Since $\s\vert_{A,B}\in\sigma$ and $\s\vert_{B,C}\in\tau$, it follows that $\zeta_{A\implies B}(\s\vert_{A,B})=\zeta_{B\implies C}(\s\vert_{B,C})$.  If $\zeta_B(\s\vert_B)=P$ then $\zeta_{A\implies B}(\s\vert_{A,B})=P$ and if $\zeta_B(\s\vert_B)=O$ then $\zeta_{B\implies C}(\s\vert_{B,C})=P$, so we must have $\zeta_{A\implies B}(\s\vert_{A,B})=\zeta_{B\implies C}(\s\vert_{B,C})=P$.  By transitivity of $\Rightarrow$, it follows that $\zeta_{A\implies C}(\s\vert_{A,C})=P$.  
-
-    If $\s\vert_{A,C}$ has odd length, it means that the lengths of $\s\vert_A$ and $\s\vert_C$ has opposite parities and therefore that the lengths of $\s\vert_{A,B}$ and $\s\vert_{B,C}$ have opposite parities.  So it follows that $\zeta_{A\implies B}(\s\vert_{A,B})=\neg\zeta_{B\implies C}(\s\vert_{B,C})$.  Suppose that $\zeta_{A\implies B}(\s\vert_{A,B})=O$.  Then $\zeta_A(\s\vert_A)=P$ and $\zeta_B(\s\vert_B)=O$.  By Proposition \ref{nice-negative-games} above applied to $\s\vert_{B,C}$, we must have $\zeta_C(\s\vert_C)=O$ and therefore $\zeta_{A\implies C}(\s\vert_{A,C})=(P\Rightarrow O)=O$.  
-
-    If instead we have $\zeta_{B\implies C}(\s\vert_{B,C})=O$, then $\zeta_B(\s\vert_B)=P$ and $\zeta_C(\s\vert_C)=O$.  By Proposition \ref{nice-negative-games} applied to $\s\vert_{A,B}$, we must have $\zeta_A(\s\vert_A)=P$ and so $\zeta_{A\implies C}(\s\vert_{A,C})=(P\Rightarrow O) = O$.  
+    See Appendix \ref{alternatingsequenceslemmaproof}.
   \end{proof}
 \end{lemma}
 
@@ -768,11 +771,7 @@ Thus we see that the plays according to some given strategy $\sigma$ for $A\impl
     \]
   Then $\sigma=\sigma'$.
   \begin{proof}
-    Our proof is essentially that given in \cite{CalderonMcCusker}.  Suppose for a contradiction that $\sigma\ne\sigma'$, so without loss of generality there is some $P$-position $s\in\sigma\setminus\sigma'$ (using the definition of a strategy).  By hypothesis, there is some $s'\in\sigma'$ such that $s'\vert_A=s\vert_A$ and $s'\vert_B=s\vert_B$.  Clearly, $s\ne s'$, since $s\not\in\sigma'$, so let $r\prefix s$ be the largest common prefix of $s$ and $s'$.  We therefore have $rx\prefix s,ry\prefix s'$, where $x,y\in M_{A\implies B}$ and $x\ne y$.  
-
-    Since $s\vert_A=s'\vert_A$ and $s\vert_B=s'\vert_B$, the moves $x$ and $y$ must take place in different games (otherwise we would be forced to have $x=y$).  They are therefore both $P$-moves.  Suppose without loss of generality that $x$ is an $A$-move and that $y$ is a $B$-move.  By hypothesis, there is some $P$-position $t\in\sigma$ such that $t\vert_A=ry\vert_A=r\vert_A$ and $t\vert_B=ry\vert_B=r\vert_By$.
-
-    Now clearly $rx\ne t$ (since their restrictions to $A$ and $B$ are different).  Let $q\prefix rx, t$ be their largest common prefix; then we have $qu\prefix rx, qv\prefix t$ for some $u\ne v$.  But now since $qu, qv\in\sigma$, $u$ and $v$ must both be $O$-moves, so they must be contained in the same component.  But this is impossible: if they are both $A$-moves then we have $q\vert_Au\prefix r\vert_Ax$ and $q\vert_Av\prefix r\vert_A$, so $u=v$ and if they are both $B$-moves then we have $q\vert_Bu\prefix r\vert_B$ and $q\vert_Bv\prefix r\vert_By$, so $u=v$ again.  This is a contradiction.
+    See Appendix \ref{HylandSchalkFaithfulProof}.
   \end{proof}
 \end{lemma}
 
@@ -797,6 +796,9 @@ This can be shown in an easy way.  Roughly speaking, we write out the sequence $
 \begin{lemma}
   \label{LiftingLemma}
   Let $A,B,C$ be negative games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $B\implies C$.  Suppose that $s\in\sigma$ and $t\in\tau$ are such that $s\vert_B=t\vert_B$.  Let $n=\length(s)+\length(t\vert_C)$; i.e., the total number of unique terms of $s$ and $t$ after we have identified their common $B$-component.  Then for all $k$ with $0\le k\le n$, there is a unique sequence $\s^k\in\sigma\|\tau$ of length $k$ such that $\s^k\vert_A\prefix s\vert_A$ and $\s^k\vert_C\prefix t\vert_C$.  Moreover, for this $\s^k$ we have $\s^k\vert_{A,B}\prefix s$ and $\s^k\vert_{B,C}\prefix t$, and if $j\le k$ then $\s^j\prefix \s^k$.  
+  \begin{proof}
+    See Appendix \ref{LiftingLemmaProof}.
+  \end{proof}
 \end{lemma}
 
 Note that Lemma \ref{LiftingLemma} is stronger than saying that there is a unique sequence $\s^k$ of length $k$ such that $\s^k\vert_{A,B}\prefix s$ and $\s^k\vert_{B,C}\prefix t$.  Instead, we are saying that there exists a sequence $\s^k$ with those properties, but that it is uniquely determined even when we make no requirement on its $B$-component other than that the whole sequence is contained in $\sigma\|\tau$.
@@ -806,36 +808,6 @@ As a corollary, we see that the sequences $s$ and $t$ may be interleaved: set $\
   \length(\s\vert_{A,B})\le\length(s)=n-\length(t\vert_C)\le n-\length(\s\vert_C)=\length(\s\vert_{A,B})
   \]
 so we must have equality everywhere, and similarly for $\s\vert_{B,C}$ and $t$.
-
-\begin{proof}[Proof of Lemma \ref{LiftingLemma}]
-  We prove this by induction on $k$.  There is a unique sequence of length $0$, namely the empty sequence, and its $A$- and $C$-components are both empty, so are prefixes of $s$ and $t$.  
-
-  Suppose now that $k=1$.  We make the observation that if $a$ is an $O$-move in $A$ and if $b$ is an $O$-move in $B$ then $a$ is a $P$-move in $A\implies B$ and $b$ is a $P$-move in $B\implies C$.  Since the starting move in $A\implies B$ or $B\implies C$ must be an $O$-move in both its component game and in the game as a whole, we see that any sequence in $\sigma\|\tau$ must begin with a move in $C$.  So we have $\s^1=c$, for some $C$-move $c$, and the condition that $\s^1\vert_C\prefix t$ means that $c$ must be the first move in $t$, which is always a move from $C$.  We have $\s^1\vert_A=\emptyplay\prefix s\vert_A$ and $\s^1\vert_B=\emptyplay\prefix s\vert_B$, as desired.
-
-  Now suppose that we have constructed the sequence $\s^k$ for some $k$ such that $1\le k<n$.  We seek a sequence $\s^{k+1}\in \sigma\|\tau$ of length $k+1$ such that $\s^{k+1}\vert_A\prefix s$ and $\s^{k+1}\vert_C\prefix t$.  If we write $\s'$ for the sequence obtained by removing the last move in $\s^{k+1}$, it is clear that $\s'\vert_A\prefix s$ and $\s'\vert_C\prefix t$, so $\s'=\s^k$ by uniqueness.  Therefore, $\s^{k+1}$ is of the form $\s^kx$, for some move $x\in M_A\cprd M_B\cprd M_C$.  
-
-  Write $\s^k=\s''y$, where $y$ is the last move in $\s^k$.  Our move $x$ will depend on which game $y$ is played on as follows:
-  
-  \begin{itemize}
-    \item Suppose $y$ is a move in $A$ or an $O$-move in $B$.  By induction, $\s''y\vert_{A,B}$ is a prefix of $s$ ending in $y$.  We claim that it is a proper prefix.  
-
-      Indeed, let $b$ be the last $B$-move occurring in $\s''y$ (since play in $A\implies B$ starts with a $B$-move, there must be such a move).  If $b=y$, then $b$ is an $O$-move in $A\implies B$.  Otherwise, $y$ must be a move in $A$, and then $b$ is again an $O$-move in $A\implies B$, since player $P$ switches games.  Therefore, $b$ is a $P$-move in $B\implies C$.  Now $\s''y\vert_B$ is a prefix of $t$ ending in $b$.  Since $b$ is a $P$-move in $B\implies C$, it may only be followed in $B\implies C$ by another move from $B$, so there are two possibilities: either $\s''y\vert_{B,C}=t$ or there is some other $B$-move $b'$ that occurs later than $b$ in the sequence $t$.  In the first case, $\s''y\vert_{A,B}$ must be a proper prefix of $s$ by length considerations:
-      \begin{align*}
-        \length(\s''y\vert_{A,B}) & = \length(\s''y) - \length(\s''y\vert_C) \\
-          & = \length(\s''y) - \length(t\vert_C) \\
-          & = k - \length(t\vert_C) < n - \length(t\vert_C) = \length(s)
-      \end{align*}
-      while in the second case $\s''y\vert_B$ must be a proper prefix of $t\vert_B=s\vert_B$, and so $\s''y\vert_{A,B}$ must be a proper prefix of $s$.
-
-      Therefore, we have $\s''y\vert_{A,B}x\prefix s$ for some move $x\in M_A\cprd M_B$.  If $x$ is an $A$-move then $\s''yx\vert_{B,C}=\s''y\vert_{B,C}\prefix t$, as desired.  If $x$ is a move in $B$, then it must be a $P$-move in $A\implies B$ (since $y$ is either a move in $A$ or an $O$-move in $B$), so it is an $O$-move in $B\implies C$.  Since $s\vert_B=t\vert_B$, we must have $\s''yx\vert_B\prefix t\vert_B$, and so $y$ must be a $P$-move in $B\implies C$, and should therefore be followed by another move in $B$, which must be $x$.  Therefore, $\s''yx\vert_{B,C}\prefix t$.
-
-      For uniqueness, suppose that $\s''yz\in\sigma\|\tau$ is such that $\s''yz\vert_A\prefix s\vert_A$ and $\s''yz\vert_C\prefix t\vert_C$.  As before, let $b$ be the last $B$-move occurring in $\s''y$; we have already shown that $b$ must be a $P$-move in $B\implies C$, and it follows that it must be the last move occurring in $\s''y\vert_{B,C}$ (since it can only be followed by another $B$-move).  Suppose that $z\in M_B\cprd M_C$.  Then $\s''yz\vert_{B,C}=\s''y\vert_{B,C}z$; since the last move in $\s''y\vert_{B,C}$ is $b$, this means that $z$ must be an $O$-move in $B$.  So $z$ is either an $O$-move in $B$ or a move in $A$.
-
-      If $y$ was an $O$-move in $A$, then $y$ is a $P$-move in $A\implies B$, so it must be followed in $A\implies B$ by another move from $A$.  Then the condition that $\s''yz\vert_A\prefix s\vert_A$ tells us that $z=x$.  If instead $y$ was a $P$-move in $A$ or a move in $B$ then $y$ is an $O$-move in $A\implies B$; now, since we have $\s''y\vert_{A,B}z,\s''y\vert_{A,B}x\in\sigma$, it must be the case that $x=z$ by the definition of a strategy.
-
-    \item If instead $y$ is a move in $C$ or a $P$-move in $B$, we use a symmetrical argument, choosing $x$ to be the next move along in $t$.  We need to take a little extra care here when we talk about the last $B$-move in $\s''y$; there may in fact be no $B$-moves in $\s''y$.  Since any play in $A\implies B$ must begin with a $B$-move, this only happens when $\s''y$ is entirely made up of $C$-moves.  In this case, it is not difficult to show that $\s''y\vert_{B,C}$ is a proper prefix of $t$ by length considerations.  \qedhere
-  \end{itemize}
-\end{proof}
 
 We now have all the ingredients ready to prove that $\comp\tau\sigma$ is a well-defined strategy.
 
@@ -1018,21 +990,10 @@ Similarly, player $P$ wins an infinite play $s$ in $A\implies B$ if and only if 
 The point now is that if $A,B,C$ are negative win-games and $\sigma$ and $\tau$ are strategies for $A\implies B$ and $B\implies C$, we will never end up in the situation we were in in Example \ref{TotalCompositionExample} where we have an infinite play in $B$ that stops us from replying in the composition $\comp\tau\sigma$.  In that example, the unique infinite play in $\st$ would have to be either $O$-winning or $P$-winning, so either $\sigma$ or $\tau$ would not be a valid winning strategy.  
 
 \begin{proposition}
+  \label{CompWinningIsWinning}
   Let $A,B,C$ be negative win-games, let $\sigma$ be a winning strategy for $A\implies B$ and let $\tau$ be a winning strategy for $B\implies C$.  Then $\comp\tau\sigma$ is a winning strategy for $A\implies C$.  
   \begin{proof}
-    First, we want to show that $\comp\tau\sigma$ is a total strategy.  Let $s\in\comp\tau\sigma$ be an $O$-position; then we have some $\s\in\sigma\|\tau$ with $\s\vert_{A,C}=s$.  
-
-    We claim that there is a maximal such $\s$.  By Lemma \ref{LiftingLemma}, $\s$ is determined by its length, and so the only way that there could not be a maximal such $\s$ is if there is some infinite sequence $\S\in(M_A\cprd M_B\cprd M_C)^\omega$ with $\S\vert_{A,B}\in\sigma\cup\sigma^\omega$, $\S\vert_{B,C}\in\tau\cup\tau^\omega$ and $\S\vert_{A,C}=s$.  Since $\S$ has some finite prefix $\s$ with $\s\vert_{A,C}=s$, $\S\vert_A$ and $\S\vert_C$ must both be finite, so they are $O$-plays in the games $A\implies B$ and $B\implies C$ respectively.  
-
-    Now $\S\vert_B$ is infinite.  If $W_B(\S\vert_B)=O$, then $W_{A\implies B}(\S\vert_{A,B})=O$, contradicting the fact that $\sigma$ is a winning strategy.  Symmetrically, if $W_B(\S\vert_B)=P$, then $W_{B\implies C}(\S\vert_{B,C})=O$, contradicting the fact that $\tau$ is a winning strategy.  We have a contradiction in either case, so if $\sigma$ and $\tau$ are indeed winning strategies, there must be a maximal (finite) $\s\in\sigma\|\tau$ such that $\s\vert_{A,C}=s$.  
-
-    The argument from Proposition \ref{BoundedTotalComposition} now applies, showing that $sx\in\comp\tau\sigma$ for some $P$-move $x$.  
-
-    Lastly, we want to show that any infinite play in $\comp\tau\sigma$ is $P$-winning.  Suppose $s$ is some infinite play in $\comp\tau\sigma$.  For each finite prefix $t\prefix s$ there is some $\t\in\sigma\|\tau$ with $\t\vert_{A,C}=t$, and by Lemma \ref{LiftingLemma}, we have $\t'\prefix\t$ if $t'\prefix t$.  Therefore, these $\t$ glue to give an infinite sequence $\s\in(M_A\cprd M_B\cprd M_C)^\omega$ such that $\s\vert_{A,B}\in\sigma^\omega$ and $\s\vert_{B,C}\in\tau^\omega$.  We claim that $W_{A\implies B}^*(\s\vert_{A,B})=W_{B\implies C}^*(\s\vert_{B,C})=P$ - then it follows that $W_{A\implies C}^*(\s\vert_{A,C})=P$ by transitivity of $\Rightarrow$.  If $\s\vert_{A,B}$ and $\s\vert_{B,C}$ are both infinite, then this is automatically true, since $\sigma$ and $\tau$ are winning strategies.  Otherwise, one of them must be infinite and the other finite.  
-
-    Suppose that $\s\vert_{A,B}$ is finite.  Let $\t$ be the shortest finite prefix of $\s$ with $\t\vert_{A,B}=\s\vert_{A,B}$; then we have $\t c\prefix \s$ for some move $c\in M_C$.  If $\t\vert_{A,B}=\emptyplay$, then $W_A^*(\t\vert_{A,B})=P$ since $A$ and $B$ are negative.  Otherwise, there is at least one $B$-move in $\t\vert_{A,B}$.  Let $b$ be the last $B$-move occurring in $\t\vert_{A,B}$ - then it is the last $B$-move occurring in $\t\vert_{B,C}$; since it is followed by the move $c$, it must be an $O$-move in $B\implies C$ and therefore a $P$-move in $B$.  Therefore, $W_{A\implies B}^*(\s\vert_{A,B})=P$.  
-
-    If instead $\s\vert_{B,C}$ is finite, once again we have some $\t\prefix\s$ with $\t\vert_{A,B}=\s\vert_{A,B}$ and $\t a\prefix\s$ for some move $a\in M_A$.  Since $\s\vert_{A,B}$ is infinite, it must be non-empty, so it must contain some $B$-move.  Let $b$ be the last $B$-move occurring in $\s\vert_{A,B}$; since $b$ is followed by an $A$-move, it must be an $O$-move in $B$.  Now $b$ is also the last $B$-move occurring in $\s\vert_{B,C}$ and so $W_{B\implies C}^*(\s\vert_{B,C})=P$.
+    See Appendix \ref{CompWinningIsWinningProof}.
   \end{proof}
 \end{proposition}
 
@@ -1232,7 +1193,7 @@ For the functor $\cmap{\F}{\G(\alpha)}{\Rel}$, we shall want to show that
   \]
 To show this, we will want to show that for any such $s,t,u$ there is some interleaving $\s$ such that $\s\vert_{A,C}=s$, $\s\vert_{A,B}=t$ and $\s\vert_{B,C}=u$.  Even though $s$, $t$ and $u$ all have length less than $\alpha$, $\s$ might have longer length; it will, however, have length less than $\alpha\#\alpha$.
 
-Note that it is not immediately clear that the elements of $\comp\tau\sigma$ have length less than $\alpha$.  We will have to show this.  First, though, we will need to restrict our class of games so that we do get a well-defined composition.
+It is not immediately clear from the definition that the elements of $\comp\tau\sigma$ have length less than $\alpha$, and in fact it turns out that this is not true.  For this reason, we will eventually need to place restrictions on the ordinal $\alpha$ to make sure that $\comp\tau\sigma$ is indeed a valid strategy for $A\implies C$.  
 
 \subsubsection{Completely negative and almost completely negative $\alpha$-games}
 
@@ -1337,7 +1298,7 @@ Once we have our category $\G(\alpha)$ set up, this will allow us to define a fu
   \label{TransHylandSchalkFaithful}
   Let $A,B$ be $\alpha$-games and let $\sigma,\sigma'$ be strategies for $A\implies B$.  Suppose that $\grel\sigma=\grel{\sigma'}$ as subsets of $P_A\times P_B$.  Then $\sigma=\sigma'$.
   \begin{proof}
-    Exactly as in Lemma \ref{HylandSchalkFaithful}.
+    See Appendix \ref{HylandSchalkFaithfulProof}.
   \end{proof}
 \end{lemma}
 
@@ -1843,6 +1804,7 @@ Therefore, our original diagram in $\G(\alpha)$ is commutative, since the functo
 We therefore have the structure of a symmetric monoidal category on $\G(\alpha)$.  
 
 \subsubsection{Symmetric monoidal closed structure}
+\label{TransSMCCSex}
 
 In existing finitary models of game semantics, the category of games is made into a symmetric monoidal closed category where the linear implication of two objects is given by the connective $\implies$.  As we remarked earlier, this approach will not work immediately for us, since $A\implies B$ need not be completely negative even if $A$ and $B$ are.  Our solution will be to modify $A\implies B$ so that it becomes completely negative.  
 
@@ -1884,6 +1846,8 @@ The main technical result we shall use to construct our closed monoidal structur
 \end{theorem}
 
 Note that if $A$ is completely negative, then the terminal object of $\G(\alpha)/A$ is the identity strategy $\map{\id_A}{A}{A}$, as is standard for slice categories.  If $A$ is not completely negative, then we will need to use a different construction.
+
+We will write this terminal object as $A^{\cn}\xrightarrow{\cn}A$.  $A^{\cn}$ should be thought of as the `smallest completely negative extension of $A$', and the fact that it gives rise to a terminal object in $\G(\alpha)/A$ makes this vague notion precise.  If $A$ and $B$ are completely negative $\alpha$-games, we shall define a game $A\impliescn B$ to be given by $(A\implies B)^{\cn}$.  We will then be able to use the fact that $(A\implies B)^{\cn}$ gives rise to a terminal object in the category $\G(\alpha)/(A\implies B)$ to show that the connective $\impliescn$ in fact gives rise to a monoidal closed structure on $\G(\alpha)$.  
 
 \begin{definition}
   Let $A$ be an $\alpha$-game.  We form a completely negative $\alpha$-game $A^{\cn}$ as follows:
@@ -2048,6 +2012,7 @@ It remains to prove Lemma \ref{CnLiftingLemma}.
 \end{proof}
 
 \subsubsection{A digression}
+\label{DigressionSex}
 
 Earlier on, we defined a category $\G(\alpha)/A$ for $A$ an arbitrary $\alpha$-game.  At this point, it is tempting to define a category as follows:
 
@@ -2201,7 +2166,13 @@ Therefore $\G(\alpha)$ has the structure of a symmetric monoidal category with t
 
 \subsubsection{Win-games and winning strategies}
 
-TODO: Write this section.
+We shall not develop the theory of transfinite win-games in this report, leaving this work for future research.  The basic idea is as follows.  Let $\alpha$ be an ordinal of the form $\omega^\beta$.  We form a category $\G(\alpha+1)$ of games where the objects are acn $\alpha+1$-games.  
+
+Given an acn $\alpha+1$-game $A$, we have an associated $\alpha$-game $A^\circ$ given by forgetting about the plays of length $\alpha$.  We call a total strategy $\sigma$ for $A^\circ$ \emph{winning} if every play of length $\alpha$ that is the limit of plays from $\sigma$ is a $P$-play in $A$.  
+
+We can then show that winning strategies compose to give winning strategies, just as in the $\omega+1$-case.  The morphisms between objects $A$ and $B$ in our category will be winning strategies for $A^\circ\implies B^\circ$.  We can then show that this category inherits a closed monoidal structure from $\G(\alpha)$.  
+
+This construction agrees with the previous one in the sense that $\G(\omega+1)$ and our original category $\mathcal W$ of win-games are isomorphic as categories.  
 
 \section{Exponentials}
 
@@ -2259,71 +2230,62 @@ Just like the tensor product, the exponential $\oc A$ has the property that only
 
 We can also prove a version of Proposition \ref{NiceAcnGames} for the exponential connective using the same argument.
 
-The next Proposition goes some way towards showing why $\oc A$ is a suitable model for the exponential connective in linear logic:
+To demonstrate why it is important to restrict the order in which the opponent $O$ may open games, we define a commutative comonoid structure on $\oc A$.  The comultiplication $\mu\from \oc A\to \oc A\tensor \oc A$ is the copycat strategy that opens a new copy of $A$ on the left hand side whenever a new copy of $A$ is opened on the right hand side.  (Here we see why the condition on the order in which games may be opened is important -- if we had no such restriction then there would be no canonical way to choose which copy of $A$ to open on the left hand side and the comultiplication would not be associative.)
 
-\begin{proposition}
-  $\oc A$ gives rise to a cofree commutative comonoid on $A$ in our monoidal category.
-  \begin{proof}[Sketch proof]
-    The comultiplication $\mu\from \oc A\to \oc A\tensor \oc A$ is the copycat strategy that opens a new copy of $A$ on the left hand side whenever a new copy of $A$ is opened on the right hand side.  (Here we see why the condition on the order in which games may be opened is important -- if we had no such restriction then there would be no canonical way to choose which copy of $A$ to open on the left hand side and the comultiplication would not be associative.)
+The counit $\eta\from \oc A\to I$ is the unique empty strategy on $\oc A\implies I$.  
 
-    The counit $\eta\from \oc A\to I$ is the unique empty strategy on $\oc A\implies I$.  
+For associativity of comultiplication, we want to check that the following diagram commutes:
+\[
+  \begin{tikzcd}
+    \oc A \arrow[r, "\mu"] \arrow[dd, "\mu"']
+      & \oc A \tensor \oc A \arrow[d, "\id_{\oc A}\tensor \mu"] \\
+    %
+      & \oc A \tensor (\oc A \tensor \oc A) \arrow[d, "\assoc_{A,A,A}\inv"] \\
+    \oc A \tensor \oc A \arrow[r, "\mu\tensor\id_{\oc A}"']
+      & (\oc A \tensor \oc A) \tensor \oc A
+  \end{tikzcd}
+  \]
+For this, note that each path round the diagram is a copycat strategy $\oc A \to (\oc A\tensor \oc A)\tensor \oc A$.  Since we are forced to open copies of $\oc A$ in order, there is only one such copycat strategy, and so the two paths must be equal.  
 
-    For associativity of comultiplication, we want to check that the following diagram commutes:
-    \[
-      \begin{tikzcd}
-        \oc A \arrow[r, "\mu"] \arrow[dd, "\mu"']
-          & \oc A \tensor \oc A \arrow[d, "\id_{\oc A}\tensor \mu"] \\
-        %
-          & \oc A \tensor (\oc A \tensor \oc A) \arrow[d, "\assoc_{A,A,A}\inv"] \\
-        \oc A \tensor \oc A \arrow[r, "\mu\tensor\id_{\oc A}"']
-          & (\oc A \tensor \oc A) \tensor \oc A
-      \end{tikzcd}
-      \]
-    For this, note that each path round the diagram is a copycat strategy $\oc A \to (\oc A\tensor \oc A)\tensor \oc A$.  Since we are forced to open copies of $\oc A$ in order, there is only one such copycat strategy, and so the two paths must be equal.  
+Exactly the same argument tells us that comultiplication is commutative and that the counit is indeed a counit for this comultiplication.
 
-    Exactly the same argument tells us that comultiplication is commutative and that the counit is indeed a counit for this comultiplication.
+We have a natural forgetful functor from the category of comonoids over $\G(\alpha)$ to $\G(\alpha)$ itself.  We first want to show that we have a functor in the opposite direction that sends a game $A$ to this comonoid over $\oc A$.  
 
-    We have a natural forgetful functor from the category of comonoids over $\G(\alpha)$ to $\G(\alpha)$ itself.  We first want to show that we have a functor in the opposite direction that sends a game $A$ to this comonoid over $\oc A$.  
+Let $A,B$ be completely negative $\alpha$-games and let $\sigma$ be a strategy for $A\implies B$.  Then we have a natural strategy $\oc \sigma$ for $\oc A\implies\oc B$ given by
+\[
+  \oc\sigma = \{s\in P_{\oc A}\suchthat s\vert_n\in\sigma\textrm{ for all $n\in\omega$}\}
+  \]
+where we have written $s\vert_n$ for the subsequence of $s$ consisting of all terms that occur in the $n$-th copy of $A$ or the $n$-th copy of $B$.  
 
-    Let $A,B$ be completely negative $\alpha$-games and let $\sigma$ be a strategy for $A\implies B$.  Then we have a natural strategy $\oc \sigma$ for $\oc A\implies\oc B$ given by
-    \[
-      \oc\sigma = \{s\in P_{\oc A}\suchthat s\vert_n\in\sigma\textrm{ for all $n\in\omega$}\}
-      \]
-    where we have written $s\vert_n$ for the subsequence of $s$ consisting of all terms that occur in the $n$-th copy of $A$ or the $n$-th copy of $B$.  
+The proof that this is a strategy may be adapted from the discussion of the strategy $\sigma\tensor\tau$ above.  Similarly, we may show that if $A,B,C$ are completely negative $\alpha$-games and we have strategies $A\xrightarrow{\sigma}B\xrightarrow{\tau}C$ then
+\[
+  \comp{\oc\tau}{\oc\sigma} = \oc(\comp\tau\sigma)
+  \]
+using the same argument we used to show that taking the tensor product of two strategies preserves composition.
 
-    The proof that this is a strategy may be adapted from the discussion of the strategy $\sigma\tensor\tau$ above.  Similarly, we may show that if $A,B,C$ are completely negative $\alpha$-games and we have strategies $A\xrightarrow{\sigma}B\xrightarrow{\tau}C$ then
-    \[
-      \comp{\oc\tau}{\oc\sigma} = \oc(\comp\tau\sigma)
-      \]
-    using the same argument we used to show that taking the tensor product of two strategies preserves composition.
+This gives us a functor $\cmap{\oc}{\G(\alpha)}{\G(\alpha)}$.  We want to show that it gives rise to a functor from $\G(\alpha)$ into the category of comonoids over $\G(\alpha)$ sending a game $A$ to the comonoid $\oc A\to \oc A\tensor \oc A$.  For this, we need to show that if $A,B$ are completely negative $\alpha$-games and $\sigma$ is a strategy for $A\implies B$ then the following diagram commutes:
+\[
+  \begin{tikzcd}
+    \oc A \arrow[r, "\mu"] \arrow[d, "\oc \sigma"']
+      & \oc A \tensor \oc A \arrow[d, "\oc \sigma \tensor \oc \sigma"] \\
+    \oc B \arrow[r, "\mu"']
+      & \oc B \tensor \oc B
+  \end{tikzcd}
+  \]
+Each branch of this diagram is a strategy for $\oc A\implies(\oc B\tensor\oc B)$ in which player $P$ plays according to $\sigma$, opening a new copy of $A$ on the left each time player $O$ opens a copy of $B$ on the right.  Since the order in which player $P$ may open copies of $A$ is pre-determined, there is a unique such strategy, and so this diagram must commute.  
 
-    This gives us a functor $\cmap{\oc}{\G(\alpha)}{\G(\alpha)}$.  We want to show that it gives rise to a functor from $\G(\alpha)$ into the category of comonoids over $\G(\alpha)$ sending a game $A$ to the comonoid $\oc A\to \oc A\tensor \oc A$.  For this, we need to show that if $A,B$ are completely negative $\alpha$-games and $\sigma$ is a strategy for $A\implies B$ then the following diagram commutes:
-    \[
-      \begin{tikzcd}
-        \oc A \arrow[r, "\mu"] \arrow[d, "\oc \sigma"']
-          & \oc A \tensor \oc A \arrow[d, "\oc \sigma \tensor \oc \sigma"] \\
-        \oc B \arrow[r, "\mu"']
-          & \oc B \tensor \oc B
-      \end{tikzcd}
-      \]
-    Each branch of this diagram is a strategy for $\oc A\implies(\oc B\tensor\oc B)$ in which player $P$ plays according to $\sigma$, opening a new copy of $A$ on the left each time player $O$ opens a copy of $B$ on the right.  Since the order in which player $P$ may open copies of $A$ is pre-determined, there is a unique such strategy, and so this diagram must commute.  
-
-    Lastly, we need to show that this functor is adjoint to the forgetful functor from the category of commutative comonoids on $\G(\alpha)$ to the category $\G(\alpha)$ itself.  We start off by providing a natural transformation from the functor $A\mapsto \oc A$ on $\G(\alpha)$ to the identity functor on $\G(\alpha)$.  Given a completely negative $\alpha$-game $A$, we have a strategy $\der$ for $\oc A\implies A$ that is the copycat strategy where player $P$ forgets about the extra copies of $A$.  Then, if $A,B$ are completely negative $\alpha$-games and $\sigma$ is a strategy for $A\implies B$, we have the following commutative square:
-    \[
-      \begin{tikzcd}
-        \oc A \arrow[r, "\der"] \arrow[d, "\oc \sigma"']
-          & A \arrow[d, "\sigma"] \\
-        \oc B \arrow[r, "\der"']
-          & B
-      \end{tikzcd}
-      \]
-    (by inspecting the definition of $\oc \sigma$) and so $\der$ gives rise to a natural transformation from $A\mapsto \oc A$ to $\id_A$.  
-
-    To complete the proof of adjointness, we need to show that the reverse composition of these functors admits a natural transformation out of the identity functor on the category of commutative comonoids over $\G(\alpha)$.  Let $\map{\mu}{X}{X\tensor X}$ be a commutative comonoid over $\G(\alpha)$.  
-  \end{proof}
-\end{proposition}
-
-TODO: complete this section.
+We shall eventually show that in fact $\oc A\to\oc A\tensor\oc A$ is the \emph{cofree commutative comonoid} on $A$.  To show that, we will need \cite{martinsthesis} to give a map $\der\from\oc A\to A$, and we will need to show that for each commutative comonoid $B\to B\tensor B$ and each morphism $\sigma\from B\to A$ there exists a unique morphism $\sigma^\dagger\from B\to \oc A$ such that the following diagram commutes:
+\[
+  \begin{tikzcd}
+    A
+      & \oc A \arrow[l, "\der"'] \arrow[r, "\mu"]
+        & \oc A \tensor \oc A \\
+    %
+      & B \arrow[r] \arrow[u, dotted, "\sigma^\dagger"'] \arrow[ul, "\sigma"]
+        & B\tensor B \arrow[u, dotted, "\sigma^\dagger \tensor \sigma^\dagger"']
+  \end{tikzcd}
+  \]
+We are not yet in a position to define the morphism $\sigma^\dagger$, but it is easy to see what $\der$ is: it is the copycat strategy on $\oc A\implies\oc A$ that copies the moves from $A$ on the right into the first copy of $A$ on the left.  
 
 \subsection{Products in $\G(\alpha)$}
 
@@ -2368,7 +2330,7 @@ Let $A,B$ be objects of some category $\G(\alpha)$ of transfinite games.  Follow
 
 It is clear that $A\sequoid B$ is a well-formed game - namely, it is the weakening of the tensor product $A\tensor A$ such that player $O$ is forced to start play in the game $A$.  We have a natural copycat strategy $\wk\from A\tensor B\to A\sequoid B$ and the morphism
 \[
-  A\tensor B\to (A\sequoid B)\times(B\sequoid A)
+  \dec_{A,B}\from A\tensor B\to (A\sequoid B)\times(B\sequoid A)
   \]
 induced by the morphisms
 \[
@@ -2381,7 +2343,8 @@ Other natural copycat isomorphisms may be verified by inspection:
   \passoc_{A,B,C} \from (A\sequoid B) \sequoid C \toisom A\sequoid (B\tensor C) \\
   \pcomm_{A,B,C} = \comp{\passoc_{A,B,C}\inv}{\comp{(\id_A\tensor\braid)}{\passoc_{A,B,C}}} \from (A\sequoid B)\sequoid C \toisom (A\sequoid C)\sequoid B\\
   \lun_A \from I\sequoid A \toisom I\\
-  \run_A \from A\sequoid I \toisom A
+  \run_A \from A\sequoid I \toisom A \\
+  \dist_{A,B,C}=\langle \pi_1\sequoid\id_C,\pi_2\sequoid\id_C\rangle\from (A\times B)\sequoid C \toisom (A\sequoid C)\times(B\sequoid C)
 \end{gather*}
 
 One important point is that the sequoid does not give rise to a functor $\G(\alpha)\times\G(\alpha)\to\G(\alpha)$ in the way that the tensor product does.  To see why, let $A,B,C,D$ be games, let $\sigma$ be a strategy for $A\implies B$ and let $\tau$ be a strategy for $C\implies D$.  We would like to construct a strategy $\sigma\sequoid\tau$ for
@@ -2426,7 +2389,20 @@ What this means is that $\blank\sequoid\blank$ gives us a functor, not from $\G(
 
 The closed monoidal category $\G(\alpha)$, the subcategory $\G_s(\alpha)$, the morphisms $\passoc$ and $\run$, and the natural transformation $\wk$ in fact give rise to a structure known as a \emph{sequoidal category} (This definition was first introduced in \cite{laird02}, but with the direction of the sequoid operator reversed; see, for example, \cite{martinsthesis} for the definition where the orientation of the sequoid agrees with ours).  
 
-Moreover, the isomorphism $A\tensor B\cong (A\sequoid B)\times(B\sequoid A)$ means that our sequoidal category is \emph{decomposable}.  
+Moreover, the isomorphism $\dec_{A,B,C}\from A\tensor B\cong (A\sequoid B)\times(B\sequoid A)$ means that our sequoidal category is \emph{decomposable} and the isomorphism $\dist_{A,B,C}\from (A\times B)\sequoid C\to (A\sequoid C)\times(B\sequoid C)$ tells us that it is \emph{distributive}.  
+
+The last part of the definition of a sequoidal category that we will need is the coherence diagram:
+\[
+  \begin{tikzcd}
+    (A \tensor B) \tensor C \arrow[r, "\wk\tensor\id_C"] \arrow[d, "\assoc_{A,B,C}"']
+      & (A \sequoid B) \tensor C \arrow[r, "\wk"]
+        & (A \sequoid B) \sequoid C \\
+    A \tensor (B \tensor C) \arrow[r, "\wk"]
+      & A \sequoid (B \tensor C) \arrow[ur, "\passoc_{A,B,C}"']
+        &
+  \end{tikzcd}
+  \]
+Commutativity of this diagram in $\G(\alpha)$ may be verified by inspection.  
 
 \cite{laird02} gives examples of what we can prove in general sequoidal categories, particularly in the cpo-enriched setting.  They are used in \cite{martinsthesis} to study the logic modelled by games and history-sensitive strategies.  The most useful property of the sequoid from the point of view of our study of the exponential is that it allows us to express our exponential as a final coalgebra.
 
@@ -2481,7 +2457,7 @@ making the following diagram commute:
       \]
     where we write $\s\vert_{B_0, \oc A}$ for $\s\vert_{B_0,A_0,A_1,\dots}$.  
 
-    We shall postpone the proof that $\fcoal\sigma$ is a strategy.  We claim that the final coalgebra diagram commutes:
+    We shall omit the proof that $\fcoal\sigma$ is a strategy.  We claim that the final coalgebra diagram commutes:
     \[
       \begin{tikzcd}
         B \arrow[r, "\sigma"] \arrow[d, "\fcoal{\sigma}"']
@@ -2619,26 +2595,256 @@ making the following diagram commute:
   \end{proof}
 \end{theorem}
 
-We still need to show that $\fcoal\sigma$ is indeed a strategy.  We shall start with a lemma that will take the role of Lemma \ref{TransLiftingLemma}.  
+\begin{note}
+  This is not the same as the proof found in \cite{martinsthesis}, which implicitly uses the fact that in the finitary games setting we may identify $\oc A$ with the limit of the diagram
+  \[
+    I \leftarrow A \leftarrow A\sequoid A \leftarrow A\sequoid(A\sequoid A) \leftarrow \cdots
+    \]
+  As we shall see in the next section, we do not have this identification in the transfinite setting.  However, we will give an alternative proof that $\oc A$ is the final coalgebra for $A\sequoid\blank$ in the next section that will be more along the lines of the proof in \cite{martinsthesis}.  
+\end{note}
+
+\subsubsection{The sequoidal exponential gives a cofree commutative comonoid}
+
+As an application of this result, we shall prove that $\oc A\xrightarrow{\mu}\oc A\tensor \oc A$ is the cofree commutative comonoid on $A$.  We start with a small but useful lemma:
 
 \begin{lemma}
-  \label{ExponentialLiftingLemma}
-  Let $s\in\fcoal\sigma$.  Then there exists a unique shortest sequence $\s\in\|\sigma\|$ such that $\s\vert_{B,\oc A}=s$.  
-
+  \[
+    \oc A \tensor \oc A \cong \oc(A\times A)
+    \]
   \begin{proof}
-    The definition of $\fcoal\sigma$ tells us that there exists some $\s\in\|\sigma\|$ with $\s\vert_{B,\oc A}=s$.  We may assume that $\s$ is minimal with this property by removing moves from the end.  
-    
-    Let $\beta$ be the length of $\s$  We shall prove that if $\t$ has length $\beta$ and $\t\vert_{B,\oc A}=s$ then $\t=\s$.  
-    
-    Write $\s^\delta$ for the initial prefix of $\s$ of length $\delta$.  We shall prove by induction on $\delta$ that $\s^\delta$ is the unique sequence $\t^\delta$ of length $\delta$ such that $\t^\delta\vert_{B,\oc A}\prefix s$.  
-
-    Suppose we have some sequence $\t^{\delta+1}$ of length $\delta+1$ such that $\t^{\delta+1}\vert_{B,\oc A}\prefix s$.  Then, by the induction hypothesis, we must have $\t^{\delta+1}=\s^\delta x$ for some $x$.  We now split into cases:
-
-    \begin{description}
-      \item[Case 1: ]$\s^\delta$ is a limiting play or $\s^\delta$ ends with a $P$-move in a copy of $A$.  In this case, the condition on $\|\sigma\|$ tells us that $x$ must be a move in a copy of $A$, and so 
-    \end{description}
+    We check that the game trees are isomorphic.  The basic idea is that in each $P$-position the player $O$ may either play in one of the games that has already been opened, or he has a choice of two new games to open -- in $\oc A\tensor \oc A$, he may open either the first unopened copy of $A$ on the left or the first unopened copy of $A$ on the right, while in $\oc(A\times A)$ he may open either of the copies of $A$ in the first unopened copy of $A\times A$.  
   \end{proof}
 \end{lemma}
+
+This means that $\oc A\tensor\oc A$ is the final coalgebra for the functor 
+\[
+  (A\times A)\sequoid\blank
+  \]
+Upon examining the induced morphism $\oc A\tensor \oc A \to (A\times A)\sequoid(\oc A\tensor \oc A)$, we observe that it is equal to the following composite
+\[
+  \oc A\tensor \oc A \xrightarrow{\xi} (A\sequoid(\oc A\tensor\oc A)) \times (A\sequoid(\oc A\tensor\oc A))\xrightarrow{\dist\inv}(A\times A)\sequoid(\oc A\tensor \oc A)
+  \]
+where the morphism $\xi$ is induced by the morphisms
+\[
+  \begin{tikzcd}
+    %
+      &
+        & (A\sequoid\oc A)\tensor \oc A \arrow[r, "\wk"]
+          & (A\sequoid\oc A) \sequoid \oc A \arrow[r, "\passoc\inv"]
+            & A\sequoid (\oc A\tensor \oc A) \\
+    \oc A \tensor \oc A \arrow[urr, "\alpha\tensor\id"] \arrow[dr, "\sym"]
+      &
+        &
+          &
+            & \\
+    %
+      & \oc A \tensor \oc A \arrow[r, "\alpha\tensor\id"]
+        & (A\sequoid\oc A)\tensor \oc A \arrow[r, "\wk"]
+          & (A\sequoid\oc A) \sequoid \oc A \arrow[r, "\passoc\inv"]
+            & A\sequoid (\oc A\tensor \oc A) \\
+  \end{tikzcd}
+  \]
+
+Now let $\map{\mu}{B}{B\tensor B}$ be a commutative comonoid in $\G(\alpha)$ and let $\sigma\from B\to A$ be a morphism.  We build up a chain as follows:
+\[
+  B \xrightarrow{\mu} B\tensor B \xrightarrow{\sigma\tensor\id_B} A \tensor B \xrightarrow{\wk} A \sequoid B \xrightarrow{\Delta} (A \sequoid B) \times (A \sequoid B) \rightarrow{\dist_{A,A,B}\inv} (A\times A)\sequoid B
+  \]
+where $\Delta=\langle\id,\id\rangle$ is the diagonal morphism into the product.  The composite $\comp{\comp{\wk}{\sigma\tensor\id_B}}{\mu}$ gives rise to a unique morphism
+\[
+  \sigma^\dagger=\fcoal{\comp{\comp{\wk}{\sigma\tensor\id_B}}{\mu}}\from B\to \oc A
+  \]
+making the following diagram commute:
+\[
+  \begin{tikzcd}
+    B \arrow[r, "\mu"] \arrow[d, "\sigma^\dagger"']
+      & B\tensor B \arrow[r, "\sigma\tensor\id_B"]
+        & A\tensor B \arrow[r, "\wk"]
+          & A \sequoid B \arrow[d, "\id_A\sequoid\sigma^\dagger"] \\
+    \oc A \arrow[rrr, "\alpha"]
+      &
+        &
+          & A\sequoid\oc A
+  \end{tikzcd}
+  \]
+
+We claim that $\sigma^\dag$ gives us a homomorphism of comonoids; that is, that the following diagram commutes:
+\[
+  \begin{tikzcd}
+  B \arrow[r, "\mu"] \arrow[d, "\sigma^\dag"']
+    & B\tensor B \arrow[d, "\sigma^\dag\tensor\sigma^\dag"] \\
+  \oc A \arrow[r, "\mu"]
+    & \oc A \tensor \oc A
+  \end{tikzcd}
+  \]
+We will show this by proving that the two paths round this square are both anamorphisms for the morphism $B\to (A\times A)\sequoid B$ given above.  Since anamorphisms are unique by the definition of a final coalgebra, this means that the two branches are equal.  
+
+We start with the branch $B\to B\tensor B \to \oc A\tensor \oc A$.  We claim that the following diagram commutes:
+\begin{longdiagram}
+  \begin{tikzcd}
+    B \arrow[r, "\mu"] \arrow[d, "\sigma^\dag"]
+      & B\tensor B \arrow[r, "\sigma\tensor\id_B"]
+        & A \tensor B \arrow[r, "\wk"]
+          & A \sequoid B \arrow[r, "\Delta"] \arrow[d, "\id_A\sequoid\sigma^\dagger"]
+            & (A\sequoid B) \times (A \sequoid B) \arrow[r, "{\dist_{A,A,B}\inv}"] \arrow[d, "{\langle\id_A\sequoid\sigma^\dagger,\id_A\sequoid\sigma^\dagger\rangle}"]
+              & (A \times A) \sequoid B \arrow[d, "\id_{A\times A}\sequoid\sigma^{\dagger}"] \\
+    \oc A \arrow[rrr, "\alpha"] \arrow[d, "\mu"]
+      &
+        &
+          & A\sequoid \oc A \arrow[r, "\Delta"]
+            & (A \sequoid \oc A)\times (A\sequoid \oc A) \arrow[r, "{\dist_{A,A,\oc A}\inv}"']
+              & (A\times A)\sequoid \oc A \arrow[d, "\id_{A\times A}\sequoid\mu"] \\
+    \oc A \tensor \oc A \arrow[rrrrr]
+      &
+        &
+          &
+            &
+              & (A\times A)\sequoid(\oc A\tensor \oc A)
+  \end{tikzcd}
+\end{longdiagram}
+
+The rectangle at the top left is one we have drawn before.  The square in the middle at the top commutes because $\Delta$ gives rise to a natural transformation between $\id_{\G(\alpha)}$ and $\blank\times\blank$.  The square at the top right commutes because $\dist$ is a natural transformation.  
+
+The rectangle at the bottom commutes because both brances are copycat strategies for $\oc A\implies (A\times A)\sequoid(\oc A\tensor\oc A)$, and there is a unique such strategy.  
+
+It follows that $\comp\mu{\sigma^\dagger}$ is an anamorphism for the morphism along the top and the functor $(A\times A)\sequoid\blank$.  
+
+Now we deal with the other branch.  We claim that we have the following commutative diagram:
+\begin{longdiagram}
+  \begin{tikzcd}
+    B \arrow[r, "\mu"] \arrow[dd, "\mu"'] \arrow[ddr, phantom, "\textbf{1}"]
+      & B\tensor B \arrow[r, "\sigma\tensor \id_B"] \arrow[d, "\id_B\tensor\mu"] \arrow[dr, phantom, "\textbf{2}"]
+        & A \tensor B \arrow[rrr, "\wk"] \arrow[d, "\id_A\tensor\mu"] \arrow[drrr, phantom, "\textbf{3}"]
+          &
+            &
+              & A\sequoid B \arrow[d, "\id_A\sequoid\mu"] \\
+    %
+      & B \tensor(B\tensor B) \arrow[r, "\sigma\tensor\id_{B\tensor B}"] \arrow[d, "{\assoc_{B,B,B}\inv}"]
+        & A \tensor (B \tensor B) \arrow[rrr, "\wk"] \arrow[drr, phantom, "\textbf{4}"]
+          &
+            &
+              & A \sequoid (B\tensor B) \arrow[dd, "\id_A\sequoid(\sigma^\dagger \tensor \sigma^\dagger)"] \arrow[dl, "{\passoc_{A,B,B}}"] \arrow[ddl, phantom, "\textbf{7}"] \\
+    B \tensor B \arrow[r, "\mu\tensor \id_B"] \arrow[d, "\sigma^\dagger \tensor \sigma^\dagger"'] \arrow[drrr, phantom, "\textbf{5}" yshift=-0.3em]
+      & (B \tensor B) \tensor B \arrow[r, "(\sigma\tensor\id_B)\tensor\id_B"' yshift=-0.3em]
+        & (A \tensor B) \tensor B \arrow[r, "\wk\tensor\id_B"]
+          & (A \sequoid B) \tensor B \arrow[r, "\wk"] \arrow[d, "(\id\sequoid\sigma^\dagger)\tensor\sigma^\dagger"'] \arrow[dr, phantom, "\textbf{6}"]
+            & (A\sequoid B)\sequoid B \arrow[d, "(\id\sequoid\sigma^\dagger)\sequoid\sigma^\dagger"]
+              & \\
+    \oc A \tensor \oc A \arrow[rrr, "\alpha\sequoid\id_{\oc A}"']
+      &
+        &
+          & (A \sequoid \oc A)\tensor \oc A \arrow[r, "\wk"]
+            & (A \sequoid \oc A) \sequoid \oc A \arrow[r, "\passoc\inv"]
+              & A \sequoid (\oc A \tensor \oc A)
+  \end{tikzcd}
+\end{longdiagram}
+
+We check that each cell commutes in turn.
+\begin{enumerate}[{\bf 1}]
+  \item is the diagram showing that the comultiplication for $B$ is associative.
+  \item commutes since $\blank\tensor\blank$ is a functor.
+  \item commutes since $\wk$ is a natural transformation.
+  \item is the coherence diagram for sequoidal categories that we gave earlier.
+  \item is obtained from an earlier diagram by taking the tensor product with $B$ on the top, taking the tensor product with $\oc A$ on the bottom, and passing between the two with the morphism $\sigma^\dag$.  
+  \item commutes because $\wk$ is a natural transformation.
+  \item commutes because $\passoc$ is a natural transformation.  
+\end{enumerate}
+
+Furthermore, note that the morphism along the bottom is one of the two morphisms $\oc A\tensor\oc A \to A\sequoid(\oc A \tensor \oc A)$ that we gave before.  To get the other one, note that since the comultiplication in $B$ is commutative, we have a commutative diagram:
+\[
+  \begin{tikzcd}
+    %
+      & B \arrow[ddl, "\mu"'] \arrow[dd, "\mu"] \\
+    %
+      & \\
+    B\tensor B \arrow[r, "\sym"] \arrow[d, "\sigma^\dagger\tensor\sigma^\dagger"']
+      & B\tensor B \arrow[d, "\sigma^\dagger\tensor\sigma^\dagger"] \\
+    \oc A \tensor \oc A \arrow[r, "\sym"]
+      & \oc A \tensor \oc A
+  \end{tikzcd}
+  \]
+which we may glue on to the left hand side of the diagram above, giving a commutative diagram with the second morphism $\oc A\tensor \oc A\to A\sequoid(\oc A\tensor \oc A)$ along the bottom.  
+
+These two diagrams between them induce a commutative diagram
+\begin{longdiagram}
+  \begin{tikzcd}
+    B \arrow[r, "\mu"] \arrow[d, "\mu"']
+      & B\tensor B \arrow[r, "\sigma\tensor\id_B"]
+        & A \tensor B \arrow[r, "\wk"]
+          & A \sequoid B \arrow[r, "\Delta"]
+            & (A \sequoid B) \times (A \sequoid B) \arrow[r, "{\dist_{A,A,B}\inv}" yshift=0.6em] \arrow[d, "{\langle \id_A\sequoid\mu, \id_A\sequoid\mu\rangle}"']
+              & (A\times A)\sequoid B \arrow[d, "\id_{A\times A}\sequoid\mu"] \\
+    B\tensor B \arrow[d, "\sigma^\dagger\tensor\sigma^\dagger"']
+      &
+        &
+          &
+            & (A \sequoid (B \tensor B)) \times (A \sequoid (B\tensor B)) \arrow[d, "{\langle \id_A\sequoid(\sigma^\dagger\tensor\sigma^\dagger), \id_A\sequoid(\sigma^\dagger\tensor\sigma^\dagger)\rangle}"'] \arrow[r, "{\dist_{A,A,B\tensor B}\inv}"]
+              & (A \times A) \sequoid (B\tensor B) \arrow[d, "\id_{A\times A}\sequoid\mu"] \\
+    \oc A \times \oc A \arrow[rrrr, "\xi"]
+      &
+        &
+          &
+            & (A \sequoid (\oc A \tensor \oc A)) \times (A \sequoid (\oc A \tensor \oc A)) \arrow[r, "{\dist_{A,A,\oc A\tensor\oc A}\inv}" yshift=0.3em]
+              & (A\times A) \sequoid(\oc A \tensor \oc A)
+  \end{tikzcd}
+\end{longdiagram}
+
+that proves that $\comp{\sigma^\dagger\tensor\sigma^\dagger}{\mu}$ is an anamorphism for the morphism along the top as well.  Therefore, $\sigma^\dagger$ does give us a homomorphism of comonoids.  
+
+We claim that $\sigma^\dagger$ makes the following diagram commute:
+\[
+  \begin{tikzcd}
+    B \arrow[d, "\sigma^\dagger"'] \arrow[dr, "\sigma"]
+      & \\
+    \oc A \arrow[r, "\der"']
+      & A
+  \end{tikzcd}
+  \]
+Indeed, we have a commutative diagram
+\[
+  \begin{tikzcd}
+    B \arrow[r, "\comp{\wk}{\comp{(\sigma\tensor\id_B)}{\mu}}" yshift=0.3em] \arrow[d, "\sigma^\dagger"']
+      & A \sequoid B \arrow[dr, "\id_A\sequoid 1"] \arrow[d, "\id_A\sequoid\sigma^\dagger"']
+        & 
+          & \\
+    \oc A \arrow[r, "\alpha"']
+      & A \sequoid \oc A \arrow[r, "\id_A\sequoid 1"']
+        & A \sequoid I \arrow[r, "\run_A"]
+          & A
+  \end{tikzcd}
+  \]
+and we observe that the morphism along the bottom is precisely $\der$, while the morphism along the bottom is precisely $\sigma$.  
+
+Now we show uniqueness.  Suppose that $\tau\from B\to\oc A$ is a morphism making the following diagram commute:
+\[
+  \begin{tikzcd}
+    %
+      & B \arrow[d, "\tau"] \arrow[r, "\mu"] \arrow[dl, "\sigma"']
+        & B \tensor B \arrow[d, "\tau\tensor\tau"] \\
+    A
+      & \oc A \arrow[l, "\der"] \arrow[r, "\mu"]
+        & \oc A \tensor \oc A
+  \end{tikzcd}
+  \]
+Then we get the following commutative diagram:
+\[
+  \begin{tikzcd}
+    B \arrow[r, "\mu"] \arrow[d, "\tau"]
+      & B \tensor B \arrow[r, "\sigma\tensor\id_A"] \arrow[d, "\tau\tensor\tau"]
+        & A \tensor B \arrow[r, "\wk"] \arrow[d, "\id_A\tensor\tau"]
+          & A \sequoid B \arrow[d, "\id_A\sequoid\tau"] \\
+    \oc A \arrow[r, "\mu"]
+      & \oc A \tensor \oc A \arrow[r, "\der\tensor\id_A"]
+        & A \tensor \oc A \arrow[r, "\wk"]
+          & A \sequoid \oc A
+  \end{tikzcd}
+  \]
+where commutativity of the middle square is derived from the commutative triangle on the left of the diagram immediately above.  Now observe that the morphism $A\to A\sequoid\oc A$ along the bottom is precisely the morphism $\alpha$.  Therefore, $\tau$ is an anamorphism for the morphism
+\[
+  B \xrightarrow{\mu} B\tensor B \xrightarrow{\sigma\tensor\id_A} A\tensor B \xrightarrow{\wk} A \sequoid B
+  \]
+and so $\tau=\sigma$.  
+
+We have shown that $\oc A \xrightarrow{\mu}\oc A \tensor \oc A$ is indeed the cofree commutative comonoid on $A$.  
 
 \section{The final sequence}
 
@@ -2658,6 +2864,12 @@ Let $\C$ be a category and let $\F\from \C\to \C$ be an endofunctor.  Suppose th
     and $\FS_\F(\beta\le\mu)$ is the arrow in the limiting cone
   \item Applying the functor $\F$ to the cone $\FS_\F(\mu)$ gives rise to a new cone over the above diagram, inducing a unique arrow $\FS_\F(\mu+1)\to\FS_\F(\mu)$.  We set $\FS_\F(\mu\le\mu+1)$ to be equal to this arrow.
 \end{itemize}
+
+A standard fact about the final sequence (see \cite{finalseq}) is that if $\delta$ is an ordinal and the morphism
+\[
+  \FS_\F(\delta\le\delta+1)\from \F(\FS_\F(\delta))\to \FS_\F(\delta)
+  \]
+is an isomorphism, then the inverse of this morphism exhibits $\FS_\F(\delta)$ as the final coalgebra for the endofunctor $\F$.  In this case, we say that the final sequence $\FS_\F$ has \emph{stabilized by $\delta$}.  
 
 Our goal is to characterize the final sequence for functors of the form $A\sequoid\blank$ in categories $\G(\alpha)$ of games, in the hope that this will allow us to study the exponential $\oc A$ in more depth.
 
@@ -2717,7 +2929,7 @@ We need to prove some results so we can be sure that the rank of a sequence is w
 
         If instead $t$ has limiting length, then every proper prefix $v\pprefix t$ is a subsequence of some proper prefix $u\pprefix s$.  Therefore, by induction, for every proper prefix $v\pprefix t$, we have $v\in R_\delta$ for some $\delta<\mu$ and therefore $t\in\mu$.  
 
-      \item Induction on $\delta$.  If $sin R_{\delta+1}$ then $\Delta s\in R_\delta$; by the induction hypothesis, this means that $\Delta\Delta s\in R_\delta$ and therefore that $\Delta s\in R_{\delta+1}$.  
+      \item Induction on $\delta$.  If $s\in R_{\delta+1}$ then $\Delta s\in R_\delta$; by the induction hypothesis, this means that $\Delta\Delta s\in R_\delta$ and therefore that $\Delta s\in R_{\delta+1}$.  
 
         Now let $\mu$ be a limit ordinal.  Suppose $s\in R_\mu$.  If $s$ has successor length, it means that $s\in R_\delta$ for some $\delta<\mu$, so $\Delta s\in R_\delta$ by induction.  By (i), all the prefixes of $\Delta s$ are in $R_\delta$ as well, so $\Delta s\in R_\mu$.  
 
@@ -2827,16 +3039,261 @@ We can now give our classification result:
 \begin{theorem}
   Let $s\in\omega^{*<\alpha}$ and let $\mu<\alpha$ be a limit ordinal.  Then $\rank(s)\ge\mu$ if and only if $s$ has a weakly increasing subsequence of length $\mu$.  
 
-  For $n\ge 1$, $\rank(s)\ge\mu+n$ if and only if $s$ has a weakly increasing subsequence $t$ of length $\mu$ and a term of magnitude at least $n-1$ that occurs later in the sequence than all the terms of $t$.  
+  For $n\ge 1$, $\rank(s)\ge\mu+n$ if and only if $s$ has a subsequence of the form $tm$, where $t$ is weakly increasing of length $\mu$ and $m\ge n-1$ is a single term.
 
   \begin{proof}
     \emph{If: } Suppose $t$ is a weakly increasing subsequence of length $\mu$.  By Lemma \ref{WeaklyIncreasingLemma}, $t$ has rank $\mu$, so by Proposition \ref{RankProposition}, $s$ has rank at least $\mu$.  
 
     Write $s=s'u$, where $t$ is a subsequence of $s'$ and $u$ contains some term $m\ge n-1$.  Then $s'$ has rank at least $\mu$.  Then $\Delta^{n-1} s'$ has rank at least $\mu$ and $\Delta^{n-1}u\ne\emptyplay$, since $u$ contains the term $m$.  Let $x$ be the first term of $\Delta^{n-1}u$.  Then $\Delta^{n-1}s'.x$ is a subsequence of $\Delta^{n-1}s$, and it must have rank at least $\mu+1$ (since it is a successor play and contains $\Delta^{n-1}s'$ as a subsequence.  Therefore, $\Delta^{n-1}s$ has rank at least $\mu+1$ and so $s$ has rank at least $\mu+1+(n-1)=\mu+n$.  
 
-    \emph{Only if: } Let $\delta=\mu+n$ be an ordinal
+    \emph{Only if: } We prove by induction on $\delta$ that if $s\in\omega^{*<\alpha}$ has rank $\delta$ then $s$ satisfies the appropriate condition above.  First, let $\mu$ be a limit ordinal and suppose that $s$ has rank $\mu+1$.  We want to show that $s$ has a weakly increasing subsequence of length $\mu$ that is not cofinal in $s$.  
+
+    Since $s$ has rank $\mu+1$, $\Delta s$ has rank $\mu$, so contains a weakly increasing subsequence of length $\mu$, by the induction hypothesis.  This sequence lifts to a weakly increasing subsequence $u$ of $s$.  If $s$ has successor length, then $u$ is not cofinal in $s$, so we win.  
+
+    Otherwise, suppose that $s$ has limiting length.  Then there must be some proper prefix $t\pprefix s$ of rank $\mu$; otherwise, $s\in R_\mu$, which is a contradiction.  Then by the induction hypothesis we can find a weakly increasing subsequence of $t$ of length $\mu$, and this subsequence is not cofinal in $s$.  
+
+    Now let $n\ge1\in\omega$ and suppose that $s$ has rank $\mu+n$.  If we apply the derivative $n-1$ times to $s$ then we end up with a sequence of rank $\mu+1$.  By the previous part, this sequence must have a subsequence of the form $u.m$, where $u$ is weakly increasing of length $\mu$ and $m$ is a single term.  This sequence lifts to a subsequence $\hat u.(m+n-1)$ of $s$, where $\hat u$ is still weakly increasing.  
+
+    Lastly, suppose that $s$ has rank $\mu$, for $\mu$ a limit ordinal.  It follows that $s$ has limiting length.  
+
+    For each limit ordinal $\lambda<\mu$, let $t_\lambda$ be the shortest prefix of $s$ of rank at least $\lambda$.  Since $s$ has rank $\mu$, $t_\lambda$ exists for each $\lambda$.  By the induction hypothesis, each $t_\lambda$ has some weakly increasing subsequence of length $\lambda$.  We will prove something stronger: we will inductively construct for each $\lambda$ a weakly increasing subsequence $u_\lambda$ of $t_\lambda$ such that $u_\lambda$ has length $\lambda$ and such that if $\lambda'\le\lambda$ then $u_{\lambda'}\prefix u_\lambda$.  
+
+    Suppose we have constructed $u_\lambda$.  Note that the rank of $t_\lambda$ must be less than $\lambda+\omega$; otherwise, $t_\lambda$ would have to have some prefix of length $\lambda+m$ for some $m$, contradicting minimality of $t_\lambda$.  Therefore, $t_\lambda$ is a proper prefix of $t_{\lambda+\omega}$, so we write $t_{\lambda+\omega}=t_\lambda.v$ for some sequence $v$.  
+
+    We claim that for all $N\in\omega$ there is some $n\ge N$ occurring in the sequence $v$.  Indeed, if $N$ is such that there is no $n\ge N$ occurring in $v$, then we may take the derivative of $u_{\lambda+\omega}$ finitely many times and end up with a sequence of rank $\lambda$, which is a contradiction.  We construct $u_{\lambda+\omega}$ as follows: let $n_0$ be the least value occurring in the sequence $v$ and let $a_0$ be the earliest occurrence of $n_0$ in the sequence $v$.  Now let $N$ be the largest value that occurs (not necessarily strictly) earlier than $a_0$ in the sequence $v$.  We know that there is some $n\ge N$ occurring in $v$; let $n_1$ be the least such $n$.  Certainly, $n_1$ may only occur later in the sequence $v$ than $a_0$, so let $a_1$ be the first occurrence of $n_1$ in the sequence $v$.  Continuing in this way, we build up an increasing subsequence $a_0 a_1 a_2 \dots$ of $v$.  We set
+    \[
+      u_{\lambda+\omega} = u_\lambda a_0 a_1 a_2 \dots
+      \]
+    Then certainly $u_\lambda$ is a prefix of $u_{\lambda+\omega}$.  
+
+    Now suppose that $\mu$ is a multiple of $\omega^2$ and we have constructed the sequences $u_\lambda$ for all limit ordinals $\lambda<\mu$.  Then the sequences $u_\lambda$ glue to give a sequence $u_\mu$.  We need to check that $u_\mu$ is a subsequence of $t_\mu$.  Indeed, if $u_\mu$ is not a subsequence of $t_\mu$ then there is some earliest term $b$ in the sequence $u_\mu$ such that $b$ is not a term of $t_\mu$.  But then there is some $\lambda'<\mu$ such that $u_{\lambda'}$ is not a subsequence of $t_\mu$, which is a contradiction.  
+
+    This completes the induction.  
+
+    To complete the argument, suppose that $\mu$ is a limit ordinal and that $\rank(s)\ge\mu$.  Write $\gamma=\rank(s)$.  We may write $\gamma=\lambda+m$ for some $m$, where $\lambda\ge\mu$ is a limit ordinal.  Then $s$ has a weakly increasing subsequence of length $\lambda$, and we may take a prefix of this subsequence to obtain a weakly increasing subsequence of $s$ of length $\mu$.  
+
+    Now suppose that $\rank(s)\ge\mu+n$.  We may write $\rank(s) = \lambda+m$, where $\lambda$ is a limit ordinal and either $\lambda>\mu$ or $\lambda=\mu$ and $m\ge n$.  In the first case, $s$ has a weakly increasing sequence of length $\lambda$; we may then take a prefix of length $\mu+\omega$ of this sequence and note that this sequence must have a subsequence of the form $up$, for some $p\ge (n-1)$.  
+
+    In the second case, $s$ has a subsequence of the form $uq$, where $u$ is weakly increasing of length $\mu$ and $q\ge m-1\ge n-1$.  
   \end{proof}
 \end{theorem}
+
+A consequence of this classification is that if $s\in\omega^{*<\alpha}$, then $\rank(s)<\length(s)+\omega$.  Furthermore, if $\mu$ is a limit ordinal and $\length(s)<\mu$, then $\rank(s)<\mu$.  We will see that this is the reason why the final sequence for $A\sequoid\blank$ converges so quickly for $\omega$- and $(\omega+1)$-games: there are no sequences of finite length with infinite rank, and every sequence of length $\le \omega+1$ has rank less than $\omega+\omega$.  
+
+\subsection{Classification of the final sequence for $A\sequoid\protect\blank$}
+
+Let $\G(\alpha)$ be a category of games, and let $A$ be an object of $\G(\alpha)$.  We have $M_{\oc A}=M_A\times\omega$, so there is a natural map $\pr_2\from M_{\oc A}\to \omega$.  If $s$ is a play in $\oc A$, then we get an associated sequence of natural numbers $\hat s\from\length(s)\to\omega$ given by\[
+  \hat s = \pr_2 \circ s
+  \]
+
+Given an ordinal $\delta$, we define a game $(\oc A)_\delta=(M_{\oc A},\lambda_{\oc A}, \zeta_{\oc A}, P_{\oc A,\delta})$, where $P_{\oc A,\delta}$ is the subset of $P_{\oc A}$ given by:
+\[
+  P_{\oc A,\delta} = \{s\in P_{\oc A}\suchthat \rank(\hat s)\le\delta\}
+  \]
+As we have seen, this set is prefix-closed, so $(\oc A)_\delta$ is a well formed game.  
+
+For an ordinal $\delta$, let $A^{\sequoid\delta}$ denote term $\delta$ in the final sequence for $A\sequoid\blank$ (i.e., $A^{\sequoid\delta}=\FS_{A\sequoid\blank}(\delta)$).  
+
+Our main result is as follows:
+
+\begin{theorem}
+  \label{MainFinalSequenceResult}
+  \[
+    A^{\sequoid\delta}\cong (\oc A)_\delta
+    \]
+  Given ordinals $\gamma\le\delta$, the arrow $A^{\sequoid\delta}\to A^{\sequoid\gamma}$ in the final sequence is given by the copycat morphism $(\oc A)_\delta\to(\oc A)_\gamma$ induced by the inclusion $P_{\oc A, \gamma}\hookrightarrow P_{\oc A, \delta}$.  
+\end{theorem}
+
+As a sanity check, we observe that if $n<\omega$ then the sequences of rank $n$ are precisely the sequences that only involve the terms $0,\dots,n-1$.  Therefore, it is easy to see that $A^{\sequoid n}\cong(\oc A)_n$ for all $n<\omega$.  
+
+\begin{proof}[Proof of Theorem \ref{MainFinalSequenceResult}]
+  If $s\in P_{\oc A}$ then $\hat s$ has rank $0$ if and only if $s=\emptyplay$.  Therefore, it is easy to see that $A^{\sequoid 0}=I\cong(\oc A)_0$.  
+
+  Consider the game $A\sequoid (\oc A)_\delta$.  If $s$ is a play in this game, then we may identify $s$ with a subsequence of $\oc A$ by labelling the copy of $s$ on the left as $A_0$ and increasing the index by one for each copy of $A$ on the right.  In other words:
+  \[
+    \Delta\hat s = ({s\vert_{(\oc_A)_\delta}})\hat{}
+    \]
+  By the induction hypothesis, $({s\vert_{(\oc_A)_\delta}})\hat{}$ has rank at most $\delta$ and therefore $\hat s$ has rank at most $\delta+1$.  
+
+  Conversely, if $s$ is a sequence in $P_{\oc A}$ and $\Delta\hat s$ has rank at most $\delta$, it means that $s\vert_{A_2,A_3,\dots}\in P_{(\oc_A)_\delta}$ and so $s$ is a play in $A\sequoid(\oc A)_\delta$.  
+
+  We check the assertion about the morphisms in the category.  There is a unique morphism $(\oc A)_\delta\to I$ for each $\delta$, so there is nothing to check there.  Suppose $\mu<\alpha$ is a limit ordinal.  By induction, $A^{\sequoid\mu}\cong (\oc_A)_\mu$ and the morphisms $A^{\sequoid\mu}\to A^{\sequoid\delta}$ for $\delta<\mu$ are copycat morphisms induced by the inclusion $P_{\oc A, \delta}\hookrightarrow P_{\oc A,\mu}$.  If we apply the functor $A\sequoid\blank$ to this cone, then we get a cone from $A\sequoid A^{\sequoid \mu}$ over the diagram formed by $A^{\sequoid\delta}$ for $\delta<\mu$.  Our argument above also tells us that all the arrows in this new diagram are induced by inclusion functions, and therefore the morphism
+  \[
+    A^{\sequoid\mu}\to A\sequoid A^{\sequoid\mu}
+    \]
+  induced by the inclusion $P_{\oc A,\mu}\hookrightarrow P_{\oc A, \mu+1}$ commutes with both cones, so it is the morphism $A^{\sequoid\mu+1}\to A^{\sequoid\mu}$ in our diagram.  Under the isomorphism $A^{\sequoid\delta}\cong (\oc A)_\delta$ that we have constructed already, the functor $A\sequoid\blank$ sends inclusion morphisms to inclusion morphisms, so by induction the morphism $A^{\sequoid\mu+n+1}\to A^{\sequoid\mu+n}$ is also induced by an inclusion map.  
+
+  It remains to deal with the limiting case.  Let $\mu$ be a limit ordinal.  Then $(\oc A)_\mu$ admits a cone over the diagram given by the $A^{\sequoid \delta}$ for $\delta<\mu$, again given by copycat morphisms induced by inclusion maps.  Let $B$ be an object of $\G(\alpha)$ and suppose that we have a cone
+  \[
+    \left(\map{\sigma_\delta}{B}{A^{\sequoid\delta}}\right)_{\delta<\mu}
+    \]
+  over the diagram given by the $A^{\sequoid\delta}$ and the inclusion morphisms between them.  This means that if we identify $A^{\sequoid\delta}$ with $(\oc A)_\delta$ then the strategies $\sigma_\delta$ form a chain.  Then (under this identification) we set
+  \[
+    \sigma = \textrm{limit closure of }\bigcup_{\delta<\mu}\sigma_\delta
+    \]
+  Since $B$ satisfies the limit condition, we do not introduce any extra plays when we take the limit closure and so $\sigma$ is a subset of $P_{B\implies (\oc A)_\mu}$, by the definition of a sequence of rank $\mu$.  $\sigma$ is limit-closed, so it is a strategy, since the $\sigma_\delta$ are.  It is clear that composing $\sigma$ with the inclusion morphism $(\oc A)_\mu\to(\oc A)_\delta$ gives $\sigma_\delta$, so this is a morphism of cones.  
+
+  Now suppose that $\tau\from B\to(\oc A)_\mu$ also gives rise to a morphism of cones.  By applying the functor into $\Rel$, we can check that if we compose $\tau$ with the inclusion morphism $(\oc A)_\mu\to(\oc A)_\delta$ then we get the strategy $\tau\cap P_{B\implies(\oc A)_\delta}$.  Therefore, for all $\delta<\mu$:
+  \[
+    \tau \cap P_{B\implies(\oc A)_\delta}=\sigma_\delta
+    \]
+  Since $\tau$ satisfies the limit condition, it is clear that $\sigma\subset\tau$.  Conversely, suppose that $s\in\tau$.  Since $\tau\subset P_{B\implies(\oc A)_\mu}$, $s\vert_{(\oc A)_\mu}$ must have rank at most $\mu$.  If $s\vert_{(\oc A)_\mu}$ has rank $\delta<\mu$, it follows that $s\in\sigma_\delta\subset\sigma$.  If instead $s\vert_{(\oc A)_\mu}$ has rank $\mu$ then it must be a limiting play, so by the limit condition on $\sigma$ it suffices to show that all the proper prefixes of $s$ are contained in $\sigma$.  Since $s\vert_{(\oc A)_\mu}$ has rank $\mu$, all its proper prefixes have rank less than $\mu$ and are therefore contained in $\sigma$ by the argument we have just used.  
+
+  It follows that $\sigma=\tau$, and therefore that the limiting cone $A^{\sequoid\mu}$ is indeed given by the game $(\oc A)_\mu$, together with the morphisms induced by inclusion functions.  This completes the induction.  
+\end{proof}
+
+As a consequence of this classification, we have:
+
+\begin{corollary}
+  Let $\alpha=\omega^\beta$ for some $\beta$.  If $A$ is an object of $\G(\alpha)$, then the final sequence for the functor $A\sequoid\blank\from\G(\alpha)\to\G(\alpha)$ stabilizes by $\alpha$.  
+
+  Moreover, this bound is tight: there exists some completely negative $\alpha$-game $A$ such that the final sequence for $A\sequoid\blank$ does not stabilize before $\alpha$.  
+  \begin{proof}
+    We want to show that the morphism
+    \[
+      A^{\sequoid\alpha+1}\to A^{\sequoid\alpha}
+      \]
+    in the final sequence for $A\sequoid\blank$ is an isomorphism.  If we make the identification given by our classification result, then we may identify this morphism with the copycat morphism $(\oc A)_{\alpha+1}\to(\oc A)_\alpha$ induced by the inclusion function
+    \[
+      P_{\oc A,\alpha}\hookrightarrow P_{\oc A,\alpha+1}
+      \]
+    But we have already shown that any sequence of length less than $\alpha$ must have rank less than $\alpha$ and therefore this inclusion map is the identity.  It follows that the morphism $(\oc A)_{\alpha+1}\to(\oc A)_\alpha$ is the identity and so the morphism above is indeed an isomorphism.
+
+    To show tightness of the bound, it suffices to exhibit a game $A$ such that there sequences $s\in\oc A$ of length less than $\alpha$ and arbitrarily high rank.  We take $A$ to be the $\alpha$-game $\st$ where there is a unique legal play $qaqa\dots$ of any length $\delta<\alpha$.  Then for any $\delta<\alpha$ we may construct a play $s\in\oc A$ of the form
+    \[
+      q_1a_1q_2a_2\dots\;q_1a_1q_2a_2\dots\;\dots\dots
+      \]
+    such that $\hat{s}$ has the canonical sequence $c_{\delta}$ as a subsequence.  Therefore, $\hat{s}$ has rank at least $\delta$.  
+  \end{proof}
+\end{corollary}
+
+\begin{note}
+  This result gives an alternative proof that $\oc A$ is the final coalgebra for the functor $A\sequoid\blank$.  
+
+  Although we have not developed the theory of win-games of length $\omega^\beta+1$, this result also sheds some light on why the final sequence for $\omega+1$-games stabilizes at $\omega+\omega$: this time, we use the fact that any sequence of length at most $\omega+1$ must have rank at most $\omega+\omega$.  
+\end{note}
+
+\section{Further Directions}
+
+There are still a few areas in the current direction that need working out, such as the construction of transfinite win-games with winning strategies.  I also plan to examine the internal logic of these categories of transfinite games to characterize them logically, and to investigate the logical meaning of convergence of the final sequence.  
+
+The paper \cite{MelliesCofCommCom} gives category-theoretic conditions under which the final sequence for $A\sequoid\blank$ always terminates at $\omega$ (though it is not stated in quite that language).  I plan to examine this work to see which of these conditions fail for categories of transfinite games.  There are other category-theoretic questions to ask about the behaviour of the final sequence.  It is known, for example, that the final sequence for a finitary endofunctor on $\Set$ must always terminate by $\omega+\omega$ \cite{finalseq} and there are other results generalizing this.  Although our endofunctor is not a functor on $\Set$, it can be turned into a functor on $\Set$ if we restrict to copycat strategies.  It would be worthwhile to view the results of this research under that lens.  
+
+As a longer-term piece of research: we had a number of mathematical problems caused by the sequential nature of the games we studied, and we were forced to restrict our attention to negative games (though we found a possible way of getting around that).  An alternative approach, studied by Abramsky and Melli\`{e}s \cite{AMConcurrent}, is to study \emph{concurrent games}.  These games, where the players $O$ and $P$ move concurrently, rather than sequentially, avoid many of the problems present with sequential games; indeed, the authors of \cite{AMConcurrent} obtain a full completeness result for MALL using these concurrent games.  It is not immediately obvious how to apply the research in this report to concurrent games, nor how to develop the sequoid operator in a concurrent setting.  One possible approach to the latter problem is to observe that in our category of games we have a natural isomorphism
+\[
+  \G_s(A\sequoid B,C)\cong\G_s(A,B\implies C)
+  \]
+(where $\G_s$ is a category of games and strict strategies) so that $\blank\sequoid B$ is something like a left adjoint to the functor $B\implies\blank$ in the strict subcategory.  In a general cpo-enriched monoidal category $\C$, we can say that a morphism $f\from X\to Y$ is \emph{strict} if the composition
+\[
+  I\xrightarrow{\emptyplay_X}X\xrightarrow{f}Y = \emptyplay_Y
+  \]
+where $\emptyplay_X$ and $\emptyplay_Y$ are the bottom elements of $\C(I,X)$ and $\C(I,Y)$ respectively.  
+
+The eventual goal here will be to develop a sequoidal category of concurrent games and to characterize its internal logic.  A further direction in this area is to mimic the results in this report in a concurrent setting.  
+
+A surprising direction of research is given by the material in Sections \ref{TransSMCCSex} through \ref{ImpliesCnSex}, in particular trying to generalize the construction in Section \ref{DigressionSex} to other categories.  The situation here is fairly non-standard: we a category (of completely negative games), but we also have all the non-completely negative games that are not objects of the category but still admit morphisms into them.  We dealt with these objects by using a construction that mimics the traditional slice categories from category theory, but I would be interested to pursue this further and try to develop it in a more general category-theoretic framework.  It might be worthwhile to study these questions in the context of finitary games, particularly as $A^{\cn}$ has a presentation there in terms of the linear connectives (specifically, $N^{\cn}=N$ if $N$ is negative and $P^{\cn}=\bneggame{P}\implies\bot$ if $P$ is positive).  
+
+In Section \ref{DigressionSex} we constructed a category $\tilde{\G}$ whose objects are arbitrary (not necessarily completely negative) games.  Even in the finitary setting, this poses an obvious question: is this category  $*$-autonomous and can we use it to model fragments of linear logic that we could not model in the completely negative case?  Of course, there are other obstacles to doing this besides the sign of the games in our category, and the fact that $\tilde{\G}$ is equivalent as a category to $\G$ casts some doubt on whether this is possible, but I would like to explore this direction further.  
+
+Another thing that is worth looking into is the effect that removing the limiting condition might have on these games.  The limiting condition played no great role in our construction of $\G(\alpha)$, though it was cruicial in our work on the final sequence.  Removing the limiting condition might allow certain forms of unbounded nondeterminism to be modelled.  The work done in \cite{LairdOrdinalGames} is connected to this, and it will be instructive to compare the research in this report with Laird's earlier work on transfinite game semantics.  
+
+Lastly, there is further technical research to be done into sequoidal categories, such as finding appropriate conditions under which the sequoidal exponential gives rise to a linear exponential comonad or cofree commutative comonoid.  
+
+\appendix
+
+\section{Proofs}
+
+This Appendix contains proofs from the early sections that were omitted from the main body of the text to avoid breaking up the flow.  
+
+\subsection{Proof of Proposition \ref{nice-negative-games}}
+\label{nice-negative-games-proof}
+
+We proceed by induction on the length $n$ of $s$.  If $n=0$ then $s=\emptyplay$ and so $\zeta_A(s\vert_A)=\zeta_A(\emptyplay)=P$ and similarly for $B$, since $A,B$ are negative games.  Now suppose that $n>0$ - so $s=tm$ for some $t\in P_{A\tensor B},m\in M_{A\tensor B}$.  By induction, either $t\vert_A=P$ or $t\vert_B=P$, so there are three cases:
+\begin{description}
+  \item[Case 1:] $\zeta_A(t\vert_A)=P$ and $\zeta_B(t\vert_B)=P$. Then either $tm\vert_A=t\vert_A$ (if $m$ is a $B$-move) or $tm\vert_B=t\vert_B$ (if $m$ is an $A$-move).  This proves part (i).  For part (ii), note that in this case we have $\zeta_{A\tensor B}(t)=P$, so $\zeta_{A\tensor B}(tm)=O$, since $tm$ is alternating.  If $m$ is an $A$-move, it means that $\zeta_B(tm\vert_B)=\zeta_B(t\vert_B)=P$, so we must have $\zeta_A(tm\vert_A)=O$ by the definition of $\zeta_{A\tensor B}$.  Then
+    \[
+      \lambda_{A\tensor B}(m)=\lambda_A(m)=\zeta_A(t\vert_Am)=O=\zeta_{A\tensor B}(tm)
+      \]
+    If $m$ is a $B$-move, the argument is similar.
+  \item[Case 2:] $\zeta_A(t\vert_A)=P$ and $\zeta_B(t\vert_B)=O$.  For part (i), it will suffice to show that $m$ is a $B$-move - so $tm\vert_A=t\vert_A$.  Indeed, we have $\zeta_{A\tensor B}(t)=O$, so $\zeta_{A\tensor B}(tm)=P$, since $tm$ is alternating with respect to $\zeta_{A\tensor B}$.  In particular, $\zeta_B(tm\vert_B)=P$, so we must have $tm\vert_B\ne t\vert_B$ and therefore $m$ is a $B$-move.  For part (ii), we have:
+    \begin{gather*}
+      \lambda_{A\tensor B}(m)=\lambda_B(m)=\zeta_B(t\vert_Bm)=\neg\zeta_B(t\vert_B)=\neg O = P \\
+      \zeta_{A\tensor B}(tm)=\neg\zeta_{A\tensor B}(t)=t = \neg O = P = \lambda_{A\tensor B}
+    \end{gather*}
+  \item[Case 3:] $\zeta_A(t\vert_A)=O$ and $\zeta_B(t\vert_B)=P$.  Similar to Case 2.
+\end{description}
+
+Finally, note that the $\tensor$ result implies the $\implies$ result after writing $A\implies B=\neggame{A}\parr B = \neggame{(A\tensor \neggame{B})}$.
+
+\subsection{Proof of Proposition \ref{alternatingsequenceslemma}}
+\label{alternatingsequenceslemmaproof}
+
+By symmetry, it will suffice to prove that if $\s\vert_{A,B}\in P_{A\implies B}$ and $\s\vert_{B,C}\in P_{B\implies C}$ then $\s\vert_{A,C}\in P_{A\implies C}$.  If $X,Y$ are negative games, then sequences $t\in P_{X\implies Y}$ are specified by the following properties - $t\vert_X\in P_X$, $t\vert_Y\in P_Y$, if $t$ has even length, then $\zeta_{X\implies Y}(t)=P$ and if $t$ has odd length then $\zeta_{X\implies Y}(t)=O$.  We need to show that these properties holds if $X=A$, $Y=C$ and $t=\s\vert_{A,C}$.  
+
+Certainly, $\s\vert_{A,C}\vert_A=\s\vert_A=\s\vert_{A,B}\vert_A\in P_A$ and similarly $\s\vert_{A,C}\vert_C\in P_C$.  
+
+If $\s\vert_{A,C}$ has even length, it means that the lengths of $\s\vert_A$ and $\s\vert_C$ have the same parity, and therefore that the lengths of $\s\vert_{A,B}$ and $\s\vert_{B,C}$ have the same parity.  Since $\s\vert_{A,B}\in\sigma$ and $\s\vert_{B,C}\in\tau$, it follows that $\zeta_{A\implies B}(\s\vert_{A,B})=\zeta_{B\implies C}(\s\vert_{B,C})$.  If $\zeta_B(\s\vert_B)=P$ then $\zeta_{A\implies B}(\s\vert_{A,B})=P$ and if $\zeta_B(\s\vert_B)=O$ then $\zeta_{B\implies C}(\s\vert_{B,C})=P$, so we must have $\zeta_{A\implies B}(\s\vert_{A,B})=\zeta_{B\implies C}(\s\vert_{B,C})=P$.  By transitivity of $\Rightarrow$, it follows that $\zeta_{A\implies C}(\s\vert_{A,C})=P$.  
+
+If $\s\vert_{A,C}$ has odd length, it means that the lengths of $\s\vert_A$ and $\s\vert_C$ has opposite parities and therefore that the lengths of $\s\vert_{A,B}$ and $\s\vert_{B,C}$ have opposite parities.  So it follows that $\zeta_{A\implies B}(\s\vert_{A,B})=\neg\zeta_{B\implies C}(\s\vert_{B,C})$.  Suppose that $\zeta_{A\implies B}(\s\vert_{A,B})=O$.  Then $\zeta_A(\s\vert_A)=P$ and $\zeta_B(\s\vert_B)=O$.  By Proposition \ref{nice-negative-games} above applied to $\s\vert_{B,C}$, we must have $\zeta_C(\s\vert_C)=O$ and therefore $\zeta_{A\implies C}(\s\vert_{A,C})=(P\Rightarrow O)=O$.  
+
+If instead we have $\zeta_{B\implies C}(\s\vert_{B,C})=O$, then $\zeta_B(\s\vert_B)=P$ and $\zeta_C(\s\vert_C)=O$.  By Proposition \ref{nice-negative-games} applied to $\s\vert_{A,B}$, we must have $\zeta_A(\s\vert_A)=P$ and so $\zeta_{A\implies C}(\s\vert_{A,C})=(P\Rightarrow O) = O$.  
+
+\subsection{Proof of Proposition \ref{HylandSchalkFaithful}, Proposition \ref{TransHylandSchalkFaithful}}
+\label{HylandSchalkFaithfulProof}
+
+Our proof is essentially that given in \cite{CalderonMcCusker}.  Suppose for a contradiction that $\sigma\ne\sigma'$, so without loss of generality there is some $P$-position $s\in\sigma\setminus\sigma'$ (using the definition of a strategy).  By hypothesis, there is some $s'\in\sigma'$ such that $s'\vert_A=s\vert_A$ and $s'\vert_B=s\vert_B$.  Clearly, $s\ne s'$, since $s\not\in\sigma'$, so let $r\prefix s$ be the largest common prefix of $s$ and $s'$.  We therefore have $rx\prefix s,ry\prefix s'$, where $x,y\in M_{A\implies B}$ and $x\ne y$.  
+
+Since $s\vert_A=s'\vert_A$ and $s\vert_B=s'\vert_B$, the moves $x$ and $y$ must take place in different games (otherwise we would be forced to have $x=y$).  They are therefore both $P$-moves.  Suppose without loss of generality that $x$ is an $A$-move and that $y$ is a $B$-move.  By hypothesis, there is some $P$-position $t\in\sigma$ such that $t\vert_A=ry\vert_A=r\vert_A$ and $t\vert_B=ry\vert_B=r\vert_By$.
+
+Now clearly $rx\ne t$ (since their restrictions to $A$ and $B$ are different).  Let $q\prefix rx, t$ be their largest common prefix; then we have $qu\prefix rx, qv\prefix t$ for some $u\ne v$.  But now since $qu, qv\in\sigma$, $u$ and $v$ must both be $O$-moves, so they must be contained in the same component.  But this is impossible: if they are both $A$-moves then we have $q\vert_Au\prefix r\vert_Ax$ and $q\vert_Av\prefix r\vert_A$, so $u=v$ and if they are both $B$-moves then we have $q\vert_Bu\prefix r\vert_B$ and $q\vert_Bv\prefix r\vert_By$, so $u=v$ again.  This is a contradiction.
+
+\subsection{Proof of Lemma \ref{LiftingLemma}}
+\label{LiftingLemmaProof}
+
+We prove this by induction on $k$.  There is a unique sequence of length $0$, namely the empty sequence, and its $A$- and $C$-components are both empty, so are prefixes of $s$ and $t$.  
+
+Suppose now that $k=1$.  We make the observation that if $a$ is an $O$-move in $A$ and if $b$ is an $O$-move in $B$ then $a$ is a $P$-move in $A\implies B$ and $b$ is a $P$-move in $B\implies C$.  Since the starting move in $A\implies B$ or $B\implies C$ must be an $O$-move in both its component game and in the game as a whole, we see that any sequence in $\sigma\|\tau$ must begin with a move in $C$.  So we have $\s^1=c$, for some $C$-move $c$, and the condition that $\s^1\vert_C\prefix t$ means that $c$ must be the first move in $t$, which is always a move from $C$.  We have $\s^1\vert_A=\emptyplay\prefix s\vert_A$ and $\s^1\vert_B=\emptyplay\prefix s\vert_B$, as desired.
+
+Now suppose that we have constructed the sequence $\s^k$ for some $k$ such that $1\le k<n$.  We seek a sequence $\s^{k+1}\in \sigma\|\tau$ of length $k+1$ such that $\s^{k+1}\vert_A\prefix s$ and $\s^{k+1}\vert_C\prefix t$.  If we write $\s'$ for the sequence obtained by removing the last move in $\s^{k+1}$, it is clear that $\s'\vert_A\prefix s$ and $\s'\vert_C\prefix t$, so $\s'=\s^k$ by uniqueness.  Therefore, $\s^{k+1}$ is of the form $\s^kx$, for some move $x\in M_A\cprd M_B\cprd M_C$.  
+
+Write $\s^k=\s''y$, where $y$ is the last move in $\s^k$.  Our move $x$ will depend on which game $y$ is played on as follows:
+
+\begin{itemize}
+  \item Suppose $y$ is a move in $A$ or an $O$-move in $B$.  By induction, $\s''y\vert_{A,B}$ is a prefix of $s$ ending in $y$.  We claim that it is a proper prefix.  
+
+    Indeed, let $b$ be the last $B$-move occurring in $\s''y$ (since play in $A\implies B$ starts with a $B$-move, there must be such a move).  If $b=y$, then $b$ is an $O$-move in $A\implies B$.  Otherwise, $y$ must be a move in $A$, and then $b$ is again an $O$-move in $A\implies B$, since player $P$ switches games.  Therefore, $b$ is a $P$-move in $B\implies C$.  Now $\s''y\vert_B$ is a prefix of $t$ ending in $b$.  Since $b$ is a $P$-move in $B\implies C$, it may only be followed in $B\implies C$ by another move from $B$, so there are two possibilities: either $\s''y\vert_{B,C}=t$ or there is some other $B$-move $b'$ that occurs later than $b$ in the sequence $t$.  In the first case, $\s''y\vert_{A,B}$ must be a proper prefix of $s$ by length considerations:
+    \begin{align*}
+      \length(\s''y\vert_{A,B}) & = \length(\s''y) - \length(\s''y\vert_C) \\
+        & = \length(\s''y) - \length(t\vert_C) \\
+        & = k - \length(t\vert_C) < n - \length(t\vert_C) = \length(s)
+    \end{align*}
+    while in the second case $\s''y\vert_B$ must be a proper prefix of $t\vert_B=s\vert_B$, and so $\s''y\vert_{A,B}$ must be a proper prefix of $s$.
+
+    Therefore, we have $\s''y\vert_{A,B}x\prefix s$ for some move $x\in M_A\cprd M_B$.  If $x$ is an $A$-move then $\s''yx\vert_{B,C}=\s''y\vert_{B,C}\prefix t$, as desired.  If $x$ is a move in $B$, then it must be a $P$-move in $A\implies B$ (since $y$ is either a move in $A$ or an $O$-move in $B$), so it is an $O$-move in $B\implies C$.  Since $s\vert_B=t\vert_B$, we must have $\s''yx\vert_B\prefix t\vert_B$, and so $y$ must be a $P$-move in $B\implies C$, and should therefore be followed by another move in $B$, which must be $x$.  Therefore, $\s''yx\vert_{B,C}\prefix t$.
+
+    For uniqueness, suppose that $\s''yz\in\sigma\|\tau$ is such that $\s''yz\vert_A\prefix s\vert_A$ and $\s''yz\vert_C\prefix t\vert_C$.  As before, let $b$ be the last $B$-move occurring in $\s''y$; we have already shown that $b$ must be a $P$-move in $B\implies C$, and it follows that it must be the last move occurring in $\s''y\vert_{B,C}$ (since it can only be followed by another $B$-move).  Suppose that $z\in M_B\cprd M_C$.  Then $\s''yz\vert_{B,C}=\s''y\vert_{B,C}z$; since the last move in $\s''y\vert_{B,C}$ is $b$, this means that $z$ must be an $O$-move in $B$.  So $z$ is either an $O$-move in $B$ or a move in $A$.
+
+    If $y$ was an $O$-move in $A$, then $y$ is a $P$-move in $A\implies B$, so it must be followed in $A\implies B$ by another move from $A$.  Then the condition that $\s''yz\vert_A\prefix s\vert_A$ tells us that $z=x$.  If instead $y$ was a $P$-move in $A$ or a move in $B$ then $y$ is an $O$-move in $A\implies B$; now, since we have $\s''y\vert_{A,B}z,\s''y\vert_{A,B}x\in\sigma$, it must be the case that $x=z$ by the definition of a strategy.
+
+  \item If instead $y$ is a move in $C$ or a $P$-move in $B$, we use a symmetrical argument, choosing $x$ to be the next move along in $t$.  We need to take a little extra care here when we talk about the last $B$-move in $\s''y$; there may in fact be no $B$-moves in $\s''y$.  Since any play in $A\implies B$ must begin with a $B$-move, this only happens when $\s''y$ is entirely made up of $C$-moves.  In this case, it is not difficult to show that $\s''y\vert_{B,C}$ is a proper prefix of $t$ by length considerations.  \qedhere
+\end{itemize}
+
+\subsection{Proof of Proposition \ref{CompWinningIsWinning}}
+\label{CompWinningIsWinningProof}
+
+First, we want to show that $\comp\tau\sigma$ is a total strategy.  Let $s\in\comp\tau\sigma$ be an $O$-position; then we have some $\s\in\sigma\|\tau$ with $\s\vert_{A,C}=s$.  
+
+We claim that there is a maximal such $\s$.  By Lemma \ref{LiftingLemma}, $\s$ is determined by its length, and so the only way that there could not be a maximal such $\s$ is if there is some infinite sequence $\S\in(M_A\cprd M_B\cprd M_C)^\omega$ with $\S\vert_{A,B}\in\sigma\cup\sigma^\omega$, $\S\vert_{B,C}\in\tau\cup\tau^\omega$ and $\S\vert_{A,C}=s$.  Since $\S$ has some finite prefix $\s$ with $\s\vert_{A,C}=s$, $\S\vert_A$ and $\S\vert_C$ must both be finite, so they are $O$-plays in the games $A\implies B$ and $B\implies C$ respectively.  
+
+Now $\S\vert_B$ is infinite.  If $W_B(\S\vert_B)=O$, then $W_{A\implies B}(\S\vert_{A,B})=O$, contradicting the fact that $\sigma$ is a winning strategy.  Symmetrically, if $W_B(\S\vert_B)=P$, then $W_{B\implies C}(\S\vert_{B,C})=O$, contradicting the fact that $\tau$ is a winning strategy.  We have a contradiction in either case, so if $\sigma$ and $\tau$ are indeed winning strategies, there must be a maximal (finite) $\s\in\sigma\|\tau$ such that $\s\vert_{A,C}=s$.  
+
+The argument from Proposition \ref{BoundedTotalComposition} now applies, showing that $sx\in\comp\tau\sigma$ for some $P$-move $x$.  
+
+Lastly, we want to show that any infinite play in $\comp\tau\sigma$ is $P$-winning.  Suppose $s$ is some infinite play in $\comp\tau\sigma$.  For each finite prefix $t\prefix s$ there is some $\t\in\sigma\|\tau$ with $\t\vert_{A,C}=t$, and by Lemma \ref{LiftingLemma}, we have $\t'\prefix\t$ if $t'\prefix t$.  Therefore, these $\t$ glue to give an infinite sequence $\s\in(M_A\cprd M_B\cprd M_C)^\omega$ such that $\s\vert_{A,B}\in\sigma^\omega$ and $\s\vert_{B,C}\in\tau^\omega$.  We claim that $W_{A\implies B}^*(\s\vert_{A,B})=W_{B\implies C}^*(\s\vert_{B,C})=P$ - then it follows that $W_{A\implies C}^*(\s\vert_{A,C})=P$ by transitivity of $\Rightarrow$.  If $\s\vert_{A,B}$ and $\s\vert_{B,C}$ are both infinite, then this is automatically true, since $\sigma$ and $\tau$ are winning strategies.  Otherwise, one of them must be infinite and the other finite.  
+
+Suppose that $\s\vert_{A,B}$ is finite.  Let $\t$ be the shortest finite prefix of $\s$ with $\t\vert_{A,B}=\s\vert_{A,B}$; then we have $\t c\prefix \s$ for some move $c\in M_C$.  If $\t\vert_{A,B}=\emptyplay$, then $W_A^*(\t\vert_{A,B})=P$ since $A$ and $B$ are negative.  Otherwise, there is at least one $B$-move in $\t\vert_{A,B}$.  Let $b$ be the last $B$-move occurring in $\t\vert_{A,B}$ - then it is the last $B$-move occurring in $\t\vert_{B,C}$; since it is followed by the move $c$, it must be an $O$-move in $B\implies C$ and therefore a $P$-move in $B$.  Therefore, $W_{A\implies B}^*(\s\vert_{A,B})=P$.  
+
+If instead $\s\vert_{B,C}$ is finite, once again we have some $\t\prefix\s$ with $\t\vert_{A,B}=\s\vert_{A,B}$ and $\t a\prefix\s$ for some move $a\in M_A$.  Since $\s\vert_{A,B}$ is infinite, it must be non-empty, so it must contain some $B$-move.  Let $b$ be the last $B$-move occurring in $\s\vert_{A,B}$; since $b$ is followed by an $A$-move, it must be an $O$-move in $B$.  Now $b$ is also the last $B$-move occurring in $\s\vert_{B,C}$ and so $W_{B\implies C}^*(\s\vert_{B,C})=P$.
 
 \bibliographystyle{alpha}
 \bibliography{ordinal_games}

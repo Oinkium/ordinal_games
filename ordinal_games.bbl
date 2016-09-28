@@ -10,6 +10,13 @@ Samson Abramsky, Radha Jagadeesan, and Pasquale Malacaria.
 \newblock Full abstraction for {PCF}.
 \newblock {\em Information and Computation}, 163(2):409 -- 470, 2000.
 
+\bibitem[AM99]{AMConcurrent}
+Samson Abramsky and Paul-Andr{\'e} Melli\`{e}s.
+\newblock Concurrent games and full completeness.
+\newblock In {\em Proceedings of the 14th Annual IEEE Symposium on Logic in
+  Computer Science}, LICS '99, pages 431--, Washington, DC, USA, 1999. IEEE
+  Computer Society.
+
 \bibitem[BDER97]{bion}
 P.~Baillot, V.~Danos, T.~Ehrhard, and L.~Regnier.
 \newblock Believe it or not, {AJM}'s games model is a model of classical linear
@@ -88,6 +95,12 @@ J.~Laird.
 \newblock A categorical semantics of higher-order store.
 \newblock In {\em Proceedings of CTCS '02}, number~69 in ENTCS. Elsevier, 2002.
 
+\bibitem[Lai15]{LairdOrdinalGames}
+J.~Laird.
+\newblock Sequential algorithms for unbounded nondeterminism.
+\newblock {\em Electronic Notes in Theoretical Computer Science}, 319:271 --
+  287, 2015.
+
 \bibitem[Lam92]{lamarchegames}
 Fran\c{c}ois Lamarche.
 \newblock Sequential algorithms, games and linear logic.
@@ -123,7 +136,7 @@ Andrea Schalk.
 
 \bibitem[Sch04]{SchalkWhatIs}
 Andrea Schalk.
-\newblock What is a cateegorical model for linear logic?, October 2004.
+\newblock What is a categorical model for linear logic?, October 2004.
 
 \bibitem[Wor05]{finalseq}
 James Worrell.
