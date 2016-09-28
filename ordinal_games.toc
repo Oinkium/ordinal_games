@@ -36,4 +36,10 @@
 \contentsline {subsection}{\numberline {A.3}Proof of Proposition 2.14\hbox {}, Proposition 3.14\hbox {}}{99}
 \contentsline {subsection}{\numberline {A.4}Proof of Lemma 2.15\hbox {}}{100}
 \contentsline {subsection}{\numberline {A.5}Proof of Proposition 2.21\hbox {}}{102}
-\contentsline {section}{References}{103}
+\contentsline {section}{\numberline {B}Weakenings}{103}
+\contentsline {subsection}{\numberline {B.1}Weakenings}{103}
+\contentsline {subsection}{\numberline {B.2}The weakening monad of a game}{105}
+\contentsline {subsubsection}{\numberline {B.2.1}Weakening pullback of a game}{105}
+\contentsline {subsection}{\numberline {B.3}The weakening monad}{106}
+\contentsline {subsection}{\numberline {B.4}Lax weakening morphisms}{110}
+\contentsline {section}{References}{114}

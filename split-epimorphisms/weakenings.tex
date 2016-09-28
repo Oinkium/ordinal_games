@@ -204,10 +204,10 @@
 
 \begin{document}
 
-\section{The Hyland-Schalke functor $\G\to\Rel$}
+\section{The Hyland-Schalk functor $\G\to\Rel$}
 \label{hylandschalke}
 
-Let $\G$ denote an appropriate category of games and strategies, and let $\Rel$ denote the category of sets and relations.  It is known (Hyland, Schalke, 1996) that the following define a functor $\cmap{\F}{\G}{\Rel}$:
+Let $\G$ denote an appropriate category of games and strategies, and let $\Rel$ denote the category of sets and relations.  It is known (Hyland, Schalk, 1996) that the following define a functor $\cmap{\F}{\G}{\Rel}$:
 
 \begin{IEEEeqnarray*}{CCC}
   \F(A) & = & P_A \\
@@ -225,8 +225,8 @@ It can be shown that this functor $\F$ is faithful (see Calderon and McCusker, 2
 Let $A=(M_A,\lambda_A,P_A)$ be a game.  Then we have two notions of a \emph{weakening} of $A$ - informally, a game that is \emph{easier} than $A$, from the player $P$'s point of view.  
 
 \begin{enumerate}
-  \item An \emph{antecedent weakening} of $A$ is a game $A'=(M_A,\lambda_A,P_{A'})$, where $P_{A'}\subset P_{A}$ such that for every $O$-play $s$ occuring in both $P_A$ and $P_{A'}$, the set of $P$-responses to $s$ in $A'$ is precisely the set of $P$-responses to $s$ in $A$ and for every $P$-play $t$ occurring in both $P_A$ and $P_{A'}$, the set of $O$-responses to $t$ in $A'$ is a subset of the set of $O$-responses to $t$ in $A$.  
-  \item A \emph{precedent strengthening} of $A$ is a game $A''=(M_A,\lambda_A,P_{A''})$ where $P_A\subset P_{A''}$ such that for every $O$-play $s$ occuring in both $P_A$ and $P_{A''}$, the set of player responses to $s$ in $A$ is a subset of the set of $P$-responses to $s$ in $A''$, and such that for every $P$-play $t$ occuring in both $P_A$ and $P_{A''}$ the set of $O$-responses to $t$ in $A$ is precisely the set of $O$-responses to $t$ in $A''$.  
+  \item An \emph{antecedent weakening} of $A$ is a game $A'=(M_A,\lambda_A,P_{A'})$, where $P_{A'}\subset P_{A}$ such that for every $O$-play $s$ occurring in both $P_A$ and $P_{A'}$, the set of $P$-responses to $s$ in $A'$ is precisely the set of $P$-responses to $s$ in $A$ and for every $P$-play $t$ occurring in both $P_A$ and $P_{A'}$, the set of $O$-responses to $t$ in $A'$ is a subset of the set of $O$-responses to $t$ in $A$.  
+  \item A \emph{precedent strengthening} of $A$ is a game $A''=(M_A,\lambda_A,P_{A''})$ where $P_A\subset P_{A''}$ such that for every $O$-play $s$ occurring in both $P_A$ and $P_{A''}$, the set of player responses to $s$ in $A$ is a subset of the set of $P$-responses to $s$ in $A''$, and such that for every $P$-play $t$ occurring in both $P_A$ and $P_{A''}$ the set of $O$-responses to $t$ in $A$ is precisely the set of $O$-responses to $t$ in $A''$.  
 \end{enumerate}
 
 In other words, a precedent strengthening of $A$ is a game in which the player has more choices at each move, but the opponent has the same choices, while an antecedent weakening of $A$ is a game in which the player has the same choices at each move, but the opponent has fewer choices.  
@@ -330,7 +330,7 @@ We shall want to prove various useful properties of these weakening pullbacks, n
       \comp{\grel{\sigma'}}{\grel{\tau'}} & = \{(s, t)\in P_{C'}\times P_A\suchthat \exists u\in P_{B'} \esuchthat (s,u)\in\grel\tau, (u,t)\in\grel\sigma\}
     \end{align*}
 
-     - in other words, the same thing, but with $P_{B'}$ instead of $P_B$.  It is clear then that $\comp{\grel{\sigma'}}{\grel{\tau'}}\subset\grel{(\comp\sigma\tau)'}$.  In the other direction, suppose $(s,t)\in P_{C'}\times P_A$ and that there exiss $u\in P_B$ such that $(s,u)\in\grel\tau$ and $(u,t)\in\grel\sigma$.  But now, since $(u,t)\in\grel\sigma$, we must have $u\in P_{B'}$ by the definition of $P_{B'}$ and therefore $(u,t)\in \comp{\grel{\sigma'}}{\grel{\tau'}}$.
+     - in other words, the same thing, but with $P_{B'}$ instead of $P_B$.  It is clear then that $\comp{\grel{\sigma'}}{\grel{\tau'}}\subset\grel{(\comp\sigma\tau)'}$.  In the other direction, suppose $(s,t)\in P_{C'}\times P_A$ and that there exists $u\in P_B$ such that $(s,u)\in\grel\tau$ and $(u,t)\in\grel\sigma$.  But now, since $(u,t)\in\grel\sigma$, we must have $u\in P_{B'}$ by the definition of $P_{B'}$ and therefore $(u,t)\in \comp{\grel{\sigma'}}{\grel{\tau'}}$.
 
      So far what we have done is show that the morphism $\tau'$ does indeed give us a morphism in $\G/A$ from $\map{(\comp\sigma\tau)'}{C'}{A}$ to $\map{\sigma'}{B'}{A}$.  We still need to prove that what we have defined respects composition and so gives us a functor $\G/A\to \G/A$.
 
@@ -367,7 +367,7 @@ We shall want to prove various useful properties of these weakening pullbacks, n
     \end{align*}
     Since $t\in P_{B'}$, there must be some $\t\in \sigma$ such that $\t\vert_B=t$.  Put another way, there must be some $v\in P_A$ such that $(t,v)\in\grel\sigma$.  We have $(u,t)\in\grel\tau$, so therefore $(u,v)\in\grel{\comp\sigma\tau}$, and it follows that $u\in P_{C'}$.  
 
-    Therefore, we have that $\grel{\comp{\tau'}{\upsilon'}}=\comp{\grel{\tau '}}{\grel{\upsilon '}} = \grel{(\comp\tau\upsilon)'}$.  Since the Hyland-Schalke functor is faithful, this means that $\comp{\tau '}{\upsilon '}=(\comp\tau\upsilon)'$.
+    Therefore, we have that $\grel{\comp{\tau'}{\upsilon'}}=\comp{\grel{\tau '}}{\grel{\upsilon '}} = \grel{(\comp\tau\upsilon)'}$.  Since the Hyland-Schalk functor is faithful, this means that $\comp{\tau '}{\upsilon '}=(\comp\tau\upsilon)'$.
 
     This all means that we can define a functor $\cmap{\weak_A}{\G/A}{\G/A}$ by
     \begin{IEEEeqnarray*}{CCCCC}
@@ -527,10 +527,10 @@ We now introduce a lax version of our notion of weakening morphism that is stabl
     \]
 \end{lemma}
 
-We shall give two proofs of this lemma - one direct proof using the Hyland-Schalke functor and one proof using the idempotent monad structure described in the previous section.  
+We shall give two proofs of this lemma - one direct proof using the Hyland-Schalk functor and one proof using the idempotent monad structure described in the previous section.  
 
 \begin{proof}[First proof]
-  We know that $\cmap{\tau}{C}{B}$ is an isomorphism; therefore, its image $\grel\tau\subset P_C\times P_B$ under the Hyland-Schalke functor is an isomorphism in $\Rel$.  It is well-known (and easy to show) that the isomorphisms in $\Rel$ are precisely those relations that are the graphs of bijective functions.  Therefore, we have a bijection $\cmap{\grel\tau}{P_C}{P_B}$ with the property that
+  We know that $\cmap{\tau}{C}{B}$ is an isomorphism; therefore, its image $\grel\tau\subset P_C\times P_B$ under the Hyland-Schalk functor is an isomorphism in $\Rel$.  It is well-known (and easy to show) that the isomorphisms in $\Rel$ are precisely those relations that are the graphs of bijective functions.  Therefore, we have a bijection $\cmap{\grel\tau}{P_C}{P_B}$ with the property that
 
   i) For all $s\in P_C$ there exists a $P$-play $\s\in\tau$ such that $\s\vert_C=s$ and $\s\vert_B=\grel\tau(s)$
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2016.8.14)  28 SEP 2016 13:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2016.8.14)  28 SEP 2016 16:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1009,18 +1009,18 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
  (./ordinal_games.aux)
 \openout1 = `ordinal_games.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 272.
-LaTeX Font Info:    ... okay on input line 272.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 272.
-LaTeX Font Info:    ... okay on input line 272.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 272.
-LaTeX Font Info:    ... okay on input line 272.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 272.
-LaTeX Font Info:    ... okay on input line 272.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 272.
-LaTeX Font Info:    ... okay on input line 272.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 272.
-LaTeX Font Info:    ... okay on input line 272.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 281.
+LaTeX Font Info:    ... okay on input line 281.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 281.
+LaTeX Font Info:    ... okay on input line 281.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 281.
+LaTeX Font Info:    ... okay on input line 281.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 281.
+LaTeX Font Info:    ... okay on input line 281.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 281.
+LaTeX Font Info:    ... okay on input line 281.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 281.
+LaTeX Font Info:    ... okay on input line 281.
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1116,36 +1116,36 @@ File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 <cleos-g.png, id=14, 395.4775pt x 418.56375pt>
 File: cleos-g.png Graphic file (type png)
  <use cleos-g.png>
-Package pdftex.def Info: cleos-g.png used on input line 301.
+Package pdftex.def Info: cleos-g.png used on input line 310.
 (pdftex.def)             Requested size: 69.56563pt x 73.6271pt.
  [1]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 303.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 312.
 
 
 (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 303.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 312.
 
-Overfull \hbox (8.90298pt too wide) in paragraph at lines 309--310
+Overfull \hbox (8.90298pt too wide) in paragraph at lines 318--319
 \OT1/cmr/m/n/10.95 Malacaria [[]], by Hy-land and Ong [[]], and by Nickau [[]])
 . 
  []
 
 [2 <./cleos-g.png (PNG copy)>] [3]
-Overfull \hbox (5.18207pt too wide) detected at line 375
+Overfull \hbox (5.18207pt too wide) detected at line 384
 []
  []
 
 [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14]
-Overfull \hbox (6.94476pt too wide) detected at line 603
+Overfull \hbox (6.94476pt too wide) detected at line 612
 [] \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/10.95 s \OMS/cmsy/m/
 n/10.95 2 \OML/cmm/m/it/10.95 M[]  [] []  []\OMS/cmsy/m/n/10.95 g
  []
 
 
-Overfull \hbox (12.65497pt too wide) in paragraph at lines 619--620
+Overfull \hbox (12.65497pt too wide) in paragraph at lines 628--629
 []\OT1/cmr/m/n/10.95 It fol-lows im-me-di-ately from the def-i-ni-tions that $[
 ][][]\OML/cmm/m/it/10.95 A$ \OT1/cmr/m/n/10.95 is a well formed game. 
  []
@@ -1153,24 +1153,24 @@ Overfull \hbox (12.65497pt too wide) in paragraph at lines 619--620
 [15] [16] [17]
 
 Package amsthm Warning: The \qedhere command may not work correctly here on inp
-ut line 710.
+ut line 719.
 
 
-Overfull \hbox (8.06586pt too wide) in paragraph at lines 707--712
+Overfull \hbox (8.06586pt too wide) in paragraph at lines 716--721
 []\OT1/cmr/m/n/10.95 (ii): $[] []$ 
  []
 
-LaTeX Font Info:    Try loading font information for U+euf on input line 729.
+LaTeX Font Info:    Try loading font information for U+euf on input line 738.
 (/usr/share/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 ) [18]
-Overfull \hbox (0.40103pt too wide) in paragraph at lines 756--758
+Overfull \hbox (0.40103pt too wide) in paragraph at lines 765--767
 \OT1/cmr/m/n/10.95 if $\OML/cmm/m/it/10.95 A; B$ \OT1/cmr/m/n/10.95 are neg-a-t
 ive games. In other words, we can ig-nore the well-formedness
  []
 
 [19]
-Overfull \hbox (3.58801pt too wide) detected at line 790
+Overfull \hbox (3.58801pt too wide) detected at line 799
 \OMS/cmsy/m/n/10.95 f\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 s\OMS/cmsy/m/n/10.
 95 j[]\OML/cmm/m/it/10.95 ; s\OMS/cmsy/m/n/10.95 j[]\OT1/cmr/m/n/10.95 )  [] []
   []\OMS/cmsy/m/n/10.95 g \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 f\OT1/cmr/m/
@@ -1179,7 +1179,7 @@ n/10.95 (\OML/cmm/m/it/10.95 s[]\OMS/cmsy/m/n/10.95 j[]\OML/cmm/m/it/10.95 ; s[
  []
 
 [20]
-Overfull \hbox (2.31253pt too wide) detected at line 828
+Overfull \hbox (2.31253pt too wide) detected at line 837
 []\OT1/cmr/m/n/10.95 (\U/euf/m/n/10.95 s\OMS/cmsy/m/n/10.95 j[]\OT1/cmr/m/n/10.
 95 ) \OMS/cmsy/m/n/10.95 ^^T []\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 s\OT1/cm
 r/m/n/10.95 ) = \OML/cmm/m/it/10.95 n \OMS/cmsy/m/n/10.95 ^^@ []\OT1/cmr/m/n/10
@@ -1190,14 +1190,14 @@ r/m/n/10.95 ) = \OML/cmm/m/it/10.95 n \OMS/cmsy/m/n/10.95 ^^@ []\OT1/cmr/m/n/10
  []
 
 [21] [22] [23] [24] [25]
-Overfull \hbox (7.85733pt too wide) in paragraph at lines 978--979
+Overfull \hbox (7.85733pt too wide) in paragraph at lines 987--988
 \OT1/cmr/m/n/10.95 win-game, then a \OT1/cmr/m/it/10.95 win-ning strat-egy \OT1
 /cmr/m/n/10.95 for $\OML/cmm/m/it/10.95 A$ \OT1/cmr/m/n/10.95 is a to-tal strat
 -egy for $(\OML/cmm/m/it/10.95 M[]; ^^U[]; ^^P[]; P[]\OT1/cmr/m/n/10.95 )$
  []
 
 [26] [27] [28] [29] [30] [31]
-Overfull \hbox (22.26468pt too wide) in paragraph at lines 1157--1158
+Overfull \hbox (22.26468pt too wide) in paragraph at lines 1166--1167
 []\OT1/cmr/m/n/10.95 Setting $\OML/cmm/m/it/10.95 M[] \OT1/cmr/m/n/10.95 = \OML
 /cmm/m/it/10.95 M[] \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 M[] \OT1/cmr/m/n/1
 0.95 = \OML/cmm/m/it/10.95 M[] \OMS/cmsy/m/n/10.95 t \OML/cmm/m/it/10.95 M[]$\O
@@ -1205,7 +1205,7 @@ T1/cmr/m/n/10.95 , and re-strict-ing $\OML/cmm/m/it/10.95 ^^P[]; ^^P[]; ^^P[]$
  []
 
 
-Overfull \hbox (11.05331pt too wide) in paragraph at lines 1166--1168
+Overfull \hbox (11.05331pt too wide) in paragraph at lines 1175--1177
 \OT1/cmr/m/it/10.95 over, $\OML/cmm/m/it/10.95 P[]$ \OT1/cmr/m/it/10.95 is the 
 largest sub-set $\OML/cmm/m/it/10.95 X \OMS/cmsy/m/n/10.95 ^^R \OML/cmm/m/it/10
 .95 P[]\OMS/cmsy/m/n/10.95 k\OML/cmm/m/it/10.95 P[]$ \OT1/cmr/m/it/10.95 such t
@@ -1214,7 +1214,7 @@ hat $\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 M[]; ^^U[]; ^^P[]; X\OT1/cmr/m/n/1
  []
 
 [32] [33] [34] [35]
-Overfull \hbox (5.74709pt too wide) in paragraph at lines 1245--1246
+Overfull \hbox (5.74709pt too wide) in paragraph at lines 1254--1255
 \OML/cmm/m/it/10.95 s\OMS/cmsy/m/n/10.95 j[]$ \OT1/cmr/m/n/10.95 and $\OML/cmm/
 m/it/10.95 s\OMS/cmsy/m/n/10.95 j[]$ \OT1/cmr/m/n/10.95 are both lim-it-ing pla
 ys. By Lemma 3.6[], $[](\OML/cmm/m/it/10.95 s\OMS/cmsy/m/n/10.95 j[]\OT1/cmr/m/
@@ -1223,51 +1223,51 @@ cmsy/m/n/10.95 j[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ^^T
  []
 
 [36] [37] [38] [39] [40]
-Overfull \hbox (9.4125pt too wide) in paragraph at lines 1387--1387
+Overfull \hbox (9.4125pt too wide) in paragraph at lines 1396--1396
 []|$[]$|  
  []
 
 
-Overfull \hbox (9.4125pt too wide) in paragraph at lines 1389--1389
+Overfull \hbox (9.4125pt too wide) in paragraph at lines 1398--1398
 []|$[]$|  
  []
 
 
-Overfull \hbox (6.9344pt too wide) detected at line 1392
+Overfull \hbox (6.9344pt too wide) detected at line 1401
 []
  []
 
 [41] [42] [43] [44] [45] [46] [47] [48]
-Overfull \hbox (35.44717pt too wide) in paragraph at lines 1624--1624
+Overfull \hbox (35.44717pt too wide) in paragraph at lines 1633--1633
 [] 
  []
 
 
-Overfull \hbox (86.78394pt too wide) in paragraph at lines 1656--1656
+Overfull \hbox (86.78394pt too wide) in paragraph at lines 1665--1665
 [] 
  []
 
 [49] [50] [51] [52]
-Overfull \hbox (1.36723pt too wide) in paragraph at lines 1801--1803
+Overfull \hbox (1.36723pt too wide) in paragraph at lines 1810--1812
 \OMS/cmsy/m/n/10.95 F [] [] G\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 \OT1/cmr/
 m/n/10.95 ) \OMS/cmsy/m/n/10.95 ! []$\OT1/cmr/m/n/10.95 . The re-la-tional con-
 tent $[]$ of the strat-egy $[][]$
  []
 
 
-Overfull \hbox (40.22849pt too wide) in paragraph at lines 1811--1811
+Overfull \hbox (40.22849pt too wide) in paragraph at lines 1820--1820
 [] 
  []
 
 [53]
-Overfull \hbox (20.00883pt too wide) in paragraph at lines 1823--1824
+Overfull \hbox (20.00883pt too wide) in paragraph at lines 1832--1833
 []\OT1/cmr/m/n/10.95 We there-fore have the struc-ture of a sym-met-ric monoida
 l cat-e-gory on $\OMS/cmsy/m/n/10.95 G\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 
 \OT1/cmr/m/n/10.95 )$. 
  []
 
 [54] [55] [56] [57] [58] [59] [60] [61] [62]
-Overfull \hbox (16.99615pt too wide) in paragraph at lines 2083--2084
+Overfull \hbox (16.99615pt too wide) in paragraph at lines 2092--2093
 \OT1/cmr/m/n/10.95 both ap-pro-pri-ate sub-sets of $\OML/cmm/m/it/10.95 P[]\OMS
 /cmsy/m/n/10.95 k\OML/cmm/m/it/10.95 P[]\OMS/cmsy/m/n/10.95 k\OML/cmm/m/it/10.9
 5 P[]$\OT1/cmr/m/n/10.95 . We just need to check that $\OML/cmm/m/it/10.95 ^^U[
@@ -1275,23 +1275,23 @@ Overfull \hbox (16.99615pt too wide) in paragraph at lines 2083--2084
  []
 
 
-Overfull \hbox (10.48459pt too wide) in paragraph at lines 2101--2102
+Overfull \hbox (10.48459pt too wide) in paragraph at lines 2110--2111
 []\OT1/cmr/m/n/10.95 To con-struct the monoidal closed struc-ture, it suf-fices
  to give a mor-phism 
  []
 
 [63]
-Overfull \hbox (39.49551pt too wide) detected at line 2147
+Overfull \hbox (39.49551pt too wide) detected at line 2156
 []\OMS/cmsy/m/n/10.95 k [][] \OT1/cmr/m/n/10.95 = []
  []
 
 [64]
-Overfull \hbox (74.48236pt too wide) detected at line 2162
+Overfull \hbox (74.48236pt too wide) detected at line 2171
 [] \OMS/cmsy/m/n/10.95 k [][] \OT1/cmr/m/n/10.95 = []
  []
 
 [65] [66]
-Overfull \hbox (0.44365pt too wide) in paragraph at lines 2250--2251
+Overfull \hbox (0.44365pt too wide) in paragraph at lines 2259--2260
 []\OT1/cmr/m/n/10.95 Now by al-ter-na-tion we must have ei-ther $\OML/cmm/m/it/
 10.95 ^^P[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 s\OMS/cmsy/m/n/10.95 j[]\OT1
 /cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a; m\OT1/cmr/m/n/10.95 )) = \OML/cmm/m/it/1
@@ -1301,54 +1301,54 @@ L/cmm/m/it/10.95 s\OMS/cmsy/m/n/10.95 j[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.9
  []
 
 [67] [68] [69] [70]
-Overfull \hbox (77.01457pt too wide) in paragraph at lines 2371--2371
+Overfull \hbox (77.01457pt too wide) in paragraph at lines 2380--2380
 [] 
  []
 
 [71] [72]
-Overfull \hbox (0.96515pt too wide) in paragraph at lines 2415--2416
+Overfull \hbox (0.96515pt too wide) in paragraph at lines 2424--2425
 \OT1/cmr/m/n/10.95 our se-quoidal cat-e-gory is \OT1/cmr/m/it/10.95 de-com-pos-
 able \OT1/cmr/m/n/10.95 and the iso-mor-phism $[][] [] [] (\OML/cmm/m/it/10.95 
 A \OMS/cmsy/m/n/10.95 ^^B
  []
 
 [73] [74]
-Overfull \hbox (24.12447pt too wide) in paragraph at lines 2507--2507
+Overfull \hbox (24.12447pt too wide) in paragraph at lines 2516--2516
 [] 
  []
 
 
-Overfull \hbox (51.26396pt too wide) detected at line 2523
+Overfull \hbox (51.26396pt too wide) detected at line 2532
 \OML/cmm/m/it/10.95 P[] \OMS/cmsy/m/n/10.95 \ []
  []
 
 
-Overfull \hbox (30.56708pt too wide) detected at line 2531
+Overfull \hbox (30.56708pt too wide) detected at line 2540
 \OML/cmm/m/it/10.95 S \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 P[] \OMS/cmsy/m/
 n/10.95 \ []
  []
 
 [75]
-Overfull \hbox (10.21413pt too wide) detected at line 2561
+Overfull \hbox (10.21413pt too wide) detected at line 2570
 \OT1/cmr/m/n/10.95 ([][] \OMS/cmsy/m/n/10.95 \OML/cmm/m/it/10.95 ^^\\OT1/cmr/m
 /n/10.95 ) \OMS/cmsy/m/n/10.95 ^^N \OML/cmm/m/it/10.95 ^^[ \OT1/cmr/m/n/10.95 =
  []
  []
 
 [76]
-Overfull \hbox (1.35188pt too wide) in paragraph at lines 2588--2590
+Overfull \hbox (1.35188pt too wide) in paragraph at lines 2597--2599
 \OT1/cmr/m/n/10.95 By con-struc-tion, the $\OML/cmm/m/it/10.95 A$\OT1/cmr/m/n/1
 0.95 -components of the $\U/euf/m/n/10.95 t[]$ \OT1/cmr/m/n/10.95 agree (in-dee
 d, the $\OML/cmm/m/it/10.95 A[]$\OT1/cmr/m/n/10.95 -component
  []
 
 [77] [78]
-Overfull \hbox (62.06122pt too wide) detected at line 2672
+Overfull \hbox (62.06122pt too wide) detected at line 2681
 []
  []
 
 
-Overfull \hbox (17.37387pt too wide) detected at line 2677
+Overfull \hbox (17.37387pt too wide) detected at line 2686
 \OML/cmm/m/it/10.95 B [] B \OMS/cmsy/m/n/10.95 
  \OML/cmm/m/it/10.95 B [] A \OMS/cmsy/m/n/10.95 
  \OML/cmm/m/it/10.95 B [] A \OMS/cmsy/m/n/10.95  \OML/cmm/m/it/10.95 B [] \OT1
@@ -1361,32 +1361,42 @@ m/it/10.95 B
  []
 
 [79] [80] [81] [82] [83]
-Overfull \hbox (8.06529pt too wide) in paragraph at lines 2904--2904
+Overfull \hbox (8.06529pt too wide) in paragraph at lines 2913--2913
 []\OT1/cmr/bx/n/12 The rank of a trans-fi-nite se-quence of nat-u-ral num-bers 
 
  []
 
 [84] [85] [86] [87] [88] [89] [90] [91]
-Overfull \hbox (1.96648pt too wide) in paragraph at lines 3122--3124
+Overfull \hbox (1.96648pt too wide) in paragraph at lines 3131--3133
 \OT1/cmr/m/n/10.95 As we have seen, this set is prefix-closed, so $(!\OML/cmm/m
 /it/10.95 A\OT1/cmr/m/n/10.95 )[]$ is a well formed game. 
  []
 
-[92] [93] [94] [95] [96] [97] [98] [99] [100] [101] [102] (./ordinal_games.bbl
+[92] [93] [94] [95] [96] [97] [98] [99] [100] [101] [102] [103] [104] [105]
+[106] [107] [108] [109] [110] [111]
+Overfull \hbox (17.5971pt too wide) in paragraph at lines 3691--3692
+\OML/cmm/m/it/10.95 ^^\[] [] [] []B \OMS/cmsy/m/n/10.95 ! []\OML/cmm/m/it/10.95
+ C$ \OT1/cmr/m/n/10.95 then we get a weak-en-ing $\OML/cmm/m/it/10.95 B[]$ \OT1
+/cmr/m/n/10.95 of $\OML/cmm/m/it/10.95 B$ \OT1/cmr/m/n/10.95 and an iso-mor-phi
+sm $(\OML/cmm/m/it/10.95 ^^\[]\OT1/cmr/m/n/10.95 )[] [] [] []\OML/cmm/m/it/10.9
+5 B[] \OMS/cmsy/m/n/10.95 !
+ []
+
+[112] (./ordinal_games.bbl [113]
 Underfull \hbox (badness 1127) in paragraph at lines 9--12
 \OT1/cmr/m/n/10.95 Full ab-strac-tion for PCF.  \OT1/cmr/m/it/10.95 In-for-ma-t
 ion and Com-pu-ta-tion\OT1/cmr/m/n/10.95 ,
  []
 
-[103] [104]) [105] (./ordinal_games.aux) ) 
+[114] [115]) [116] (./ordinal_games.aux) ) 
 Here is how much of TeX's memory you used:
- 19401 strings out of 493014
- 385965 string characters out of 6139325
- 436154 words of memory out of 5000000
- 22497 multiletter control sequences out of 15000+600000
+ 20205 strings out of 493014
+ 406233 string characters out of 6139325
+ 447099 words of memory out of 5000000
+ 23301 multiletter control sequences out of 15000+600000
  26828 words of font info for 109 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,21n,82p,1055b,1022s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,21n,87p,1055b,1110s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><
@@ -1413,10 +1423,10 @@ onts/type1/public/mathabx-type1/mathb10.pfb></usr/share/texmf-dist/fonts/type1/
 public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/am
 sfonts/symbols/msam7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/sym
 bols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/wasy2-ps/wasy10.pfb>
-Output written on ordinal_games.pdf (106 pages, 777442 bytes).
+Output written on ordinal_games.pdf (117 pages, 819583 bytes).
 PDF statistics:
- 475 PDF objects out of 1000 (max. 8388607)
- 331 compressed objects within 4 object streams
+ 511 PDF objects out of 1000 (max. 8388607)
+ 356 compressed objects within 4 object streams
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

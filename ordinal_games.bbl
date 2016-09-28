@@ -30,6 +30,11 @@ Andreas Blass.
 \newblock A game semantics for linear logic.
 \newblock {\em Annals of Pure and Applied Logic}, 56(1–3):183 -- 220, 1992.
 
+\bibitem[Chr03]{juliuszthesis}
+Juliusz Chroboczek.
+\newblock {\em Game Semantics and Subtyping}.
+\newblock PhD thesis, University of Edinburgh, 2003.
+
 \bibitem[CLM13]{martinsthesis}
 Martin Churchill, Jim Laird, and Guy McCusker.
 \newblock Imperative programs as proofs via game semantics.
